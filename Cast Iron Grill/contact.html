@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Visit Us | Cast Iron Grill</title>
+<meta name="description" content="Contact, hours, and directions for Cast Iron Grill in downtown Lubbock, TX." />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<!-- NAV -->
+<nav>
+<a href="index.html" class="nav-logo">Cast Iron <span>Grill</span></a>
+<ul class="nav-links">
+<li><a href="about.html">Our Story</a></li>
+<li><a href="menu.html">Menu</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="contact.html" class="nav-cta active">Visit Us</a></li>
+</ul>
+<button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+<a href="index.html">Home</a>
+<a href="about.html">Our Story</a>
+<a href="menu.html">Menu</a>
+<a href="gallery.html">Gallery</a>
+<a href="contact.html" class="mobile-cta active">Visit Us</a>
+</div>
+<div class="page-wrap">
+<div class="page-inner">
+<div class="page-header">
+<div class="page-header-left">
+<div class="section-label">Get In Touch</div>
+<h1>Visit Us</h1>
+<p>Downtown Lubbock, corner of 19th Street. Walk-ins welcome — no reservations needed.</p>
+</div>
+</div>
+<div class="page-content">
+<div class="contact-split">
+<!-- Left: contact info + map -->
+<div class="contact-info">
+<h3>Cast Iron Grill</h3>
+<div class="contact-detail">
+<span class="contact-detail-icon">📞</span>
+<div class="contact-detail-text">
+<h5>Phone</h5>
+<p><a href="tel:18067717690">(806) 771-7690</a></p>
+</div>
+</div>
+<div class="contact-detail">
+<span class="contact-detail-icon">📍</span>
+<div class="contact-detail-text">
+<h5>Address</h5>
+<p>620 19th Street<br>Lubbock, TX 79401</p>
+</div>
+</div>
+<div class="contact-detail">
+<span class="contact-detail-icon">🕒</span>
+<div class="contact-detail-text">
+<h5>Hours</h5>
+<p>Monday – Friday: 7:00 AM – 2:00 PM<br>Breakfast served until ~10:30 AM<br>Closed Saturday &amp; Sunday</p>
+</div>
+</div>
+<div class="contact-detail">
+<span class="contact-detail-icon">🛵</span>
+<div class="contact-detail-text">
+<h5>Order Online</h5>
+<p><a href="https://ordering.chownow.com/order/21177/locations?add_cn_ordering_class=true" target="_blank" rel="noopener">Order ahead via ChowNow</a></p>
+</div>
+</div>
+<div class="contact-detail">
+<span class="contact-detail-icon">🚚</span>
+<div class="contact-detail-text">
+<h5>Catering &amp; Food Truck</h5>
+<p>Available for events and offices around Lubbock — call or use the form to ask about booking.</p>
+</div>
+</div>
+<div class="map-embed">
+<iframe
+title="Cast Iron Grill location"
+src="https://maps.google.com/maps?q=620+19th+St,+Lubbock,+TX+79401&output=embed&z=16"
+allowfullscreen
+loading="lazy"
+referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+</div>
+<div class="social-row">
+<a href="https://www.facebook.com/castirongrill/" class="social-btn" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+<a href="https://www.instagram.com/castirongrillfoodtruck/" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+</div>
+</div>
+<!-- Right: contact form -->
+<form id="suggest-form" onsubmit="handleSubmit(event)">
+<div class="form-row">
+<div class="form-group">
+<label for="fname">First Name</label>
+<input type="text" id="fname" placeholder="Jane" required />
+</div>
+<div class="form-group">
+<label for="lname">Last Name</label>
+<input type="text" id="lname" placeholder="Smith" required />
+</div>
+</div>
+<div class="form-group">
+<label for="email">Email Address</label>
+<input type="email" id="email" placeholder="jane@example.com" required />
+</div>
+<div class="form-group">
+<label for="phone">Phone Number</label>
+<input type="tel" id="phone" placeholder="(806) 000-0000" />
+</div>
+<div class="form-group">
+<label for="reason">Reason for Contact</label>
+<select id="reason">
+<option value="">Select one...</option>
+<option>General Question</option>
+<option>Catering Inquiry</option>
+<option>Food Truck Booking</option>
+<option>Large Group / Party</option>
+<option>Pie Order</option>
+<option>Feedback</option>
+</select>
+</div>
+<div class="form-group">
+<label for="party">Party Size (if applicable)</label>
+<input type="number" id="party" min="1" placeholder="4" />
+</div>
+<div class="form-group">
+<label for="message">Message</label>
+<textarea id="message" placeholder="How can we help?"></textarea>
+</div>
+<button type="submit" class="btn-submit">Send Message</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
