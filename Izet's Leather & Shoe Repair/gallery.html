@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gallery | Izet's Leather &amp; Shoe Repair</title>
+<meta name="description" content="Photos of Izet's Leather & Shoe Repair in downtown Stamford, CT — storefront, craftsmanship, and before-and-after repair work." />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<!-- NAV -->
+<nav>
+<a href="index.html" class="nav-logo">Izet's <span>Leather &amp; Shoe Repair</span></a>
+<ul class="nav-links">
+<li><a href="about.html">Our Craft</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="gallery.html" class="active">Gallery</a></li>
+<li><a href="contact.html" class="nav-cta">Visit Us</a></li>
+</ul>
+<button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+<a href="index.html">Home</a>
+<a href="about.html">Our Craft</a>
+<a href="services.html">Services</a>
+<a href="gallery.html" class="active">Gallery</a>
+<a href="contact.html" class="mobile-cta">Visit Us</a>
+</div>
+<div class="page-wrap">
+<div class="page-inner">
+<div class="page-header">
+<div class="page-header-left">
+<div class="section-label">Photo Gallery</div>
+<h1>A Look Inside</h1>
+<p>The storefront and craftsmanship of Izet's Leather &amp; Shoe Repair, plus a couple of illustrative stock photos — each clearly labeled.</p>
+</div>
+<div class="page-header-right">
+<a href="services.html" class="btn-primary">View Services</a>
+</div>
+</div>
+<div class="page-content">
+<div class="menu-note" style="margin-bottom:1.5rem;">
+This is an independent design proposal, not photos taken on assignment for the shop. The six photos tagged <strong>Real Photo</strong> were downloaded directly from Izet's own official website (izetsleather.com) — its storefront sign and a set of the shop's own before/after and craftsmanship shots. The two photos tagged <strong>Stock</strong> are free stock photography (Pexels) used only to illustrate a leather workshop and leather-goods tools in general — they are <em>not</em> photos of Izet's own workshop or products.
+</div>
+<div class="gallery-tabs">
+<button class="gallery-tab active" onclick="switchTab(event, 'all')">All Photos</button>
+<button class="gallery-tab" onclick="switchTab(event, 'storefront')">Storefront</button>
+<button class="gallery-tab" onclick="switchTab(event, 'craft')">Craftsmanship</button>
+<button class="gallery-tab" onclick="switchTab(event, 'stock')">Stock</button>
+</div>
+<!-- ALL -->
+<div class="gallery-panel active" id="panel-all">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/storefront-real.jpg" alt="The real storefront of Izet's Leather & Shoe Repair at night, sign lit up, 60 Atlantic Street, Stamford, CT" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/before-after-heels-real.jpg" alt="Real before-and-after photo of a pair of high heels restored at Izet's, worn soles and heel caps fully rebuilt" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/new-leather-sole-real.jpg" alt="Close-up of a freshly stitched new leather sole on a pair of dress shoes at Izet's" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/heel-repair-real.jpg" alt="A restored white designer heel with a red sole photographed on a workbench at Izet's" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/resoled-dress-shoe-real.jpg" alt="A resoled brown leather dress shoe next to its new leather sole, stamped with the resoler's mark, at Izet's" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/resoled-pair-real.jpg" alt="A pair of leather dress shoes with newly stitched leather soles, stamped Vero Cuoio, at Izet's" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock</span>
+<img src="photos/leather-workshop-stock.jpg" alt="Stock photo of an unrelated craftsman hand-stitching a piece of black leather in a workshop, used only as illustrative atmosphere" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock</span>
+<img src="photos/leather-goods-tools-stock.jpg" alt="Stock photo of leather wallets and hand tools laid out on a wooden workbench, used only as illustrative atmosphere" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+<!-- STOREFRONT -->
+<div class="gallery-panel" id="panel-storefront">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/storefront-real.jpg" alt="The real storefront of Izet's Leather & Shoe Repair at night, sign lit up, 60 Atlantic Street, Stamford, CT" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+<!-- CRAFTSMANSHIP -->
+<div class="gallery-panel" id="panel-craft">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/before-after-heels-real.jpg" alt="Real before-and-after photo of a pair of high heels restored at Izet's, worn soles and heel caps fully rebuilt" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/new-leather-sole-real.jpg" alt="Close-up of a freshly stitched new leather sole on a pair of dress shoes at Izet's" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/heel-repair-real.jpg" alt="A restored white designer heel with a red sole photographed on a workbench at Izet's" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/resoled-dress-shoe-real.jpg" alt="A resoled brown leather dress shoe next to its new leather sole, stamped with the resoler's mark, at Izet's" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/resoled-pair-real.jpg" alt="A pair of leather dress shoes with newly stitched leather soles, stamped Vero Cuoio, at Izet's" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+<!-- STOCK -->
+<div class="gallery-panel" id="panel-stock">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock</span>
+<img src="photos/leather-workshop-stock.jpg" alt="Stock photo of an unrelated craftsman hand-stitching a piece of black leather in a workshop, used only as illustrative atmosphere" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock</span>
+<img src="photos/leather-goods-tools-stock.jpg" alt="Stock photo of leather wallets and hand tools laid out on a wooden workbench, used only as illustrative atmosphere" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
+<button class="lightbox-close" onclick="closeLightbox()">✕</button>
+<button class="lightbox-prev" onclick="shiftLightbox(-1)">&#8249;</button>
+<img id="lightbox-img" src="" alt="" />
+<button class="lightbox-next" onclick="shiftLightbox(1)">&#8250;</button>
+<div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
