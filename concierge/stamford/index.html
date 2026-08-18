@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stamford, CT — The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+
+    /* Full-screen scrollable panel below fixed nav */
+    .page-wrap {
+      position: fixed;
+      top: 68px; left: 0; right: 0; bottom: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      background: var(--white);
+    }
+
+    /* Breadcrumb stays at top of scroll panel */
+    .breadcrumb {
+      margin-top: 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    /* City hero — compact */
+    .city-hero {
+      padding: 2.5rem 5% 2rem;
+    }
+    .city-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
+    .city-hero .hero-sub { font-size: 0.9rem; margin-bottom: 1rem; }
+    .city-hero-meta { font-size: 0.8rem; gap: 1rem; }
+
+    /* Quick stats */
+    .highlight-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .highlight-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--gold);
+    }
+    .highlight-card h4 { font-size: 0.88rem; color: var(--navy); margin-bottom: 0.2rem; }
+    .highlight-card p { font-size: 0.78rem; color: var(--sub); }
+    .highlight-card .big-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      color: var(--gold);
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.15rem;
+    }
+
+    /* Section padding — tighter */
+    .section { padding: 2.5rem 5%; }
+    .section-sm { padding: 1.75rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+
+    .upcoming-events { padding: 2rem 5%; }
+    .events-list { display: flex; flex-direction: column; }
+
+    .neighborhood-section { padding: 2.5rem 5%; background: var(--mist); }
+
+    @media (max-width: 900px) {
+      .highlight-strip { grid-template-columns: repeat(3, 1fr); }
+      .two-col { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .highlight-strip { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-page-location="Stamford">
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Stamford, CT</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../index.html">Home</a>
+  <a href="index.html" class="active">Stamford, CT</a>
+  <a href="downtown/index.html">Downtown</a>
+  <a href="harbor-point/index.html">Harbor Point</a>
+</div>
+
+<!-- SCROLLABLE PAGE PANEL -->
+<div class="page-wrap">
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="../index.html">Home</a>
+    <span class="sep">›</span>
+    <span>Connecticut</span>
+    <span class="sep">›</span>
+    <span>Stamford</span>
+  </div>
+
+  <!-- CITY HERO -->
+  <section class="city-hero">
+    <div class="section-label">Connecticut</div>
+    <h1>Stamford, <span>CT</span></h1>
+    <p class="hero-sub">From waterfront dining in Harbor Point to world-class theatre in Downtown — Stamford is one of Connecticut's most vibrant cities.</p>
+    <div class="city-hero-meta">
+      <span>📍 Fairfield County, CT</span>
+      <span>🏙️ 135,000+ residents</span>
+      <span>🚆 45 min to NYC by Metro-North</span>
+      <span>🌊 19 miles of shoreline</span>
+    </div>
+  </section>
+
+  <!-- QUICK STATS -->
+  <section class="section-sm" style="background:var(--white);">
+    <div class="highlight-strip">
+      <div class="highlight-card">
+        <div class="big-num">150+</div>
+        <h4>Restaurants</h4>
+        <p>From harbor waterfront to hidden Italian gems in Springdale</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">40+</div>
+        <h4>Parks &amp; Trails</h4>
+        <p>Cove Island, Mill River, Bartlett Arboretum, and miles of shoreline</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">8</div>
+        <h4>Neighborhoods</h4>
+        <p>Each with its own character, dining scene, and local vibe</p>
+      </div>
+    </div>
+
+    <!-- Category filter -->
+    <div class="category-pills">
+      <button class="pill active" data-cat="all">All</button>
+      <button class="pill" data-cat="events">🎟 Events</button>
+      <button class="pill" data-cat="dining">🍽 Dining</button>
+      <button class="pill" data-cat="nightlife">🍸 Nightlife</button>
+      <button class="pill" data-cat="arts">🎭 Arts &amp; Culture</button>
+      <button class="pill" data-cat="outdoors">🌿 Outdoors</button>
+      <button class="pill" data-cat="shopping">🛍 Shopping</button>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="upcoming-events cat-section" data-cat="events">
+    <div class="section-label">What's On</div>
+    <h2 class="section-title">Upcoming Events</h2>
+    <hr class="section-divider" />
+
+    <div class="two-col">
+      <div class="events-list">
+
+        <div class="event-item">
+          <div class="event-date-box">
+            <div class="month">JUL</div>
+            <div class="day">30</div>
+          </div>
+          <div class="event-info">
+            <h4>Ja Rule &amp; Ashanti — Summer in the Park</h4>
+            <p>The iconic R&amp;B duo performs together at Mill River Park's free summer concert series. We Heart R&amp;B opens the show.</p>
+            <div class="event-venue">📍 Mill River Park · Downtown · 5 PM – 10 PM</div>
+            <a class="event-link" href="https://heystamford.com" target="_blank" rel="noopener">Event info →</a>
+          </div>
+          <span class="badge badge-open">This Week</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box">
+            <div class="month">AUG</div>
+            <div class="day">1</div>
+          </div>
+          <div class="event-info">
+            <h4>Hey Stamford! Food Festival</h4>
+            <p>Two-day culinary event with top food vendors, themed bars, celebrity guests, and live music.</p>
+            <div class="event-venue">📍 Mill River Park · Downtown · Aug 1–2</div>
+            <a class="event-link" href="https://heystamford.com" target="_blank" rel="noopener">Event info →</a>
+          </div>
+          <span class="badge badge-soon">Soon</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box">
+            <div class="month">AUG</div>
+            <div class="day">13</div>
+          </div>
+          <div class="event-info">
+            <h4>Lower Summer Street Block Party</h4>
+            <p>Open-street festival with expanded outdoor dining patios, live music, and a community atmosphere. Free.</p>
+            <div class="event-venue">📍 Summer St · Downtown · 5 PM – 9 PM</div>
+            <a class="event-link" href="https://stamford-downtown.com" target="_blank" rel="noopener">Event info →</a>
+          </div>
+          <span class="badge badge-soon">Soon</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box">
+            <div class="month">AUG</div>
+            <div class="day">29</div>
+          </div>
+          <div class="event-info">
+            <h4>Stamford Beer, Wine &amp; Spirits Fest</h4>
+            <p>Hundreds of tastings from local and regional producers. Tickets required.</p>
+            <div class="event-venue">📍 Mill River Park · Downtown · 1:30 PM</div>
+            <a class="event-link" href="https://stamfordbeerwinespirits.com" target="_blank" rel="noopener">Get tickets →</a>
+          </div>
+          <span class="badge badge-soon">Aug 29</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box">
+            <div class="month">AUG</div>
+            <div class="day">30</div>
+          </div>
+          <div class="event-info">
+            <h4>Honey Harvest Festival — Bartlett Arboretum</h4>
+            <p>Live music, vendor marketplace, honey tastings, face painting, and educational bee talks on 93 acres of gardens.</p>
+            <div class="event-venue">📍 Bartlett Arboretum · North Stamford · 11 AM – 4 PM</div>
+            <a class="event-link" href="https://bartlettarboretum.org" target="_blank" rel="noopener">Event info →</a>
+          </div>
+          <span class="badge badge-soon">Aug 30</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box">
+            <div class="month">SEP</div>
+            <div class="day">19</div>
+          </div>
+          <div class="event-info">
+            <h4>Jim Henson's Labyrinth in Concert</h4>
+            <p>40th anniversary celebration — live band performs David Bowie's full soundtrack with HD film screening.</p>
+            <div class="event-venue">📍 Palace Theatre · Downtown · 8 PM</div>
+            <a class="event-link" href="https://palacestamford.org" target="_blank" rel="noopener">Get tickets →</a>
+          </div>
+          <span class="badge badge-soon">Sep 19</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box">
+            <div class="month">OCT</div>
+            <div class="day">11</div>
+          </div>
+          <div class="event-info">
+            <h4>That's Amore Italian Festival</h4>
+            <p>Columbus Day weekend Italian heritage celebration with live music, authentic food, family activities over two days.</p>
+            <div class="event-venue">📍 Mill River Park · Downtown · Oct 11–12, Noon–9 PM</div>
+            <a class="event-link" href="https://stamford-downtown.com" target="_blank" rel="noopener">Event info →</a>
+          </div>
+          <span class="badge badge-soon">Oct 11–12</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box">
+            <div class="month">SAT</div>
+            <div class="day">WKL</div>
+          </div>
+          <div class="event-info">
+            <h4>Downtown Farmers Market</h4>
+            <p>Every Saturday through the season — fresh produce, local vendors, artisan goods, and seasonal specialties.</p>
+            <div class="event-venue">📍 Veterans Memorial Park · 130 Atlantic St · All morning</div>
+          </div>
+          <span class="badge badge-open">Weekly</span>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="submit-form" id="suggest">
+          <h3>Know something happening?</h3>
+          <p>Submit an event and we'll verify and post it within 24–48 hours.</p>
+          <form id="suggest-form">
+            <div class="form-group" style="margin-bottom:0.75rem;">
+              <label>Event or place name</label>
+              <input type="text" placeholder="e.g. Jazz at The Capital Grille" />
+            </div>
+            <div class="form-group" style="margin-bottom:0.75rem;">
+              <label>Details (date, location, description)</label>
+              <textarea placeholder="Tell us anything you know — we'll do the research…"></textarea>
+            </div>
+            <div class="form-group" style="margin-bottom:1rem;">
+              <label>Category</label>
+              <select>
+                <option>Event</option>
+                <option>Restaurant</option>
+                <option>Bar / Nightlife</option>
+                <option>Arts &amp; Culture</option>
+                <option>Outdoors</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;">Submit →</button>
+          </form>
+        </div>
+
+        <div style="margin-top:1.25rem;background:var(--mist);border-radius:var(--radius);padding:1.1rem;border:1px solid var(--border);">
+          <h4 style="font-size:0.88rem;color:var(--navy);margin-bottom:0.65rem;">📰 Local Sources</h4>
+          <ul style="display:flex;flex-direction:column;gap:0.45rem;">
+            <li><a href="https://www.stamfordadvocate.com" target="_blank" style="font-size:0.82rem;color:var(--gold);">Stamford Advocate ↗</a></li>
+            <li><a href="https://heystamford.com" target="_blank" style="font-size:0.82rem;color:var(--gold);">Hey Stamford! ↗</a></li>
+            <li><a href="https://patch.com/connecticut/stamford" target="_blank" style="font-size:0.82rem;color:var(--gold);">Patch Stamford ↗</a></li>
+            <li><a href="https://stamford-downtown.com" target="_blank" style="font-size:0.82rem;color:var(--gold);">Stamford Downtown ↗</a></li>
+            <li><a href="https://millriverpark.org" target="_blank" style="font-size:0.82rem;color:var(--gold);">Mill River Park ↗</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEIGHBORHOODS -->
+  <section class="neighborhood-section cat-section" data-cat="all">
+    <div class="section-label">Explore Stamford</div>
+    <h2 class="section-title">Neighborhoods</h2>
+    <p class="section-sub" style="margin-bottom:1.5rem;">Each neighborhood has its own character. Dive in.</p>
+
+    <div class="neighborhood-grid">
+      <a href="downtown/index.html" class="neighborhood-chip">
+        <span class="chip-icon">🏙️</span>
+        <span class="chip-name">Downtown</span>
+        <span class="chip-sub">Restaurants · Nightlife · Theatre</span>
+      </a>
+      <a href="harbor-point/index.html" class="neighborhood-chip">
+        <span class="chip-icon">🌊</span>
+        <span class="chip-name">Harbor Point</span>
+        <span class="chip-sub">Waterfront · Dining · Marina</span>
+      </a>
+      <a href="shippan-point/index.html" class="neighborhood-chip">
+        <span class="chip-icon">⛵</span>
+        <span class="chip-name">Shippan Point</span>
+        <span class="chip-sub">Waterfront homes · Cove Island</span>
+      </a>
+      <a href="springdale/index.html" class="neighborhood-chip">
+        <span class="chip-icon">🏡</span>
+        <span class="chip-name">Springdale</span>
+        <span class="chip-sub">Village feel · Hope St · Train</span>
+      </a>
+      <a href="glenbrook/index.html" class="neighborhood-chip">
+        <span class="chip-icon">🚆</span>
+        <span class="chip-name">Glenbrook</span>
+        <span class="chip-sub">Walkable · Commuter-friendly</span>
+      </a>
+      <a href="north-stamford/index.html" class="neighborhood-chip">
+        <span class="chip-icon">🌲</span>
+        <span class="chip-name">North Stamford</span>
+        <span class="chip-sub">Estates · Trails · Quiet</span>
+      </a>
+      <a href="cove/index.html" class="neighborhood-chip">
+        <span class="chip-icon">🏖️</span>
+        <span class="chip-name">Cove / East Side</span>
+        <span class="chip-sub">Shoreline · Mixed residential</span>
+      </a>
+      <a href="waterside/index.html" class="neighborhood-chip">
+        <span class="chip-icon">🌅</span>
+        <span class="chip-name">Waterside</span>
+        <span class="chip-sub">Long Island Sound access</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- DINING -->
+  <section class="section cat-section" data-cat="dining">
+    <div class="section-label">Where to Eat</div>
+    <h2 class="section-title">Stamford Dining</h2>
+    <p class="section-sub" style="margin-bottom:1.5rem;">150+ restaurants across every neighborhood. A small selection of favorites below — see the full Downtown guide for the deep dive.</p>
+
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Dining · $$$</span>
+          <div class="card-title">BarVera Modern Mediterranean</div>
+          <div class="card-meta"><span>📍 148 Bedford St · Downtown</span></div>
+          <p class="card-desc">Top Chef Winner Chef Charbel Hayek's Middle Eastern-Mediterranean flagship. Opened 2026. One of Stamford's most exciting new openings.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Dining · $$$</span>
+          <div class="card-title">The Crab Shell</div>
+          <div class="card-meta"><span>📍 Harbor Point · South End</span></div>
+          <p class="card-desc">Stamford's beloved dockside seafood institution. 11 boat slips, outdoor patio, frozen drinks, and a dance band on the patio. Open 35+ years.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Dining · $$</span>
+          <div class="card-title">Tiernan's Bar &amp; Restaurant</div>
+          <div class="card-meta"><span>📍 187 Main St · Downtown</span></div>
+          <p class="card-desc">Stamford's favorite Irish pub since 2004. Live bands Friday–Saturday, trivia Wednesdays, dart league Tuesdays. Classic pub food, outdoor patio on Main St.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Dining · $$$</span>
+          <div class="card-title">Prime: An American Kitchen</div>
+          <div class="card-meta"><span>📍 78 Southfield Ave · Harbor Point</span></div>
+          <p class="card-desc">Modern American cuisine with raw bar, fresh seafood, waterfront views, and boat accessibility. Jazz brunch Sundays.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Dining · $$</span>
+          <div class="card-title">Flinders Lane</div>
+          <div class="card-meta"><span>📍 184 Summer St · Downtown</span></div>
+          <p class="card-desc">Australian-inspired with bold flavors and award-winning cocktails. Daily happy hour 4–6 PM. Known for the spiced pineapple margarita.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Dining · $$</span>
+          <div class="card-title">Çka Ka Qëllu</div>
+          <div class="card-meta"><span>📍 Downtown</span></div>
+          <p class="card-desc">Modern Albanian cuisine reviewed by the New York Times. Immersive dining with beautiful meze and authentic dishes. A true standout.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:1.5rem;">
+      <a href="downtown/index.html" class="btn-outline">Full Downtown Dining Guide →</a>
+    </div>
+  </section>
+
+  <!-- ARTS & CULTURE -->
+  <section class="section cat-section" data-cat="arts" style="background:var(--mist);">
+    <div class="section-label">Arts &amp; Culture</div>
+    <h2 class="section-title">Venues &amp; Institutions</h2>
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Theatre</span>
+          <div class="card-title">Palace Theatre</div>
+          <div class="card-meta"><span>📍 61 Atlantic St · Downtown</span></div>
+          <p class="card-desc">Historic 1,600-seat theatre originally opened in 1927. Broadway musicals, concerts, and major performances. Recently renovated.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Cinema</span>
+          <div class="card-title">Avon Theatre Film Center</div>
+          <div class="card-meta"><span>📍 Bedford St · Downtown</span></div>
+          <p class="card-desc">Non-profit dedicated to classic, alternative, and art-house films since 1939. Restored in 2004. Two screens.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Museum</span>
+          <div class="card-title">Stamford Museum &amp; Nature Center</div>
+          <div class="card-meta"><span>📍 39 Scofieldtown Rd · North Stamford</span></div>
+          <p class="card-desc">80+ acres with nature trails, planetarium, Heckscher Farm, and Bendel Mansion galleries. Family favorite year-round.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Theatre</span>
+          <div class="card-title">Curtain Call</div>
+          <div class="card-meta"><span>📍 1349 Newfield Ave · Springdale</span></div>
+          <p class="card-desc">Fairfield County's longest-running non-profit theatre. 12+ productions annually, annual free outdoor Shakespeare. 30,000+ patrons per year.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Gardens</span>
+          <div class="card-title">Bartlett Arboretum</div>
+          <div class="card-meta"><span>📍 151 Brookdale Rd · North Stamford</span></div>
+          <p class="card-desc">93-acre living classroom with 13 gardens, champion trees, native habitats, summer concerts, and the Honey Harvest Festival.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Gallery</span>
+          <div class="card-title">Yankell Legacy Gallery</div>
+          <div class="card-meta"><span>📍 61 Studio Court</span></div>
+          <p class="card-desc">Fine art gallery in the historic stone studio of Gutzon Borglum — the sculptor of Mount Rushmore — built in 1911. By appointment.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- OUTDOORS -->
+  <section class="section cat-section" data-cat="outdoors">
+    <div class="section-label">Get Outside</div>
+    <h2 class="section-title">Parks &amp; Outdoors</h2>
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Park</span>
+          <div class="card-title">Mill River Park</div>
+          <div class="card-meta"><span>📍 Downtown</span></div>
+          <p class="card-desc">Stamford's "mini Central Park" — 19 miles of shoreline access, summer concerts, the Nissen Carousel, movie nights, and year-round programming.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Waterfront</span>
+          <div class="card-title">Cove Island Park</div>
+          <div class="card-meta"><span>📍 Shippan</span></div>
+          <p class="card-desc">Paved loop trail, beach access, marinas, and picnic areas on Long Island Sound. One of Stamford's most scenic parks.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Trails</span>
+          <div class="card-title">Mianus River State Park</div>
+          <div class="card-meta"><span>📍 North Stamford</span></div>
+          <p class="card-desc">Popular hiking and mountain biking. Mianus Maze Trail is a 5-mile moderate loop. Network of fire roads and single-track.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- NIGHTLIFE -->
+  <section class="section cat-section" data-cat="nightlife" style="background:var(--mist);">
+    <div class="section-label">After Dark</div>
+    <h2 class="section-title">Nightlife</h2>
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Irish Pub</span>
+          <div class="card-title">Tiernan's</div>
+          <div class="card-meta"><span>📍 187 Main St · Downtown</span></div>
+          <p class="card-desc">Live bands Friday–Saturday. Trivia with MC Hype on Wednesdays. Dart league Tuesdays. Patio on Main St. Happy hour Mon–Fri 4–7 PM.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Cocktail Bar</span>
+          <div class="card-title">Bar Rosso</div>
+          <div class="card-meta"><span>📍 28 Spring St · Downtown</span></div>
+          <p class="card-desc">High-energy Italian craft cocktail bar with wood-burning beehive oven. Mezzanine bar overlooks the main floor. Extensive Italian wine list.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Lounge</span>
+          <div class="card-title">RIZZ Lounge &amp; Grill</div>
+          <div class="card-meta"><span>📍 121 Towne St · Downtown</span></div>
+          <p class="card-desc">Modern chic ambiance, premium cocktails. Karaoke every Thursday night. Live entertainment on weekends.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INSTAGRAM / SOCIAL -->
+  <section style="padding:2.25rem 5%; background:var(--white);">
+    <div class="section-label">Follow the Scene</div>
+    <h2 class="section-title">Local Instagram Accounts</h2>
+    <hr style="border:none;border-top:1px solid var(--border);margin:0.4rem 0 1.5rem;" />
+    <p style="font-size:0.88rem;color:var(--sub);max-width:600px;margin-bottom:1.25rem;">The fastest way to stay on top of Stamford — these accounts post real-time events, food drops, and community happenings before anyone else.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.75rem;">
+      <a style="background:var(--white);border-radius:var(--radius);padding:1rem 1.1rem;box-shadow:var(--shadow);display:flex;align-items:center;gap:0.75rem;text-decoration:none;transition:box-shadow 0.2s;" href="https://instagram.com/stamford_events" target="_blank" rel="noopener">
+        <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">📅</div>
+        <div><div style="font-size:0.82rem;font-weight:600;color:var(--navy);">@stamford_events</div><div style="font-size:0.74rem;color:var(--sub);margin-top:0.1rem;">Events & nightlife</div></div>
+      </a>
+      <a style="background:var(--white);border-radius:var(--radius);padding:1rem 1.1rem;box-shadow:var(--shadow);display:flex;align-items:center;gap:0.75rem;text-decoration:none;transition:box-shadow 0.2s;" href="https://instagram.com/heystamford" target="_blank" rel="noopener">
+        <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">📍</div>
+        <div><div style="font-size:0.82rem;font-weight:600;color:var(--navy);">@heystamford</div><div style="font-size:0.74rem;color:var(--sub);margin-top:0.1rem;">City news & community</div></div>
+      </a>
+      <a style="background:var(--white);border-radius:var(--radius);padding:1rem 1.1rem;box-shadow:var(--shadow);display:flex;align-items:center;gap:0.75rem;text-decoration:none;transition:box-shadow 0.2s;" href="https://instagram.com/stamfordfoodia" target="_blank" rel="noopener">
+        <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">🍽</div>
+        <div><div style="font-size:0.82rem;font-weight:600;color:var(--navy);">@stamfordfoodia</div><div style="font-size:0.74rem;color:var(--sub);margin-top:0.1rem;">Food & restaurants</div></div>
+      </a>
+      <a style="background:var(--white);border-radius:var(--radius);padding:1rem 1.1rem;box-shadow:var(--shadow);display:flex;align-items:center;gap:0.75rem;text-decoration:none;transition:box-shadow 0.2s;" href="https://instagram.com/stamfordcommunity" target="_blank" rel="noopener">
+        <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">🤝</div>
+        <div><div style="font-size:0.82rem;font-weight:600;color:var(--navy);">@stamfordcommunity</div><div style="font-size:0.74rem;color:var(--sub);margin-top:0.1rem;">Neighborhood life</div></div>
+      </a>
+      <a style="background:var(--white);border-radius:var(--radius);padding:1rem 1.1rem;box-shadow:var(--shadow);display:flex;align-items:center;gap:0.75rem;text-decoration:none;transition:box-shadow 0.2s;" href="https://instagram.com/stamford.runclub" target="_blank" rel="noopener">
+        <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">🏃</div>
+        <div><div style="font-size:0.82rem;font-weight:600;color:var(--navy);">@stamford.runclub</div><div style="font-size:0.74rem;color:var(--sub);margin-top:0.1rem;">Running routes & meetups</div></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+
+  <!-- Compact Map -->
+  <div class="section" style="padding-top: 1rem; padding-bottom: 2rem;">
+    <h3 class="section-title" style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--sub); font-weight: 600; letter-spacing: 0.04em;">MAP</h3>
+    <div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border);">
+      <iframe
+        title="Stamford, CT"
+        src="https://maps.google.com/maps?q=Stamford,+CT&output=embed&z=13"
+        style="display:block; width:100%; height:260px; border:none;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p class="footer-tagline">Your local intelligence platform. Curated, verified, always up to date.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Stamford</h5>
+        <ul>
+          <li><a href="downtown/index.html">Downtown</a></li>
+          <li><a href="harbor-point/index.html">Harbor Point</a></li>
+          <li><a href="shippan-point/index.html">Shippan Point</a></li>
+          <li><a href="springdale/index.html">Springdale</a></li>
+          <li><a href="glenbrook/index.html">Glenbrook</a></li>
+          <li><a href="north-stamford/index.html">North Stamford</a></li>
+          <li><a href="cove/index.html">Cove / East Side</a></li>
+          <li><a href="waterside/index.html">Waterside</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Categories</h5>
+        <ul>
+          <li><a href="#">Events</a></li>
+          <li><a href="#">Dining</a></li>
+          <li><a href="#">Nightlife</a></li>
+          <li><a href="#">Arts &amp; Culture</a></li>
+          <li><a href="#">Outdoors</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>The Concierge</h5>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="#suggest">Suggest a Place</a></li>
+          <li><a href="#">Advertise</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 The Concierge · All rights reserved.</span>
+      <span>Stamford, CT</span>
+    </div>
+  </footer>
+
+</div><!-- /.page-wrap -->
+
+<script src="../script.js"></script>
+</body>
+</html>

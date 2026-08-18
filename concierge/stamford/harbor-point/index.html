@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harbor Point — Stamford, CT · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-wrap {
+      position: fixed;
+      top: 68px; left: 0; right: 0; bottom: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      background: var(--white);
+    }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+    .neighborhood-hero { padding: 2rem 5% 1.75rem; text-align: center; }
+    .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin: 0.4rem 0 0.75rem; }
+    .neighborhood-hero p { font-size: 0.9rem; max-width: 540px; }
+    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
+    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
+    .highlight-card h4 { font-size: 0.85rem; color: var(--navy); margin-bottom: 0.15rem; }
+    .highlight-card p { font-size: 0.77rem; color: var(--sub); }
+    .section { padding: 2.25rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .cat-section { padding: 2.25rem 5%; }
+    .sidebar-box { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem; margin-bottom: 1.25rem; }
+    .sidebar-box h4 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 0.65rem; }
+    .news-links a { display: block; color: var(--navy); font-size: 0.83rem; padding: 0.3rem 0; text-decoration: none; border-bottom: 1px solid var(--border); }
+    .news-links a:last-child { border-bottom: none; }
+    .news-links a:hover { color: var(--gold); }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+    .events-list { display: flex; flex-direction: column; }
+    /* Instagram feed */
+    .instagram-section { padding: 2.25rem 5%; background: var(--mist); }
+    .ig-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.75rem; margin-top: 1.25rem; }
+    .ig-account-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); display: flex; align-items: center; gap: 0.75rem; text-decoration: none; transition: box-shadow 0.2s; }
+    .ig-account-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.13); }
+    .ig-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .ig-info { min-width: 0; }
+    .ig-handle { font-size: 0.82rem; font-weight: 600; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ig-desc { font-size: 0.74rem; color: var(--sub); margin-top: 0.1rem; }
+    @media (max-width: 900px) { .highlight-strip { grid-template-columns: repeat(2, 1fr); } .two-col { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) { .highlight-strip { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-page-location="Harbor Point">
+
+<nav>
+  <a href="../../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../index.html'">Stamford, CT</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Harbor Point</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../../index.html">Home</a>
+  <a href="../index.html">Stamford, CT</a>
+  <a href="index.html" class="active">Harbor Point</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <a href="../../index.html">Home</a>
+    <span class="sep">›</span>
+    <span>Connecticut</span>
+    <span class="sep">›</span>
+    <a href="../index.html">Stamford</a>
+    <span class="sep">›</span>
+    <span>Harbor Point</span>
+  </div>
+
+  <section class="neighborhood-hero" style="background: linear-gradient(135deg, #0a2744 0%, #1a4a7a 100%); color:var(--white);">
+    <div class="section-label" style="color:var(--gold-lt);">Neighborhood</div>
+    <h1 style="font-family:'Playfair Display',serif; font-weight:700; color:var(--white);">Harbor <span style="color:var(--gold-lt);">Point</span></h1>
+    <p style="margin:0 auto 1.25rem; color:rgba(255,255,255,0.82); line-height:1.6;">Stamford's premier waterfront district — a $3.5B mixed-use development with direct Long Island Sound access, upscale dining, luxury residences, and year-round events on the water.</p>
+    <div class="city-hero-meta" style="justify-content:center;">
+      <span>⚓ Working Harbor</span>
+      <span>🌊 Long Island Sound</span>
+      <span>🍽 Waterfront Dining</span>
+      <span>🎆 SoundWaters Center</span>
+    </div>
+  </section>
+
+  <section style="padding: 1.75rem 5%; background: var(--white);">
+    <div class="highlight-strip">
+      <div class="highlight-card">
+        <div class="big-num">$3.5B</div>
+        <h4>Development</h4>
+        <p>One of CT's largest urban waterfront projects</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">80+</div>
+        <h4>Acres</h4>
+        <p>Waterfront mixed-use development</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">5K+</div>
+        <h4>Residents</h4>
+        <p>Luxury apartments & condos</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">2 min</div>
+        <h4>To Downtown</h4>
+        <p>Shuttle & walkable connection</p>
+      </div>
+    </div>
+    <div class="category-pills">
+      <button class="pill active" data-cat="all">All</button>
+      <button class="pill" data-cat="events">🎟 Events</button>
+      <button class="pill" data-cat="dining">🍽 Dining</button>
+      <button class="pill" data-cat="nightlife">🍸 Nightlife</button>
+      <button class="pill" data-cat="outdoors">🌿 Outdoors</button>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="cat-section upcoming-events" data-cat="events" style="background:var(--mist);">
+    <div class="section-label">What's On</div>
+    <h2 class="section-title">Upcoming Events</h2>
+    <hr class="section-divider" />
+    <div class="two-col">
+      <div class="events-list">
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">AUG</div><div class="day">29</div></div>
+          <div class="event-info">
+            <div class="event-tags"><span class="card-tag events">Beer & Wine</span><span class="card-tag featured">Featured</span></div>
+            <h3 class="event-title" style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--navy);margin:0.2rem 0;">Stamford Beer, Wine & Spirits Festival</h3>
+            <p class="event-meta" style="font-size:0.8rem;color:var(--sub);">Harbor Point Waterfront · Aug 29–30 · 1–8 PM · Tickets req.</p>
+            <p class="event-desc" style="font-size:0.83rem;color:var(--slate);margin-top:0.3rem;">100+ craft breweries, wineries, and distilleries on the waterfront. Live music across three stages. One of Stamford's biggest annual events, right here at Harbor Point.</p>
+            <a class="event-link" href="https://stamfordbeerwinespirits.com" target="_blank" rel="noopener">Get tickets →</a>
+          </div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">SEP</div><div class="day">6</div></div>
+          <div class="event-info">
+            <div class="event-tags"><span class="card-tag outdoors">Outdoor</span></div>
+            <h3 class="event-title" style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--navy);margin:0.2rem 0;">Harbor Point Kayak & Paddle Festival</h3>
+            <p class="event-meta" style="font-size:0.8rem;color:var(--sub);">Harbor Point Marina · Sep 6 · 9 AM–4 PM · Free to watch</p>
+            <p class="event-desc" style="font-size:0.83rem;color:var(--slate);margin-top:0.3rem;">Annual paddlesports gathering on the Sound with demo kayaks, guided tours, and open-water races. Rentals available for those who want to get on the water.</p>
+            <a class="event-link" href="https://harborpointstamford.com" target="_blank" rel="noopener">Event info →</a>
+          </div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">OCT</div><div class="day">18</div></div>
+          <div class="event-info">
+            <div class="event-tags"><span class="card-tag events">Night Market</span></div>
+            <h3 class="event-title" style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--navy);margin:0.2rem 0;">Harbor Point Night Market</h3>
+            <p class="event-meta" style="font-size:0.8rem;color:var(--sub);">Harbor Point Plaza · Oct 18 · 5–10 PM · Free entry</p>
+            <p class="event-desc" style="font-size:0.83rem;color:var(--slate);margin-top:0.3rem;">Local artisans, food trucks, live acoustic music, and string lights along the waterfront walk. A perfect autumn evening on the water.</p>
+            <a class="event-link" href="https://harborpointstamford.com" target="_blank" rel="noopener">Event info →</a>
+          </div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">SUN</div><div class="day">WKL</div></div>
+          <div class="event-info">
+            <div class="event-tags"><span class="card-tag outdoors">Recurring</span></div>
+            <h3 class="event-title" style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--navy);margin:0.2rem 0;">Sunday Waterfront Yoga</h3>
+            <p class="event-meta" style="font-size:0.8rem;color:var(--sub);">Harbor Point Lawn · Every Sunday · 8–9 AM · Free · Through Sep</p>
+            <p class="event-desc" style="font-size:0.83rem;color:var(--slate);margin-top:0.3rem;">Free morning yoga on the waterfront lawn. All levels welcome. BYO mat. The best way to start a Sunday in Stamford.</p>
+            <a class="event-link" href="https://harborpointstamford.com/events" target="_blank" rel="noopener">Event info →</a>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <div class="sidebar-box">
+          <h4>Suggest an Event</h4>
+          <p style="font-size:0.82rem;color:var(--sub);margin-bottom:0.85rem;">Know about something at Harbor Point we're missing?</p>
+          <form id="suggest-form-hp-events" onsubmit="handleSidebarSubmit(event,'suggest-form-hp-events')">
+            <input type="text" placeholder="Event name" style="width:100%;padding:0.55rem 0.75rem;border:1px solid var(--border);border-radius:6px;font-size:0.83rem;margin-bottom:0.5rem;box-sizing:border-box;" />
+            <textarea placeholder="Date, venue, website..." rows="3" style="width:100%;padding:0.55rem 0.75rem;border:1px solid var(--border);border-radius:6px;font-size:0.83rem;resize:vertical;box-sizing:border-box;"></textarea>
+            <button type="submit" style="margin-top:0.5rem;width:100%;background:var(--gold);color:var(--navy);border:none;padding:0.6rem;border-radius:6px;font-weight:600;font-size:0.83rem;cursor:pointer;">Submit</button>
+          </form>
+        </div>
+        <div class="sidebar-box">
+          <h4>Local Coverage</h4>
+          <div class="news-links">
+            <a href="https://www.stamfordadvocate.com" target="_blank" rel="noopener">Stamford Advocate ↗</a>
+            <a href="https://heystamford.com" target="_blank" rel="noopener">Hey Stamford ↗</a>
+            <a href="https://harborpointstamford.com" target="_blank" rel="noopener">Harbor Point ↗</a>
+            <a href="https://soundwaters.org" target="_blank" rel="noopener">SoundWaters ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DINING -->
+  <section class="cat-section" data-cat="dining" style="background:var(--white);">
+    <div class="section-label">Where to Eat</div>
+    <h2 class="section-title">Dining</h2>
+    <hr class="section-divider" />
+    <div class="grid-3">
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#0a3d62,#1e6fa5);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">Seafood</span><span class="card-tag featured">Waterfront</span></div>
+          <h3 class="card-title">Stamford Sandwich Company</h3>
+          <p class="card-desc">Beloved harbor-side lunch spot with creative sandwiches, chowder, and fresh-catch daily specials. One of the most popular daytime stops at Harbor Point.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Harbor Point · $$ · Breakfast & Lunch</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a3a5c,#2e7bb5);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">American</span><span class="card-tag featured">Views</span></div>
+          <h3 class="card-title">The Water's Edge at Giovanni's</h3>
+          <p class="card-desc">Elegant waterfront dining with panoramic Sound views, impeccable service, and a menu anchored by fresh seafood and prime cuts. The area's top special-occasion restaurant.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Shippan Ave · $$$$ · Dinner nightly</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#117a65,#1abc9c);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">Casual</span></div>
+          <h3 class="card-title">Harbor Point Grill</h3>
+          <p class="card-desc">Open-air casual dining on the water with burgers, flatbreads, fresh salads, and cold beer. The go-to for after-work hangouts and weekend lunches with harbor views.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Harbor Point Plaza · $$ · Lunch & Dinner</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#641e16,#c0392b);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">Italian</span></div>
+          <h3 class="card-title">Mecha Noodle Bar</h3>
+          <p class="card-desc">Pan-Asian noodle house with ramen, pho, and udon bowls in a sleek waterfront space. Perfect for a quick satisfying meal before or after time on the water.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Harbor Point · $$ · Lunch & Dinner</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#7d3c98,#9b59b6);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">Coffee</span></div>
+          <h3 class="card-title">Harlan Social</h3>
+          <p class="card-desc">Upscale social club-style restaurant with craft cocktails, seasonal small plates, and a vibrant waterfront patio. Popular for Sunday brunch and weeknight happy hour.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Harbor Point · $$$ · Brunch, Lunch & Dinner</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#b7950b,#d4ac0d);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">Coffee</span><span class="card-tag featured">Local Favorite</span></div>
+          <h3 class="card-title">Zumbach's Gourmet Coffee</h3>
+          <p class="card-desc">Stamford's beloved independent coffee roaster with an outpost at Harbor Point. Freshly roasted beans, exceptional espresso, and pastries to match the waterfront view.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Harbor Point · $ · Morning & Afternoon</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- OUTDOORS -->
+  <section class="cat-section" data-cat="outdoors" style="background:var(--mist);">
+    <div class="section-label">Get Outside</div>
+    <h2 class="section-title">Outdoors & Water</h2>
+    <hr class="section-divider" />
+    <div class="grid-3">
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a5276,#2e86c1);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag outdoors">Marina</span><span class="card-tag featured">Must Visit</span></div>
+          <h3 class="card-title">Brewer Yacht Haven Marina</h3>
+          <p class="card-desc">Full-service marina with slips for visiting boaters, fuel dock, ship's store, and direct access to Long Island Sound. A working harbor in the middle of the city.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Harbor Point · Open daily · Seasonal</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#0e6655,#17a589);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag outdoors">Waterfront Walk</span></div>
+          <h3 class="card-title">Harbor Point Waterfront Promenade</h3>
+          <p class="card-desc">A scenic mile-long waterfront walk connecting the marina to the beaches. Benches, public art, fishing spots, and sweeping Sound views at every turn.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Harbor Point · Open 24/7 · Free</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#1e8449,#27ae60);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag outdoors">Education</span><span class="card-tag featured">Kids</span></div>
+          <h3 class="card-title">SoundWaters Community Center</h3>
+          <p class="card-desc">Marine education center on the harbor with sailing programs, kayak tours, environmental science classes, and hands-on Long Island Sound exhibits. Excellent for families.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Harbor Point · Programs year-round · soundwaters.org</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#2c3e50,#3d5a80);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag outdoors">Kayaking</span></div>
+          <h3 class="card-title">Kayak & Paddleboard Rentals</h3>
+          <p class="card-desc">Seasonal kayak and SUP rentals at the marina for self-guided paddles along the harbor and out into the Sound. No experience required — staff provides a brief orientation.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Harbor Point Marina · May–Oct · $$ per hour</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#784212,#b7770d);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag outdoors">Park</span></div>
+          <h3 class="card-title">Harbor Point Green</h3>
+          <p class="card-desc">A beautifully landscaped central lawn surrounded by restaurants and the marina. Home to outdoor fitness classes, food truck pop-ups, and concerts throughout summer.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Harbor Point Center · Open daily · Free</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a2744,#2c3e6b);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag outdoors">Fishing</span></div>
+          <h3 class="card-title">Harbor Fishing Pier</h3>
+          <p class="card-desc">A public fishing pier at the south end of the waterfront walk. Striped bass, bluefish, and flounder are common catches. Open to the public year-round, no permit required.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 South Harbor Point · Open daily · Free</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INSTAGRAM / SOCIAL -->
+  <section class="instagram-section">
+    <div class="section-label">Follow the Scene</div>
+    <h2 class="section-title">Local Instagram Accounts</h2>
+    <hr class="section-divider" />
+    <p style="font-size:0.88rem;color:var(--sub);max-width:580px;margin-bottom:1.25rem;">The fastest way to stay current on Harbor Point and Stamford — these accounts post real-time events, food drops, and local happenings.</p>
+    <div class="ig-grid">
+      <a class="ig-account-card" href="https://instagram.com/stamford_events" target="_blank" rel="noopener">
+        <div class="ig-avatar">📅</div>
+        <div class="ig-info"><div class="ig-handle">@stamford_events</div><div class="ig-desc">Events calendar & nightlife</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/heystamford" target="_blank" rel="noopener">
+        <div class="ig-avatar">📍</div>
+        <div class="ig-info"><div class="ig-handle">@heystamford</div><div class="ig-desc">City news & community</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/stamfordfoodia" target="_blank" rel="noopener">
+        <div class="ig-avatar">🍽</div>
+        <div class="ig-info"><div class="ig-handle">@stamfordfoodia</div><div class="ig-desc">Food & restaurant coverage</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/stamfordcommunity" target="_blank" rel="noopener">
+        <div class="ig-avatar">🤝</div>
+        <div class="ig-info"><div class="ig-handle">@stamfordcommunity</div><div class="ig-desc">Neighborhood life</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/stamford.runclub" target="_blank" rel="noopener">
+        <div class="ig-avatar">🏃</div>
+        <div class="ig-info"><div class="ig-handle">@stamford.runclub</div><div class="ig-desc">Running routes & meetups</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/harborpointstamford" target="_blank" rel="noopener">
+        <div class="ig-avatar">⚓</div>
+        <div class="ig-info"><div class="ig-handle">@harborpointstamford</div><div class="ig-desc">Official Harbor Point feed</div></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- SUGGEST CTA -->
+  <section id="suggest" style="background:var(--navy); padding:3rem 5%; text-align:center;">
+    <div class="section-label" style="color:var(--gold-lt);">Community</div>
+    <h2 style="font-family:'Playfair Display',serif; color:var(--white); font-size:clamp(1.5rem,3vw,2rem); margin-bottom:0.65rem;">Know Something We Don't?</h2>
+    <p style="color:rgba(255,255,255,0.75); max-width:480px; margin:0 auto 1.75rem; font-size:0.9rem;">A new restaurant, a pop-up, an event that isn't listed — tell us and we'll verify it.</p>
+    <form id="suggest-form-main" onsubmit="handleSidebarSubmit(event,'suggest-form-main')" style="max-width:480px; margin:0 auto; display:flex; flex-direction:column; gap:0.65rem;">
+      <input type="text" placeholder="What's the tip? (venue, event, anything)" style="padding:0.75rem 1rem; border:none; border-radius:8px; font-size:0.9rem; width:100%; box-sizing:border-box;" />
+      <textarea rows="3" placeholder="More details — date, address, source, link..." style="padding:0.75rem 1rem; border:none; border-radius:8px; font-size:0.9rem; resize:vertical; width:100%; box-sizing:border-box;"></textarea>
+      <button type="submit" style="background:var(--gold); color:var(--navy); border:none; padding:0.8rem; border-radius:8px; font-weight:700; font-size:0.9rem; cursor:pointer; letter-spacing:0.03em;">Send It In</button>
+    </form>
+  </section>
+
+
+  <!-- Compact Map -->
+  <div class="section" style="padding-top: 1rem; padding-bottom: 2rem;">
+    <h3 class="section-title" style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--sub); font-weight: 600; letter-spacing: 0.04em;">MAP</h3>
+    <div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border);">
+      <iframe
+        title="Harbor Point, Stamford"
+        src="https://maps.google.com/maps?q=Harbor+Point+Stamford+CT&output=embed&z=15"
+        style="display:block; width:100%; height:260px; border:none;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p class="footer-tagline">Live, verified local intelligence — from the neighborhood up.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Harbor Point</h5>
+        <ul>
+          <li><a href="#">Events</a></li>
+          <li><a href="#">Dining</a></li>
+          <li><a href="#">Outdoors</a></li>
+          <li><a href="#suggest">Suggest a Place</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Stamford</h5>
+        <ul>
+          <li><a href="../index.html">Stamford Overview</a></li>
+          <li><a href="../downtown/index.html">Downtown</a></li>
+          <li><a href="#suggest">Suggest a Place</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>The Concierge</h5>
+        <ul>
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../index.html">Explore Cities</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 The Concierge · All rights reserved</span>
+      <span>Live local intelligence, community verified</span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="../../script.js"></script>
+<script>
+function handleSidebarSubmit(e, formId) {
+  e.preventDefault();
+  const form = document.getElementById(formId);
+  if (!form) return;
+  form.innerHTML = `<div style="text-align:center;padding:1.5rem 0;"><div style="font-size:2rem;margin-bottom:0.5rem;">✓</div><p style="color:var(--white);font-weight:600;margin-bottom:0.25rem;">Got it — thanks!</p><p style="color:rgba(255,255,255,0.7);font-size:0.85rem;">Our team will verify it. If it checks out, it'll be live within 24–48 hours.</p></div>`;
+}
+</script>
+</body>
+</html>

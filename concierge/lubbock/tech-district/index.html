@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tech District — Lubbock, TX · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-wrap {
+      position: fixed; top: 68px; left: 0; right: 0; bottom: 0;
+      overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white);
+    }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+    .section { padding: 2.5rem 5%; }
+    .section-sm { padding: 1.75rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .neighborhood-hero { padding: 2.5rem 5% 2rem; }
+    .neighborhood-hero h1 { font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 0.4rem; }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+    .ig-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.75rem; }
+    .ig-account-card {
+      background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem;
+      box-shadow: var(--shadow); display: flex; align-items: center; gap: 0.75rem;
+      text-decoration: none; transition: box-shadow 0.2s;
+    }
+    .ig-account-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+    .ig-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+    }
+    .ig-handle { font-size: 0.82rem; font-weight: 600; color: var(--navy); }
+    .ig-desc { font-size: 0.74rem; color: var(--sub); margin-top: 0.1rem; }
+    /* TTU red accent */
+    .tt-red { border-left-color: #cc0000 !important; }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-page-location="Tech District">
+
+<nav>
+  <a href="../../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../index.html'">Lubbock, TX</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Tech District</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../../index.html">Home</a>
+  <a href="../index.html">Lubbock, TX</a>
+  <a href="index.html" class="active">Tech District</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <a href="../../index.html">Home</a>
+    <span class="sep">›</span>
+    <span>Texas</span>
+    <span class="sep">›</span>
+    <a href="../index.html">Lubbock</a>
+    <span class="sep">›</span>
+    <span>Tech District</span>
+  </div>
+
+  <section class="neighborhood-hero">
+    <div class="section-label">Lubbock</div>
+    <h1>Tech District <span style="font-size:0.55em;color:var(--sub);font-family:'Inter',sans-serif;font-weight:400;">Lubbock, TX</span></h1>
+    <p class="hero-sub" style="font-size:0.9rem;color:var(--sub);margin-bottom:0.75rem;">The heartbeat of Lubbock. Texas Tech University's sprawling 1,839-acre campus, game-day madness on The Strip, and a dense bar and restaurant scene along University Avenue.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;font-size:0.8rem;color:var(--sub);">
+      <span>🏈 Jones AT&amp;T Stadium</span>
+      <span>🏀 United Supermarkets Arena</span>
+      <span>🎓 Texas Tech Campus</span>
+      <span>🍺 The Strip</span>
+    </div>
+  </section>
+
+  <!-- SPORTS EVENTS -->
+  <section class="section cat-section" data-cat="sports" style="padding-top:1.5rem;">
+    <div class="section-label">Wreck 'Em</div>
+    <h2 class="section-title">Texas Tech Game Schedule</h2>
+    <hr class="section-divider" />
+
+    <div class="two-col">
+      <div class="events-list">
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">AUG</div><div class="day">30</div></div>
+          <div class="event-info">
+            <h4>🏈 Football Season Opener</h4>
+            <p>The Red Raiders kick off the 2025 season. Jones AT&amp;T Stadium transforms the entire city. Tailgate scene on Flint Ave and The Strip starts at noon. Wear your red and black.</p>
+            <div class="event-venue">📍 Jones AT&amp;T Stadium · 60,454 capacity</div>
+            <a class="event-link" href="https://texastech.com/sports/football" target="_blank" rel="noopener">Football schedule →</a>
+          </div>
+          <span class="badge badge-soon">Aug 30</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">SEP</div><div class="day">20</div></div>
+          <div class="event-info">
+            <h4>🏈 Texas Tech vs. Oklahoma State</h4>
+            <p>Big 12 rivalry game. One of the electric home matchups of the season. Gates open 2 hours before kickoff. Pre-game bars on The Strip hit capacity — arrive early.</p>
+            <div class="event-venue">📍 Jones AT&amp;T Stadium</div>
+            <a class="event-link" href="https://texastech.com/sports/football" target="_blank" rel="noopener">Get tickets →</a>
+          </div>
+          <span class="badge badge-soon">Sep 20</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">OCT</div><div class="day">11</div></div>
+          <div class="event-info">
+            <h4>🏈 Texas Tech Homecoming Game</h4>
+            <p>The biggest football weekend of the year. Alumni flood back, parade through campus Friday, and the homecoming game is always a sell-out. Book accommodations months in advance.</p>
+            <div class="event-venue">📍 Jones AT&amp;T Stadium</div>
+            <a class="event-link" href="https://texastech.com/sports/football" target="_blank" rel="noopener">Homecoming info →</a>
+          </div>
+          <span class="badge badge-soon">Oct 11</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">NOV</div><div class="day">8</div></div>
+          <div class="event-info">
+            <h4>🏀 Men's Basketball Season Opener</h4>
+            <p>The Red Raiders tip off the 2025–26 season at the USA. TTU basketball has risen to national prominence — expect a packed arena and an electric environment all season.</p>
+            <div class="event-venue">📍 United Supermarkets Arena · 15,098 capacity</div>
+            <a class="event-link" href="https://texastech.com/sports/mens-basketball" target="_blank" rel="noopener">Basketball schedule →</a>
+          </div>
+          <span class="badge badge-soon">Nov 8</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">FEB</div><div class="day">SEA</div></div>
+          <div class="event-info">
+            <h4>⚾ Baseball at Rip Griffin Park</h4>
+            <p>Red Raider baseball is a perennial Big 12 powerhouse and national title contender. Intimate ballpark, great atmosphere, and one of the best college baseball programs in the country.</p>
+            <div class="event-venue">📍 Dan Law Field / Rip Griffin Park · Season: Feb–May</div>
+            <a class="event-link" href="https://texastech.com/sports/baseball" target="_blank" rel="noopener">Baseball schedule →</a>
+          </div>
+          <span class="badge badge-open">Season</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">SAT</div><div class="day">WKL</div></div>
+          <div class="event-info">
+            <h4>🍺 Game Day on The Strip</h4>
+            <p>Every home football Saturday, University Avenue becomes one of the greatest college bar scenes in the South. Whiskey Dicks, The Library, 1520, and dozens more — all packed in red and black from noon to midnight.</p>
+            <div class="event-venue">📍 University Ave · The Strip · Home game Saturdays</div>
+          </div>
+          <span class="badge badge-open">Home games</span>
+        </div>
+
+      </div>
+
+      <div>
+        <div style="background:var(--mist);border-radius:var(--radius);padding:1.1rem;border:1px solid var(--border);margin-bottom:1rem;">
+          <h4 style="font-size:0.88rem;color:#cc0000;margin-bottom:0.65rem;">🏈 TTU Quick Links</h4>
+          <ul style="display:flex;flex-direction:column;gap:0.45rem;">
+            <li><a href="https://texastech.com/sports/football" target="_blank" style="font-size:0.82rem;color:var(--gold);">Football Schedule ↗</a></li>
+            <li><a href="https://texastech.com/sports/mens-basketball" target="_blank" style="font-size:0.82rem;color:var(--gold);">Men's Basketball ↗</a></li>
+            <li><a href="https://texastech.com/sports/womens-basketball" target="_blank" style="font-size:0.82rem;color:var(--gold);">Women's Basketball ↗</a></li>
+            <li><a href="https://texastech.com/sports/baseball" target="_blank" style="font-size:0.82rem;color:var(--gold);">Baseball ↗</a></li>
+            <li><a href="https://www.unitedssa.com" target="_blank" style="font-size:0.82rem;color:var(--gold);">All Arena Events ↗</a></li>
+            <li><a href="https://texastech.com/sports" target="_blank" style="font-size:0.82rem;color:var(--gold);">All TTU Sports ↗</a></li>
+          </ul>
+        </div>
+        <div class="submit-form" id="suggest">
+          <h3>Know something happening?</h3>
+          <p>Submit a game, event, or spot and we'll verify and post it.</p>
+          <form id="suggest-form" onsubmit="handleSubmit(event)">
+            <div class="form-group" style="margin-bottom:0.75rem;">
+              <label>Event or place name</label>
+              <input type="text" placeholder="e.g. TTU vs Texas game watch" />
+            </div>
+            <div class="form-group" style="margin-bottom:0.75rem;">
+              <label>Details</label>
+              <textarea placeholder="Date, venue, any details…"></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;">Submit →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE STRIP NIGHTLIFE -->
+  <section class="section cat-section" data-cat="nightlife" style="background:var(--mist);">
+    <div class="section-label">The Strip</div>
+    <h2 class="section-title">University Ave Bars &amp; Hangouts</h2>
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Country Bar</span>
+          <div class="card-title">Whiskey Dicks</div>
+          <div class="card-meta"><span>📍 2419 University Ave</span></div>
+          <p class="card-desc">The Strip's crown jewel. Mechanical bull, country music, cheap domestics, and a sea of red and black jerseys on game days. Opens at noon on football Saturdays. The energy is unmatched.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Dive Bar</span>
+          <div class="card-title">The Library Bar</div>
+          <div class="card-meta"><span>📍 1516 University Ave</span></div>
+          <p class="card-desc">A Texas Tech institution for decades. Pool tables, cold beer, unpretentious atmosphere. "I'm going to the library" has meant this bar for generations of Red Raiders.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Rooftop Bar</span>
+          <div class="card-title">1520 Bar &amp; Lounge</div>
+          <div class="card-meta"><span>📍 1520 University Ave</span></div>
+          <p class="card-desc">Multi-level with rooftop views of campus. DJ nights Friday–Saturday, craft cocktails, and a VIP section. The upscale option on The Strip — but still packed with Red Raiders gear.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Sports Bar</span>
+          <div class="card-title">The Varsity</div>
+          <div class="card-meta"><span>📍 University Ave</span></div>
+          <p class="card-desc">Every TV tuned to Red Raider games. The sports bar go-to for every away game and the overflow crowd for home games. Full food menu, wings, and a massive selection of draft beers.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Patio Bar</span>
+          <div class="card-title">Lonesome Dove Western Bistro</div>
+          <div class="card-meta"><span>📍 Near Campus</span></div>
+          <p class="card-desc">Upscale Western cuisine and cocktails with a patio. One of the top pre-game dinner spots near campus. Reservations recommended on home game weekends.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Pizza · $</span>
+          <div class="card-title">Manny's Pit BBQ &amp; More</div>
+          <div class="card-meta"><span>📍 Near Texas Tech Campus</span></div>
+          <p class="card-desc">Late-night campus staple. BBQ sandwiches, burritos, and loaded nachos. The go-to fuel stop between The Strip and heading home. Open late on weekends.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CAMPUS -->
+  <section class="section cat-section" data-cat="outdoors">
+    <div class="section-label">Campus Life</div>
+    <h2 class="section-title">Texas Tech University</h2>
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Campus</span>
+          <div class="card-title">Jones AT&amp;T Stadium</div>
+          <div class="card-meta"><span>📍 2526 6th St</span></div>
+          <p class="card-desc">Home of Red Raider football since 1947. 60,454 seats, a Double-T painted at midfield, and one of the loudest atmospheres in the Big 12. Tour available on non-game days.</p>
+          <a class="event-link" href="https://texastech.com/sports/football" target="_blank" rel="noopener">Schedule →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Campus</span>
+          <div class="card-title">United Supermarkets Arena</div>
+          <div class="card-meta"><span>📍 1701 Indiana Ave</span></div>
+          <p class="card-desc">Home of basketball and major concerts. 15,098 seats. Recent shows: Reba McEntire, country tours, and national pop acts. The USA is the main events hub of Lubbock.</p>
+          <a class="event-link" href="https://www.unitedssa.com" target="_blank" rel="noopener">Event calendar →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Golf</span>
+          <div class="card-title">Rawls Course at Texas Tech</div>
+          <div class="card-meta"><span>📍 3720 4th St</span></div>
+          <p class="card-desc">Tom Doak-designed course consistently ranked among the top public university courses in the US. Has hosted NCAA Regional play. Stunning South Plains landscape. Open to the public.</p>
+          <a class="event-link" href="https://rawlscourse.com" target="_blank" rel="noopener">Tee times →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Walking</span>
+          <div class="card-title">Memorial Circle</div>
+          <div class="card-meta"><span>📍 Texas Tech Campus · Center</span></div>
+          <p class="card-desc">The iconic center of campus. Spanish Renaissance architecture, massive oak trees, and the Saddle Tramp statue. Walk the circle — it's what every TTU student and visitor does on their first visit.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Museum</span>
+          <div class="card-title">National Ranching Heritage Center</div>
+          <div class="card-meta"><span>📍 3121 4th St</span></div>
+          <p class="card-desc">37-acre outdoor museum with 48 authentic historic ranch structures from the 1780s–1950s. Completely free admission. One of the most underrated museums in Texas.</p>
+          <a class="event-link" href="https://nrhc.ttu.edu" target="_blank" rel="noopener">Plan your visit →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Event</span>
+          <div class="card-title">Carol of Lights — December</div>
+          <div class="card-meta"><span>📍 Texas Tech Campus · Early December</span></div>
+          <p class="card-desc">One of the most beautiful holiday traditions in Texas. 25,000+ lights cover the administration buildings while the TTU choir performs. Free and open to the public. Draws tens of thousands.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DINING NEAR CAMPUS -->
+  <section class="section cat-section" data-cat="dining" style="background:var(--mist);">
+    <div class="section-label">Where to Eat</div>
+    <h2 class="section-title">Near Campus Dining</h2>
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Italian · $$</span>
+          <div class="card-title">Orlando's Italian Restaurant</div>
+          <div class="card-meta"><span>📍 2402 Ave Q</span></div>
+          <p class="card-desc">A Texas Tech institution since the 1980s. BYOB wine policy, massive portions, and authentic family-style Italian. The pasta is some of the best in West Texas. Always packed.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Wings · $</span>
+          <div class="card-title">Wings-N-More</div>
+          <div class="card-meta"><span>📍 Near Campus</span></div>
+          <p class="card-desc">The game-watch wings spot. 40+ flavors, giant beer towers, and every TV on Red Raider games. The campus crowd's go-to for away games and late-night post-Strip food.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Diner · $</span>
+          <div class="card-title">Spanky's Restaurant &amp; Bar</div>
+          <div class="card-meta"><span>📍 1811 Buddy Holly Ave</span></div>
+          <p class="card-desc">Campus diner classic with comfort food and famously large portions. A lunch destination for professors, students, and anyone who discovers it. The chicken fried steak is mandatory.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="instagram-section">
+    <div class="section-label">Follow the Scene</div>
+    <h2 class="section-title">Local Instagram Accounts</h2>
+    <hr class="section-divider" />
+    <p style="font-size:0.88rem;color:var(--sub);max-width:580px;margin-bottom:1.25rem;">Stay on top of game days, campus events, and what's happening on The Strip.</p>
+    <div class="ig-grid">
+      <a class="ig-account-card" href="https://instagram.com/texastechsports" target="_blank" rel="noopener">
+        <div class="ig-avatar">⚡</div>
+        <div class="ig-info"><div class="ig-handle">@texastechsports</div><div class="ig-desc">Red Raiders athletics</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/texastechuniversity" target="_blank" rel="noopener">
+        <div class="ig-avatar">🏈</div>
+        <div class="ig-info"><div class="ig-handle">@texastechuniversity</div><div class="ig-desc">Campus & student life</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/texastechfootball" target="_blank" rel="noopener">
+        <div class="ig-avatar">🏟️</div>
+        <div class="ig-info"><div class="ig-handle">@texastechfootball</div><div class="ig-desc">Red Raider football</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/ttu_mbb" target="_blank" rel="noopener">
+        <div class="ig-avatar">🏀</div>
+        <div class="ig-info"><div class="ig-handle">@ttu_mbb</div><div class="ig-desc">Men's basketball</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/lubbock" target="_blank" rel="noopener">
+        <div class="ig-avatar">📍</div>
+        <div class="ig-info"><div class="ig-handle">@lubbock</div><div class="ig-desc">City events & happenings</div></div>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- Compact Map -->
+  <div class="section" style="padding-top: 1rem; padding-bottom: 2rem;">
+    <h3 class="section-title" style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--sub); font-weight: 600; letter-spacing: 0.04em;">MAP</h3>
+    <div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border);">
+      <iframe
+        title="Tech District, Lubbock"
+        src="https://maps.google.com/maps?q=Texas+Tech+University+Lubbock+TX&output=embed&z=14"
+        style="display:block; width:100%; height:260px; border:none;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p class="footer-tagline">Your local intelligence platform. Curated, verified, always up to date.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Lubbock</h5>
+        <ul>
+          <li><a href="../index.html">Lubbock Overview</a></li>
+          <li><a href="../depot-district/index.html">Depot District</a></li>
+          <li><a href="index.html">Tech District</a></li>
+          <li><a href="../historic-district/index.html">Historic District</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>The Concierge</h5>
+        <ul>
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="#suggest">Suggest a Place</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 The Concierge · All rights reserved.</span>
+      <span>Lubbock, TX</span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="../../script.js"></script>
+</body>
+</html>

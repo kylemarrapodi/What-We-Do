@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Historic District — Lubbock, TX · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-wrap {
+      position: fixed; top: 68px; left: 0; right: 0; bottom: 0;
+      overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white);
+    }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+    .section { padding: 2.5rem 5%; }
+    .section-sm { padding: 1.75rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .neighborhood-hero { padding: 2.5rem 5% 2rem; }
+    .neighborhood-hero h1 { font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 0.4rem; }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+    .ig-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.75rem; }
+    .ig-account-card {
+      background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem;
+      box-shadow: var(--shadow); display: flex; align-items: center; gap: 0.75rem;
+      text-decoration: none; transition: box-shadow 0.2s;
+    }
+    .ig-account-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+    .ig-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+    }
+    .ig-handle { font-size: 0.82rem; font-weight: 600; color: var(--navy); }
+    .ig-desc { font-size: 0.74rem; color: var(--sub); margin-top: 0.1rem; }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-page-location="Historic District">
+
+<nav>
+  <a href="../../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../index.html'">Lubbock, TX</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Historic District</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../../index.html">Home</a>
+  <a href="../index.html">Lubbock, TX</a>
+  <a href="index.html" class="active">Historic District</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <a href="../../index.html">Home</a>
+    <span class="sep">›</span>
+    <span>Texas</span>
+    <span class="sep">›</span>
+    <a href="../index.html">Lubbock</a>
+    <span class="sep">›</span>
+    <span>Historic District</span>
+  </div>
+
+  <section class="neighborhood-hero">
+    <div class="section-label">Lubbock</div>
+    <h1>Historic District <span style="font-size:0.55em;color:var(--sub);font-family:'Inter',sans-serif;font-weight:400;">Lubbock, TX</span></h1>
+    <p class="hero-sub" style="font-size:0.9rem;color:var(--sub);margin-bottom:0.75rem;">The soul of Lubbock. Birthplace of Buddy Holly, home to the stunning new Buddy Holly Hall of Performing Arts, and the center of the city's growing arts and cultural scene.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;font-size:0.8rem;color:var(--sub);">
+      <span>🎸 Buddy Holly birthplace</span>
+      <span>🎭 Performing arts</span>
+      <span>🏛️ Museums</span>
+      <span>🌮 Downtown dining</span>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="section cat-section" data-cat="events" style="padding-top:1.5rem;">
+    <div class="section-label">What's On</div>
+    <h2 class="section-title">Events &amp; Performances</h2>
+    <hr class="section-divider" />
+
+    <div class="two-col">
+      <div class="events-list">
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">SEP</div><div class="day">13</div></div>
+          <div class="event-info">
+            <h4>🎸 Buddy Holly Music Festival</h4>
+            <p>Annual citywide tribute to Lubbock's most famous son. Free outdoor concerts at Buddy Holly Hall plaza, vendors, and performances in the Depot District. One of the best free events in West Texas.</p>
+            <div class="event-venue">📍 Buddy Holly Hall &amp; Area · Downtown</div>
+            <a class="event-link" href="https://buddyhollycenter.org" target="_blank" rel="noopener">Event info →</a>
+          </div>
+          <span class="badge badge-soon">Sep 13</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">SEP</div><div class="day">26</div></div>
+          <div class="event-info">
+            <h4>🎤 Reba McEntire at Buddy Holly Hall</h4>
+            <p>Country legend and Texas favorite brings her 2025 tour to Lubbock's premier performing arts venue. The Concert Hall seats 2,200 with world-class acoustics.</p>
+            <div class="event-venue">📍 Buddy Holly Hall · 1300 Mac Davis Ln</div>
+            <a class="event-link" href="https://buddyhollyhall.com" target="_blank" rel="noopener">Get tickets →</a>
+          </div>
+          <span class="badge badge-soon">Sep 26</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">OCT</div><div class="day">18</div></div>
+          <div class="event-info">
+            <h4>🌮 Lubbock on the Square — Food &amp; Wine Festival</h4>
+            <p>Downtown Lubbock's signature fall event. Local chefs, Texas High Plains winemakers, and live music from regional bands. Family-friendly and free to attend — food and wine purchased separately.</p>
+            <div class="event-venue">📍 Courthouse Square · Downtown</div>
+            <a class="event-link" href="https://downtownlubbock.org" target="_blank" rel="noopener">Event info →</a>
+          </div>
+          <span class="badge badge-soon">Oct 18</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">DEC</div><div class="day">HOL</div></div>
+          <div class="event-info">
+            <h4>🎄 Broadway at Buddy Holly Hall</h4>
+            <p>The holiday Broadway season brings national touring productions to Lubbock. Recent shows have included Wicked, Hamilton, and Mamma Mia. Book early — these sell out weeks in advance.</p>
+            <div class="event-venue">📍 Buddy Holly Hall · Crickets Theatre &amp; Concert Hall</div>
+            <a class="event-link" href="https://buddyhollyhall.com" target="_blank" rel="noopener">Season schedule →</a>
+          </div>
+          <span class="badge badge-soon">Seasonal</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">SAT</div><div class="day">WKL</div></div>
+          <div class="event-info">
+            <h4>🛒 Downtown Lubbock Farmers Market</h4>
+            <p>Saturday mornings at the Courthouse Square — local produce, honey, baked goods, and artisan vendors. A great way to spend a morning before the game or an afternoon exploring downtown.</p>
+            <div class="event-venue">📍 Courthouse Square · Downtown · Sat mornings</div>
+            <a class="event-link" href="https://downtownlubbock.org" target="_blank" rel="noopener">Market info →</a>
+          </div>
+          <span class="badge badge-open">Weekly</span>
+        </div>
+
+      </div>
+
+      <div>
+        <div style="background:var(--mist);border-radius:var(--radius);padding:1.1rem;border:1px solid var(--border);margin-bottom:1rem;">
+          <h4 style="font-size:0.88rem;color:var(--navy);margin-bottom:0.65rem;">🎭 Venue Quick Links</h4>
+          <ul style="display:flex;flex-direction:column;gap:0.45rem;">
+            <li><a href="https://buddyhollyhall.com" target="_blank" style="font-size:0.82rem;color:var(--gold);">Buddy Holly Hall ↗</a></li>
+            <li><a href="https://buddyhollycenter.org" target="_blank" style="font-size:0.82rem;color:var(--gold);">Buddy Holly Center ↗</a></li>
+            <li><a href="https://downtownlubbock.org" target="_blank" style="font-size:0.82rem;color:var(--gold);">Downtown Lubbock ↗</a></li>
+            <li><a href="https://explorelbb.com" target="_blank" style="font-size:0.82rem;color:var(--gold);">Visit Lubbock ↗</a></li>
+          </ul>
+        </div>
+        <div class="submit-form" id="suggest">
+          <h3>Know something happening?</h3>
+          <p>Submit an event or place and we'll verify and add it.</p>
+          <form id="suggest-form" onsubmit="handleSubmit(event)">
+            <div class="form-group" style="margin-bottom:0.75rem;">
+              <label>Event or place name</label>
+              <input type="text" placeholder="e.g. Jazz night at Boppin' B" />
+            </div>
+            <div class="form-group" style="margin-bottom:0.75rem;">
+              <label>Details</label>
+              <textarea placeholder="Date, venue, any details…"></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;">Submit →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTS & CULTURE -->
+  <section class="section cat-section" data-cat="arts" style="background:var(--mist);">
+    <div class="section-label">Arts &amp; Culture</div>
+    <h2 class="section-title">Venues &amp; Museums</h2>
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Concert Hall</span>
+          <div class="card-title">Buddy Holly Hall of Performing Arts</div>
+          <div class="card-meta"><span>📍 1300 Mac Davis Ln</span></div>
+          <p class="card-desc">Opened 2021 — the most significant cultural venue built in Lubbock in a generation. 2,200-seat Concert Hall with superb acoustics plus a 450-seat Crickets Theatre. Broadway tours, symphonies, and major national acts.</p>
+          <a class="event-link" href="https://buddyhollyhall.com" target="_blank" rel="noopener">Full schedule →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Museum</span>
+          <div class="card-title">Buddy Holly Center</div>
+          <div class="card-meta"><span>📍 1801 Crickets Ave · Depot District</span></div>
+          <p class="card-desc">The definitive collection on Buddy Holly and the rock & roll era. Original memorabilia, instruments, and a fine arts gallery. The West Texas Walk of Fame is outside. Unmissable for music lovers.</p>
+          <a class="event-link" href="https://buddyhollycenter.org" target="_blank" rel="noopener">Plan your visit →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Landmark</span>
+          <div class="card-title">Buddy Holly Statue &amp; Walk of Fame</div>
+          <div class="card-meta"><span>📍 8th St &amp; Ave Q · Downtown</span></div>
+          <p class="card-desc">Life-size bronze statue of Buddy Holly in his signature pose stands at the corner of 8th and Q. The West Texas Walk of Fame honors Lubbock music legends including Waylon Jennings and Mac Davis.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Symphony</span>
+          <div class="card-title">Lubbock Symphony Orchestra</div>
+          <div class="card-meta"><span>📍 Buddy Holly Hall · Downtown</span></div>
+          <p class="card-desc">The LSO performs at Buddy Holly Hall year-round — classical concerts, pops series, and holiday performances. A subscription season is one of the best value entertainment options in Lubbock.</p>
+          <a class="event-link" href="https://lubbocksymphony.org" target="_blank" rel="noopener">Season schedule →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Theatre</span>
+          <div class="card-title">Lubbock Community Theatre</div>
+          <div class="card-meta"><span>📍 Downtown Lubbock</span></div>
+          <p class="card-desc">One of the oldest community theatres in Texas. Musicals, dramas, and comedies throughout the season. Affordable tickets and consistently high-quality local productions.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Winery</span>
+          <div class="card-title">McPherson Cellars</div>
+          <div class="card-meta"><span>📍 1615 Texas Ave · Downtown</span></div>
+          <p class="card-desc">Award-winning Texas winery in a beautifully restored 1930s Coca-Cola bottling plant downtown. The best indoor tasting room in the city — also hosts concerts and private events.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DINING -->
+  <section class="section cat-section" data-cat="dining">
+    <div class="section-label">Where to Eat</div>
+    <h2 class="section-title">Downtown &amp; Historic District Dining</h2>
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">American · $$$</span>
+          <div class="card-title">The Nicolett</div>
+          <div class="card-meta"><span>📍 2407 19th St</span></div>
+          <p class="card-desc">Lubbock's upscale dining anchor. Hand-cut steaks, seasonal menus with West Texas ingredients, and an impressive wine list anchored by Texas High Plains bottles.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Tex-Mex · $$</span>
+          <div class="card-title">Rosa's Café &amp; Tortilla Factory</div>
+          <div class="card-meta"><span>📍 Multiple locations · Downtown</span></div>
+          <p class="card-desc">West Texas Tex-Mex done right. Fresh tortillas made on-site, massive burritos, and queso that'll ruin you for all other queso. A Lubbock institution born and raised in the city.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Steakhouse · $$$</span>
+          <div class="card-title">Cagle Steaks</div>
+          <div class="card-meta"><span>📍 Downtown Lubbock</span></div>
+          <p class="card-desc">Old-school West Texas steakhouse with beef you can trust. Lubbock sits at the heart of the Texas cattle industry — the steaks here prove it. A local institution for special occasions.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="instagram-section">
+    <div class="section-label">Follow the Scene</div>
+    <h2 class="section-title">Local Instagram Accounts</h2>
+    <hr class="section-divider" />
+    <p style="font-size:0.88rem;color:var(--sub);max-width:580px;margin-bottom:1.25rem;">Arts, concerts, and downtown Lubbock happenings — follow these for real-time updates.</p>
+    <div class="ig-grid">
+      <a class="ig-account-card" href="https://instagram.com/buddyhollyhall" target="_blank" rel="noopener">
+        <div class="ig-avatar">🎵</div>
+        <div class="ig-info"><div class="ig-handle">@buddyhollyhall</div><div class="ig-desc">Concerts & Broadway</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/buddyhollycenter" target="_blank" rel="noopener">
+        <div class="ig-avatar">🎸</div>
+        <div class="ig-info"><div class="ig-handle">@buddyhollycenter</div><div class="ig-desc">Museum & music heritage</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/visitlubbock" target="_blank" rel="noopener">
+        <div class="ig-avatar">🌵</div>
+        <div class="ig-info"><div class="ig-handle">@visitlubbock</div><div class="ig-desc">Tourism & city events</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/lubbockeats" target="_blank" rel="noopener">
+        <div class="ig-avatar">🍽</div>
+        <div class="ig-info"><div class="ig-handle">@lubbockeats</div><div class="ig-desc">Food & restaurants</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/lubbock" target="_blank" rel="noopener">
+        <div class="ig-avatar">📍</div>
+        <div class="ig-info"><div class="ig-handle">@lubbock</div><div class="ig-desc">City life & community</div></div>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- Compact Map -->
+  <div class="section" style="padding-top: 1rem; padding-bottom: 2rem;">
+    <h3 class="section-title" style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--sub); font-weight: 600; letter-spacing: 0.04em;">MAP</h3>
+    <div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border);">
+      <iframe
+        title="Historic District, Lubbock"
+        src="https://maps.google.com/maps?q=Downtown+Lubbock+TX&output=embed&z=15"
+        style="display:block; width:100%; height:260px; border:none;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p class="footer-tagline">Your local intelligence platform. Curated, verified, always up to date.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Lubbock</h5>
+        <ul>
+          <li><a href="../index.html">Lubbock Overview</a></li>
+          <li><a href="../depot-district/index.html">Depot District</a></li>
+          <li><a href="../tech-district/index.html">Tech District</a></li>
+          <li><a href="index.html">Historic District</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>The Concierge</h5>
+        <ul>
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="#suggest">Suggest a Place</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 The Concierge · All rights reserved.</span>
+      <span>Lubbock, TX</span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="../../script.js"></script>
+</body>
+</html>

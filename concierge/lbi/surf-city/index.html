@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Surf City — Long Beach Island · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-wrap { position: fixed; top: 68px; left: 0; right: 0; bottom: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white); }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+    .neighborhood-hero { padding: 2.5rem 5% 2.25rem; }
+    .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
+    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
+    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
+    .highlight-card h4 { font-size: 0.85rem; color: var(--navy); margin-bottom: 0.15rem; }
+    .highlight-card p { font-size: 0.77rem; color: var(--sub); }
+    .section { padding: 2.25rem 5%; }
+    .section-sm { padding: 1.75rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+    .cat-section { padding: 2.25rem 5%; }
+    .sidebar-box { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem; margin-bottom: 1.25rem; }
+    .sidebar-box h4 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 0.65rem; }
+    .info-row { display: flex; gap: 0.5rem; align-items: flex-start; margin-bottom: 0.5rem; }
+    .info-row .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+    .info-row p { font-size: 0.8rem; color: var(--sub); line-height: 1.5; margin: 0; }
+    .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .map-embed-wrap iframe { display: block; width: 100%; height: 260px; border: none; }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .highlight-strip { grid-template-columns: repeat(2,1fr); } }
+  </style>
+</head>
+<body data-page-location="Surf City">
+
+<nav>
+  <a href="../../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../index.html'">LBI</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Surf City</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../../index.html">Home</a>
+  <a href="../index.html">Long Beach Island</a>
+  <a href="index.html" class="active">Surf City</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="../../index.html">Home</a><span>›</span>
+      <a href="../../new-jersey/index.html">New Jersey</a><span>›</span>
+      <a href="../index.html">Long Beach Island</a><span>›</span>
+      <span>Surf City</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="neighborhood-hero" style="background: linear-gradient(135deg, #0a2a4a 0%, #1a6fa5 50%, #48b8e0 100%); color: white;">
+    <div class="section-label" style="color:rgba(150,220,255,0.9);">Mid-Island · The Hub</div>
+    <h1 style="font-family:'Playfair Display',serif;color:white;">Surf City</h1>
+    <p style="color:rgba(255,255,255,0.82);max-width:580px;line-height:1.65;margin-bottom:1rem;">The geographic and social center of Long Beach Island. A walkable, vibrant town with a strong surfing culture, LBI's most celebrated bayside hotel and beach club, Saturday farmers markets, excellent casual dining, and a bay beach that's a summer afternoon favorite for families.</p>
+    <div class="city-hero-meta">
+      <span>🏄 Surfing Capital of LBI</span>
+      <span>🏨 Surf City Hotel & Beach Club</span>
+      <span>🌊 Bay Beach & Kayaking</span>
+      <span>🥬 Saturday Farmers Market</span>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="section-sm" style="background:var(--white);">
+    <div class="highlight-strip">
+      <div class="highlight-card"><div class="big-num">Mid</div><h4>Island Position</h4><p>Geographically central — equidistant from both ends</p></div>
+      <div class="highlight-card"><div class="big-num">1894</div><h4>Borough Founded</h4><p>One of LBI's earliest incorporated communities</p></div>
+      <div class="highlight-card"><div class="big-num">Sat</div><h4>Farmers Market</h4><p>Weekly market June–October at the municipal complex</p></div>
+      <div class="highlight-card"><div class="big-num">2</div><h4>Ocean + Bay</h4><p>Both ocean beach and protected bay beach access</p></div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="cat-section" style="background:var(--mist);">
+    <div class="two-col">
+      <div>
+
+        <!-- Hotel & Landmarks -->
+        <div class="section-header"><h2 class="section-title">Landmarks</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#0a2a4a,#48b8e0);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag featured">Hotel</span><span class="card-tag">Beach Club</span></div>
+              <h3 class="card-title">Surf City Hotel & Beach Club</h3>
+              <p class="card-desc">LBI's most celebrated gathering spot — a bayside hotel with an outdoor beach club that defines the Surf City summer. The pool deck, tiki bar, and live music stage face the bay for spectacular sunset views. Rooms book out months in advance for peak summer. Even if you're not staying, the beach club bar is open to guests and walk-ins on a space-available basis. Sunday funday at the Beach Club is a summer ritual.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Barnegat Ave, Surf City · Seasonal · Book early</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#1a4a1a,#4aaa4a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag outdoors">Bay Beach</span><span class="card-tag featured">Family Favorite</span></div>
+              <h3 class="card-title">Bay Beach & Kayak Launch</h3>
+              <p class="card-desc">Surf City's bay beach is calm, warm, and shallow — perfect for young children and for launching paddleboards and kayaks into Barnegat Bay. The gradual sandy bottom extends far out at low tide. A popular late-afternoon spot when the ocean beach gets crowded or windy. Kayak rentals available nearby from Memorial Day through Labor Day.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Bay side, Surf City · Free access · Rentals available</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#3a2a0a,#9a7a2a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag outdoors">Market</span></div>
+              <h3 class="card-title">Saturday Farmers Market</h3>
+              <p class="card-desc">Weekly outdoor market held every Saturday from June through October at the Surf City Municipal Complex. Local produce, fresh-cut flowers, Jersey honey, artisan baked goods, homemade jams, handmade crafts, and prepared food vendors. A great Saturday morning ritual before the beach. Draws regulars from all over the island.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Municipal Complex · Sat 8am–1pm · June–October</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#0a1a3a,#1a3a7a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag outdoors">Surfing</span></div>
+              <h3 class="card-title">Surf Culture & Ocean Beach</h3>
+              <p class="card-desc">Surf City lives up to its name — the beach has a legitimate surf culture with consistent waves that attract shortboarders, longboarders, and beginner surfers. Multiple surf schools operate here in summer. The designated surf zone is well-organized and respected. Best surf in shoulder season (May, September–October) when summer crowds thin out.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Ocean beach, Surf City · Lessons available · Badge required</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dining -->
+        <div class="section-header"><h2 class="section-title">Dining & Drinks</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#2a0a1a,#8a2a5a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Tacos & Bar</span><span class="card-tag featured">Local Favorite</span></div>
+              <h3 class="card-title">Scojos</h3>
+              <p class="card-desc">The original LBI taco joint and one of the most beloved casual spots on the island. Creative fish tacos, shrimp tacos, and a menu of shareable plates that pairs perfectly with a cold margarita. Loud, fun, packed in summer — exactly what it should be. Outdoor seating when the weather cooperates. Early-evening crowds spill out onto the deck.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Long Beach Blvd, Surf City · Full bar · Seasonal</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#0a2a1a,#2a7a4a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Seafood</span></div>
+              <h3 class="card-title">Yellow Fin Restaurant</h3>
+              <p class="card-desc">A consistent Surf City favorite for solid seafood in a relaxed atmosphere. Menu features daily fish specials, whole belly clam strips, seafood pasta, and reliable classics. BYOB. Outdoor deck seating with bay views. Good value for the quality — one of the better options on the mid-island for a sit-down dinner.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Surf City · BYOB · Seasonal dinner service</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#2a1a0a,#7a4a2a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Coffee</span></div>
+              <h3 class="card-title">Surf City Coffee</h3>
+              <p class="card-desc">A go-to morning stop for Surf City regulars. Quality espresso drinks, cold brew, and a solid selection of pastries and breakfast sandwiches. Unpretentious and quick — exactly what you need before the farmers market or a beach day. Small outdoor seating area. Gets busy but moves fast.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Surf City · Mornings · Seasonal hours</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#1a1a2a,#3a3a6a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag nightlife">Bar</span></div>
+              <h3 class="card-title">Bird & Betty's</h3>
+              <p class="card-desc">Craft cocktails, a thoughtful beer and wine list, and bar food that's actually worth ordering. A more grown-up alternative to the louder beach bars, with a warm neighborhood-bar atmosphere. Popular with the Surf City local crowd and a welcome change of pace from the typical Shore bar. Live music on select nights.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Surf City · Full bar · Seasonal</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Practical Notes -->
+        <div class="section-header"><h2 class="section-title">Practical Notes</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:0.75rem;">
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Central Location</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Surf City is the mid-point of LBI — a 10-minute bike ride or short drive from almost anywhere on the island. It makes an ideal base for exploring the full island without committing to the southern or northern ends.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Beach Hotel Booking</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">The Surf City Hotel is one of the few true hotel options on LBI with a full beach club experience. It books out for July and August by early spring. If you want a summer weekend here, check availability in February or March.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Surf Lessons</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Multiple surf schools operate out of Surf City's beach. Beginner group lessons are widely available. Book in advance for summer weekends. The beach has a designated surf zone separate from the swimming areas.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Biking</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Surf City is the best town on LBI for biking — flat, compact, and perfectly situated for rides north toward Harvey Cedars or south toward Ship Bottom on the island-spanning bike path along the bay side of Long Beach Blvd.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="map-embed-wrap" style="margin-bottom:1.25rem;">
+          <iframe title="Surf City NJ Map" src="https://maps.google.com/maps?q=Surf+City,+NJ&output=embed&z=14" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Need to Know</h4>
+          <div class="info-row"><span class="icon">🗺</span><p><strong>Location:</strong> Mid-island LBI, Long Beach Township</p></div>
+          <div class="info-row"><span class="icon">🚗</span><p><strong>Parking:</strong> Street parking throughout. Less crowded than Beach Haven. Municipal lot near the beach.</p></div>
+          <div class="info-row"><span class="icon">🏖</span><p><strong>Beach badges:</strong> Required. Sold at beach entrances. Daily and weekly options.</p></div>
+          <div class="info-row"><span class="icon">🏄</span><p><strong>Surf conditions:</strong> Best waves on the island. Designated surf zones marked with flags.</p></div>
+          <div class="info-row"><span class="icon">🚴</span><p><strong>Bike path:</strong> Connects north to Harvey Cedars and south to Ship Bottom. Best biking on LBI.</p></div>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Explore LBI</h4>
+          <a href="../ship-bottom/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">← Ship Bottom</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../harvey-cedars/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Harvey Cedars →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../barnegat-light/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Barnegat Light →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">All LBI Towns →</span>
+            <span style="font-size:0.72rem;color:var(--gold);">6 towns</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p>Your local intelligence platform — curated, verified, and always expanding.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Long Beach Island</h4>
+        <a href="../index.html">LBI Overview</a>
+        <a href="../holgate/index.html">Holgate</a>
+        <a href="../beach-haven/index.html">Beach Haven</a>
+        <a href="../ship-bottom/index.html">Ship Bottom</a>
+        <a href="index.html">Surf City</a>
+        <a href="../harvey-cedars/index.html">Harvey Cedars</a>
+        <a href="../barnegat-light/index.html">Barnegat Light</a>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="../../index.html">Home</a>
+        <a href="../../new-jersey/index.html">New Jersey</a>
+        <a href="../../connecticut/index.html">Connecticut</a>
+      </div>
+      <div class="footer-links">
+        <h4>The Concierge</h4>
+        <a href="../../index.html">About</a>
+        <a href="../../index.html#suggest">Suggest a Place</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 The Concierge. All rights reserved.</div>
+  </footer>
+
+</div>
+<script src="../../script.js"></script>
+</body>
+</html>

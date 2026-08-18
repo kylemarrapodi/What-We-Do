@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Holgate — Long Beach Island · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-wrap { position: fixed; top: 68px; left: 0; right: 0; bottom: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white); }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+    .neighborhood-hero { padding: 2.5rem 5% 2.25rem; }
+    .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
+    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
+    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
+    .highlight-card h4 { font-size: 0.85rem; color: var(--navy); margin-bottom: 0.15rem; }
+    .highlight-card p { font-size: 0.77rem; color: var(--sub); }
+    .section { padding: 2.25rem 5%; }
+    .section-sm { padding: 1.75rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+    .cat-section { padding: 2.25rem 5%; }
+    .sidebar-box { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem; margin-bottom: 1.25rem; }
+    .sidebar-box h4 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 0.65rem; }
+    .info-row { display: flex; gap: 0.5rem; align-items: flex-start; margin-bottom: 0.5rem; }
+    .info-row .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+    .info-row p { font-size: 0.8rem; color: var(--sub); line-height: 1.5; margin: 0; }
+    .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .map-embed-wrap iframe { display: block; width: 100%; height: 260px; border: none; }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .highlight-strip { grid-template-columns: repeat(2,1fr); } }
+  </style>
+</head>
+<body data-page-location="Holgate">
+
+<nav>
+  <a href="../../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../index.html'">LBI</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Holgate</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../../index.html">Home</a>
+  <a href="../index.html">Long Beach Island</a>
+  <a href="index.html" class="active">Holgate</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="../../index.html">Home</a><span>›</span>
+      <a href="../../new-jersey/index.html">New Jersey</a><span>›</span>
+      <a href="../index.html">Long Beach Island</a><span>›</span>
+      <span>Holgate</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="neighborhood-hero" style="background: linear-gradient(135deg, #1a3c34 0%, #2d6a4f 60%, #52b788 100%); color: white;">
+    <div class="section-label" style="color:rgba(201,168,76,0.85);">Southernmost LBI</div>
+    <h1 style="font-family:'Playfair Display',serif;color:white;">Holgate</h1>
+    <p style="color:rgba(255,255,255,0.82);max-width:560px;line-height:1.65;margin-bottom:1rem;">The wild, untouched southern tip of LBI. Where the paved road ends, three miles of federally protected wilderness beach begins — no lifeguards, no concessions, just surf, piping plovers, and empty dunes stretching south toward Atlantic City.</p>
+    <div class="city-hero-meta">
+      <span>🌿 Forsythe Wildlife Refuge</span>
+      <span>🎣 World-Class Surf Fishing</span>
+      <span>🐦 Piping Plover Nesting</span>
+      <span>🚗 Beach Driving (Fall/Winter)</span>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="section-sm" style="background:var(--white);">
+    <div class="highlight-strip">
+      <div class="highlight-card"><div class="big-num">3mi</div><h4>Wilderness Beach</h4><p>Federally protected, no lifeguards</p></div>
+      <div class="highlight-card"><div class="big-num">400+</div><h4>Refuge Acres</h4><p>Barrier beach, dunes & tidal salt marsh</p></div>
+      <div class="highlight-card"><div class="big-num">50+</div><h4>Bird Species</h4><p>Critical Atlantic Flyway migration stop</p></div>
+      <div class="highlight-card"><div class="big-num">Sep–Mar</div><h4>Beach Driving</h4><p>4WD permitted seaward of berm crest</p></div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="cat-section" style="background:var(--mist);">
+    <div class="two-col">
+      <div>
+        <div class="section-header"><h2 class="section-title">The Wilderness</h2></div>
+        <hr class="section-divider" />
+
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#1a3c34,#52b788);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag outdoors">Wildlife Refuge</span><span class="card-tag featured">Must-See</span></div>
+              <h3 class="card-title">Forsythe Wilderness Beach</h3>
+              <p class="card-desc">Edwin B. Forsythe National Wildlife Refuge. Over 400 acres of pristine barrier beach, high dunes, and tidal salt marsh designated a federal Wilderness Area in 1975. No development, no facilities — just the most unspoiled stretch of beach on the Jersey Shore.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 End of Barnegat Ave · Free · Sunrise to sunset</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#0a3d62,#1e6fa5);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag outdoors">Fishing</span><span class="card-tag featured">Local Favorite</span></div>
+              <h3 class="card-title">Surf Fishing</h3>
+              <p class="card-desc">Among the best surf fishing on the entire East Coast. Striped bass, bluefish, weakfish, and flounder run the Holgate tip seasonally. The point where the bay meets the ocean creates exceptional structure for feeding fish. Serious anglers come specifically for Holgate.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Ocean & bay sides · NJ fishing license required</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#2d4a22,#6aab3a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag outdoors">Wildlife</span></div>
+              <h3 class="card-title">Birding & Wildlife</h3>
+              <p class="card-desc">One of New Jersey's largest breeding grounds for federally threatened piping plovers. Also nests American oystercatchers, black skimmers, and least terns. Critical link on the Atlantic Flyway migration route — exceptional for fall shorebird watching.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Entire refuge · Best: spring nesting & fall migration</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#5c3d0e,#b5651d);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag outdoors">Beach Driving</span></div>
+              <h3 class="card-title">4WD Beach Access</h3>
+              <p class="card-desc">One of the few NJ beaches where you can drive on the sand — but only September 1 through March 31. Vehicles must obtain a beach buggy permit from Long Beach Township and stay seaward of the berm crest. 4WD and proper tire deflation required.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Permitted Sep 1–Mar 31 · LBT permit required · 4WD only</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-header"><h2 class="section-title">Clamming Trail</h2></div>
+        <hr class="section-divider" />
+        <div class="card animate-in" style="margin-bottom:2rem;">
+          <div class="card-body">
+            <div class="card-tags"><span class="card-tag outdoors">Bay Activity</span></div>
+            <h3 class="card-title">Holgate Clamming Trail</h3>
+            <p class="card-desc">A 0.4-mile bay-side trail open for clamming from September 1 through March 15. Boat landing permitted. Hard clams (quahogs) and soft-shell clams (steamers) are commonly found. A classic Jersey Shore experience — bring a rake and a bucket.</p>
+            <p style="font-size:0.78rem;color:var(--sub);">📍 Bay side, south end · Sep 1–Mar 15 · NJ shellfish license required</p>
+          </div>
+        </div>
+
+        <div class="section-header"><h2 class="section-title">Practical Notes</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:0.75rem;">
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">No Facilities</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">No restrooms, no concessions, no lifeguards in the refuge. Bring everything you need — water, sunscreen, food. Nearest services are in Beach Haven (~2 miles north).</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Bird Nesting Season</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">April 1–August 31: beach driving prohibited and portions of the beach are closed to protect nesting birds. Respect the roped-off areas — fines apply.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Dining Nearby</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Holgate has no restaurants or bars. Head north to <a href="../beach-haven/index.html" style="color:var(--gold);font-weight:600;">Beach Haven</a> for dining — a 10-minute drive or bike ride along the boulevard.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Best Time to Visit</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Fall (September–November) is ideal: beach driving opens, crowds disappear, fishing peaks, and shorebird migration is underway. Spring is excellent for birding before nesting restrictions.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="map-embed-wrap" style="margin-bottom:1.25rem;">
+          <iframe title="Holgate NJ Map" src="https://maps.google.com/maps?q=Holgate,+Long+Beach+Township,+NJ&output=embed&z=14" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Need to Know</h4>
+          <div class="info-row"><span class="icon">🗺</span><p><strong>Location:</strong> Southern tip of LBI, Long Beach Township</p></div>
+          <div class="info-row"><span class="icon">🚗</span><p><strong>Parking:</strong> Limited street parking at the end of Barnegat Ave</p></div>
+          <div class="info-row"><span class="icon">🏖</span><p><strong>Beach badges:</strong> Not required in the refuge area</p></div>
+          <div class="info-row"><span class="icon">📱</span><p><strong>Forsythe Refuge:</strong> (609) 652-1665</p></div>
+          <div class="info-row"><span class="icon">🚌</span><p><strong>Shuttle:</strong> LBI Shuttle stops at south end of Holgate in summer</p></div>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Up the Island</h4>
+          <a href="../beach-haven/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Beach Haven →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../ship-bottom/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Ship Bottom →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">All LBI Towns →</span>
+            <span style="font-size:0.72rem;color:var(--gold);">6 towns</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p>Your local intelligence platform — curated, verified, and always expanding.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Long Beach Island</h4>
+        <a href="../index.html">LBI Overview</a>
+        <a href="index.html">Holgate</a>
+        <a href="../beach-haven/index.html">Beach Haven</a>
+        <a href="../ship-bottom/index.html">Ship Bottom</a>
+        <a href="../surf-city/index.html">Surf City</a>
+        <a href="../harvey-cedars/index.html">Harvey Cedars</a>
+        <a href="../barnegat-light/index.html">Barnegat Light</a>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="../../index.html">Home</a>
+        <a href="../../new-jersey/index.html">New Jersey</a>
+        <a href="../../connecticut/index.html">Connecticut</a>
+      </div>
+      <div class="footer-links">
+        <h4>The Concierge</h4>
+        <a href="../../index.html">About</a>
+        <a href="../../index.html#suggest">Suggest a Place</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 The Concierge. All rights reserved.</div>
+  </footer>
+
+</div>
+<script src="../../script.js"></script>
+</body>
+</html>
