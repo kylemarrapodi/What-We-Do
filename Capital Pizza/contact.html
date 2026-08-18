@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Visit Us | Capital Pizza</title>
+<meta name="description" content="Contact, hours, and directions for Capital Pizza's two Lubbock, TX locations — Tech Terrace and Lakeridge." />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;0,900;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<!-- NAV -->
+<nav>
+<a href="index.html" class="nav-logo">Capital <span>Pizza</span></a>
+<ul class="nav-links">
+<li><a href="about.html">Our Story</a></li>
+<li><a href="menu.html">Menu</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="contact.html" class="nav-cta active">Visit Us</a></li>
+</ul>
+<button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+<a href="index.html">Home</a>
+<a href="about.html">Our Story</a>
+<a href="menu.html">Menu</a>
+<a href="gallery.html">Gallery</a>
+<a href="contact.html" class="mobile-cta active">Visit Us</a>
+</div>
+<div class="page-wrap">
+<div class="page-inner">
+<div class="page-header">
+<div class="page-header-left">
+<div class="section-label">Get In Touch</div>
+<h1>Visit Us</h1>
+<p>Two Lubbock locations — Tech Terrace and Lakeridge. Walk-ins welcome at both.</p>
+</div>
+</div>
+<div class="page-content">
+<div class="contact-split">
+<!-- Left: contact info + map -->
+<div class="contact-info">
+<h3>Capital Pizza — Tech Terrace</h3>
+<div class="contact-detail">
+<span class="contact-detail-icon">📞</span>
+<div class="contact-detail-text">
+<h5>Phone</h5>
+<p><a href="tel:18063683603">(806) 368-3603</a></p>
+</div>
+</div>
+<div class="contact-detail">
+<span class="contact-detail-icon">📍</span>
+<div class="contact-detail-text">
+<h5>Address</h5>
+<p>2705 26th Street (at Boston Ave)<br>Lubbock, TX 79410</p>
+</div>
+</div>
+<div class="contact-detail">
+<span class="contact-detail-icon">🕒</span>
+<div class="contact-detail-text">
+<h5>Hours</h5>
+<p>Daily: 11:00 AM – Midnight<br>Kitchen closes at 11:00 PM<br>To-go orders taken until 10:45 PM</p>
+</div>
+</div>
+<div class="contact-detail">
+<span class="contact-detail-icon">🍕</span>
+<div class="contact-detail-text">
+<h5>Order Online</h5>
+<p><a href="https://www.ordercapitalpizza.com/" target="_blank" rel="noopener">Order ahead for carry-out</a></p>
+</div>
+</div>
+<div class="map-embed">
+<iframe
+title="Capital Pizza Tech Terrace location"
+src="https://maps.google.com/maps?q=2705+26th+St,+Lubbock,+TX+79410&output=embed&z=16"
+allowfullscreen
+loading="lazy"
+referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+</div>
+
+<div class="location-card" style="margin-top:2rem;">
+<h4>📍 Second Location — Lakeridge</h4>
+<div class="contact-detail">
+<span class="contact-detail-icon">📍</span>
+<div class="contact-detail-text">
+<p>8211 Slide Road<br>Lubbock, TX 79424</p>
+</div>
+</div>
+<div class="contact-detail" style="margin-bottom:0;">
+<span class="contact-detail-icon">📞</span>
+<div class="contact-detail-text">
+<p><a href="tel:18067014062">(806) 701-4062</a> — carry-out &amp; limited delivery available</p>
+</div>
+</div>
+</div>
+
+<div class="social-row">
+<a href="https://www.facebook.com/CapitalPizza" class="social-btn" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+<a href="https://www.instagram.com/capitalpizzalbk/" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+</div>
+</div>
+<!-- Right: contact form -->
+<form id="suggest-form" onsubmit="handleSubmit(event)">
+<div class="form-row">
+<div class="form-group">
+<label for="fname">First Name</label>
+<input type="text" id="fname" placeholder="Jane" required />
+</div>
+<div class="form-group">
+<label for="lname">Last Name</label>
+<input type="text" id="lname" placeholder="Smith" required />
+</div>
+</div>
+<div class="form-group">
+<label for="email">Email Address</label>
+<input type="email" id="email" placeholder="jane@example.com" required />
+</div>
+<div class="form-group">
+<label for="phone">Phone Number</label>
+<input type="tel" id="phone" placeholder="(806) 000-0000" />
+</div>
+<div class="form-group">
+<label for="location">Which Location?</label>
+<select id="location">
+<option value="">Select one...</option>
+<option>Tech Terrace — 2705 26th St</option>
+<option>Lakeridge — 8211 Slide Rd</option>
+<option>Either / Not Sure</option>
+</select>
+</div>
+<div class="form-group">
+<label for="reason">Reason for Contact</label>
+<select id="reason">
+<option value="">Select one...</option>
+<option>General Question</option>
+<option>Large Group / Party</option>
+<option>Catering Inquiry</option>
+<option>Happy Hour / Bar Question</option>
+<option>Feedback</option>
+</select>
+</div>
+<div class="form-group">
+<label for="party">Party Size (if applicable)</label>
+<input type="number" id="party" min="1" placeholder="4" />
+</div>
+<div class="form-group">
+<label for="message">Message</label>
+<textarea id="message" placeholder="How can we help?"></textarea>
+</div>
+<button type="submit" class="btn-submit">Send Message</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

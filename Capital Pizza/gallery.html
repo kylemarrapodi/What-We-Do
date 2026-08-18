@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gallery | Capital Pizza</title>
+<meta name="description" content="Photos from Capital Pizza's Tech Terrace location in Lubbock, TX." />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;0,900;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<!-- NAV -->
+<nav>
+<a href="index.html" class="nav-logo">Capital <span>Pizza</span></a>
+<ul class="nav-links">
+<li><a href="about.html">Our Story</a></li>
+<li><a href="menu.html">Menu</a></li>
+<li><a href="gallery.html" class="active">Gallery</a></li>
+<li><a href="contact.html" class="nav-cta">Visit Us</a></li>
+</ul>
+<button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+<a href="index.html">Home</a>
+<a href="about.html">Our Story</a>
+<a href="menu.html">Menu</a>
+<a href="gallery.html" class="active">Gallery</a>
+<a href="contact.html" class="mobile-cta">Visit Us</a>
+</div>
+<div class="page-wrap">
+<div class="page-inner">
+<div class="page-header">
+<div class="page-header-left">
+<div class="section-label">Photo Gallery</div>
+<h1>A Look Inside</h1>
+<p>Real photos of Capital Pizza's Tech Terrace location, sourced from the restaurant's official website — clearly labeled on every image.</p>
+</div>
+<div class="page-header-right">
+<a href="menu.html" class="btn-primary">View Menu</a>
+</div>
+</div>
+<div class="page-content">
+<div class="menu-note" style="margin-bottom:1.5rem;">
+This is an independent design proposal, not photos taken on assignment for the restaurant. Photos tagged <strong>Real Photo</strong> are sourced directly from Capital Pizza's own official website and show the actual Tech Terrace location. The one photo tagged <strong>Stock Photo</strong> is a generic dough-prep image used site-wide on Capital's own website template — it isn't confirmed to depict their actual kitchen, so it's labeled as illustrative only.
+</div>
+<div class="gallery-tabs">
+<button class="gallery-tab active" onclick="switchTab(event, 'all')">All Photos</button>
+<button class="gallery-tab" onclick="switchTab(event, 'food')">Food</button>
+<button class="gallery-tab" onclick="switchTab(event, 'space')">Inside &amp; Outside</button>
+</div>
+<!-- ALL -->
+<div class="gallery-panel active" id="panel-all">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/pizza-cutting-real.jpg" alt="A fresh gourmet pizza being sliced at Capital Pizza" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/signage-day-real.jpg" alt="The real Capital Pizza window signage in daylight" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/signage-night-real.jpg" alt="The real Capital Pizza exterior sign lit up at night" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/bar-interior-real.jpg" alt="The real Capital Pizza bar, taps, and seating in Tech Terrace" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/dining-room-real.jpg" alt="The real Capital Pizza dining room covered in Texas Tech memorabilia" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/pizza-closeup-real.jpg" alt="Close-up of a fresh specialty pizza at Capital Pizza" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/tap-wall-real.jpg" alt="A wall of decorative beer tap handles at Capital Pizza's bar" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/liquor-shelf-real.jpg" alt="The back bar liquor and craft beer cooler at Capital Pizza" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/pizza-detail-real.jpg" alt="Detail shot of pepperoni, sausage, olive, and pepper toppings on a Capital Pizza pie" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/pizza-boxes-real.jpeg" alt="Stacks of Capital Pizza to-go boxes ready for pickup" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/logo-real.png" alt="The real Capital Pizza Gourmet Pizza and Lounge logo" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock Photo</span>
+<img src="photos/dough-prep-stock.jpeg" alt="Hands dusted with flour, illustrative dough-prep photo used on Capital Pizza's own website" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+<!-- FOOD -->
+<div class="gallery-panel" id="panel-food">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/pizza-cutting-real.jpg" alt="A fresh gourmet pizza being sliced at Capital Pizza" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/pizza-closeup-real.jpg" alt="Close-up of a fresh specialty pizza at Capital Pizza" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/pizza-detail-real.jpg" alt="Detail shot of pepperoni, sausage, olive, and pepper toppings on a Capital Pizza pie" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/pizza-boxes-real.jpeg" alt="Stacks of Capital Pizza to-go boxes ready for pickup" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock Photo</span>
+<img src="photos/dough-prep-stock.jpeg" alt="Hands dusted with flour, illustrative dough-prep photo used on Capital Pizza's own website" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+<!-- INSIDE & OUTSIDE -->
+<div class="gallery-panel" id="panel-space">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/signage-day-real.jpg" alt="The real Capital Pizza window signage in daylight" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/signage-night-real.jpg" alt="The real Capital Pizza exterior sign lit up at night" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/bar-interior-real.jpg" alt="The real Capital Pizza bar, taps, and seating in Tech Terrace" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/dining-room-real.jpg" alt="The real Capital Pizza dining room covered in Texas Tech memorabilia" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/tap-wall-real.jpg" alt="A wall of decorative beer tap handles at Capital Pizza's bar" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/liquor-shelf-real.jpg" alt="The back bar liquor and craft beer cooler at Capital Pizza" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/logo-real.png" alt="The real Capital Pizza Gourmet Pizza and Lounge logo" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
+<button class="lightbox-close" onclick="closeLightbox()">✕</button>
+<button class="lightbox-prev" onclick="shiftLightbox(-1)">&#8249;</button>
+<img id="lightbox-img" src="" alt="" />
+<button class="lightbox-next" onclick="shiftLightbox(1)">&#8250;</button>
+<div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
