@@ -1375,13 +1375,24 @@ function initPanelCollapse() {
   if (homePanel) document.body.classList.add('has-home-panel');
 
   const KEY = 'concierge:panel-collapsed';
+  // Below this width the panel is an off-canvas drawer rather than a column.
+  const mobile = window.matchMedia('(max-width: 768px)');
+  const isDrawer = () => mobile.matches && !homePanel;
+
   let collapsed = false;
   try { collapsed = localStorage.getItem(KEY) === '1'; } catch (e) { /* private mode */ }
+  // A drawer always starts closed — that's the convention, and on a phone the
+  // page underneath is what you came for.
+  if (isDrawer()) collapsed = true;
 
   const btn = document.createElement('button');
   btn.className = 'panel-toggle';
   btn.type = 'button';
   document.body.appendChild(btn);
+
+  const backdrop = document.createElement('div');
+  backdrop.className = 'panel-backdrop';
+  document.body.appendChild(backdrop);
 
   function apply() {
     const label = collapsed ? 'Show search and events' : 'Hide search and events';
@@ -1392,16 +1403,37 @@ function initPanelCollapse() {
     btn.title = label;
   }
 
-  // Apply the remembered state without animating it on first paint.
+  function set(next) {
+    collapsed = next;
+    // Only remember the choice on desktop; a phone visit shouldn't overwrite
+    // the preference someone set on a wide screen.
+    if (!isDrawer()) {
+      try { localStorage.setItem(KEY, collapsed ? '1' : '0'); } catch (e) { /* private mode */ }
+    }
+    apply();
+  }
+
+  // Apply the starting state without animating it on first paint.
   document.body.classList.add('panel-no-anim');
   apply();
   requestAnimationFrame(() => document.body.classList.remove('panel-no-anim'));
 
-  btn.addEventListener('click', () => {
-    collapsed = !collapsed;
-    try { localStorage.setItem(KEY, collapsed ? '1' : '0'); } catch (e) { /* private mode */ }
-    apply();
+  btn.addEventListener('click', () => set(!collapsed));
+  backdrop.addEventListener('click', () => set(true));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !collapsed && isDrawer()) set(true);
   });
+
+  // Crossing the breakpoint (rotating a phone, resizing a window) changes what
+  // the panel *is*, so re-derive the state instead of leaving it half-applied.
+  const onBreakpoint = () => {
+    if (isDrawer()) { set(true); return; }
+    let stored = false;
+    try { stored = localStorage.getItem(KEY) === '1'; } catch (e) { /* private mode */ }
+    set(stored);
+  };
+  if (mobile.addEventListener) mobile.addEventListener('change', onBreakpoint);
+  else if (mobile.addListener) mobile.addListener(onBreakpoint);
 }
 
 function initScrollAnimations() {

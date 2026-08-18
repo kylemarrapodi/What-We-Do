@@ -907,11 +907,64 @@ body.panel-no-anim .page-wrap-with-panel,
 body.panel-no-anim .home-split,
 body.panel-no-anim .panel-toggle { transition: none !important; }
 
+/* Backdrop behind the mobile drawer — tap it to close. Desktop never shows it. */
+.panel-backdrop {
+  display: none;
+  position: fixed;
+  top: 68px; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.45);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 110;
+  transition: opacity 0.25s ease;
+}
+
 /* On narrow screens the home page drops the map and the panel IS the page,
    so collapsing it would leave a blank screen. */
 @media (max-width: 900px) {
   body.has-home-panel .panel-toggle { display: none; }
   body.has-home-panel.panel-collapsed { --panel-w: var(--panel-w-open); }
+}
+
+/* ---- Phones: the side panel becomes an off-canvas drawer ----
+   Pushing the content sideways by a fixed 320px leaves almost nothing on a
+   phone, so below 768px the panel floats over the page instead and the
+   content always gets the full width. */
+@media (max-width: 768px) {
+  body:not(.has-home-panel) { --panel-w: 0px; }
+
+  body:not(.has-home-panel) .site-left-panel {
+    width: min(var(--panel-w-open), 86vw);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 120;
+    box-shadow: var(--shadow-lg);
+  }
+  body:not(.has-home-panel):not(.panel-collapsed) .site-left-panel { transform: translateX(0); }
+  body:not(.has-home-panel) .site-left-panel > * { width: min(var(--panel-w-open), 86vw); }
+
+  /* Content is never shifted — the drawer sits on top of it */
+  body:not(.has-home-panel) .page-wrap-with-panel { left: 0 !important; }
+
+  /* Bigger tap target, and it rides the drawer's edge when open */
+  body:not(.has-home-panel) .panel-toggle {
+    width: 28px;
+    height: 78px;
+    font-size: 1.1rem;
+    left: 0;
+    z-index: 121;
+  }
+  body:not(.has-home-panel):not(.panel-collapsed) .panel-toggle {
+    left: min(var(--panel-w-open), 86vw);
+  }
+
+  body:not(.has-home-panel) .panel-backdrop { display: block; }
+  body:not(.has-home-panel):not(.panel-collapsed) .panel-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  body.panel-no-anim .site-left-panel { transition: none !important; }
 }
 
 /* ---- Shared panel typography & event item styles ---- */
