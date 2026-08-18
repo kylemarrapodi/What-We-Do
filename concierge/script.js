@@ -635,8 +635,8 @@ const LIVE_MUSIC = {
         desc: 'The Island\'s longest-running shore bar, right at the causeway.', link: 'lbi/ship-bottom/index.html' },
       { name: 'Surf City Hotel', kind: 'Hotel Bar & Beach Club', where: 'Surf City', nights: 'Six days a week across two rooms',
         desc: 'The nightlife hub of the north end for over a century.', link: 'lbi/surf-city/index.html' },
-      { name: "Nardi's Tavern", kind: 'Tavern', where: 'Harvey Cedars', nights: 'Every night of the week',
-        desc: 'Music seven nights — and the pink party bus that runs the Boulevard.', link: 'lbi/harvey-cedars/index.html' },
+      { name: "Nardi's Tavern", kind: 'Tavern', where: 'North Beach Haven', nights: 'Every night of the week',
+        desc: 'Music seven nights — and the pink party bus that runs the Boulevard.', link: 'lbi/beach-haven/index.html' },
     ],
     series: []
   },
@@ -671,6 +671,12 @@ const LIVE_MUSIC = {
         nights: 'Year-round',
         desc: 'One of the few Beach Haven rooms that keeps booking music straight through the off-season, when most of the Boulevard is shuttered.',
         cal: { href: 'https://www.blackwhalebar.com/', label: 'blackwhalebar.com' } },
+
+      { name: "Nardi's Tavern", kind: 'Tavern & Nightclub', addr: '11801 Long Beach Blvd, North Beach Haven', phone: '(609) 492-9538',
+        nights: 'Music every night · Sun–Thu at 9:30 PM, Fri & Sat at 10 PM · acoustic sets Fri & Sat from 5 PM · Dave Christopher Band Sundays at 5 PM',
+        acts: ['Green Knuckle Material (Tuesdays)', 'The Pickles', 'Big Bang Baby', 'Friend Zone', 'Mike Byrne', 'Matt Pietrucha'],
+        desc: 'Tavern by day, nightclub by night, and the only room on the Island with music seven nights a week — plus the pink Nardi\'s party bus running the Boulevard, which is a Long Beach Island landmark in its own right. Just north of Beach Haven proper.',
+        cal: { href: 'http://www.nardistavern.com/band-schedule', label: 'nardistavern.com — band schedule' } },
     ],
     series: [
       { name: 'Concerts on the Green', who: 'Beach Haven Community Arts Program',
@@ -697,33 +703,32 @@ const LIVE_MUSIC = {
     blurb: 'The north end\'s nightlife hub, running music six days a week across two rooms in the same building.',
     venues: [
       { name: 'Surf City Hotel', kind: 'Hotel Bar & Beach Club', where: 'Surf City',
-        nights: 'Bistro: Monday, Wednesday & Thursday · Beach Club: Tuesday, Friday & Saturday nights, plus Sunday afternoons',
+        nights: 'Bistro during dinner hours · Beach Club late night, 21+ — bands Tuesday, Friday, Saturday and select Sundays',
         acts: ['Shorty Long and the Jersey Horns'],
         desc: 'One of the oldest structures on Long Beach Island, putting people up and putting bands on for over a century. Two rooms with separate schedules, so there is something on nearly every night of the week.',
-        cal: { href: 'https://www.surfcityhotelnj.com/', label: 'surfcityhotelnj.com' } },
+        cal: { href: 'https://surfcityhotel.com/entertainment.html', label: 'surfcityhotel.com — entertainment' } },
     ],
     series: []
   },
 
   'harvey-cedars': {
-    blurb: 'Small town, outsized music habit — one tavern books something every single night.',
+    blurb: 'Harvey Cedars keeps its music outdoors and free — bayfront concerts at Sunset Park, with the booked rooms a short drive in either direction.',
     venues: [
-      { name: "Nardi's Tavern", kind: 'Tavern', where: 'Harvey Cedars',
-        nights: 'Live music every night of the week',
-        desc: 'One of the Island\'s most beloved music spots, and the only one with its own transportation: the pink Nardi\'s party bus that runs up and down the Boulevard is a Long Beach Island landmark in its own right.' },
       { name: 'Sunset Park', kind: 'Bayfront Concerts', where: 'Harvey Cedars',
         nights: 'Summer evenings',
         desc: 'Free bayfront concerts with the sunset doing most of the production work. Bring a chair.' },
     ],
-    series: []
+    series: [],
+    nearest: { text: 'The Surf City Hotel is a few minutes south, and Nardi\'s runs music seven nights a week down in North Beach Haven.', href: 'lbi/surf-city/index.html' }
   },
 
   'barnegat-light': {
     blurb: 'The quiet end of the Island. One long-standing bar, and music when it happens rather than on a schedule.',
     venues: [
-      { name: "Kubel's Bar & Restaurant", kind: 'Bar & Restaurant', addr: '7th St & Bayview', phone: '(609) 494-8592',
-        nights: 'Occasional — call ahead',
-        desc: 'A north-end institution since long before anyone was printing schedules. Music turns up here, but it is not a booked room in the way Beach Haven or Surf City are — worth a phone call rather than a drive.' },
+      { name: "Kubel's Bar & Restaurant", kind: 'Bar & Restaurant', addr: '28 W 7th St', phone: '(609) 494-8592',
+        nights: 'Open daily from noon, year-round · happy hour 4–6 PM weekdays · music occasional, call ahead',
+        desc: 'A north-end institution since long before anyone was printing schedules, and one of the few Island rooms open all year. Music turns up here, but it is not a booked room the way Beach Haven or Surf City are — worth a phone call rather than a drive.',
+        cal: { href: 'https://www.kubelsbarnegatlight.com/', label: 'kubelsbarnegatlight.com' } },
     ],
     series: [],
     nearest: { text: 'For a booked room, Surf City and Harvey Cedars are both a short drive south.', href: 'lbi/surf-city/index.html' }
@@ -752,7 +757,8 @@ const LIVE_MUSIC = {
         link: 'stamford/downtown/index.html' },
       { name: "Casey's Tavern", kind: 'Neighborhood Bar', addr: '85 Woodside St', phone: '(203) 363-0804',
         nights: 'Open mic Thursdays · Karaoke Sundays, 9 PM',
-        desc: 'An Irish pub off the downtown grid that consistently turns up on Stamford\'s live-music lists. Not a booking room — an open-mic-and-karaoke room, which is its own thing.' },
+        desc: 'An Irish pub off the downtown grid that consistently turns up on Stamford\'s live-music lists. Not a booking room — an open-mic-and-karaoke room, which is its own thing. No website of its own; the Facebook page is where anything gets posted.',
+        cal: { href: 'https://www.facebook.com/caseys.stamford/', label: 'facebook.com/caseys.stamford' } },
       { name: 'Harbor Point', kind: 'Waterfront Series', where: 'South End',
         nights: 'Five nights a week through the summer',
         desc: 'The largest single piece of what replaced Alive@Five — free walk-up entertainment on the waterfront most weeknights in season.',
@@ -760,8 +766,10 @@ const LIVE_MUSIC = {
     ],
     series: [
       { name: 'Summer in the Park', who: 'Hey Stamford!, Mill River Park, Parachute Concerts, Stamford Downtown and The Karp Family',
-        when: 'Three concert weekends across the summer', where: 'Mill River Park',
-        note: 'Introduced in June 2026 as part of the programming that succeeded Alive@Five.' },
+        when: 'Three concert weekends · July 16 – August 2 in 2026', where: 'Mill River Park, downtown',
+        acts: ['DaBaby', 'Fat Joe', 'Remy Ma', 'Two Friends', 'Ja Rule', 'Ashanti', 'Jowell & Randy', 'Grupo Niche'],
+        note: 'Introduced in June 2026 as part of the programming that succeeded Alive@Five. Those were the 2026 headliners — next summer\'s lineup posts in the spring.',
+        cal: { href: 'https://summerinthepark.com/info/', label: 'summerinthepark.com' } },
     ]
   },
 
@@ -778,14 +786,17 @@ const LIVE_MUSIC = {
         desc: 'The Stamford Center for the Arts\' main stage — the room that gets the touring names. Diana Ross played here in August; the season runs music, comedy and theatre straight through the winter.',
         cal: { href: 'https://palacestamford.org', label: 'palacestamford.org' } },
 
-      { name: 'Tigin Irish Pub', kind: 'Irish Pub', where: 'Downtown',
-        nights: 'Live music and trivia nights',
-        desc: 'Whiskey list, big beer selection, and music mixed in among the trivia and the game-night crowd. Reliable rather than headline-driven.' },
+      { name: 'Tigin Irish Pub', kind: 'Irish Pub', addr: '175 Bedford St', phone: '(475) 212-6044',
+        nights: 'Pub Quiz Tuesdays at 8 PM · live bands on select weekends · opens early weekends for Premier League',
+        desc: 'Whiskey list, big beer selection, and music mixed in among the trivia and the game-night crowd. Reliable rather than headline-driven.',
+        cal: { href: 'https://tiginirishpub.com/', label: 'tiginirishpub.com' } },
     ],
     series: [
       { name: 'Summer in the Park', who: 'Hey Stamford!, Mill River Park, Parachute Concerts, Stamford Downtown and The Karp Family',
-        when: 'Three concert weekends across the summer', where: 'Mill River Park',
-        note: 'Alive@Five ran downtown for 27 years and has now ended. This is the series that took its place, alongside the Harbor Point weeknights and a quieter run of concerts in the arboretum.' },
+        when: 'Three concert weekends · July 16 – August 2 in 2026', where: 'Mill River Park, downtown',
+        acts: ['DaBaby', 'Fat Joe', 'Remy Ma', 'Two Friends', 'Ja Rule', 'Ashanti', 'Jowell & Randy', 'Grupo Niche'],
+        note: 'Alive@Five ran downtown for 27 years and has now ended. This is the series that took its place, alongside the Harbor Point weeknights and a quieter run of concerts in the arboretum.',
+        cal: { href: 'https://summerinthepark.com/info/', label: 'summerinthepark.com' } },
     ]
   },
 
@@ -793,10 +804,12 @@ const LIVE_MUSIC = {
     blurb: 'The waterfront is where most of Stamford\'s free summer music moved after Alive@Five wound down — five nights a week of it, walk-up, no ticket.',
     venues: [
       { name: 'Harbor Point Summer Programming', kind: 'Waterfront Series', where: 'Harbor Point Square',
-        nights: 'Five nights a week through the summer',
-        desc: 'The biggest share of the programming that replaced Alive@Five: live entertainment on the waterfront most weeknights in season, free and walk-up.' },
-      { name: 'Sign of the Whale', kind: 'Bar & Rooftop', where: 'Harbor Point',
-        desc: 'A 5,000-square-foot rooftop looking out over Long Island Sound. More of a DJ-and-crowd room than a stage, but it is the anchor of the Harbor Point night.' },
+        nights: 'Five nights a week through the summer · free live music Tuesday evenings on the waterfront',
+        desc: 'The biggest share of the programming that replaced Alive@Five: live entertainment on the waterfront most weeknights in season, free and walk-up, alongside movies in the park, outdoor fitness and the farmers market.',
+        cal: { href: 'https://bltliveworkplay.com/apartments/stamford/harbor-point/events/', label: 'harbor point — events calendar' } },
+      { name: 'Sign of the Whale', kind: 'Bar & Rooftop', addr: '6 Harbor Point Rd',
+        desc: 'A 5,000-square-foot rooftop looking out over Long Island Sound, above an equally large dining room. Live bands, rooftop parties, trivia — the anchor of the Harbor Point night.',
+        cal: { href: 'https://www.signofthewhalect.com/whats-goin-on', label: "signofthewhalect.com — what's goin' on" } },
       { name: "Half Full Brewery — Third Place", kind: 'Taproom & Beer Garden', where: 'Stamford',
         nights: 'Live music through the summer',
         desc: 'Part taproom, part coworking, part event space, with a relaxed beer garden that runs live music, lawn games and one-off events across the warm months.',
@@ -809,8 +822,9 @@ const LIVE_MUSIC = {
     blurb: 'Shippan is residential, but the office park on Harbor Drive turns into one of the better casual music spots in the city in season.',
     venues: [
       { name: 'The Beer Garden at Shippan Landing', kind: 'Beer Garden', addr: '290 Harbor Dr',
-        nights: 'Tuesday–Sunday in season',
-        desc: 'Seventeen waterfront acres of office park that open up to craft beer, food trucks and live music. Genuinely pleasant, and almost nobody outside Stamford knows it is there.' },
+        nights: 'Wed–Fri 4 PM–midnight · Sat noon–midnight · Sun noon–9 PM, in season',
+        desc: 'Seventeen waterfront acres of office park that open up to a rotating craft beer roster, food trucks and live music. Genuinely pleasant, and almost nobody outside Stamford knows it is there.',
+        cal: { href: 'https://www.beeratthelanding.com/', label: 'beeratthelanding.com' } },
     ],
     series: [],
     nearest: { text: 'For a booked band on a weekend night, downtown is ten minutes north.', href: 'stamford/downtown/index.html' }
@@ -831,9 +845,10 @@ const LIVE_MUSIC = {
   'north-stamford': {
     blurb: 'North Stamford is woods and stone walls, not stages — but the arboretum runs the quietest and arguably nicest concert series in the city.',
     venues: [
-      { name: 'Bartlett Arboretum', kind: 'Outdoor Concerts', where: 'North Stamford',
-        nights: 'Summer evenings',
-        desc: 'One of the three strands of programming that succeeded Alive@Five — a deliberately quieter concert series among the gardens, a world away from a downtown bar on a Saturday.' },
+      { name: 'Bartlett Arboretum & Gardens', kind: 'Outdoor Concerts', where: 'North Stamford',
+        nights: 'Summer Concert Series — select Sundays, 5–7 PM on the Great Lawn',
+        desc: 'One of the three strands of programming that succeeded Alive@Five — a deliberately quieter concert series among the gardens, a world away from a downtown bar on a Saturday. $5 members, $10 non-members, free for under-12s. The Honey Harvest Festival runs the same lawn in late August.',
+        cal: { href: 'https://www.bartlettarboretum.org/events', label: 'bartlettarboretum.org/events' } },
     ],
     series: [],
     nearest: { text: 'The nearest booked rooms are downtown, about fifteen minutes south.', href: 'stamford/downtown/index.html' }
@@ -881,9 +896,10 @@ const LIVE_MUSIC = {
   'depot-district': {
     blurb: 'Four blocks of warehouses off Buddy Holly Avenue doing what they have done since the Seventies: putting Texas songwriters on small stages most nights of the week.',
     venues: [
-      { name: 'The Blue Light Live', kind: 'Listening Room', addr: '1806 Buddy Holly Ave',
+      { name: 'The Blue Light Live', kind: 'Listening Room', addr: '1806 Buddy Holly Ave', phone: '(806) 762-1185',
+        nights: 'Weekly songwriter nights, plus album releases and touring bills',
         acts: ['The Droptines', 'Parker Ryan', 'Scott Allison'],
-        desc: 'The room that made the modern Lubbock songwriter scene — red dirt, Texas country, and a long history of acts playing here on the way up. If you only get one Depot District night, spend it here.',
+        desc: 'A legendary West Texas listening room and honky-tonk anchoring the Depot District — red dirt, Texas country, and a long history of acts playing here on the way up. If you only get one Depot District night, spend it here.',
         cal: { href: 'https://www.bandsintown.com/v/10003090-the-bluelight-live', label: 'bandsintown.com — The Bluelight Live' } },
 
       { name: "Jake's Backroom", kind: 'Rock Club', where: 'Depot District',
@@ -897,7 +913,7 @@ const LIVE_MUSIC = {
           { date: 'Aug 20, 2026', act: 'McCoy Moore' },
           { date: 'Aug 28, 2026', act: 'Charles Wesley Godwin' },
         ],
-        cal: { href: 'https://concertfix.com/concerts/lubbock-tx', label: 'concertfix.com — Lubbock' } },
+        cal: { href: 'https://concertfix.com/concerts/lubbock-tx+cooks-garage', label: "concertfix.com — Cook's Garage" } },
     ],
     series: []
   },
@@ -906,7 +922,8 @@ const LIVE_MUSIC = {
     blurb: 'The Strip runs on Texas Tech\'s calendar — game-day bars and student rooms rather than booked stages, with the arena handling the arena-sized nights.',
     venues: [
       { name: 'United Supermarkets Arena', kind: 'Arena', where: 'Texas Tech Campus',
-        desc: 'Where the touring names play when they come to Lubbock — 15,000 seats on the Texas Tech campus, sharing a calendar with Red Raider basketball.' },
+        desc: 'Where the touring names play when they come to Lubbock — 15,300 seats on the Texas Tech campus, sharing a calendar with Red Raider basketball.',
+        cal: { href: 'https://www.unitedssa.com', label: 'unitedssa.com' } },
     ],
     series: [],
     nearest: { text: 'The Depot District is five minutes north and is where the bands actually are most nights.', href: 'lubbock/depot-district/index.html' }
@@ -916,7 +933,8 @@ const LIVE_MUSIC = {
     blurb: 'Downtown Lubbock\'s music is anchored by one very serious building.',
     venues: [
       { name: 'The Buddy Holly Hall of Performing Arts and Sciences', kind: 'Performing Arts Hall', where: 'Downtown Lubbock',
-        desc: 'The city\'s flagship performing arts complex, opened in 2020 and named for Lubbock\'s most famous son. Touring musicals, orchestral programs and concert bookings across two halls.' },
+        desc: 'The city\'s flagship performing arts complex, opened in 2020 and named for Lubbock\'s most famous son. Touring concerts, comedy, Broadway and community programming across two halls.',
+        cal: { href: 'https://buddyhollyhall.org/events-tickets/', label: 'buddyhollyhall.org — events & tickets' } },
     ],
     series: [],
     nearest: { text: 'For bar-sized rooms and local bills, the Depot District is a few blocks away.', href: 'lubbock/depot-district/index.html' }
@@ -940,7 +958,7 @@ const LIVE_MUSIC = {
       { name: 'Richardson Auditorium in Alexander Hall', kind: 'Concert Hall', addr: '68 Nassau St',
         desc: 'Princeton University Concerts and the New Jersey Symphony — chamber music at an international level.',
         link: 'princeton/university/index.html' },
-      { name: 'McCarter Theatre Center', kind: 'Theatre', where: 'University Campus',
+      { name: 'McCarter Theatre Center', kind: 'Theatre', addr: '91 University Pl',
         desc: 'Music, plays, ballet, circus and cabaret on a year-round schedule.',
         link: 'princeton/university/index.html' },
     ],
@@ -951,16 +969,18 @@ const LIVE_MUSIC = {
     blurb: 'Three of the four Princeton bars licensed to serve until 2 AM are within a two-minute walk of each other here — and two of them book bands.',
     venues: [
       { name: 'The Alchemist & Barrister', kind: 'Tavern', addr: '28 Witherspoon St',
-        nights: 'Live music from local bands Wednesday, Thursday & Sunday nights',
-        desc: 'Known around town as the "Cheers of Princeton" — a landmark tavern in a historic building at the heart of downtown, with a dependable midweek run of local bands. One of the handful of Princeton bars that can stay open until 2 AM.' },
+        nights: 'Local bands Thursday 10 PM–1 AM and Sunday 9:30–11:30 PM · open mic Wednesday 10 PM–1 AM',
+        desc: 'Known around town as the "Cheers of Princeton" — a landmark tavern in a historic building at the heart of downtown, open since 1974, with a dependable midweek run of local bands. One of the handful of Princeton bars that can stay open until 2 AM.',
+        cal: { href: 'http://www.theaandb.com/local-events.html', label: 'theaandb.com — local events' } },
 
-      { name: 'Triumph Brewing Company', kind: 'Brewpub', where: 'Nassau Street',
+      { name: 'Triumph Brewing Company', kind: 'Brewpub', addr: '138 Nassau St',
         nights: 'Rotating live-music calendar through the week',
-        desc: 'A Nassau Street microbrewery with a genuinely busy bar — students, locals and the corporate crowd in the same room — and music mixed through the week rather than parked on the weekend. Also open until 2 AM.' },
+        desc: 'A Nassau Street microbrewery with a genuinely busy bar — students, locals and the corporate crowd in the same room — and music spread through the week rather than parked on the weekend. Also open until 2 AM.',
+        cal: { href: 'https://www.triumphbrewing.com/princeton/', label: 'triumphbrewing.com/princeton' } },
 
       { name: 'Ivy Inn', kind: 'Dive Bar', where: 'Princeton',
         nights: 'Occasional live music · open until 2 AM',
-        desc: 'A proper dive: pool tables, cheap drinks, friendly bartenders and music that turns up without much warning. The third of the late-license bars, and the least polished, which is the point.' },
+        desc: 'A proper dive: pool tables, cheap drinks, friendly bartenders and music that turns up without much warning. The third of the late-license bars, and the least polished, which is the point. No published calendar — this one you walk past and look in.' },
     ],
     series: []
   },
@@ -977,8 +997,9 @@ const LIVE_MUSIC = {
         desc: 'The University\'s on-stage series — hour-long informal concerts played twice in an evening with the audience seated on the stage. This season: the Sandeep Das Trio, mezzo-soprano Ema Nikolovska with guitarist Sean Shibe, pianist Tony Siqi Yun, the Junction Trio, and violinist Isabelle Faust with harpsichordist Kristian Bezuidenhout.',
         cal: { href: 'https://concerts.princeton.edu/upcoming-season/', label: 'concerts.princeton.edu — season' } },
 
-      { name: 'McCarter Theatre Center', kind: 'Theatre', where: 'University Place',
-        desc: 'The town\'s big year-round house — live music alongside plays, ballet, circus and cabaret. Programmes independently of the University concert series, so it is worth checking both.' },
+      { name: 'McCarter Theatre Center', kind: 'Theatre', addr: '91 University Pl', phone: '(609) 258-2787',
+        desc: 'The town\'s big year-round house — a nationally regarded independent performing arts center running music alongside theater, dance and spoken word. Programs independently of the University concert series, so it is worth checking both calendars.',
+        cal: { href: 'https://www.mccarter.org/events', label: 'mccarter.org/events' } },
     ],
     series: []
   },

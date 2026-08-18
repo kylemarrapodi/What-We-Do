@@ -92,8 +92,15 @@ Each venue entry has:
 - `dated` — specific shows with a date. **These go stale.** Only a couple of
   entries have them (Cook's Garage in Lubbock), and they want clearing out or
   refreshing every few months.
-- `cal` — a link to the venue's own calendar, which is always more current than
-  this site.
+- `cal` — a link straight to the venue's own events page, which is always more
+  current than this site. **This is the most important field.** Nearly every bar
+  and venue publishes its own live-music calendar — birdandbettys.com/events,
+  tiernansbar.com/happenings, nardistavern.com/band-schedule, joepops.com/events,
+  theaandb.com/local-events.html — and that page is the authority. This site's job
+  is to tell you the room exists, what nights it books, and to hand you the link.
+  Only four entries have no `cal`: Sunset Park (a municipal park), the Witherspoon
+  Street church (not a booked venue), and the Ivy Inn, which publishes nothing at
+  all — noted as such on the card rather than left blank.
 
 Neighborhoods with no music venues say so plainly and point at the nearest place
 that has some, rather than padding the section out.
@@ -113,6 +120,15 @@ dates were left out, and the series is documented by its recurring pattern
 (Wednesdays, 7:30 PM, Veterans Bicentennial Park) with past lineups labeled as
 past. The rule for anything added later: publish the pattern and the calendar
 link, and only publish a date you can see on the venue's own listing.
+
+Two errors caught on a second pass, both worth knowing about as a pattern:
+Nardi's Tavern was placed in Harvey Cedars on the strength of a roundup article
+that listed it next to Harvey Cedars venues — it's actually at 11801 Long Beach
+Blvd in North Beach Haven, and now sits on the Beach Haven page. And the Surf
+City Hotel's site is surfcityhotel.com, not the surfcityhotelnj.com that got
+guessed at from the venue name. Roundup articles are fine for finding rooms and
+bad for pinning down where they are; domains should come from a search result,
+never from the name.
 
 ## Fidelity to the original
 
