@@ -1277,7 +1277,7 @@ const PANEL_EVENTS = {
 function _renderPanelEvents(locationKey, p, containerEl) {
   const data = PANEL_EVENTS[locationKey] || PANEL_EVENTS.default;
   const linkHtml = data.link
-    ? `<a href="${p}${data.link.href}" style="font-size:0.72rem;color:var(--gold);font-weight:600;">${data.link.text}</a>`
+    ? `<a href="${p}${data.link.href}" class="panel-guide-link" style="color:var(--gold);font-weight:600;">${data.link.text}</a>`
     : '';
   const headerHtml = `
     <div class="home-events-header">
@@ -1331,7 +1331,7 @@ function initSidePanel() {
     </div>
     <div class="site-panel-middle" id="site-panel-events"></div>
     <div class="site-panel-bottom">
-      <p style="font-size:0.72rem;color:rgba(255,255,255,0.35);margin-bottom:0.6rem;">Know something we missed?</p>
+      <p class="panel-hint" style="color:rgba(255,255,255,0.35);margin-bottom:0.6rem;">Know something we missed?</p>
       <a href="${p}index.html#suggest" style="display:block;text-align:center;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);border-radius:var(--radius);padding:0.55rem 1rem;font-size:0.78rem;font-weight:600;color:var(--gold-lt);text-decoration:none;transition:background 0.2s;">+ Suggest a Place or Event</a>
     </div>`;
 
@@ -1362,6 +1362,133 @@ function handleSubmit(e) {
 }
 
 // Scroll animations
+// ── Favorites ────────────────────────────────────────────────────────
+// Lets someone pin the town they live in so it is one tap away from any
+// page. Stored in localStorage — there is no backend and no account, so a
+// favorite lives in the browser that set it.
+//
+// The place a page represents is derived from SHARED_SEARCH_TREE by matching
+// the page's own path, so no page markup has to declare anything.
+
+const FAVORITES_KEY = 'concierge:favorites';
+
+// Root-relative path of the current page, e.g. 'princeton/palmer-square/index.html'
+function currentPlacePath() {
+  const parts = window.location.pathname.split('/').filter(Boolean);
+  const idx = parts.findIndex(p => p === 'concierge');
+  if (idx < 0) return null;
+  let rest = parts.slice(idx + 1);
+  if (!rest.length || !rest[rest.length - 1].endsWith('.html')) rest.push('index.html');
+  return rest.join('/');
+}
+
+// Find the tree node for a path, carrying its parent's label for context.
+function findPlaceByUrl(url, node, parentLabel) {
+  const root = node || SHARED_SEARCH_TREE;
+  for (const child of (root.children || [])) {
+    if (child.url === url) return { url: child.url, label: child.label, sub: parentLabel || '' };
+    const hit = findPlaceByUrl(url, child, child.label);
+    if (hit) return hit;
+  }
+  return null;
+}
+
+function readFavorites() {
+  try {
+    const raw = localStorage.getItem(FAVORITES_KEY);
+    const list = raw ? JSON.parse(raw) : [];
+    return Array.isArray(list) ? list.filter(f => f && f.url && f.label) : [];
+  } catch (e) { return []; }
+}
+
+function writeFavorites(list) {
+  try { localStorage.setItem(FAVORITES_KEY, JSON.stringify(list)); } catch (e) { /* private mode */ }
+}
+
+function isFavorite(url) {
+  return readFavorites().some(f => f.url === url);
+}
+
+function initFavorites() {
+  const path = currentPlacePath();
+  const place = path ? findPlaceByUrl(path) : null;
+  const p = rootPrefix();
+
+  // ---- The list, pinned to the top of the left panel ----
+  const middle = document.querySelector('.site-panel-middle') || document.querySelector('.home-left-middle');
+  let listEl = null;
+  if (middle) {
+    listEl = document.createElement('div');
+    listEl.className = 'fav-block';
+    middle.insertBefore(listEl, middle.firstChild);
+  }
+
+  function renderList() {
+    if (!listEl) return;
+    const favs = readFavorites();
+    if (!favs.length) { listEl.innerHTML = ''; listEl.classList.remove('has-favs'); return; }
+    listEl.classList.add('has-favs');
+    listEl.innerHTML =
+      '<div class="fav-block-head">Your Places</div>' +
+      favs.map(f =>
+        `<div class="fav-row">
+           <a class="fav-link" href="${p}${f.url}">
+             <span class="fav-star">★</span>
+             <span class="fav-text"><span class="fav-name">${f.label}</span>${f.sub ? `<span class="fav-sub">${f.sub}</span>` : ''}</span>
+           </a>
+           <button class="fav-remove" type="button" data-url="${f.url}" aria-label="Remove ${f.label} from your places">×</button>
+         </div>`).join('');
+
+    listEl.querySelectorAll('.fav-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        writeFavorites(readFavorites().filter(f => f.url !== btn.dataset.url));
+        renderList();
+        syncToggle();
+      });
+    });
+  }
+
+  // ---- The toggle, on any page that maps to a place ----
+  let toggle = null;
+  if (place) {
+    const bar = document.querySelector('.breadcrumb');
+    if (bar) {
+      toggle = document.createElement('button');
+      toggle.className = 'fav-toggle';
+      toggle.type = 'button';
+      bar.appendChild(toggle);
+      toggle.addEventListener('click', () => {
+        const favs = readFavorites();
+        const next = favs.some(f => f.url === place.url)
+          ? favs.filter(f => f.url !== place.url)
+          : favs.concat([place]);
+        writeFavorites(next);
+        renderList();
+        syncToggle();
+      });
+    }
+  }
+
+  function syncToggle() {
+    if (!toggle || !place) return;
+    const on = isFavorite(place.url);
+    toggle.classList.toggle('is-on', on);
+    toggle.setAttribute('aria-pressed', String(on));
+    toggle.innerHTML = on
+      ? '<span class="fav-star">★</span> Favorited'
+      : '<span class="fav-star">☆</span> Favorite';
+    toggle.title = on ? `Remove ${place.label} from your places` : `Save ${place.label} to your places`;
+  }
+
+  renderList();
+  syncToggle();
+
+  // Keep other open tabs in step.
+  window.addEventListener('storage', (e) => {
+    if (e.key === FAVORITES_KEY) { renderList(); syncToggle(); }
+  });
+}
+
 // ── Collapsible left panel ───────────────────────────────────────────
 // Drives both layouts: the home page's .home-split grid and the injected
 // .site-left-panel on every other page. Both read --panel-w, so collapsing
@@ -1454,6 +1581,7 @@ function initScrollAnimations() {
 document.addEventListener('DOMContentLoaded', () => {
   initSidePanel();
   initPanelCollapse();
+  initFavorites();
   initLiveMusic();
   initCategoryFilter();
   initScrollAnimations();

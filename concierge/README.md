@@ -85,6 +85,51 @@ panel doesn't animate shut in front of you on each load.
 Below 900px the home page already drops the map and the panel becomes the whole
 page, so the toggle is hidden there and the panel is forced open.
 
+Below 768px the panel on every other page becomes an off-canvas drawer: the
+content keeps the full width, the drawer floats over it, and a backdrop closes
+it on tap. It starts closed, and toggling on a phone deliberately doesn't write
+to `localStorage`, so a phone visit can't overwrite the preference set on a
+desktop.
+
+## Phones
+
+The site is checked at 390px as well as at desktop width. Things that were
+fixed rather than assumed:
+
+- **The nav search bar used to be `display: none` below 768px**, which left a
+  phone with no visible way to search — the main entry point to the whole site.
+  It now stays, with the logo shrunk to make room and the suggestion dropdown
+  spanning the screen instead of a squeezed column.
+- **Tap targets** are floored at 36–44px on phones. Several links were 17–21px.
+- **Panel type** was sized for a 320px desktop column; on a phone that column is
+  the whole screen, and 9–11px text was too small. Those rules carry a `body`
+  prefix so they also beat the home page's inline copies of the same classes.
+- `.two-col` didn't collapse on the Connecticut and Texas pages, so they
+  rendered a squeezed two-column layout on phones.
+
+The audit that found these is worth re-running after layout changes: load each
+page at 390px and report any interactive element under 36px, any text under
+12px, and any element extending past the viewport.
+
+## Favorites
+
+Anyone can pin the town they live in: every place page carries a **☆ Favorite**
+button in the breadcrumb, and favorited places appear under **Your Places** at
+the top of the left panel on every page, including the home page.
+
+It's `initFavorites()` in `script.js`, stored in `localStorage` under
+`concierge:favorites`. There's no backend and no accounts, so a favorite lives
+in the browser that set it — clearing site data loses it, and it doesn't follow
+you from your phone to your laptop.
+
+No page markup declares anything. The place a page represents is derived by
+matching the page's own path against `SHARED_SEARCH_TREE`, which is also where
+the label and its parent ("Beach Haven", "Long Beach Island") come from. Add a
+town to the tree and it becomes favoritable automatically.
+
+The home page has no Favorite button, because it isn't a place — it just shows
+the list.
+
 ## Live music
 
 Every city and neighborhood page carries a **Live Music** section listing the bars
