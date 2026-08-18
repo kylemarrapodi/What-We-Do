@@ -1,0 +1,175 @@
+ <!DOCTYPE html>
+  <html lang="en">                                                                                                      <head>
+    <meta charset="UTF-8" />                                                                                              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What We Do — Projects</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      body {
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        background: #0a0a0a;
+        color: #f0f0f0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 60px 24px;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 56px;
+      }
+
+      header h1 {
+        font-size: 2.4rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        color: #ffffff;
+      }
+
+      header p {
+        margin-top: 10px;
+        font-size: 1rem;
+        color: #888;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+        width: 100%;
+        max-width: 960px;
+      }
+
+      .card {
+        background: #161616;
+        border: 1px solid #2a2a2a;
+        border-radius: 12px;
+        padding: 28px 24px;
+        text-decoration: none;
+        color: inherit;
+        transition: border-color 0.2s, transform 0.2s, background 0.2s;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .card:hover {
+        border-color: #555;
+        background: #1e1e1e;
+        transform: translateY(-2px);
+      }
+
+      .card-label {
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: #666;
+      }
+
+      .card-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #ffffff;
+      }
+
+      .card-desc {
+        font-size: 0.88rem;
+        color: #777;
+        line-height: 1.5;
+      }
+
+      .card-arrow {
+        margin-top: 12px;
+        font-size: 0.85rem;
+        color: #555;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: color 0.2s;
+      }
+
+      .card:hover .card-arrow {
+        color: #aaa;
+      }
+
+      footer {
+        margin-top: 64px;
+        font-size: 0.78rem;
+        color: #444;
+      }
+    </style>
+  </head>
+  <body>
+
+    <header>
+      <h1>What We Do</h1>
+      <p>All projects in one place</p>
+    </header>
+
+    <div class="grid">
+
+      <a class="card" href="concierge/">
+        <span class="card-label">Platform</span>
+        <div class="card-title">The Concierge</div>
+        <div class="card-desc">Local intelligence platform covering Stamford, Long Beach Island, and more.</div>
+        <div class="card-arrow">Open project →</div>
+      </a>
+
+      <a class="card" href="Sea%20Spray%20Motel/">
+        <span class="card-label">Hospitality</span>
+        <div class="card-title">Sea Spray Motel</div>
+        <div class="card-desc">Boutique motel website for a Long Beach Island property.</div>
+        <div class="card-arrow">Open project →</div>
+      </a>
+
+      <a class="card" href="Capital%20Pizza/">
+        <span class="card-label">Restaurant</span>
+        <div class="card-title">Capital Pizza</div>
+        <div class="card-desc">Proposal site for Capital Pizza.</div>
+        <div class="card-arrow">Open project →</div>
+      </a>
+
+      <a class="card" href="Casey's%20Tavern/">
+        <span class="card-label">Bar &amp; Grill</span>
+        <div class="card-title">Casey's Tavern</div>
+        <div class="card-desc">Proposal site for Casey's Tavern.</div>
+        <div class="card-arrow">Open project →</div>
+      </a>
+
+      <a class="card" href="Cast%20Iron%20Grill/">
+        <span class="card-label">Restaurant</span>
+        <div class="card-title">Cast Iron Grill</div>
+        <div class="card-desc">Proposal site for Cast Iron Grill.</div>
+        <div class="card-arrow">Open project →</div>
+      </a>
+
+      <a class="card" href="Hudson%20House%20Bar/">
+        <span class="card-label">Bar</span>
+        <div class="card-title">Hudson House Bar</div>
+        <div class="card-desc">Proposal site for Hudson House Bar.</div>
+        <div class="card-arrow">Open project →</div>
+      </a>
+
+      <a class="card" href="Izet's%20Leather%20%26%20Shoe%20Repair/">
+        <span class="card-label">Retail</span>
+        <div class="card-title">Izet's Leather &amp; Shoe Repair</div>
+        <div class="card-desc">Proposal site for Izet's Leather &amp; Shoe Repair.</div>
+        <div class="card-arrow">Open project →</div>
+      </a>
+
+      <a class="card" href="The%20Shack/">
+        <span class="card-label">Restaurant</span>
+        <div class="card-title">The Shack</div>
+        <div class="card-desc">Proposal site for The Shack.</div>
+        <div class="card-arrow">Open project →</div>
+      </a>
+
+    </div>
+
+    <footer>kylemarrapodi · github.io</footer>
+
+  </body>
+  </html>
