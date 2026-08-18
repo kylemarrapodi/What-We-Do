@@ -18,7 +18,15 @@
   --radius:  8px;
   --shadow:  0 2px 12px rgba(0,0,0,0.08);
   --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+
+  /* Left panel width. --panel-w-open never changes (inner content is sized
+     against it so nothing reflows mid-animation); --panel-w is what the
+     layout actually uses, and drops to 0 when the panel is collapsed. */
+  --panel-w-open: 320px;
+  --panel-w: var(--panel-w-open);
 }
+
+body.panel-collapsed { --panel-w: 0px; }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -822,14 +830,18 @@ footer {
 .site-left-panel {
   position: fixed;
   top: 68px; left: 0; bottom: 0;
-  width: 320px;
+  width: var(--panel-w);
   background: var(--deep);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   border-right: 1px solid rgba(255,255,255,0.07);
   z-index: 90;
+  transition: width 0.25s ease;
 }
+/* Children keep their full width so text doesn't reflow while the panel slides */
+.site-left-panel > * { width: var(--panel-w-open); }
+body.panel-collapsed .site-left-panel { border-right: none; }
 .site-panel-top {
   padding: 1.5rem 1.25rem 1rem;
   flex-shrink: 0;
@@ -856,7 +868,50 @@ footer {
   flex-shrink: 0;
 }
 .page-wrap-with-panel {
-  left: 320px !important;
+  left: var(--panel-w) !important;
+  transition: left 0.25s ease;
+}
+
+/* ---- Panel collapse toggle ----
+   A drawer handle pinned to the panel's right edge. Sits at the edge whether
+   the panel is open or closed, so it is always reachable. */
+.panel-toggle {
+  position: fixed;
+  top: 50%;
+  left: var(--panel-w);
+  transform: translateY(-50%);
+  width: 22px;
+  height: 62px;
+  padding: 0;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-left: none;
+  border-radius: 0 6px 6px 0;
+  background: var(--deep);
+  color: var(--gold);
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 95;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: left 0.25s ease, background 0.2s, color 0.2s;
+}
+.panel-toggle:hover { background: var(--navy); color: var(--gold-lt); }
+.panel-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* Suppress the slide on first paint so a remembered collapsed state
+   doesn't animate shut in front of the user on every page load. */
+body.panel-no-anim .site-left-panel,
+body.panel-no-anim .page-wrap-with-panel,
+body.panel-no-anim .home-split,
+body.panel-no-anim .panel-toggle { transition: none !important; }
+
+/* On narrow screens the home page drops the map and the panel IS the page,
+   so collapsing it would leave a blank screen. */
+@media (max-width: 900px) {
+  body.has-home-panel .panel-toggle { display: none; }
+  body.has-home-panel.panel-collapsed { --panel-w: var(--panel-w-open); }
 }
 
 /* ---- Shared panel typography & event item styles ---- */

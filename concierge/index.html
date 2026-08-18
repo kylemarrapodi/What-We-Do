@@ -14,7 +14,8 @@
       position: fixed;
       top: 68px; left: 0; right: 0; bottom: 0;
       display: grid;
-      grid-template-columns: 320px 1fr;
+      grid-template-columns: var(--panel-w) 1fr;
+      transition: grid-template-columns 0.25s ease;
     }
 
     /* ── LEFT PANEL ── */
@@ -25,6 +26,9 @@
       overflow: hidden;
       border-right: 1px solid rgba(255,255,255,0.07);
     }
+    /* Zones keep their open width so nothing reflows while the panel slides */
+    .home-left > * { width: var(--panel-w-open); }
+    body.panel-collapsed .home-left { border-right: none; }
 
     /* Top zone — brand + search + go button. Always visible, never scrolls. */
     .home-left-top {

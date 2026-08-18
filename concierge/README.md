@@ -65,6 +65,26 @@ in `script.js` (`SHARED_SEARCH_TREE`, `PANEL_EVENTS`, `LIVE_MUSIC`) and inline i
 each page. There's no backend. The "Suggest a Place / Suggest an Event" forms
 don't submit anywhere; they just swap in a thank-you message client-side.
 
+## The left panel
+
+Both layouts — the home page's split view and the injected side panel on every
+other page — share one collapsible left panel, driven by `initPanelCollapse()`
+in `script.js`.
+
+The width lives in two CSS variables: `--panel-w-open` never changes (panel
+children are sized against it so text doesn't reflow mid-slide), and `--panel-w`
+is what the layout reads, dropping to `0px` when `body.panel-collapsed` is set.
+That means collapsing is a single class on `<body>`, and both the home grid and
+the fixed side panel respond to it.
+
+The choice is stored in `localStorage` under `concierge:panel-collapsed`, so it
+carries from page to page instead of resetting on every navigation. A remembered
+collapsed state is applied behind a `panel-no-anim` class for one frame, so the
+panel doesn't animate shut in front of you on each load.
+
+Below 900px the home page already drops the map and the panel becomes the whole
+page, so the toggle is hidden there and the panel is forced open.
+
 ## Live music
 
 Every city and neighborhood page carries a **Live Music** section listing the bars

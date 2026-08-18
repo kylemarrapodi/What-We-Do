@@ -1362,6 +1362,48 @@ function handleSubmit(e) {
 }
 
 // Scroll animations
+// ── Collapsible left panel ───────────────────────────────────────────
+// Drives both layouts: the home page's .home-split grid and the injected
+// .site-left-panel on every other page. Both read --panel-w, so collapsing
+// is a single class on <body>. The choice is remembered in localStorage so
+// it carries across pages instead of resetting on every navigation.
+function initPanelCollapse() {
+  const homePanel = document.querySelector('.home-split');
+  const sidePanel = document.querySelector('.site-left-panel');
+  if (!homePanel && !sidePanel) return;
+
+  if (homePanel) document.body.classList.add('has-home-panel');
+
+  const KEY = 'concierge:panel-collapsed';
+  let collapsed = false;
+  try { collapsed = localStorage.getItem(KEY) === '1'; } catch (e) { /* private mode */ }
+
+  const btn = document.createElement('button');
+  btn.className = 'panel-toggle';
+  btn.type = 'button';
+  document.body.appendChild(btn);
+
+  function apply() {
+    const label = collapsed ? 'Show search and events' : 'Hide search and events';
+    document.body.classList.toggle('panel-collapsed', collapsed);
+    btn.textContent = collapsed ? '\u203A' : '\u2039';
+    btn.setAttribute('aria-expanded', String(!collapsed));
+    btn.setAttribute('aria-label', label);
+    btn.title = label;
+  }
+
+  // Apply the remembered state without animating it on first paint.
+  document.body.classList.add('panel-no-anim');
+  apply();
+  requestAnimationFrame(() => document.body.classList.remove('panel-no-anim'));
+
+  btn.addEventListener('click', () => {
+    collapsed = !collapsed;
+    try { localStorage.setItem(KEY, collapsed ? '1' : '0'); } catch (e) { /* private mode */ }
+    apply();
+  });
+}
+
 function initScrollAnimations() {
   const els = document.querySelectorAll('.animate-in');
   if (!els.length) return;
@@ -1379,6 +1421,7 @@ function initScrollAnimations() {
 // Init on load
 document.addEventListener('DOMContentLoaded', () => {
   initSidePanel();
+  initPanelCollapse();
   initLiveMusic();
   initCategoryFilter();
   initScrollAnimations();
