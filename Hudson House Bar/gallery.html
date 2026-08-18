@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gallery | Hudson House Bar</title>
+<meta name="description" content="Photos of Hudson House Bar, a dive bar on Long Beach Island in Beach Haven, NJ — real bar photos plus labeled stock photography." />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<!-- NAV -->
+<nav>
+<a href="index.html" class="nav-logo">Hudson House <span>Bar</span></a>
+<ul class="nav-links">
+<li><a href="about.html">Our Story</a></li>
+<li><a href="menu.html">Bar Menu</a></li>
+<li><a href="gallery.html" class="active">Gallery</a></li>
+<li><a href="contact.html" class="nav-cta">Visit Us</a></li>
+</ul>
+<button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+<a href="index.html">Home</a>
+<a href="about.html">Our Story</a>
+<a href="menu.html">Bar Menu</a>
+<a href="gallery.html" class="active">Gallery</a>
+<a href="contact.html" class="mobile-cta">Visit Us</a>
+</div>
+<div class="page-wrap">
+<div class="page-inner">
+<div class="page-header">
+<div class="page-header-left">
+<div class="section-label">Photo Gallery</div>
+<h1>A Look Inside</h1>
+<p>A mix of real Hudson House photos and clearly-labeled stock photography standing in for the rest.</p>
+</div>
+<div class="page-header-right">
+<a href="menu.html" class="btn-primary">What We Pour</a>
+</div>
+</div>
+<div class="page-content">
+<div class="menu-note" style="margin-bottom:1.5rem;">
+This is an independent design proposal, not photos taken on assignment for the bar. Only <strong>2 of the 8</strong> photos below are real — the exterior sign and the bar/drinks shot — both sourced directly from Hudson House's own public Yelp photo listing. Hudson House keeps a very low online profile (cash-only, no website), so the remaining 6 photos are <strong>free stock photography</strong> from Pexels and Wikimedia Commons, used only to illustrate the general vibe (shuffleboard, pool, darts, jukebox, a neon sign, a whiskey glass) — none of them depict the real bar, and every stock image is tagged below.
+</div>
+<div class="gallery-tabs">
+<button class="gallery-tab active" onclick="switchTab(event, 'all')">All Photos</button>
+<button class="gallery-tab" onclick="switchTab(event, 'real')">Real Photos</button>
+<button class="gallery-tab" onclick="switchTab(event, 'games')">Bar Games</button>
+<button class="gallery-tab" onclick="switchTab(event, 'drinks')">Drinks &amp; Atmosphere</button>
+</div>
+<!-- ALL -->
+<div class="gallery-panel active" id="panel-all">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/exterior-sign-real.jpg" alt="The real, weathered Hudson House Bar and Package Goods sign lit up at night outside the bar" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/bar-interior-drinks-real.jpg" alt="A Coors Light bottle and shot glass on the bar counter at Hudson House, with the back bar and patrons visible behind it" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock Photo</span>
+<img src="photos/pool-table-stock.jpg" alt="Stock photo of a pool table mid-game with a drink resting on the rail, illustrative only — not Hudson House's actual table" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock Photo</span>
+<img src="photos/dartboard-stock.jpg" alt="Stock photo of a dartboard on a pub wall with a chalkboard scoreboard, illustrative only — not Hudson House's actual dartboard" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock Photo</span>
+<img src="photos/shuffleboard-stock.jpg" alt="Stock photo of a wooden shuffleboard table, illustrative only — not Hudson House's actual table" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock Photo</span>
+<img src="photos/jukebox-stock.jpg" alt="Stock photo of a glowing pink neon jukebox, illustrative only — not Hudson House's actual jukebox" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock Photo</span>
+<img src="photos/whiskey-glass-stock.jpg" alt="Stock photo of a whiskey glass catching warm bar light, illustrative only" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock Photo</span>
+<img src="photos/neon-bar-sign-stock.jpg" alt="Stock photo of a neon Bar sign with a martini glass icon, illustrative only — not Hudson House's actual signage" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+<!-- REAL -->
+<div class="gallery-panel" id="panel-real">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/exterior-sign-real.jpg" alt="The real, weathered Hudson House Bar and Package Goods sign lit up at night outside the bar" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/bar-interior-drinks-real.jpg" alt="A Coors Light bottle and shot glass on the bar counter at Hudson House, with the back bar and patrons visible behind it" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+<!-- GAMES -->
+<div class="gallery-panel" id="panel-games">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock Photo</span>
+<img src="photos/pool-table-stock.jpg" alt="Stock photo of a pool table mid-game with a drink resting on the rail, illustrative only — not Hudson House's actual table" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock Photo</span>
+<img src="photos/dartboard-stock.jpg" alt="Stock photo of a dartboard on a pub wall with a chalkboard scoreboard, illustrative only — not Hudson House's actual dartboard" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock Photo</span>
+<img src="photos/shuffleboard-stock.jpg" alt="Stock photo of a wooden shuffleboard table, illustrative only — not Hudson House's actual table" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock Photo</span>
+<img src="photos/jukebox-stock.jpg" alt="Stock photo of a glowing pink neon jukebox, illustrative only — not Hudson House's actual jukebox" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+<!-- DRINKS -->
+<div class="gallery-panel" id="panel-drinks">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/bar-interior-drinks-real.jpg" alt="A Coors Light bottle and shot glass on the bar counter at Hudson House, with the back bar and patrons visible behind it" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock Photo</span>
+<img src="photos/whiskey-glass-stock.jpg" alt="Stock photo of a whiskey glass catching warm bar light, illustrative only" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag stock">Stock Photo</span>
+<img src="photos/neon-bar-sign-stock.jpg" alt="Stock photo of a neon Bar sign with a martini glass icon, illustrative only — not Hudson House's actual signage" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
+<button class="lightbox-close" onclick="closeLightbox()">✕</button>
+<button class="lightbox-prev" onclick="shiftLightbox(-1)">&#8249;</button>
+<img id="lightbox-img" src="" alt="" />
+<button class="lightbox-next" onclick="shiftLightbox(1)">&#8250;</button>
+<div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

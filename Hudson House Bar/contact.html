@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Visit Us | Hudson House Bar</title>
+<meta name="description" content="Contact, hours, and directions for Hudson House Bar, a dive bar on Long Beach Island in Beach Haven, NJ." />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<!-- NAV -->
+<nav>
+<a href="index.html" class="nav-logo">Hudson House <span>Bar</span></a>
+<ul class="nav-links">
+<li><a href="about.html">Our Story</a></li>
+<li><a href="menu.html">Bar Menu</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="contact.html" class="nav-cta active">Visit Us</a></li>
+</ul>
+<button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+<a href="index.html">Home</a>
+<a href="about.html">Our Story</a>
+<a href="menu.html">Bar Menu</a>
+<a href="gallery.html">Gallery</a>
+<a href="contact.html" class="mobile-cta active">Visit Us</a>
+</div>
+<div class="page-wrap">
+<div class="page-inner">
+<div class="page-header">
+<div class="page-header-left">
+<div class="section-label">Get In Touch</div>
+<h1>Visit Us</h1>
+<p>Tucked among the houses on East 13th Street, one block off Bay Avenue. Cash only, 21+.</p>
+</div>
+</div>
+<div class="page-content">
+<div class="contact-split">
+<!-- Left: contact info + map -->
+<div class="contact-info">
+<h3>Hudson House Bar</h3>
+<div class="contact-detail">
+<span class="contact-detail-icon">📞</span>
+<div class="contact-detail-text">
+<h5>Phone</h5>
+<p><a href="tel:16094929616">(609) 492-9616</a></p>
+</div>
+</div>
+<div class="contact-detail">
+<span class="contact-detail-icon">📍</span>
+<div class="contact-detail-text">
+<h5>Address</h5>
+<p>19 E 13th Street<br>Beach Haven, NJ 08008</p>
+</div>
+</div>
+<div class="contact-detail">
+<span class="contact-detail-icon">🕒</span>
+<div class="contact-detail-text">
+<h5>Hours</h5>
+<p>Sun – Fri: 12:00 PM – 1:00 AM<br>Saturday: 12:00 PM – 1:30 AM</p>
+</div>
+</div>
+<div class="contact-detail">
+<span class="contact-detail-icon">💵</span>
+<div class="contact-detail-text">
+<h5>Good to Know</h5>
+<p>Cash only, no cards. 21+. No food served.</p>
+</div>
+</div>
+<div class="map-embed">
+<iframe
+title="Hudson House Bar location"
+src="https://maps.google.com/maps?q=19+E+13th+St,+Beach+Haven,+NJ+08008&output=embed&z=16"
+allowfullscreen
+loading="lazy"
+referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+</div>
+
+<div class="social-row">
+<a href="https://www.instagram.com/hudsonhouselbi/" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+<a href="https://www.facebook.com/profile.php?id=145017045534144" class="social-btn" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+<a href="https://www.yelp.com/biz/hudson-house-bar-beach-haven" class="social-btn" target="_blank" rel="noopener" aria-label="Yelp">Y</a>
+</div>
+</div>
+<!-- Right: contact form -->
+<form id="suggest-form" onsubmit="handleSubmit(event)">
+<div class="form-row">
+<div class="form-group">
+<label for="fname">First Name</label>
+<input type="text" id="fname" placeholder="Jane" required />
+</div>
+<div class="form-group">
+<label for="lname">Last Name</label>
+<input type="text" id="lname" placeholder="Smith" required />
+</div>
+</div>
+<div class="form-group">
+<label for="email">Email Address</label>
+<input type="email" id="email" placeholder="jane@example.com" required />
+</div>
+<div class="form-group">
+<label for="phone">Phone Number</label>
+<input type="tel" id="phone" placeholder="(609) 000-0000" />
+</div>
+<div class="form-group">
+<label for="reason">Reason for Contact</label>
+<select id="reason">
+<option value="">Select one...</option>
+<option>General Question</option>
+<option>Private Party / Group</option>
+<option>What's on Tap Tonight</option>
+<option>Feedback</option>
+</select>
+</div>
+<div class="form-group">
+<label for="party">Party Size (if applicable)</label>
+<input type="number" id="party" min="1" placeholder="4" />
+</div>
+<div class="form-group">
+<label for="message">Message</label>
+<textarea id="message" placeholder="How can we help?"></textarea>
+</div>
+<button type="submit" class="btn-submit">Send Message</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
