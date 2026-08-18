@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>University Campus — Princeton, NJ · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-wrap { position: fixed; top: 68px; left: 0; right: 0; bottom: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white); }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+    .neighborhood-hero { padding: 2rem 5% 1.75rem; text-align: center; }
+    .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin: 0.4rem 0 0.75rem; }
+    .neighborhood-hero p { font-size: 0.9rem; max-width: 560px; }
+    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
+    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
+    .highlight-card h4 { font-size: 0.85rem; color: var(--navy); margin-bottom: 0.15rem; }
+    .highlight-card p { font-size: 0.77rem; color: var(--sub); }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .cat-section { padding: 2.25rem 5%; }
+    @media (max-width: 900px) { .highlight-strip { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .highlight-strip { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-page-location="Princeton" data-music-key="university">
+
+<nav>
+  <a href="../../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../index.html'">Princeton, NJ</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">University Campus</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../../index.html">Home</a>
+  <a href="../index.html">Princeton, NJ</a>
+  <a href="index.html" class="active">University Campus</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <a href="../../index.html">Home</a>
+    <span class="sep">›</span>
+    <a href="../../new-jersey/index.html">New Jersey</a>
+    <span class="sep">›</span>
+    <a href="../index.html">Princeton</a>
+    <span class="sep">›</span>
+    <span>University Campus</span>
+  </div>
+
+  <section class="neighborhood-hero" style="background: linear-gradient(135deg, #1a2744 0%, #2d1b3d 100%); color:var(--white);">
+    <div class="section-label" style="color:var(--gold-lt);">Neighborhood</div>
+    <h1 style="font-family:'Playfair Display',serif; font-weight:700; color:var(--white);">University <span style="color:var(--gold-lt);">Campus</span></h1>
+    <p style="margin:0 auto 1.25rem; color:rgba(255,255,255,0.82); line-height:1.6;">Founded in 1746 and sitting directly across Nassau Street from downtown, the campus is where Princeton keeps its serious music — an internationally programmed concert series, a year-round theatre, and a free art museum, all open to the town.</p>
+    <div class="city-hero-meta" style="justify-content:center;">
+      <span>🎓 Founded 1746</span>
+      <span>🎻 Princeton University Concerts</span>
+      <span>🎭 McCarter Theatre</span>
+      <span>🖼 Free Art Museum</span>
+    </div>
+  </section>
+
+  <section style="padding: 1.75rem 5%; background: var(--white);">
+    <div class="highlight-strip">
+      <div class="highlight-card">
+        <div class="big-num">1746</div>
+        <h4>Founded</h4>
+        <p>Fourth-oldest college in the United States</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">68</div>
+        <h4>Nassau St</h4>
+        <p>Richardson Auditorium in Alexander Hall</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">Sep–May</div>
+        <h4>Concert Season</h4>
+        <p>Chamber music at international level</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">Free</div>
+        <h4>Art Museum</h4>
+        <p>One of the best university collections anywhere</p>
+      </div>
+    </div>
+    <div class="category-pills">
+      <button class="pill active" data-cat="all">All</button>
+      <button class="pill" data-cat="arts">🎭 Arts &amp; Culture</button>
+      <button class="pill" data-cat="music">🎸 Live Music</button>
+      <button class="pill" data-cat="outdoors">🌿 Campus</button>
+    </div>
+  </section>
+
+  <section class="cat-section" data-cat="arts" style="background:var(--mist);">
+    <div class="section-label">On Stage</div>
+    <h2 class="section-title">Arts &amp; Culture</h2>
+    <hr class="section-divider" />
+    <div class="grid-3">
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a2744,#3d5a80);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag arts">Concert Hall</span><span class="card-tag featured">World-Class</span></div>
+          <h3 class="card-title">Richardson Auditorium</h3>
+          <p class="card-desc">Inside Alexander Hall, and the home room for Princeton University Concerts — a chamber series that books at genuine international level. The New Jersey Symphony plays its Princeton dates here too. Tickets are open to the public, not just the University.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 68 Nassau St · Season runs Sep–May</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#3d1f3d,#6b3f6b);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag arts">Theatre</span></div>
+          <h3 class="card-title">McCarter Theatre Center</h3>
+          <p class="card-desc">The town's big year-round house — live music alongside plays, ballet, circus and cabaret. Programs entirely independently of the University concert series, so it is worth checking both calendars before you decide nothing is on.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 University Place · Year-round</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#1b3a4b,#2e6b7a);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag arts">Museum</span></div>
+          <h3 class="card-title">Princeton University Art Museum</h3>
+          <p class="card-desc">One of the strongest university collections in the country, spanning antiquity to the contemporary, and free to visit. Worth building an afternoon around.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Princeton University campus</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cat-section" data-cat="outdoors" style="background:var(--white);">
+    <div class="section-label">Outside</div>
+    <h2 class="section-title">Campus &amp; Grounds</h2>
+    <hr class="section-divider" />
+    <div class="grid-3">
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a3a2a,#2e6b4f);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag outdoors">Campus</span><span class="card-tag featured">Est. 1746</span></div>
+          <h3 class="card-title">The Princeton Campus</h3>
+          <p class="card-desc">Founded in 1746 and one of the most walkable university campuses anywhere — Collegiate Gothic courtyards, Nassau Hall, and grounds that are open to anyone who wants to wander them. Self-guided is fine; the campus rewards aimlessness.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 South of Nassau St · Open daily</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#2d5016,#5a8f29);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag outdoors">Green Space</span></div>
+          <h3 class="card-title">Prospect Garden</h3>
+          <p class="card-desc">A formal garden tucked behind Prospect House in the middle of campus. Small, quiet, and almost always empty — the best sit-down spot on the whole campus.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Princeton University campus</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LIVE MUSIC (rendered by initLiveMusic in script.js) -->
+  <section class="section cat-section" data-cat="music" id="live-music" style="background:var(--mist);"></section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p>Your local guide to the places worth knowing about — verified, current, and written by people who actually go.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="../../index.html">Home</a>
+        <a href="../../new-jersey/index.html">New Jersey</a>
+        <a href="../../connecticut/index.html">Connecticut</a>
+      </div>
+      <div class="footer-links">
+        <h4>The Concierge</h4>
+        <a href="../../index.html">About</a>
+        <a href="../../index.html#suggest">Suggest a Place</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 The Concierge. All rights reserved.</div>
+  </footer>
+
+</div>
+<script src="../../script.js"></script>
+</body>
+</html>

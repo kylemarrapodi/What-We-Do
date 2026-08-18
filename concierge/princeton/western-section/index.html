@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Western Section — Princeton, NJ · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-wrap { position: fixed; top: 68px; left: 0; right: 0; bottom: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white); }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+    .neighborhood-hero { padding: 2rem 5% 1.75rem; text-align: center; }
+    .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin: 0.4rem 0 0.75rem; }
+    .neighborhood-hero p { font-size: 0.9rem; max-width: 560px; }
+    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
+    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
+    .highlight-card h4 { font-size: 0.85rem; color: var(--navy); margin-bottom: 0.15rem; }
+    .highlight-card p { font-size: 0.77rem; color: var(--sub); }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .cat-section { padding: 2.25rem 5%; }
+    @media (max-width: 900px) { .highlight-strip { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .highlight-strip { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-page-location="Princeton" data-music-key="western-section">
+
+<nav>
+  <a href="../../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../index.html'">Princeton, NJ</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Western Section</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../../index.html">Home</a>
+  <a href="../index.html">Princeton, NJ</a>
+  <a href="index.html" class="active">Western Section</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <a href="../../index.html">Home</a>
+    <span class="sep">›</span>
+    <a href="../../new-jersey/index.html">New Jersey</a>
+    <span class="sep">›</span>
+    <a href="../index.html">Princeton</a>
+    <span class="sep">›</span>
+    <span>Western Section</span>
+  </div>
+
+  <section class="neighborhood-hero" style="background: linear-gradient(135deg, #1a3a2a 0%, #3d5a40 100%); color:var(--white);">
+    <div class="section-label" style="color:var(--gold-lt);">Neighborhood</div>
+    <h1 style="font-family:'Playfair Display',serif; font-weight:700; color:var(--white);">Western <span style="color:var(--gold-lt);">Section</span></h1>
+    <p style="margin:0 auto 1.25rem; color:rgba(255,255,255,0.82); line-height:1.6;">The historic west end of Princeton — Morven, Drumthwacket, the Battlefield and the Institute Woods, spread along Stockton and Mercer Streets. Big houses, long lawns and 250 years of history. No bars, no stages: this end of town is for daylight.</p>
+    <div class="city-hero-meta" style="justify-content:center;">
+      <span>🏛 Morven Museum</span>
+      <span>🏛 Drumthwacket</span>
+      <span>⚔️ Battlefield State Park</span>
+      <span>🌲 Institute Woods</span>
+    </div>
+  </section>
+
+  <section style="padding: 1.75rem 5%; background: var(--white);">
+    <div class="highlight-strip">
+      <div class="highlight-card">
+        <div class="big-num">1750s</div>
+        <h4>Morven</h4>
+        <p>Built by a signer of the Declaration</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">1777</div>
+        <h4>Battle of Princeton</h4>
+        <p>Ten days after the Delaware crossing</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">600</div>
+        <h4>Acres</h4>
+        <p>Institute Woods, free and open to all</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">10 min</div>
+        <h4>To Palmer Square</h4>
+        <p>Walkable back to the late-night rooms</p>
+      </div>
+    </div>
+    <div class="category-pills">
+      <button class="pill active" data-cat="all">All</button>
+      <button class="pill" data-cat="history">🏛 History</button>
+      <button class="pill" data-cat="outdoors">🌿 Outdoors</button>
+      <button class="pill" data-cat="music">🎸 Live Music</button>
+    </div>
+  </section>
+
+  <section class="cat-section" data-cat="history" style="background:var(--mist);">
+    <div class="section-label">Historic Princeton</div>
+    <h2 class="section-title">Landmarks &amp; Museums</h2>
+    <hr class="section-divider" />
+    <div class="grid-3">
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#3d2c1b,#6b5a3a);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag arts">Museum</span><span class="card-tag featured">National Historic Landmark</span></div>
+          <h3 class="card-title">Morven Museum &amp; Garden</h3>
+          <p class="card-desc">Built in the 1750s by Richard Stockton, a signer of the Declaration of Independence, and later New Jersey's first governor's mansion. Now a museum with rotating exhibitions and gardens worth the visit on their own.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Stockton St · Wed–Sun, 10 AM–4 PM · Garden dawn to dusk</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a2744,#3d5a80);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag arts">Historic Home</span></div>
+          <h3 class="card-title">Drumthwacket</h3>
+          <p class="card-desc">The official residence of the Governor of New Jersey, a Greek Revival house set back behind a long lawn on Stockton Street. Open for scheduled public tours rather than drop-ins — check ahead.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Stockton St · Tours by schedule</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#2c1810,#6b4423);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag arts">Battlefield</span><span class="card-tag featured">1777</span></div>
+          <h3 class="card-title">Princeton Battlefield State Park</h3>
+          <p class="card-desc">Where Washington won the Battle of Princeton in January 1777, ten days after crossing the Delaware. Now open fields and the Thomas Clarke House — one of the quietest significant places in New Jersey.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Mercer St · Grounds open daily</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cat-section" data-cat="outdoors" style="background:var(--white);">
+    <div class="section-label">Outside</div>
+    <h2 class="section-title">Parks &amp; Trails</h2>
+    <hr class="section-divider" />
+    <div class="grid-3">
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a3a2a,#2e6b4f);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag outdoors">Trails</span><span class="card-tag featured">Free</span></div>
+          <h3 class="card-title">Institute Woods</h3>
+          <p class="card-desc">Nearly 600 acres of woodland and meadow behind the Institute for Advanced Study, laced with easy trails and some of the best birding in central New Jersey. Open to the public, free, and remarkably under-walked.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Behind the Institute for Advanced Study</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#2d5016,#5a8f29);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag outdoors">Towpath</span></div>
+          <h3 class="card-title">Delaware &amp; Raritan Canal Towpath</h3>
+          <p class="card-desc">The canal path runs along the edge of town — flat, shaded and uninterrupted, and the best running or cycling route in Princeton by a distance.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Along the D&amp;R Canal · Open daily</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LIVE MUSIC (rendered by initLiveMusic in script.js) -->
+  <section class="section cat-section" data-cat="music" id="live-music" style="background:var(--mist);"></section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p>Your local guide to the places worth knowing about — verified, current, and written by people who actually go.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="../../index.html">Home</a>
+        <a href="../../new-jersey/index.html">New Jersey</a>
+        <a href="../../connecticut/index.html">Connecticut</a>
+      </div>
+      <div class="footer-links">
+        <h4>The Concierge</h4>
+        <a href="../../index.html">About</a>
+        <a href="../../index.html#suggest">Suggest a Place</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 The Concierge. All rights reserved.</div>
+  </footer>
+
+</div>
+<script src="../../script.js"></script>
+</body>
+</html>

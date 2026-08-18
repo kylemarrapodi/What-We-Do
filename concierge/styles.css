@@ -983,3 +983,183 @@ footer {
   .category-pills { gap: 0.4rem; }
   .pill { font-size: 0.78rem; padding: 0.4rem 0.85rem; }
 }
+
+/* =====================================================
+   LIVE MUSIC — venue cards, series cards
+   Rendered by initLiveMusic() into <section id="live-music">
+   ===================================================== */
+
+.music-blurb {
+  max-width: 70ch;
+  color: var(--sub);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.music-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+.music-grid-series { margin-top: 1.25rem; }
+
+.music-card,
+.music-series {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 1.35rem 1.5rem;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.music-card:hover,
+.music-series:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.music-series {
+  border-left-color: var(--coral);
+  background: var(--mist);
+}
+.music-series-tag {
+  display: inline-block;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--coral);
+  margin-bottom: 0.5rem;
+}
+
+.music-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.35rem;
+}
+
+.music-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  line-height: 1.3;
+  color: var(--navy);
+}
+
+.music-kind {
+  flex-shrink: 0;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate);
+  background: var(--mist);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 0.2rem 0.6rem;
+}
+
+.music-meta {
+  font-size: 0.78rem;
+  color: var(--sub);
+  margin-bottom: 0.5rem;
+}
+
+.music-nights {
+  display: flex;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--navy);
+  background: rgba(201, 168, 76, 0.12);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  margin-bottom: 0.7rem;
+}
+.music-nights span { color: var(--gold); }
+
+.music-desc {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text);
+  margin-bottom: 0.7rem;
+}
+
+.music-acts {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--sub);
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--border);
+}
+.music-acts strong { color: var(--slate); }
+
+.music-dated {
+  list-style: none;
+  margin-top: 0.7rem;
+  border-top: 1px dashed var(--border);
+  padding-top: 0.6rem;
+}
+.music-dated li {
+  display: flex;
+  gap: 0.6rem;
+  font-size: 0.83rem;
+  padding: 0.25rem 0;
+  color: var(--text);
+}
+.music-date {
+  flex-shrink: 0;
+  min-width: 6.5rem;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding-top: 0.1rem;
+}
+
+.music-note {
+  font-size: 0.76rem;
+  font-style: italic;
+  color: var(--sub);
+  margin-top: 0.6rem;
+}
+
+.music-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+.music-cal {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 1px;
+  transition: color 0.2s;
+}
+.music-cal:hover { color: var(--gold); }
+
+.music-nearest {
+  margin-top: 1.5rem;
+  font-size: 0.88rem;
+  color: var(--sub);
+}
+.music-nearest a {
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold);
+}
+.music-nearest a:hover { color: var(--gold); }
+
+@media (max-width: 640px) {
+  .music-grid { grid-template-columns: 1fr; }
+  .music-date { min-width: 5.5rem; }
+}

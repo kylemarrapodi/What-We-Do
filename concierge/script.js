@@ -91,6 +91,15 @@ const SHARED_SEARCH_TREE = {
                 { label:'Harvey Cedars',  aliases:['harvey cedars'],        status:'live', url:'lbi/harvey-cedars/index.html',  children:[] },
                 { label:'Barnegat Light', aliases:['barnegat light','old barney'], status:'live', url:'lbi/barnegat-light/index.html', children:[] },
               ]
+            },
+            {
+              label: 'Princeton', aliases: ['princeton'], status: 'live', url: 'princeton/index.html',
+              children: [
+                { label:'Palmer Square',       aliases:['palmer square','nassau street','downtown princeton'], status:'live', url:'princeton/palmer-square/index.html',       children:[] },
+                { label:'Witherspoon-Jackson', aliases:['witherspoon jackson','witherspoon','jackson'],        status:'live', url:'princeton/witherspoon-jackson/index.html', children:[] },
+                { label:'University Campus',   aliases:['university','princeton university','campus'],         status:'live', url:'princeton/university/index.html',         children:[] },
+                { label:'Western Section',     aliases:['western section','battlefield','stockton street'],    status:'live', url:'princeton/western-section/index.html',     children:[] },
+              ]
             }
           ]
         },
@@ -201,6 +210,34 @@ function buildSearchIndex() {
     { label:'United Supermarkets Arena',   sub:'Texas Tech · Lubbock',                  type:'place',  url: p+'lubbock/tech-district/index.html', keywords:['united supermarkets arena','usa arena','lubbock arena','ttu arena'] },
     { label:'Buddy Holly Hall',            sub:'Performing Arts · Lubbock',             type:'place',  url: p+'lubbock/historic-district/index.html',keywords:['buddy holly hall','performing arts','lubbock concert hall','lubbock theatre'] },
     { label:'Palace Theatre',              sub:'Downtown Stamford',                      type:'place',  url: p+'stamford/downtown/index.html',    keywords:['palace theatre','palace','stamford theatre','stamford concert'] },
+    // ── Princeton ──
+    { label:'Princeton, NJ',      sub:'New Jersey',            type:'place',  url: p+'princeton/index.html',                  keywords:['princeton','princeton nj','nassau street','mercer county'] },
+    { label:'Palmer Square',      sub:'Princeton, NJ',         type:'place',  url: p+'princeton/palmer-square/index.html',    keywords:['palmer square','nassau street','downtown princeton','nassau inn'] },
+    { label:'Witherspoon-Jackson',sub:'Princeton, NJ',         type:'place',  url: p+'princeton/witherspoon-jackson/index.html', keywords:['witherspoon jackson','witherspoon','jackson','historic district princeton'] },
+    { label:'University Campus',  sub:'Princeton, NJ',         type:'place',  url: p+'princeton/university/index.html',       keywords:['princeton university','campus','richardson auditorium','mccarter','art museum'] },
+    { label:'Western Section',    sub:'Princeton, NJ',         type:'place',  url: p+'princeton/western-section/index.html',  keywords:['western section','morven','drumthwacket','battlefield','institute woods'] },
+    // ── Music venues ──
+    { label:"Bird & Betty's",     sub:'Music Hall · Beach Haven, LBI',       type:'place', url: p+'lbi/beach-haven/index.html',      keywords:['bird and bettys','bird & bettys','birds and bettys','live music lbi','beach haven music','dock road'] },
+    { label:'The Sea Shell Resort',sub:'Tiki Bar · Beach Haven, LBI',        type:'place', url: p+'lbi/beach-haven/index.html',      keywords:['sea shell','seashell','tiki bar','thunder thursday','beach club lbi'] },
+    { label:'The Marlin',         sub:'Live Music · Beach Haven, LBI',       type:'place', url: p+'lbi/beach-haven/index.html',      keywords:['the marlin','marlin lbi','dance floor lbi','beach haven bands'] },
+    { label:"Buckalew's",         sub:'Tavern · Beach Haven, LBI',           type:'place', url: p+'lbi/beach-haven/index.html',      keywords:['buckalews','buckalew','bay avenue','acoustic lbi'] },
+    { label:'Black Whale Bar',    sub:'Beach Haven, LBI',                    type:'place', url: p+'lbi/beach-haven/index.html',      keywords:['black whale','fish house','year round music lbi'] },
+    { label:"Joe Pop's Shore Bar",sub:'Ship Bottom, LBI',                    type:'place', url: p+'lbi/ship-bottom/index.html',      keywords:['joe pops','joe pop','shore bar','ship bottom music'] },
+    { label:'Surf City Hotel',    sub:'Surf City, LBI',                      type:'place', url: p+'lbi/surf-city/index.html',        keywords:['surf city hotel','beach club','shorty long','jersey horns','north end nightlife'] },
+    { label:"Nardi's Tavern",     sub:'Harvey Cedars, LBI',                  type:'place', url: p+'lbi/harvey-cedars/index.html',    keywords:['nardis','nardi','party bus','harvey cedars music','live music every night'] },
+    { label:"Kubel's",            sub:'Barnegat Light, LBI',                 type:'place', url: p+'lbi/barnegat-light/index.html',   keywords:['kubels','kubel','barnegat light bar','bayview'] },
+    { label:"Tiernan's Bar",      sub:'Downtown Stamford',                   type:'place', url: p+'stamford/downtown/index.html',    keywords:['tiernans','tiernan','main street stamford','live bands stamford','friday saturday bands'] },
+    { label:'Tigin Irish Pub',    sub:'Downtown Stamford',                   type:'place', url: p+'stamford/downtown/index.html',    keywords:['tigin','irish pub stamford','trivia stamford'] },
+    { label:'Half Full Brewery',  sub:'Stamford, CT',                        type:'place', url: p+'stamford/harbor-point/index.html',keywords:['half full','third place','brewery stamford','beer garden'] },
+    { label:'Beer Garden at Shippan Landing', sub:'Shippan · Stamford, CT',  type:'place', url: p+'stamford/shippan-point/index.html',keywords:['beer garden','shippan landing','harbor drive','food trucks stamford'] },
+    { label:'The Blue Light Live',sub:'Depot District · Lubbock, TX',        type:'place', url: p+'lubbock/depot-district/index.html',keywords:['blue light','bluelight','buddy holly ave','red dirt','texas country','listening room'] },
+    { label:"Jake's Backroom",    sub:'Depot District · Lubbock, TX',        type:'place', url: p+'lubbock/depot-district/index.html',keywords:['jakes backroom','jakes','rock club lubbock','metal lubbock'] },
+    { label:"Cook's Garage",      sub:'Lubbock, TX',                         type:'place', url: p+'lubbock/depot-district/index.html',keywords:['cooks garage','outdoor venue lubbock','beer hall lubbock'] },
+    { label:'The Alchemist & Barrister', sub:'Palmer Square · Princeton',    type:'place', url: p+'princeton/palmer-square/index.html',keywords:['alchemist and barrister','alchemist','barrister','witherspoon street','cheers of princeton','princeton bands'] },
+    { label:'Triumph Brewing Company', sub:'Nassau St · Princeton',          type:'place', url: p+'princeton/palmer-square/index.html',keywords:['triumph brewing','triumph','brewpub princeton','nassau street bar'] },
+    { label:'Ivy Inn',            sub:'Princeton, NJ',                       type:'place', url: p+'princeton/palmer-square/index.html',keywords:['ivy inn','dive bar princeton','pool tables princeton'] },
+    { label:'Richardson Auditorium', sub:'Princeton University',             type:'place', url: p+'princeton/university/index.html', keywords:['richardson auditorium','alexander hall','princeton university concerts','chamber music','new jersey symphony'] },
+    { label:'McCarter Theatre Center', sub:'Princeton, NJ',                  type:'place', url: p+'princeton/university/index.html', keywords:['mccarter','mccarter theatre','princeton theatre','princeton ballet'] },
   ];
 }
 
@@ -450,10 +487,14 @@ function initNavSearch(formEl) {
     const q = input.value.trim();
     if (!q) { showDefaultNavSuggestions(); return; }
 
-    // Tree nodes first (location drill-down), then flat events/places
+    // Tree nodes first (location drill-down), then flat events/places.
+    // Places are kept so individual venues — bars, music rooms, theatres —
+    // are findable by name; only the ones the tree already lists are dropped,
+    // so a location doesn't appear twice in the same dropdown.
     const treeNodes = searchTree(q);
+    const treeUrls = new Set(treeNodes.filter(n => n.url).map(n => p + n.url));
     const flatResults = searchIndex(q).filter(r =>
-      r.type === 'event' || r.type === 'sports'
+      r.type === 'event' || r.type === 'sports' || !treeUrls.has(r.url)
     );
     renderNavSuggestions({ nodes: treeNodes, flat: flatResults });
   });
@@ -570,6 +611,460 @@ function initCategoryFilter() {
   });
 }
 
+// ── Live music ───────────────────────────────────────────────────────
+// Venue-level live-music data, keyed by data-music-key on <body>.
+//
+//   nights  — the recurring pattern (what night the room books music).
+//             Stable season to season; safe to leave alone.
+//   acts    — bands that play the room regularly, or that it has booked.
+//   dated   — specific shows with a date. THESE GO STALE. See README.
+//
+// Everything here was checked against the venue's own listing, the town's
+// site, or a listings service (Bandsintown / JamBase / concertfix). Where a
+// room's schedule couldn't be confirmed, it says so rather than guessing.
+
+const LIVE_MUSIC = {
+
+  // ── Long Beach Island ──────────────────────────────────────────────
+  'lbi': {
+    blurb: 'Music on the Island runs Memorial Day to Columbus Day, with a handful of rooms that stay open year-round. Beach Haven has the most stages; the north end runs through Surf City and Harvey Cedars.',
+    venues: [
+      { name: "Bird & Betty's", kind: 'Music Hall', where: 'Beach Haven', nights: 'Wed–Sun in season',
+        desc: 'The Island\'s biggest booked room. See the Beach Haven guide for the full rundown.', link: 'lbi/beach-haven/index.html' },
+      { name: "Joe Pop's Shore Bar", kind: 'Shore Bar', where: 'Ship Bottom', nights: 'Wed–Sat, mid-May to October',
+        desc: 'The Island\'s longest-running shore bar, right at the causeway.', link: 'lbi/ship-bottom/index.html' },
+      { name: 'Surf City Hotel', kind: 'Hotel Bar & Beach Club', where: 'Surf City', nights: 'Six days a week across two rooms',
+        desc: 'The nightlife hub of the north end for over a century.', link: 'lbi/surf-city/index.html' },
+      { name: "Nardi's Tavern", kind: 'Tavern', where: 'Harvey Cedars', nights: 'Every night of the week',
+        desc: 'Music seven nights — and the pink party bus that runs the Boulevard.', link: 'lbi/harvey-cedars/index.html' },
+    ],
+    series: []
+  },
+
+  'beach-haven': {
+    blurb: 'The Island\'s live-music capital. A real music hall, two oceanfront tiki bars, an early-evening tavern circuit and a free town concert series — all inside about a dozen blocks.',
+    venues: [
+      { name: "Bird & Betty's", kind: 'Music Hall & Restaurant', addr: '529 Dock Rd', phone: '(609) 492-3000',
+        nights: 'Shows Wednesday–Sunday in the warm months; closed through the winter',
+        acts: ['Chevy Lopez', 'P-Funk North', 'AftershockNJ'],
+        desc: 'The Jersey Shore\'s best-known waterfront music room — an actual stage, an actual sound system, and touring regional acts most nights of the summer week. This is the one to check first if you want to see a band rather than hear one.',
+        cal: { href: 'https://www.birdandbettys.com/events', label: 'birdandbettys.com/events' } },
+
+      { name: 'The Sea Shell Resort & Beach Club', kind: 'Oceanfront Tiki Bar', addr: '10 S Atlantic Ave', phone: '(609) 492-4611',
+        nights: 'Live entertainment seven days in season · DJs on weekends · Thunder Thursday, 10 PM–2 AM',
+        desc: 'Music outdoors every day of the season, either at the tiki bar or down by the firepits on the sand. Two tiki bars, a private beach and the only room on the Island where the stage is basically the ocean.',
+        cal: { href: 'https://theseashellresort.com/events', label: 'theseashellresort.com/events' } },
+
+      { name: 'The Marlin', kind: 'Bar & Live Music', where: 'Beach Haven',
+        nights: 'Every weekend all summer',
+        acts: ['Coming Alive', 'Stereo Social Club', 'Changing Lanes'],
+        desc: 'A well-sized stage and a spacious dance floor — the room you end up in when you want to dance to a band instead of talk over one. Books top regional acts straight through the season.',
+        cal: { href: 'https://themarlinlbi.com/marlinbar', label: 'themarlinlbi.com/marlinbar' } },
+
+      { name: "Buckalew's Restaurant & Tavern", kind: 'Tavern', addr: '101 N Bay Ave',
+        nights: 'Thursday, Friday & Saturday, 6–9 PM at the bar',
+        acts: ['The Pickles', 'Rob Connolly'],
+        desc: 'Early, easygoing sets right at the bar — the acoustic and duo end of the Island circuit, done before the late rooms even get going. Good first stop on a Beach Haven night.',
+        cal: { href: 'https://www.buckalews.com/entertainment', label: 'buckalews.com/entertainment' } },
+
+      { name: 'Black Whale Bar & Fish House', kind: 'Bar & Fish House', addr: '100 N Pennsylvania Ave',
+        nights: 'Year-round',
+        desc: 'One of the few Beach Haven rooms that keeps booking music straight through the off-season, when most of the Boulevard is shuttered.',
+        cal: { href: 'https://www.blackwhalebar.com/', label: 'blackwhalebar.com' } },
+    ],
+    series: [
+      { name: 'Concerts on the Green', who: 'Beach Haven Community Arts Program',
+        when: 'Wednesdays at 7:30 PM through the summer · free',
+        where: 'Veterans Bicentennial Park — rain moves it across the street to the LBI Historical Association Museum',
+        acts: ['The Pickles', 'Jimmy and the Parrots', 'Rave-Ons', 'Diablo Sandwich Band', 'McLean Avenue Band', 'The Kootz', 'Carnaby Street Band', 'Suyat Band', 'Gypsy Moon'],
+        note: 'Those are acts from recent seasons — the Borough posts the current lineup each spring.',
+        cal: { href: 'https://beachhavencap.org/summer-concerts/', label: 'beachhavencap.org/summer-concerts' } },
+    ]
+  },
+
+  'ship-bottom': {
+    blurb: 'One serious room, and it happens to be the first thing you hit coming over the causeway.',
+    venues: [
+      { name: "Joe Pop's Shore Bar + Restaurant", kind: 'Shore Bar', where: 'Ship Bottom', phone: '(609) 494-0558',
+        nights: 'Live music daily · shows Wednesday–Saturday nights, mid-May through October',
+        desc: 'An Island institution and a genuine booking room — cover bands, tribute acts and regional headliners, with the deck packed from happy hour on. Closed in the dead of winter like most of the Island.',
+        cal: { href: 'https://joepops.com/events', label: 'joepops.com/events' } },
+    ],
+    series: []
+  },
+
+  'surf-city': {
+    blurb: 'The north end\'s nightlife hub, running music six days a week across two rooms in the same building.',
+    venues: [
+      { name: 'Surf City Hotel', kind: 'Hotel Bar & Beach Club', where: 'Surf City',
+        nights: 'Bistro: Monday, Wednesday & Thursday · Beach Club: Tuesday, Friday & Saturday nights, plus Sunday afternoons',
+        acts: ['Shorty Long and the Jersey Horns'],
+        desc: 'One of the oldest structures on Long Beach Island, putting people up and putting bands on for over a century. Two rooms with separate schedules, so there is something on nearly every night of the week.',
+        cal: { href: 'https://www.surfcityhotelnj.com/', label: 'surfcityhotelnj.com' } },
+    ],
+    series: []
+  },
+
+  'harvey-cedars': {
+    blurb: 'Small town, outsized music habit — one tavern books something every single night.',
+    venues: [
+      { name: "Nardi's Tavern", kind: 'Tavern', where: 'Harvey Cedars',
+        nights: 'Live music every night of the week',
+        desc: 'One of the Island\'s most beloved music spots, and the only one with its own transportation: the pink Nardi\'s party bus that runs up and down the Boulevard is a Long Beach Island landmark in its own right.' },
+      { name: 'Sunset Park', kind: 'Bayfront Concerts', where: 'Harvey Cedars',
+        nights: 'Summer evenings',
+        desc: 'Free bayfront concerts with the sunset doing most of the production work. Bring a chair.' },
+    ],
+    series: []
+  },
+
+  'barnegat-light': {
+    blurb: 'The quiet end of the Island. One long-standing bar, and music when it happens rather than on a schedule.',
+    venues: [
+      { name: "Kubel's Bar & Restaurant", kind: 'Bar & Restaurant', addr: '7th St & Bayview', phone: '(609) 494-8592',
+        nights: 'Occasional — call ahead',
+        desc: 'A north-end institution since long before anyone was printing schedules. Music turns up here, but it is not a booked room in the way Beach Haven or Surf City are — worth a phone call rather than a drive.' },
+    ],
+    series: [],
+    nearest: { text: 'For a booked room, Surf City and Harvey Cedars are both a short drive south.', href: 'lbi/surf-city/index.html' }
+  },
+
+  'holgate': {
+    blurb: 'Holgate is the quiet south end — wildlife refuge, surf fishing and not much after dark by design. There are no dedicated music venues down here.',
+    venues: [],
+    series: [],
+    nearest: { text: 'Beach Haven is about five minutes north and has the Island\'s densest run of stages.', href: 'lbi/beach-haven/index.html' }
+  },
+
+  // ── Stamford ───────────────────────────────────────────────────────
+  'stamford': {
+    blurb: 'Stamford\'s music splits three ways: the bar circuit downtown, the summer waterfront programming at Harbor Point, and touring acts at the Palace. Note that Alive@Five — the summer series that ran downtown for 27 years — has ended; what replaced it is spread across Mill River Park, Harbor Point and the arboretum.',
+    venues: [
+      { name: "Tiernan's Bar & Restaurant", kind: 'Bar & Live Music', addr: '187 Main St', phone: '(203) 353-8566',
+        nights: 'Bands every Friday & Saturday, 9:30 PM unless noted · Trivia with MC Caitlin, Wednesdays 7:30 PM',
+        desc: 'The anchor of the downtown bar scene and the most dependable place in Stamford to find a band on a weekend night. Doors stay open late.',
+        cal: { href: 'https://www.tiernansbar.com/happenings', label: 'tiernansbar.com/happenings' },
+        link: 'stamford/downtown/index.html' },
+      { name: 'The Palace Theatre', kind: 'Theatre', where: 'Downtown · 61 Atlantic St',
+        nights: 'Touring shows year-round',
+        desc: 'Stamford Center for the Arts\' main room — touring music, comedy and theatre. Diana Ross played here in August.',
+        cal: { href: 'https://palacestamford.org', label: 'palacestamford.org' },
+        link: 'stamford/downtown/index.html' },
+      { name: "Casey's Tavern", kind: 'Neighborhood Bar', addr: '85 Woodside St', phone: '(203) 363-0804',
+        nights: 'Open mic Thursdays · Karaoke Sundays, 9 PM',
+        desc: 'An Irish pub off the downtown grid that consistently turns up on Stamford\'s live-music lists. Not a booking room — an open-mic-and-karaoke room, which is its own thing.' },
+      { name: 'Harbor Point', kind: 'Waterfront Series', where: 'South End',
+        nights: 'Five nights a week through the summer',
+        desc: 'The largest single piece of what replaced Alive@Five — free walk-up entertainment on the waterfront most weeknights in season.',
+        link: 'stamford/harbor-point/index.html' },
+    ],
+    series: [
+      { name: 'Summer in the Park', who: 'Hey Stamford!, Mill River Park, Parachute Concerts, Stamford Downtown and The Karp Family',
+        when: 'Three concert weekends across the summer', where: 'Mill River Park',
+        note: 'Introduced in June 2026 as part of the programming that succeeded Alive@Five.' },
+    ]
+  },
+
+  'stamford-downtown': {
+    blurb: 'The densest run of rooms in the city — a weekend band bar, a 1,580-seat theatre and a pub circuit, all walkable from Atlantic and Main.',
+    venues: [
+      { name: "Tiernan's Bar & Restaurant", kind: 'Bar & Live Music', addr: '187 Main St', phone: '(203) 353-8566',
+        nights: 'Bands every Friday & Saturday, 9:30 PM unless noted · Trivia with MC Caitlin, Wednesdays 7:30 PM',
+        desc: 'The anchor of downtown\'s bar scene: a proper weekend band bar with a deep draft list and a crowd that runs from happy-hour suits to late-night regulars. Bands start at 9:30 unless the room says otherwise.',
+        cal: { href: 'https://www.tiernansbar.com/happenings', label: 'tiernansbar.com/happenings' } },
+
+      { name: 'The Palace Theatre', kind: 'Theatre', addr: '61 Atlantic St',
+        nights: 'Touring shows year-round',
+        desc: 'The Stamford Center for the Arts\' main stage — the room that gets the touring names. Diana Ross played here in August; the season runs music, comedy and theatre straight through the winter.',
+        cal: { href: 'https://palacestamford.org', label: 'palacestamford.org' } },
+
+      { name: 'Tigin Irish Pub', kind: 'Irish Pub', where: 'Downtown',
+        nights: 'Live music and trivia nights',
+        desc: 'Whiskey list, big beer selection, and music mixed in among the trivia and the game-night crowd. Reliable rather than headline-driven.' },
+    ],
+    series: [
+      { name: 'Summer in the Park', who: 'Hey Stamford!, Mill River Park, Parachute Concerts, Stamford Downtown and The Karp Family',
+        when: 'Three concert weekends across the summer', where: 'Mill River Park',
+        note: 'Alive@Five ran downtown for 27 years and has now ended. This is the series that took its place, alongside the Harbor Point weeknights and a quieter run of concerts in the arboretum.' },
+    ]
+  },
+
+  'harbor-point': {
+    blurb: 'The waterfront is where most of Stamford\'s free summer music moved after Alive@Five wound down — five nights a week of it, walk-up, no ticket.',
+    venues: [
+      { name: 'Harbor Point Summer Programming', kind: 'Waterfront Series', where: 'Harbor Point Square',
+        nights: 'Five nights a week through the summer',
+        desc: 'The biggest share of the programming that replaced Alive@Five: live entertainment on the waterfront most weeknights in season, free and walk-up.' },
+      { name: 'Sign of the Whale', kind: 'Bar & Rooftop', where: 'Harbor Point',
+        desc: 'A 5,000-square-foot rooftop looking out over Long Island Sound. More of a DJ-and-crowd room than a stage, but it is the anchor of the Harbor Point night.' },
+      { name: "Half Full Brewery — Third Place", kind: 'Taproom & Beer Garden', where: 'Stamford',
+        nights: 'Live music through the summer',
+        desc: 'Part taproom, part coworking, part event space, with a relaxed beer garden that runs live music, lawn games and one-off events across the warm months.',
+        cal: { href: 'https://halffullbrewery.com/event-type/live-music/', label: 'halffullbrewery.com' } },
+    ],
+    series: []
+  },
+
+  'shippan-point': {
+    blurb: 'Shippan is residential, but the office park on Harbor Drive turns into one of the better casual music spots in the city in season.',
+    venues: [
+      { name: 'The Beer Garden at Shippan Landing', kind: 'Beer Garden', addr: '290 Harbor Dr',
+        nights: 'Tuesday–Sunday in season',
+        desc: 'Seventeen waterfront acres of office park that open up to craft beer, food trucks and live music. Genuinely pleasant, and almost nobody outside Stamford knows it is there.' },
+    ],
+    series: [],
+    nearest: { text: 'For a booked band on a weekend night, downtown is ten minutes north.', href: 'stamford/downtown/index.html' }
+  },
+
+  'waterside': {
+    blurb: 'Waterside sits between the South End and Shippan, so its music is really its neighbours\' — the brewery scene on one side, the waterfront series on the other.',
+    venues: [
+      { name: "Half Full Brewery — Third Place", kind: 'Taproom & Beer Garden', where: 'Stamford',
+        nights: 'Live music through the summer',
+        desc: 'Taproom, coworking space and beer garden in one, with live music and lawn games across the warm months.',
+        cal: { href: 'https://halffullbrewery.com/event-type/live-music/', label: 'halffullbrewery.com' } },
+    ],
+    series: [],
+    nearest: { text: 'Harbor Point runs free waterfront music five nights a week in season, a few minutes away.', href: 'stamford/harbor-point/index.html' }
+  },
+
+  'north-stamford': {
+    blurb: 'North Stamford is woods and stone walls, not stages — but the arboretum runs the quietest and arguably nicest concert series in the city.',
+    venues: [
+      { name: 'Bartlett Arboretum', kind: 'Outdoor Concerts', where: 'North Stamford',
+        nights: 'Summer evenings',
+        desc: 'One of the three strands of programming that succeeded Alive@Five — a deliberately quieter concert series among the gardens, a world away from a downtown bar on a Saturday.' },
+    ],
+    series: [],
+    nearest: { text: 'The nearest booked rooms are downtown, about fifteen minutes south.', href: 'stamford/downtown/index.html' }
+  },
+
+  'cove': {
+    blurb: 'Cove and the East Side are residential — beach, park and neighborhood restaurants rather than stages.',
+    venues: [],
+    series: [],
+    nearest: { text: 'Downtown and Harbor Point have the city\'s live music, both under ten minutes away.', href: 'stamford/downtown/index.html' }
+  },
+
+  'glenbrook': {
+    blurb: 'Glenbrook is a neighborhood of corner restaurants and the train station — no dedicated music rooms.',
+    venues: [],
+    series: [],
+    nearest: { text: 'Downtown is one stop away on the New Canaan branch, and has the bands.', href: 'stamford/downtown/index.html' }
+  },
+
+  'springdale': {
+    blurb: 'Springdale is quiet by design — family restaurants and the Hope Street strip, not a nightlife district.',
+    venues: [],
+    series: [],
+    nearest: { text: 'For live music, head downtown or to Harbor Point.', href: 'stamford/downtown/index.html' }
+  },
+
+  // ── Lubbock ────────────────────────────────────────────────────────
+  'lubbock': {
+    blurb: 'Buddy Holly\'s hometown still books like it. The Depot District is the center of gravity — songwriter rooms, a metal-and-rock backroom and an outdoor stage — with the arena and the performing arts hall handling the big touring nights.',
+    venues: [
+      { name: 'The Blue Light Live', kind: 'Listening Room', addr: '1806 Buddy Holly Ave',
+        acts: ['The Droptines', 'Parker Ryan', 'Scott Allison'],
+        desc: 'The heart of the Texas country and red dirt scene in Lubbock.', link: 'lubbock/depot-district/index.html' },
+      { name: "Jake's Backroom", kind: 'Rock Club', where: 'Depot District',
+        acts: ['Mirrorcell', 'What Lies Below', 'What The Dance'],
+        desc: 'The loud end of town — rock, metal and touring package shows.', link: 'lubbock/depot-district/index.html' },
+      { name: "Cook's Garage", kind: 'Outdoor Venue', where: 'Lubbock',
+        desc: 'Part garage, part beer hall, part outdoor amphitheatre.', link: 'lubbock/depot-district/index.html' },
+      { name: 'The Buddy Holly Hall of Performing Arts and Sciences', kind: 'Performing Arts Hall', where: 'Historic District',
+        desc: 'The city\'s flagship hall, named for the man himself.', link: 'lubbock/historic-district/index.html' },
+    ],
+    series: []
+  },
+
+  'depot-district': {
+    blurb: 'Four blocks of warehouses off Buddy Holly Avenue doing what they have done since the Seventies: putting Texas songwriters on small stages most nights of the week.',
+    venues: [
+      { name: 'The Blue Light Live', kind: 'Listening Room', addr: '1806 Buddy Holly Ave',
+        acts: ['The Droptines', 'Parker Ryan', 'Scott Allison'],
+        desc: 'The room that made the modern Lubbock songwriter scene — red dirt, Texas country, and a long history of acts playing here on the way up. If you only get one Depot District night, spend it here.',
+        cal: { href: 'https://www.bandsintown.com/v/10003090-the-bluelight-live', label: 'bandsintown.com — The Bluelight Live' } },
+
+      { name: "Jake's Backroom", kind: 'Rock Club', where: 'Depot District',
+        acts: ['Mirrorcell', 'What Lies Below', 'What The Dance'],
+        desc: 'Sports cafe out front, live room in back. Where the rock, metal and hardcore touring packages land when they come through West Texas.',
+        cal: { href: "https://www.bandsintown.com/v/10034987-jake's-backroom", label: "bandsintown.com — Jake's Backroom" } },
+
+      { name: "Cook's Garage", kind: 'Outdoor Venue', where: 'Lubbock',
+        desc: 'Vintage garage, beer hall and outdoor stage — the room that gets the bigger country bills that will not fit in a Depot District bar.',
+        dated: [
+          { date: 'Aug 20, 2026', act: 'McCoy Moore' },
+          { date: 'Aug 28, 2026', act: 'Charles Wesley Godwin' },
+        ],
+        cal: { href: 'https://concertfix.com/concerts/lubbock-tx', label: 'concertfix.com — Lubbock' } },
+    ],
+    series: []
+  },
+
+  'tech-district': {
+    blurb: 'The Strip runs on Texas Tech\'s calendar — game-day bars and student rooms rather than booked stages, with the arena handling the arena-sized nights.',
+    venues: [
+      { name: 'United Supermarkets Arena', kind: 'Arena', where: 'Texas Tech Campus',
+        desc: 'Where the touring names play when they come to Lubbock — 15,000 seats on the Texas Tech campus, sharing a calendar with Red Raider basketball.' },
+    ],
+    series: [],
+    nearest: { text: 'The Depot District is five minutes north and is where the bands actually are most nights.', href: 'lubbock/depot-district/index.html' }
+  },
+
+  'historic-district': {
+    blurb: 'Downtown Lubbock\'s music is anchored by one very serious building.',
+    venues: [
+      { name: 'The Buddy Holly Hall of Performing Arts and Sciences', kind: 'Performing Arts Hall', where: 'Downtown Lubbock',
+        desc: 'The city\'s flagship performing arts complex, opened in 2020 and named for Lubbock\'s most famous son. Touring musicals, orchestral programs and concert bookings across two halls.' },
+    ],
+    series: [],
+    nearest: { text: 'For bar-sized rooms and local bills, the Depot District is a few blocks away.', href: 'lubbock/depot-district/index.html' }
+  },
+
+  // ── Princeton ──────────────────────────────────────────────────────
+  'princeton': {
+    blurb: 'Princeton\'s music runs on two tracks that barely touch: a small, stubborn bar circuit that plays local bands until 2 AM, and one of the best university concert series in the country, four blocks away.',
+    venues: [
+      { name: 'The Alchemist & Barrister', kind: 'Tavern', addr: '28 Witherspoon St',
+        nights: 'Live local bands Wednesday, Thursday & Sunday',
+        desc: 'The "Cheers of Princeton" — a landmark in a historic building off Palmer Square, and the most consistent place in town to catch a local band.',
+        link: 'princeton/palmer-square/index.html' },
+      { name: 'Triumph Brewing Company', kind: 'Brewpub', where: 'Nassau Street',
+        nights: 'Rotating calendar through the week',
+        desc: 'Nassau Street brewpub with a busy bar and a rotating live-music calendar.',
+        link: 'princeton/palmer-square/index.html' },
+      { name: 'Ivy Inn', kind: 'Dive Bar', where: 'Princeton',
+        nights: 'Occasional — open until 2 AM',
+        desc: 'Pool tables, cheap drinks, no pretension, and music when it turns up.' },
+      { name: 'Richardson Auditorium in Alexander Hall', kind: 'Concert Hall', addr: '68 Nassau St',
+        desc: 'Princeton University Concerts and the New Jersey Symphony — chamber music at an international level.',
+        link: 'princeton/university/index.html' },
+      { name: 'McCarter Theatre Center', kind: 'Theatre', where: 'University Campus',
+        desc: 'Music, plays, ballet, circus and cabaret on a year-round schedule.',
+        link: 'princeton/university/index.html' },
+    ],
+    series: []
+  },
+
+  'palmer-square': {
+    blurb: 'Three of the four Princeton bars licensed to serve until 2 AM are within a two-minute walk of each other here — and two of them book bands.',
+    venues: [
+      { name: 'The Alchemist & Barrister', kind: 'Tavern', addr: '28 Witherspoon St',
+        nights: 'Live music from local bands Wednesday, Thursday & Sunday nights',
+        desc: 'Known around town as the "Cheers of Princeton" — a landmark tavern in a historic building at the heart of downtown, with a dependable midweek run of local bands. One of the handful of Princeton bars that can stay open until 2 AM.' },
+
+      { name: 'Triumph Brewing Company', kind: 'Brewpub', where: 'Nassau Street',
+        nights: 'Rotating live-music calendar through the week',
+        desc: 'A Nassau Street microbrewery with a genuinely busy bar — students, locals and the corporate crowd in the same room — and music mixed through the week rather than parked on the weekend. Also open until 2 AM.' },
+
+      { name: 'Ivy Inn', kind: 'Dive Bar', where: 'Princeton',
+        nights: 'Occasional live music · open until 2 AM',
+        desc: 'A proper dive: pool tables, cheap drinks, friendly bartenders and music that turns up without much warning. The third of the late-license bars, and the least polished, which is the point.' },
+    ],
+    series: []
+  },
+
+  'university': {
+    blurb: 'The University runs one of the most ambitious concert series of any American campus, and it is open to the town — most of it inside Alexander Hall.',
+    venues: [
+      { name: 'Richardson Auditorium in Alexander Hall', kind: 'Concert Hall', addr: '68 Nassau St',
+        desc: 'Princeton University Concerts\' home room, and where the New Jersey Symphony plays its Princeton dates. The 2026–27 Concert Classics season brings the Brentano, Ébène and Danish String Quartets, cellist Jean-Guihen Queyras with pianist Alexandre Tharaud, violinist Nemanja Radulović with Double Sens, soprano Asmik Grigorian with Lukas Geniušas, pianist Stephen Hough, and a trio of Hilary Hahn, Sheku Kanneh-Mason and Benjamin Grosvenor.',
+        acts: ['Brentano String Quartet', 'Danish String Quartet', 'Stephen Hough', 'Hilary Hahn'],
+        cal: { href: 'https://concerts.princeton.edu/', label: 'concerts.princeton.edu' } },
+
+      { name: 'Performances Up Close', kind: 'Concert Series', where: 'Alexander Hall',
+        desc: 'The University\'s on-stage series — hour-long informal concerts played twice in an evening with the audience seated on the stage. This season: the Sandeep Das Trio, mezzo-soprano Ema Nikolovska with guitarist Sean Shibe, pianist Tony Siqi Yun, the Junction Trio, and violinist Isabelle Faust with harpsichordist Kristian Bezuidenhout.',
+        cal: { href: 'https://concerts.princeton.edu/upcoming-season/', label: 'concerts.princeton.edu — season' } },
+
+      { name: 'McCarter Theatre Center', kind: 'Theatre', where: 'University Place',
+        desc: 'The town\'s big year-round house — live music alongside plays, ballet, circus and cabaret. Programmes independently of the University concert series, so it is worth checking both.' },
+    ],
+    series: []
+  },
+
+  'witherspoon-jackson': {
+    blurb: 'Princeton\'s historic Black neighborhood, and the reason the Witherspoon Street corridor sounds the way it does — church music here predates every bar in town by a century.',
+    venues: [
+      { name: 'Witherspoon Street Presbyterian Church', kind: 'Historic Congregation', where: 'Witherspoon Street',
+        desc: 'One of New Jersey\'s oldest Black congregations and the anchor of the neighborhood\'s musical life. Services and programs rather than a booked stage — but this is the oldest continuous music tradition in Princeton.' },
+    ],
+    series: [],
+    nearest: { text: 'The Alchemist & Barrister sits at the bottom of Witherspoon Street, a few minutes\' walk toward Palmer Square.', href: 'princeton/palmer-square/index.html' }
+  },
+
+  'western-section': {
+    blurb: 'Big houses, historic gardens and the Battlefield. No bars, no stages — this end of Princeton is for daylight.',
+    venues: [],
+    series: [],
+    nearest: { text: 'Palmer Square is a ten-minute walk east and has the town\'s late-night rooms.', href: 'princeton/palmer-square/index.html' }
+  },
+};
+
+// Renders the live-music section on any page carrying <body data-music-key="…">
+// and an empty <section id="live-music"> to drop it into.
+function initLiveMusic() {
+  const key = document.body.getAttribute('data-music-key');
+  const host = document.getElementById('live-music');
+  if (!key || !host) return;
+
+  const data = LIVE_MUSIC[key];
+  if (!data) return;
+
+  const p = rootPrefix();
+
+  const venueCards = (data.venues || []).map(v => {
+    const meta = [v.addr || v.where, v.phone].filter(Boolean).join(' · ');
+    const nights = v.nights ? `<p class="music-nights"><span>♪</span> ${v.nights}</p>` : '';
+    const acts = (v.acts && v.acts.length)
+      ? `<p class="music-acts"><strong>Regulars:</strong> ${v.acts.join(' · ')}</p>` : '';
+    const dated = (v.dated && v.dated.length)
+      ? `<ul class="music-dated">${v.dated.map(d =>
+          `<li><span class="music-date">${d.date}</span> ${d.act}</li>`).join('')}</ul>` : '';
+    const cal = v.cal
+      ? `<a class="music-cal" href="${v.cal.href}" target="_blank" rel="noopener">${v.cal.label} →</a>` : '';
+    const more = v.link
+      ? `<a class="music-cal" href="${p}${v.link}">Full guide →</a>` : '';
+    return `
+      <div class="music-card animate-in">
+        <div class="music-card-head">
+          <h3 class="music-name">${v.name}</h3>
+          <span class="music-kind">${v.kind}</span>
+        </div>
+        ${meta ? `<p class="music-meta">📍 ${meta}</p>` : ''}
+        ${nights}
+        <p class="music-desc">${v.desc}</p>
+        ${acts}
+        ${dated}
+        <div class="music-links">${cal}${more}</div>
+      </div>`;
+  }).join('');
+
+  const seriesCards = (data.series || []).map(s => `
+    <div class="music-series animate-in">
+      <div class="music-series-tag">Free Series</div>
+      <h3 class="music-name">${s.name}</h3>
+      ${s.who ? `<p class="music-meta">Presented by ${s.who}</p>` : ''}
+      ${s.when ? `<p class="music-nights"><span>♪</span> ${s.when}</p>` : ''}
+      ${s.where ? `<p class="music-desc">${s.where}</p>` : ''}
+      ${s.acts ? `<p class="music-acts"><strong>Recent lineups:</strong> ${s.acts.join(' · ')}</p>` : ''}
+      ${s.note ? `<p class="music-note">${s.note}</p>` : ''}
+      ${s.cal ? `<div class="music-links"><a class="music-cal" href="${s.cal.href}" target="_blank" rel="noopener">${s.cal.label} →</a></div>` : ''}
+    </div>`).join('');
+
+  const nearest = data.nearest
+    ? `<p class="music-nearest">↗ <a href="${p}${data.nearest.href}">${data.nearest.text}</a></p>` : '';
+
+  host.innerHTML = `
+    <div class="section-label">Who's Playing</div>
+    <h2 class="section-title">Live Music</h2>
+    <hr class="section-divider" />
+    <p class="music-blurb">${data.blurb}</p>
+    ${venueCards ? `<div class="music-grid">${venueCards}</div>` : ''}
+    ${seriesCards ? `<div class="music-grid music-grid-series">${seriesCards}</div>` : ''}
+    ${nearest}`;
+}
+
 // ── Persistent side panel (non-home pages) ──────────────────────────
 // Reads data-page-location from <body>, builds the panel HTML, injects
 // it into the page, and shifts .page-wrap right by 320px.
@@ -680,6 +1175,17 @@ const PANEL_EVENTS = {
     events: [
       { mo:'SEP', dy:'26', tag:'events', tagLabel:'Concert',  name:'Reba McEntire at USA',  meta:'United Supermarkets Arena',            url:'lubbock/historic-district/index.html', ticket:'https://www.unitedssa.com' },
       { mo:'OCT', dy:'18', tag:'dining', tagLabel:'Food Fest',name:'Lubbock on the Square', meta:'Courthouse Square · Downtown',         url:'lubbock/historic-district/index.html', ticket:'https://downtownlubbock.org' },
+    ]
+  },
+  Princeton: {
+    label: 'Princeton Live Music',
+    link: { href: 'princeton/index.html', text: 'Princeton Guide →' },
+    events: [
+      { mo:'WED', dy:'WKLY', tag:'arts',      tagLabel:'Live Band',  name:'Bands at the Alchemist & Barrister', meta:'28 Witherspoon St · Wed, Thu & Sun',   url:'princeton/palmer-square/index.html' },
+      { mo:'THU', dy:'WKLY', tag:'nightlife', tagLabel:'Brewpub',    name:'Live Music at Triumph Brewing',      meta:'Nassau St · rotating weekly calendar', url:'princeton/palmer-square/index.html' },
+      { mo:'SEP', dy:'–MAY', tag:'arts',      tagLabel:'Concerts',   name:'Princeton University Concerts',      meta:'Richardson Auditorium · 2026–27 season',url:'princeton/university/index.html',      ticket:'https://concerts.princeton.edu' },
+      { mo:'ALL', dy:'YEAR', tag:'arts',      tagLabel:'Theatre',    name:'McCarter Theatre Center',            meta:'University Place · year-round',        url:'princeton/university/index.html' },
+      { mo:'WED', dy:'–SUN', tag:'arts',      tagLabel:'Museum',     name:'Morven Museum & Garden',             meta:'Stockton St · 10 AM–4 PM',             url:'princeton/western-section/index.html' },
     ]
   },
   'New Jersey': {
@@ -852,6 +1358,7 @@ function initScrollAnimations() {
 // Init on load
 document.addEventListener('DOMContentLoaded', () => {
   initSidePanel();
+  initLiveMusic();
   initCategoryFilter();
   initScrollAnimations();
 

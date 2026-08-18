@@ -47,7 +47,7 @@
     @media (max-width: 600px) { .highlight-strip { grid-template-columns: 1fr; } }
   </style>
 </head>
-<body data-page-location="Harbor Point">
+<body data-page-location="Harbor Point" data-music-key="harbor-point">
 
 <nav>
   <a href="../../index.html" class="nav-logo">The <span>Concierge</span></a>
@@ -124,6 +124,7 @@
       <button class="pill" data-cat="events">🎟 Events</button>
       <button class="pill" data-cat="dining">🍽 Dining</button>
       <button class="pill" data-cat="nightlife">🍸 Nightlife</button>
+      <button class="pill" data-cat="music">🎸 Live Music</button>
       <button class="pill" data-cat="outdoors">🌿 Outdoors</button>
     </div>
   </section>
@@ -379,6 +380,9 @@
   </section>
 
   <!-- SUGGEST CTA -->
+  <!-- LIVE MUSIC (rendered by initLiveMusic in script.js) -->
+  <section class="section cat-section" data-cat="music" id="live-music" style="background:var(--mist);"></section>
+
   <section id="suggest" style="background:var(--navy); padding:3rem 5%; text-align:center;">
     <div class="section-label" style="color:var(--gold-lt);">Community</div>
     <h2 style="font-family:'Playfair Display',serif; color:var(--white); font-size:clamp(1.5rem,3vw,2rem); margin-bottom:0.65rem;">Know Something We Don't?</h2>
