@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gallery | The Shack BBQ</title>
+<meta name="description" content="Photos from The Shack BBQ in Lubbock, TX." />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<!-- NAV -->
+<nav>
+<a href="index.html" class="nav-logo">The Shack <span>BBQ</span></a>
+<ul class="nav-links">
+<li><a href="about.html">Our Story</a></li>
+<li><a href="menu.html">Menu</a></li>
+<li><a href="gallery.html" class="active">Gallery</a></li>
+<li><a href="contact.html" class="nav-cta">Visit Us</a></li>
+</ul>
+<button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+<a href="index.html">Home</a>
+<a href="about.html">Our Story</a>
+<a href="menu.html">Menu</a>
+<a href="gallery.html" class="active">Gallery</a>
+<a href="contact.html" class="mobile-cta">Visit Us</a>
+</div>
+<div class="page-wrap">
+<div class="page-inner">
+<div class="page-header">
+<div class="page-header-left">
+<div class="section-label">Photo Gallery</div>
+<h1>A Look Inside</h1>
+<p>One real photo of The Shack plus illustrative food styling — clearly labeled on every image.</p>
+</div>
+<div class="page-header-right">
+<a href="menu.html" class="btn-primary">View Menu</a>
+</div>
+</div>
+<div class="page-content">
+<div class="menu-note" style="margin-bottom:1.5rem;">
+This is an independent design proposal, not a photoshoot done on assignment for the restaurant. The photo tagged <strong>Real Photo</strong> is sourced from The Shack BBQ's own Google Business listing. Photos tagged <strong>Stock Photo</strong> are free-license images (Wikimedia Commons and Pexels) used only to illustrate the type of food and atmosphere on the menu — not actual dishes or scenes from this specific restaurant.
+</div>
+<div class="gallery-tabs">
+<button class="gallery-tab active" onclick="switchTab(event, 'all')">All Photos</button>
+<button class="gallery-tab" onclick="switchTab(event, 'food')">Food Styling</button>
+<button class="gallery-tab" onclick="switchTab(event, 'real')">Real Photos</button>
+</div>
+<!-- ALL -->
+<div class="gallery-panel active" id="panel-all">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/exterior-sign-real.jpg" alt="The Shack BBQ's real storefront and hand-painted sign on N Frankford Ave, Lubbock, TX" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Stock Photo</span>
+<img src="photos/brisket-stock.jpg" alt="Sliced smoked brisket with a peppery bark (stock photo, illustrative)" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Stock Photo</span>
+<img src="photos/ribs-stock.jpg" alt="A rack of glazed BBQ ribs (stock photo, illustrative)" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Stock Photo</span>
+<img src="photos/pulled-pork-stock.jpg" alt="Pulled pork sandwich on a sesame bun (stock photo, illustrative)" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Stock Photo</span>
+<img src="photos/collard-greens-stock.jpg" alt="A pot of collard greens simmering with bacon (stock photo, illustrative)" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Stock Photo</span>
+<img src="photos/banana-pudding-stock.jpg" alt="A pan of banana pudding with vanilla wafers (stock photo, illustrative)" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Stock Photo</span>
+<img src="photos/sweet-tea-stock.jpg" alt="A glass of sweet tea with lemon on an outdoor rail (stock photo, illustrative)" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Stock Photo</span>
+<img src="photos/string-lights-stock.jpg" alt="String lights glowing at dusk on a patio railing (stock photo, illustrative of patio ambiance)" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+<!-- FOOD STYLING -->
+<div class="gallery-panel" id="panel-food">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Stock Photo</span>
+<img src="photos/brisket-stock.jpg" alt="Sliced smoked brisket with a peppery bark (stock photo, illustrative)" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Stock Photo</span>
+<img src="photos/ribs-stock.jpg" alt="A rack of glazed BBQ ribs (stock photo, illustrative)" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Stock Photo</span>
+<img src="photos/pulled-pork-stock.jpg" alt="Pulled pork sandwich on a sesame bun (stock photo, illustrative)" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Stock Photo</span>
+<img src="photos/collard-greens-stock.jpg" alt="A pot of collard greens simmering with bacon (stock photo, illustrative)" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Stock Photo</span>
+<img src="photos/banana-pudding-stock.jpg" alt="A pan of banana pudding with vanilla wafers (stock photo, illustrative)" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Stock Photo</span>
+<img src="photos/sweet-tea-stock.jpg" alt="A glass of sweet tea with lemon on an outdoor rail (stock photo, illustrative)" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+<!-- REAL PHOTOS -->
+<div class="gallery-panel" id="panel-real">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/exterior-sign-real.jpg" alt="The Shack BBQ's real storefront and hand-painted sign on N Frankford Ave, Lubbock, TX" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
+<button class="lightbox-close" onclick="closeLightbox()">✕</button>
+<button class="lightbox-prev" onclick="shiftLightbox(-1)">&#8249;</button>
+<img id="lightbox-img" src="" alt="" />
+<button class="lightbox-next" onclick="shiftLightbox(1)">&#8250;</button>
+<div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
