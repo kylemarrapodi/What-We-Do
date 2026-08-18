@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Concierge — Your Local Guide, Everywhere</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+
+    /* ── FULL-SCREEN SPLIT ── */
+    .home-split {
+      position: fixed;
+      top: 68px; left: 0; right: 0; bottom: 0;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+    }
+
+    /* ── LEFT PANEL ── */
+    .home-left {
+      background: var(--deep);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-right: 1px solid rgba(255,255,255,0.07);
+    }
+
+    /* Top zone — brand + search + go button. Always visible, never scrolls. */
+    .home-left-top {
+      flex-shrink: 0;
+      padding: 1.5rem 1.25rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* Middle zone — events list only. Takes all remaining space and scrolls. */
+    .home-left-middle {
+      flex: 1 1 0;
+      min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      padding: 1rem 1.25rem 0.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    /* Chunky, easy-to-grab scrollbar */
+    .home-left-middle::-webkit-scrollbar { width: 8px; }
+    .home-left-middle::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); border-radius: 4px; }
+    .home-left-middle::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.45); border-radius: 4px; }
+    .home-left-middle::-webkit-scrollbar-thumb:hover { background: rgba(201,168,76,0.7); }
+
+    /* Bottom zone — suggest section. Always visible, never scrolls. */
+    .home-left-bottom {
+      flex-shrink: 0;
+      padding: 0 1.25rem 1.5rem;
+    }
+
+    /* Brand */
+    .home-eyebrow {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.4rem;
+    }
+    .home-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; color: var(--white);
+      line-height: 1.15; margin-bottom: 0.5rem;
+    }
+    .home-title span { color: var(--gold); }
+    .home-desc { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.65; }
+
+    /* ── TIERED SEARCH ── */
+    .home-search { display: flex; flex-direction: column; gap: 0.5rem; }
+    .home-search .search-wrap {
+      box-shadow: none;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06) !important;
+    }
+    .home-search .search-wrap input {
+      background: rgba(255,255,255,0.08) !important;
+      color: #ffffff !important;
+      font-size: 0.82rem;
+      padding: 0.7rem 1rem;
+      caret-color: #ffffff;
+    }
+    .home-search .search-wrap input::placeholder { color: rgba(255,255,255,0.4) !important; }
+    .home-search .search-wrap button {
+      font-size: 0.78rem;
+      padding: 0.7rem 1rem;
+    }
+
+    .search-trail { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .search-trail-item {
+      display: flex; align-items: center; gap: 0.35rem;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.35);
+      border-radius: 50px;
+      padding: 0.3rem 0.65rem 0.3rem 0.75rem;
+    }
+    .search-trail-label { font-size: 0.78rem; font-weight: 600; color: var(--gold-lt); }
+    .search-trail-remove {
+      background: none; border: none;
+      color: rgba(201,168,76,0.55); font-size: 0.65rem;
+      cursor: pointer; padding: 0; line-height: 1; transition: color 0.15s;
+    }
+    .search-trail-remove:hover { color: var(--gold-lt); }
+
+    .search-row { position: relative; }
+    .search-suggestions {
+      position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+      background: var(--deep); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius); overflow: hidden; z-index: 50; display: none;
+    }
+    .search-sug-list {
+      max-height: calc(5 * 44px);
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201,168,76,0.4) transparent;
+    }
+    .search-sug-list::-webkit-scrollbar { width: 5px; }
+    .search-sug-list::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.4); border-radius: 3px; }
+    .search-sug-go-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.5rem 1rem;
+      background: rgba(201,168,76,0.08);
+      border-top: 1px solid rgba(201,168,76,0.18);
+      gap: 0.75rem;
+    }
+    .search-sug-go-label { font-size: 0.74rem; color: rgba(255,255,255,0.4); }
+    .search-sug-go-label strong { color: var(--gold-lt); font-weight: 600; }
+    .search-sug-go-btn {
+      display: inline-flex; align-items: center;
+      background: var(--gold); color: var(--navy);
+      border: none; border-radius: 50px;
+      padding: 0.28rem 0.8rem;
+      font-size: 0.74rem; font-weight: 700;
+      font-family: 'Inter', sans-serif; cursor: pointer;
+      text-decoration: none; white-space: nowrap;
+      transition: background 0.15s; flex-shrink: 0;
+    }
+    .search-sug-go-btn:hover { background: var(--gold-lt); }
+    .search-suggestion-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.65rem 1rem; cursor: pointer; transition: background 0.15s;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .search-suggestion-item:last-child { border-bottom: none; }
+    .search-suggestion-item:hover { background: rgba(201,168,76,0.1); }
+    .sug-label { font-size: 0.85rem; color: var(--white); font-weight: 500; }
+    .sug-badge {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.15rem 0.45rem; border-radius: 50px;
+    }
+    .sug-badge.live { background: var(--green); color: white; }
+    .sug-badge.soon { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.1); }
+    .search-coming-soon {
+      margin-top: 0.45rem; font-size: 0.78rem;
+      color: rgba(255,255,255,0.5); font-style: italic; padding: 0 0.25rem;
+    }
+
+    /* ── EVENTS PANEL ── */
+    .home-events-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 0.5rem;
+      position: sticky; top: 0;
+      background: var(--deep);
+      padding: 0.25rem 0 0.5rem;
+      z-index: 5;
+    }
+    .home-events-header span {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+    .home-events-header a { font-size: 0.72rem; color: var(--gold); font-weight: 600; }
+    .home-events-header a:hover { color: var(--gold-lt); }
+
+    .home-event-item {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.45rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+      text-decoration: none; transition: opacity 0.15s; cursor: pointer;
+    }
+    .home-event-item:last-child { border-bottom: none; }
+
+    .home-event-date {
+      min-width: 38px; text-align: center;
+      background: rgba(255,255,255,0.07);
+      border-radius: 5px; padding: 0.3rem 0.2rem; flex-shrink: 0;
+    }
+    .home-event-date .mo { font-size: 0.54rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
+    .home-event-date .dy { font-size: 0.95rem; font-weight: 700; color: var(--white); line-height: 1; }
+
+    .home-event-name { font-size: 0.82rem; font-weight: 600; color: var(--white); line-height: 1.25; margin-bottom: 0.1rem; }
+    .home-event-meta { font-size: 0.7rem; color: rgba(255,255,255,0.38); }
+    .home-event-actions { display: flex; gap: 0.75rem; margin-top: 0.3rem; flex-wrap: wrap; }
+    .home-event-action-link { font-size: 0.7rem; font-weight: 600; color: rgba(255,255,255,0.45); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.18); transition: color 0.15s, border-color 0.15s; }
+    .home-event-action-link:hover { color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.5); }
+    .home-event-action-link.ticket { color: var(--gold-lt); border-color: rgba(201,168,76,0.35); }
+    .home-event-action-link.ticket:hover { color: var(--gold); border-color: var(--gold); }
+    .home-event-tag {
+      display: inline-block; font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.08rem 0.38rem; border-radius: 3px; margin-bottom: 0.18rem;
+    }
+    .home-event-tag.events   { background: #fef3cd; color: #92650a; }
+    .home-event-tag.arts     { background: #e0f0ff; color: #1a5276; }
+    .home-event-tag.outdoors { background: #e6f4ea; color: #1e6631; }
+    .home-event-tag.dining   { background: #fde8e8; color: #9b2335; }
+    .home-event-tag.nightlife{ background: #e8e0f5; color: #553c9a; }
+
+    /* location context bar */
+    .location-context {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.5rem 0.75rem;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: var(--radius);
+      margin-bottom: 0.25rem;
+    }
+    .location-context-label { font-size: 0.78rem; color: var(--gold-lt); font-weight: 600; }
+    .location-context-reset {
+      font-size: 0.72rem; color: rgba(201,168,76,0.6);
+      background: none; border: none; cursor: pointer;
+      font-family: 'Inter', sans-serif; transition: color 0.15s;
+    }
+    .location-context-reset:hover { color: var(--gold-lt); }
+
+    /* ── GO BUTTON ── */
+    .go-button-wrap {
+      display: none;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .go-button-wrap.visible { display: flex; }
+    .go-button {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.75rem 1.25rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      text-decoration: none;
+      width: 100%;
+    }
+    .go-button:hover { background: var(--gold-lt); transform: translateY(-1px); }
+    .go-button:active { transform: translateY(0); }
+    .go-button-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(15,28,54,0.65); margin-bottom: 0.15rem; }
+    .go-button-name { font-size: 0.95rem; font-weight: 700; color: var(--navy); }
+    .go-button-arrow { font-size: 1.1rem; opacity: 0.7; }
+
+    /* ── SUGGEST ── */
+    .home-suggest { padding-top: 0; }
+    .home-left-bottom { padding-top: 1rem; }
+    .home-suggest p { font-size: 0.78rem; color: rgba(255,255,255,0.45); margin-bottom: 0.5rem; line-height: 1.5; }
+
+    .suggest-tabs {
+      display: flex; gap: 0.4rem; margin-bottom: 0.65rem;
+    }
+    .suggest-tab {
+      flex: 1; padding: 0.45rem 0.6rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      color: rgba(255,255,255,0.45);
+      font-size: 0.75rem; font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .suggest-tab:hover { border-color: rgba(201,168,76,0.3); color: rgba(255,255,255,0.7); }
+    .suggest-tab.active {
+      background: rgba(201,168,76,0.12);
+      border-color: rgba(201,168,76,0.4);
+      color: var(--gold-lt);
+    }
+
+    .home-suggest-row { display: flex; gap: 0.5rem; }
+    .home-suggest-row input {
+      flex: 1; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius);
+      padding: 0.6rem 0.85rem; font-size: 0.82rem; color: var(--white);
+      font-family: 'Inter', sans-serif; outline: none;
+    }
+    .home-suggest-row input::placeholder { color: rgba(255,255,255,0.3); }
+    .home-suggest-row input:focus { border-color: var(--gold); }
+    .home-suggest-row button {
+      background: var(--gold); color: var(--navy); border: none;
+      padding: 0.6rem 1rem; border-radius: var(--radius);
+      font-weight: 700; font-size: 0.78rem; cursor: pointer;
+      white-space: nowrap; font-family: 'Inter', sans-serif; transition: background 0.2s;
+    }
+    .home-suggest-row button:hover { background: var(--gold-lt); }
+
+    /* ── RIGHT PANEL — MAP ── */
+    .home-right { position: relative; overflow: hidden; }
+    .home-right iframe { width: 100%; height: 100%; border: none; display: block; }
+
+    /* Map pins — removed pending Google Maps JS API (pins can't track map scroll with iframe) */
+
+    /* Map location label */
+    .map-location-badge {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(15,28,54,0.85);
+      color: var(--gold-lt); font-size: 0.75rem; font-weight: 600;
+      padding: 0.4rem 0.85rem; border-radius: 50px;
+      border: 1px solid rgba(201,168,76,0.3);
+      pointer-events: none;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .home-split { grid-template-columns: 1fr; }
+      .home-right { display: none; }
+    }
+    @media (max-width: 640px) {
+      .home-left-inner { padding: 1.5rem 1.25rem; }
+      .home-title { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-empty">Search any city, neighborhood, or event</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" class="active">Home</a>
+  <a href="stamford/index.html">Stamford, CT</a>
+  <a href="lubbock/index.html">Lubbock, TX</a>
+  <a href="#" onclick="alert('LBI coming soon!')">Long Beach Island, NJ</a>
+</div>
+
+<!-- FULL-SCREEN SPLIT -->
+<div class="home-split">
+
+  <!-- LEFT: panel -->
+  <div class="home-left">
+
+    <!-- TOP: brand + search + go button — always locked in place -->
+    <div class="home-left-top">
+
+      <!-- Brand -->
+      <div class="home-brand">
+        <div class="home-eyebrow">Your Local Intelligence Platform</div>
+        <h1 class="home-title">The <span>Concierge</span></h1>
+        <p class="home-desc">Discover what's happening in your city — restaurants, events, nightlife, and local happenings, curated and verified in real time.</p>
+      </div>
+
+      <!-- Tiered Search -->
+      <div class="home-search" id="tiered-search">
+        <div class="search-trail" id="search-trail"></div>
+        <div class="search-row" id="search-row">
+          <div class="search-wrap">
+            <input id="main-search" type="text" placeholder="Search a country, state, or city…" autocomplete="off" />
+          </div>
+          <div class="search-suggestions" id="search-suggestions"></div>
+        </div>
+      </div>
+
+      <!-- Go Button (appears when a live location is selected) -->
+      <div class="go-button-wrap" id="go-button-wrap">
+        <div class="go-button-label">Selected Location</div>
+        <a class="go-button" id="go-button" href="#">
+          <span class="go-button-name" id="go-button-name">—</span>
+          <span class="go-button-arrow">→</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- MIDDLE: events list — scrolls independently -->
+    <div class="home-left-middle">
+      <div class="home-events" id="events-panel">
+        <!-- injected by JS -->
+      </div>
+    </div>
+
+    <!-- BOTTOM: suggest section — always locked in place -->
+    <div class="home-left-bottom">
+      <div class="home-suggest" id="suggest">
+        <p>Know something we're missing?</p>
+        <div class="suggest-tabs">
+          <button class="suggest-tab active" onclick="switchSuggestTab(this,'place')">Suggest a Place</button>
+          <button class="suggest-tab" onclick="switchSuggestTab(this,'event')">Suggest an Event</button>
+        </div>
+        <div id="suggest-place">
+          <div class="home-suggest-row">
+            <input id="suggest-input" type="text" placeholder="Restaurant, bar, shop, gem…" />
+            <button onclick="handleTipSubmit('suggest-input','suggest-place-wrap')">Submit</button>
+          </div>
+        </div>
+        <div id="suggest-event" style="display:none;">
+          <div class="home-suggest-row">
+            <input id="suggest-event-input" type="text" placeholder="Event name, date, venue…" />
+            <button onclick="handleTipSubmit('suggest-event-input','suggest-event-wrap')">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT: Map -->
+  <div class="home-right" id="map-panel">
+    <iframe id="map-iframe"
+      title="The Concierge — Explore Map"
+      src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d96855.28796146093!2d-73.6!3d41.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+    <!-- Current location badge -->
+    <div class="map-location-badge" id="map-location-badge">Northeast US</div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+<script>
+// ═══════════════════════════════════════════════════════════════════
+//  LOCATION DATABASE
+//  mapSrc      — Google Maps embed URL for this context
+//  mapLabel    — label shown on the map badge
+//  eventsLabel — header label in the events panel
+//  eventsLink  — "see all" link in the events panel
+//  events      — array of event objects for the panel
+//  pins        — array of map pin objects { label, tag, left%, top%, url }
+//                left/top are % offsets within the map viewport (approx)
+// ═══════════════════════════════════════════════════════════════════
+const LOCATIONS = {
+
+  default: {
+    mapSrc: 'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d96855.28796146093!2d-73.6!3d41.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus',
+    mapLabel: 'United States',
+    eventsLabel: 'Happening Now',
+    eventsLink: null,
+    events: [
+      { mo:'JUL', dy:'30', tag:'events',   tagLabel:'Concert',   name:'Ja Rule & Ashanti',             meta:'Mill River Park · Stamford, CT',       url:'stamford/downtown/index.html',       ticket:'https://palacestamford.org' },
+      { mo:'AUG', dy:'1',  tag:'events',   tagLabel:'Food Fest', name:'Hey Stamford! Food Festival',   meta:'Mill River Park · Stamford, CT',       url:'stamford/downtown/index.html',       ticket:'https://heystamford.com' },
+      { mo:'AUG', dy:'30', tag:'events',   tagLabel:'Football',  name:'TTU Football Season Opener',    meta:'Jones AT&T Stadium · Lubbock, TX',     url:'lubbock/tech-district/index.html',   ticket:'https://texastech.com/sports/football' },
+      { mo:'SEP', dy:'13', tag:'arts',     tagLabel:'Music Fest',name:'Buddy Holly Music Festival',    meta:'Depot District · Lubbock, TX',         url:'lubbock/depot-district/index.html',  ticket:'https://buddyhollycenter.org' },
+      { mo:'SEP', dy:'19', tag:'arts',     tagLabel:'Concert',   name:'Labyrinth in Concert',          meta:'Palace Theatre · Stamford, CT',        url:'stamford/downtown/index.html',       ticket:'https://palacestamford.org' },
+      { mo:'SEP', dy:'26', tag:'events',   tagLabel:'Concert',   name:'Reba McEntire',                 meta:'United Supermarkets Arena · Lubbock',  url:'lubbock/historic-district/index.html',ticket:'https://www.unitedssa.com' },
+      { mo:'OCT', dy:'11', tag:'events',   tagLabel:'Festival',  name:"That's Amore Italian Fest",     meta:'Columbus Park · Stamford, CT',         url:'stamford/downtown/index.html',       ticket:'https://stamford-downtown.com' },
+      { mo:'OCT', dy:'18', tag:'dining',   tagLabel:'Food Fest', name:'Lubbock on the Square',         meta:'Courthouse Square · Lubbock, TX',      url:'lubbock/historic-district/index.html',ticket:'https://downtownlubbock.org' },
+      { mo:'NOV', dy:'8',  tag:'events',   tagLabel:'Basketball',name:'TTU Basketball Season Opener',  meta:'United Supermarkets Arena · Lubbock',  url:'lubbock/tech-district/index.html',   ticket:'https://texastech.com/sports/mens-basketball' },
+      { mo:'SAT', dy:'WKL',tag:'outdoors', tagLabel:'Market',    name:'Downtown Farmers Market',       meta:'Veterans Memorial Park · Stamford, CT',url:'stamford/index.html',                ticket:'https://stamford-downtown.com/markets' },
+    ],
+    pins: [
+      { label:'Stamford, CT', tag:'live', left:44, top:42, url:'stamford/index.html' },
+      { label:'Lubbock, TX',  tag:'live', left:20, top:68, url:'lubbock/index.html' },
+      { label:'Long Beach Island, NJ', tag:'soon', left:36, top:50, url:null },
+      { label:'New York City', tag:'soon', left:40, top:44, url:null },
+    ]
+  },
+
+  'United States': {
+    mapSrc: 'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d96855.28796146093!2d-73.6!3d41.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus',
+    mapLabel: 'United States',
+    eventsLabel: 'Happening Now — All Cities',
+    eventsLink: null,
+    events: [
+      { mo:'JUL', dy:'30', tag:'events',   tagLabel:'Concert',   name:'Ja Rule & Ashanti',             meta:'Mill River Park · Stamford, CT',       url:'stamford/downtown/index.html',       ticket:'https://palacestamford.org' },
+      { mo:'AUG', dy:'1',  tag:'events',   tagLabel:'Food Fest', name:'Hey Stamford! Food Festival',   meta:'Mill River Park · Stamford, CT',       url:'stamford/downtown/index.html',       ticket:'https://heystamford.com' },
+      { mo:'AUG', dy:'30', tag:'events',   tagLabel:'Football',  name:'TTU Football Season Opener',    meta:'Jones AT&T Stadium · Lubbock, TX',     url:'lubbock/tech-district/index.html',   ticket:'https://texastech.com/sports/football' },
+      { mo:'SEP', dy:'13', tag:'arts',     tagLabel:'Music Fest',name:'Buddy Holly Music Festival',    meta:'Depot District · Lubbock, TX',         url:'lubbock/depot-district/index.html',  ticket:'https://buddyhollycenter.org' },
+      { mo:'SEP', dy:'19', tag:'arts',     tagLabel:'Concert',   name:'Labyrinth in Concert',          meta:'Palace Theatre · Stamford, CT',        url:'stamford/downtown/index.html',       ticket:'https://palacestamford.org' },
+      { mo:'SEP', dy:'26', tag:'events',   tagLabel:'Concert',   name:'Reba McEntire',                 meta:'United Supermarkets Arena · Lubbock',  url:'lubbock/historic-district/index.html',ticket:'https://www.unitedssa.com' },
+      { mo:'OCT', dy:'11', tag:'events',   tagLabel:'Festival',  name:"That's Amore Italian Fest",     meta:'Columbus Park · Stamford, CT',         url:'stamford/downtown/index.html',       ticket:'https://stamford-downtown.com' },
+      { mo:'OCT', dy:'18', tag:'dining',   tagLabel:'Food Fest', name:'Lubbock on the Square',         meta:'Courthouse Square · Lubbock, TX',      url:'lubbock/historic-district/index.html',ticket:'https://downtownlubbock.org' },
+      { mo:'NOV', dy:'8',  tag:'events',   tagLabel:'Basketball',name:'TTU Basketball Season Opener',  meta:'United Supermarkets Arena · Lubbock',  url:'lubbock/tech-district/index.html',   ticket:'https://texastech.com/sports/mens-basketball' },
+      { mo:'SAT', dy:'WKL',tag:'outdoors', tagLabel:'Market',    name:'Downtown Farmers Market',       meta:'Veterans Memorial Park · Stamford, CT',url:'stamford/index.html',                ticket:'https://stamford-downtown.com/markets' },
+    ],
+    pins: [
+      { label:'Stamford, CT', tag:'live', left:44, top:42, url:'stamford/index.html' },
+      { label:'Lubbock, TX',  tag:'live', left:20, top:68, url:'lubbock/index.html' },
+      { label:'Long Beach Island, NJ', tag:'soon', left:36, top:50, url:null },
+      { label:'New York City', tag:'soon', left:40, top:44, url:null },
+    ]
+  },
+
+  'Connecticut': {
+    mapSrc: 'https://maps.google.com/maps?q=Connecticut,+USA&output=embed&z=9',
+    mapLabel: 'Connecticut',
+    eventsLabel: 'Connecticut Events',
+    eventsLink: { href: 'connecticut/index.html', text: 'Connecticut Guide →' },
+    events: [
+      { mo:'JUL', dy:'30', tag:'events', tagLabel:'Concert',   name:'Ja Rule & Ashanti',          meta:'Mill River Park · Stamford, CT', url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'AUG', dy:'1',  tag:'events', tagLabel:'Food Fest', name:'Hey Stamford! Food Festival', meta:'Mill River Park · Aug 1–2',       url:'stamford/downtown/index.html', ticket:'https://heystamford.com' },
+      { mo:'SEP', dy:'19', tag:'arts',   tagLabel:'Concert',   name:'Labyrinth in Concert',        meta:'Palace Theatre · Stamford, CT',  url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'OCT', dy:'11', tag:'events', tagLabel:'Festival',  name:"That's Amore Italian Fest",   meta:'Columbus Park · Oct 11–12',      url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com' },
+    ],
+    pins: [
+      { label:'Stamford', tag:'live', left:24, top:68, url:'stamford/index.html' },
+      { label:'Greenwich', tag:'soon', left:18, top:74, url:null },
+      { label:'Norwalk', tag:'soon', left:22, top:71, url:null },
+      { label:'Westport', tag:'soon', left:26, top:67, url:null },
+    ]
+  },
+
+  'Stamford': {
+    mapSrc: 'https://maps.google.com/maps?q=Stamford,+CT&output=embed&z=13',
+    mapLabel: 'Stamford, CT',
+    eventsLabel: 'Stamford Events',
+    eventsLink: { href: 'stamford/index.html', text: 'Full Stamford Guide →' },
+    events: [
+      { mo:'JUL', dy:'30', tag:'events',  tagLabel:'Concert',   name:'Ja Rule & Ashanti',          meta:'Mill River Park · 5 PM',        url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'AUG', dy:'1',  tag:'events',  tagLabel:'Food Fest', name:'Hey Stamford! Food Festival', meta:'Mill River Park · Aug 1–2',      url:'stamford/downtown/index.html', ticket:'https://heystamford.com' },
+      { mo:'AUG', dy:'13', tag:'events',  tagLabel:'Block Party',name:'Summer St Block Party',      meta:'Summer St · Downtown · 5 PM',   url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com' },
+      { mo:'AUG', dy:'29', tag:'events',  tagLabel:'Beer & Wine',name:'Beer, Wine & Spirits Fest',  meta:'Mill River Park · 1:30 PM',     url:'stamford/downtown/index.html', ticket:'https://stamfordbeerwinespirits.com' },
+      { mo:'SEP', dy:'19', tag:'arts',    tagLabel:'Concert',   name:'Labyrinth in Concert',        meta:'Palace Theatre · 8 PM',         url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'OCT', dy:'11', tag:'events',  tagLabel:'Festival',  name:"That's Amore Italian Fest",   meta:'Columbus Park · Oct 11–12',     url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com' },
+      { mo:'SAT', dy:'WKL',tag:'outdoors',tagLabel:'Market',    name:'Downtown Farmers Market',     meta:'Veterans Memorial Park · Sat mornings', url:'stamford/index.html', ticket:'https://stamford-downtown.com/markets' },
+    ],
+    pins: [
+      { label:'Mill River Park', tag:'event', left:50, top:44, url:'stamford/downtown/index.html' },
+      { label:'Palace Theatre',  tag:'event', left:47, top:50, url:'stamford/downtown/index.html' },
+      { label:'Columbus Park',   tag:'event', left:53, top:48, url:'stamford/downtown/index.html' },
+      { label:'Harbor Point',    tag:'event', left:58, top:60, url:'stamford/index.html' },
+      { label:'Bartlett Arboretum', tag:'event', left:62, top:30, url:'stamford/index.html' },
+    ]
+  },
+
+  'Downtown': {
+    mapSrc: 'https://maps.google.com/maps?q=Downtown+Stamford,+CT&output=embed&z=15',
+    mapLabel: 'Downtown Stamford',
+    eventsLabel: 'Downtown Events',
+    eventsLink: { href: 'stamford/downtown/index.html', text: 'Full Downtown Guide →' },
+    events: [
+      { mo:'AUG', dy:'1',  tag:'events',  tagLabel:'Food Fest',  name:'Hey Stamford! Food Festival', meta:'Mill River Park · Noon–8 PM',   url:'stamford/downtown/index.html', ticket:'https://heystamford.com' },
+      { mo:'AUG', dy:'13', tag:'events',  tagLabel:'Block Party',name:'Summer St Block Party',       meta:'Summer St · 5 PM–9 PM',         url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com' },
+      { mo:'SEP', dy:'19', tag:'arts',    tagLabel:'Concert',    name:'Labyrinth in Concert',        meta:'Palace Theatre · 8 PM',         url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'OCT', dy:'2',  tag:'arts',    tagLabel:'Concert',    name:'Bee Gees Gold Tribute',       meta:'Palace Theatre · 7:30 PM',      url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'OCT', dy:'11', tag:'events',  tagLabel:'Festival',   name:'Italian Festival',            meta:'Columbus Park · Noon–9 PM',     url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com' },
+      { mo:'SAT', dy:'WKL',tag:'outdoors',tagLabel:'Market',     name:'Downtown Farmers Market',     meta:'Columbus Park · 9 AM–1 PM',     url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com/markets' },
+    ],
+    pins: [
+      { label:'Mill River Park',    tag:'event', left:46, top:38, url:'stamford/downtown/index.html' },
+      { label:'Palace Theatre',     tag:'event', left:44, top:52, url:'stamford/downtown/index.html' },
+      { label:'Columbus Park',      tag:'event', left:54, top:46, url:'stamford/downtown/index.html' },
+      { label:'Summer St',          tag:'event', left:50, top:50, url:'stamford/downtown/index.html' },
+      { label:'Veterans Memorial',  tag:'event', left:42, top:56, url:'stamford/downtown/index.html' },
+    ]
+  },
+
+  'New Jersey': {
+    mapSrc: 'https://maps.google.com/maps?q=New+Jersey,+USA&output=embed&z=8',
+    mapLabel: 'New Jersey',
+    eventsLabel: 'New Jersey',
+    eventsLink: { href: 'new-jersey/index.html', text: 'New Jersey Guide →' },
+    events: [],
+    pins: [
+      { label:'Long Beach Island', tag:'soon', left:52, top:58, url:null },
+    ]
+  },
+
+  'Long Beach Island': {
+    mapSrc: 'https://maps.google.com/maps?q=Long+Beach+Island,+NJ&output=embed&z=12',
+    mapLabel: 'Long Beach Island, NJ',
+    eventsLabel: 'LBI Events',
+    eventsLink: null,
+    events: [],
+    pins: [
+      { label:'Beach Haven', tag:'soon', left:48, top:54, url:null },
+      { label:'Ship Bottom',  tag:'soon', left:50, top:42, url:null },
+      { label:'Surf City',    tag:'soon', left:51, top:36, url:null },
+    ]
+  },
+
+  'New York': {
+    mapSrc: 'https://maps.google.com/maps?q=New+York+State,+USA&output=embed&z=7',
+    mapLabel: 'New York',
+    eventsLabel: 'New York',
+    eventsLink: null,
+    events: [],
+    pins: [
+      { label:'New York City', tag:'soon', left:46, top:60, url:null },
+    ]
+  },
+
+  'New York City': {
+    mapSrc: 'https://maps.google.com/maps?q=New+York+City,+NY&output=embed&z=12',
+    mapLabel: 'New York City',
+    eventsLabel: 'NYC Events',
+    eventsLink: null,
+    events: [],
+    pins: []
+  },
+
+  'Texas': {
+    mapSrc: 'https://maps.google.com/maps?q=Texas,+USA&output=embed&z=6',
+    mapLabel: 'Texas',
+    eventsLabel: 'Texas Events',
+    eventsLink: { href: 'texas/index.html', text: 'Texas Guide →' },
+    events: [
+      { mo:'AUG', dy:'30', tag:'events', tagLabel:'Football',    name:'TTU Football Season Opener',       meta:'Jones AT&T Stadium · Lubbock',         url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football' },
+      { mo:'SEP', dy:'13', tag:'arts',   tagLabel:'Music Fest',  name:'Buddy Holly Music Festival',       meta:'Depot District · Lubbock',             url:'lubbock/index.html',              ticket:'https://buddyhollycenter.org' },
+      { mo:'SEP', dy:'26', tag:'events', tagLabel:'Concert',     name:'Reba McEntire at USA',             meta:'United Supermarkets Arena · Lubbock',  url:'lubbock/historic-district/index.html', ticket:'https://www.unitedssa.com' },
+      { mo:'OCT', dy:'11', tag:'events', tagLabel:'Homecoming',  name:'Texas Tech Homecoming',            meta:'Texas Tech Campus · Lubbock',          url:'lubbock/tech-district/index.html', ticket:'https://texastech.com' },
+      { mo:'NOV', dy:'8',  tag:'events', tagLabel:'Basketball',  name:'TTU Basketball Season Opener',     meta:'United Supermarkets Arena · Lubbock',  url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/mens-basketball' },
+    ],
+    pins: [
+      { label:'Lubbock, TX', tag:'live', left:35, top:55, url:'lubbock/index.html' },
+    ]
+  },
+
+  'Lubbock': {
+    mapSrc: 'https://maps.google.com/maps?q=Lubbock,+TX&output=embed&z=12',
+    mapLabel: 'Lubbock, TX',
+    eventsLabel: 'Lubbock Events',
+    eventsLink: { href: 'lubbock/index.html', text: 'Full Lubbock Guide →' },
+    events: [
+      { mo:'AUG', dy:'30', tag:'events', tagLabel:'Football',   name:'TTU Football Season Opener',     meta:'Jones AT&T Stadium · 60K fans',        url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football' },
+      { mo:'SEP', dy:'13', tag:'arts',   tagLabel:'Music Fest', name:'Buddy Holly Music Festival',     meta:'Depot District · Free outdoor stages', url:'lubbock/index.html',              ticket:'https://buddyhollycenter.org' },
+      { mo:'SEP', dy:'20', tag:'events', tagLabel:'Football',   name:'TTU vs. Oklahoma State',         meta:'Jones AT&T Stadium · Big 12',          url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football' },
+      { mo:'SEP', dy:'26', tag:'events', tagLabel:'Concert',    name:'Reba McEntire at USA',           meta:'United Supermarkets Arena',            url:'lubbock/historic-district/index.html', ticket:'https://www.unitedssa.com' },
+      { mo:'OCT', dy:'11', tag:'events', tagLabel:'Homecoming', name:'Texas Tech Homecoming Game',     meta:'Jones AT&T Stadium',                   url:'lubbock/tech-district/index.html', ticket:'https://texastech.com' },
+      { mo:'OCT', dy:'18', tag:'dining', tagLabel:'Food Fest',  name:'Lubbock on the Square',          meta:'Courthouse Square · Downtown',         url:'lubbock/historic-district/index.html', ticket:'https://downtownlubbock.org' },
+      { mo:'NOV', dy:'8',  tag:'events', tagLabel:'Basketball', name:'TTU Basketball Season Opener',   meta:'United Supermarkets Arena',            url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/mens-basketball' },
+      { mo:'NOV', dy:'15', tag:'nightlife',tagLabel:'Crawl',    name:'Depot District Music Crawl',     meta:'Depot District · All venues',          url:'lubbock/depot-district/index.html', ticket:'https://lubbockdepotdistrict.com' },
+    ],
+    pins: [
+      { label:'Jones AT&T Stadium',       tag:'event', left:44, top:46, url:'lubbock/tech-district/index.html' },
+      { label:'United Supermarkets Arena',tag:'event', left:47, top:42, url:'lubbock/tech-district/index.html' },
+      { label:'Depot District',           tag:'event', left:52, top:50, url:'lubbock/depot-district/index.html' },
+      { label:'Buddy Holly Hall',         tag:'event', left:50, top:54, url:'lubbock/historic-district/index.html' },
+    ]
+  },
+
+  'Depot District': {
+    mapSrc: 'https://maps.google.com/maps?q=Depot+District+Lubbock+TX&output=embed&z=15',
+    mapLabel: 'Depot District · Lubbock',
+    eventsLabel: 'Depot District Events',
+    eventsLink: { href: 'lubbock/depot-district/index.html', text: 'Full Depot Guide →' },
+    events: [
+      { mo:'FRI', dy:'WKL', tag:'nightlife',tagLabel:'Live Music', name:'Live Music at Blue Light',     meta:'1806 Buddy Holly Ave · Fri & Sat',   url:'lubbock/depot-district/index.html', ticket:'https://thebluelightlive.com' },
+      { mo:'SEP', dy:'13',  tag:'arts',     tagLabel:'Music Fest', name:'Buddy Holly Music Festival',  meta:'Depot District · Free stages',       url:'lubbock/depot-district/index.html', ticket:'https://buddyhollycenter.org' },
+      { mo:'NOV', dy:'15',  tag:'nightlife',tagLabel:'Bar Crawl',  name:'Depot District Music Crawl',  meta:'All venues · $15 wristband',         url:'lubbock/depot-district/index.html', ticket:'https://lubbockdepotdistrict.com' },
+    ],
+    pins: []
+  },
+};
+
+// ═══════════════════════════════════════════════════════════════════
+//  SEARCH TREE — single source of truth is SHARED_SEARCH_TREE in script.js
+// ═══════════════════════════════════════════════════════════════════
+const SEARCH_TREE = SHARED_SEARCH_TREE;
+
+// ═══════════════════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════════════════
+let searchPath  = [];
+let currentNode = SEARCH_TREE;
+
+// ═══════════════════════════════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════════════════════════════
+function norm(s) { return s.trim().toLowerCase(); }
+
+function getAncestorPath(targetNode) {
+  function dfs(node, path) {
+    if (node === targetNode) return path;
+    for (const c of (node.children||[])) {
+      const f = dfs(c, [...path, c]);
+      if (f) return f;
+    }
+    return null;
+  }
+  return dfs(SEARCH_TREE, []) || [];
+}
+
+function allDescendants(node) {
+  const out = [];
+  (node.children||[]).forEach(c => { out.push(c); allDescendants(c).forEach(d => out.push(d)); });
+  return out;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  RENDER — EVENTS PANEL
+// ═══════════════════════════════════════════════════════════════════
+function renderEventsPanel(locationKey) {
+  const data = LOCATIONS[locationKey] || LOCATIONS['default'];
+  const panel = document.getElementById('events-panel');
+
+  if (!data.events.length) {
+    panel.innerHTML = `
+      <div class="home-events-header"><span>${data.eventsLabel}</span></div>
+      <div style="padding:1.5rem 0;text-align:center;">
+        <div style="font-size:1.5rem;margin-bottom:0.5rem;">🗺️</div>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);line-height:1.6;">
+          ${locationKey} is coming soon.<br>Check back for events and listings.
+        </p>
+      </div>`;
+    return;
+  }
+
+  const linkHtml = data.eventsLink
+    ? `<a href="${data.eventsLink.href}">${data.eventsLink.text}</a>`
+    : '';
+
+  const eventsHtml = data.events.map(ev => `
+    <div class="home-event-item" data-venue="${ev.meta}">
+      <div class="home-event-date"><div class="mo">${ev.mo}</div><div class="dy">${ev.dy}</div></div>
+      <div class="home-event-info">
+        <div class="home-event-tag ${ev.tag}">${ev.tagLabel}</div>
+        <div class="home-event-name">${ev.name}</div>
+        <div class="home-event-meta">${ev.meta}</div>
+        <div class="home-event-actions">
+          ${ev.url ? `<a href="${ev.url}" class="home-event-action-link">More info</a>` : ''}
+          ${ev.ticket ? `<a href="${ev.ticket}" target="_blank" rel="noopener" class="home-event-action-link ticket">Tickets / Info →</a>` : ''}
+        </div>
+      </div>
+    </div>`).join('');
+
+  panel.innerHTML = `
+    <div class="home-events-header">
+      <span>${data.eventsLabel}</span>
+      ${linkHtml}
+    </div>
+    ${eventsHtml}`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  RENDER — MAP
+// ═══════════════════════════════════════════════════════════════════
+function renderMap(locationKey) {
+  const data = LOCATIONS[locationKey] || LOCATIONS['default'];
+  const iframe = document.getElementById('map-iframe');
+  if (iframe.src !== data.mapSrc) iframe.src = data.mapSrc;
+  document.getElementById('map-location-badge').textContent = data.mapLabel;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  UPDATE CONTEXT (called when search path changes)
+// ═══════════════════════════════════════════════════════════════════
+function updateContext() {
+  // Find the most specific location we have data for
+  const keys = searchPath.map(n => n.label);
+  let locationKey = 'default';
+  // Walk from most specific to least
+  for (let i = keys.length - 1; i >= 0; i--) {
+    if (LOCATIONS[keys[i]]) { locationKey = keys[i]; break; }
+  }
+  renderEventsPanel(locationKey);
+  renderMap(locationKey);
+
+  // Show/hide location context bar — lives in the locked top zone
+  let bar = document.getElementById('location-ctx-bar');
+  if (searchPath.length > 0) {
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.id = 'location-ctx-bar';
+      bar.className = 'location-context';
+      bar.innerHTML = `
+        <span class="location-context-label" id="location-ctx-label"></span>
+        <button class="location-context-reset" onclick="resetContext()">Clear ✕</button>`;
+      document.querySelector('.home-left-top').appendChild(bar);
+    }
+    document.getElementById('location-ctx-label').textContent =
+      '📍 ' + searchPath.map(n => n.label).join(' › ');
+  } else {
+    if (bar) bar.remove();
+  }
+}
+
+function resetContext() {
+  searchPath = [];
+  currentNode = SEARCH_TREE;
+  renderTrail();
+  updatePlaceholder();
+  clearSuggestions();
+  document.getElementById('main-search').value = '';
+  document.getElementById('go-button-wrap').classList.remove('visible');
+  updateContext();
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  SEARCH TRAIL
+// ═══════════════════════════════════════════════════════════════════
+function renderTrail() {
+  const trail = document.getElementById('search-trail');
+  trail.innerHTML = searchPath.map((node, i) => `
+    <div class="search-trail-item">
+      <span class="search-trail-label">${node.label}</span>
+      <button class="search-trail-remove" data-index="${i}" title="Remove">✕</button>
+    </div>`).join('');
+
+  trail.querySelectorAll('.search-trail-remove').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.dataset.index);
+      searchPath = searchPath.slice(0, idx);
+      currentNode = idx === 0 ? SEARCH_TREE : searchPath[idx - 1];
+      renderTrail();
+      updatePlaceholder();
+      clearSuggestions();
+      document.getElementById('main-search').value = '';
+      // Re-evaluate go button for new current node
+      const goWrap = document.getElementById('go-button-wrap');
+      const goBtn  = document.getElementById('go-button');
+      const goName = document.getElementById('go-button-name');
+      if (currentNode !== SEARCH_TREE && currentNode.url) {
+        goName.textContent = currentNode.label;
+        goBtn.href = currentNode.url;
+        goWrap.classList.add('visible');
+      } else {
+        goWrap.classList.remove('visible');
+      }
+      updateContext();
+    });
+  });
+}
+
+function updatePlaceholder() {
+  const input = document.getElementById('main-search');
+  const labels = ['a country or region', 'a state or province', 'a city', 'a neighborhood'];
+  input.placeholder = `Search ${labels[searchPath.length] || 'a location'}…`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  SUGGESTIONS DROPDOWN
+// ═══════════════════════════════════════════════════════════════════
+function renderSuggestions(matches) {
+  const box = document.getElementById('search-suggestions');
+  if (!matches.length) { box.innerHTML = ''; box.style.display = 'none'; return; }
+
+  // Sort alphabetically
+  const sorted = [...matches].sort((a, b) => a.label.localeCompare(b.label));
+
+  const itemsHtml = sorted.map(c => `
+    <div class="search-suggestion-item" data-label="${c.label}">
+      <span class="sug-label">${c.label}</span>
+      ${c.status === 'live' ? '<span class="sug-badge live">Live</span>' : ''}
+      ${c.status === 'soon' ? '<span class="sug-badge soon">Soon</span>' : ''}
+    </div>`).join('');
+
+  // Go button row — shown when current node has a URL
+  const goRowHtml = (currentNode !== SEARCH_TREE && currentNode.url)
+    ? `<div class="search-sug-go-row">
+        <span class="search-sug-go-label">Selected: <strong>${currentNode.label}</strong></span>
+        <a href="${currentNode.url}" class="search-sug-go-btn">Go to ${currentNode.label} →</a>
+       </div>`
+    : '';
+
+  box.style.display = 'block';
+  box.innerHTML = `<div class="search-sug-list">${itemsHtml}</div>${goRowHtml}`;
+
+  box.querySelectorAll('.search-suggestion-item').forEach(item => {
+    item.addEventListener('mousedown', e => {
+      e.preventDefault();
+      const node = allDescendants(SEARCH_TREE).find(c => c.label === item.dataset.label);
+      if (node) commitNode(node);
+    });
+  });
+}
+
+function clearSuggestions() {
+  const box = document.getElementById('search-suggestions');
+  box.innerHTML = ''; box.style.display = 'none';
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  COMMIT NODE
+// ═══════════════════════════════════════════════════════════════════
+function commitNode(node) {
+  const fullPath = getAncestorPath(node);
+  const ancestorsToAdd = fullPath.slice(searchPath.length, fullPath.length - 1);
+  ancestorsToAdd.forEach(a => searchPath.push(a));
+  searchPath.push(node);
+  currentNode = node;
+
+  renderTrail();
+  document.getElementById('main-search').value = '';
+  updateContext();
+
+  // Hide the standalone Go button wrap (we now show Go inside the suggestions dropdown)
+  document.getElementById('go-button-wrap').classList.remove('visible');
+
+  if (!node.children || node.children.length === 0) {
+    // Leaf node — re-render suggestions with Go button, no more children
+    renderSuggestions([]);
+    // Show just the go row via a minimal render
+    if (node.url) {
+      const box = document.getElementById('search-suggestions');
+      box.style.display = 'block';
+      box.innerHTML = `<div class="search-sug-go-row">
+        <span class="search-sug-go-label">Selected: <strong>${node.label}</strong></span>
+        <a href="${node.url}" class="search-sug-go-btn">Go to ${node.label} →</a>
+      </div>`;
+    } else {
+      clearSuggestions();
+      if (node.status !== 'live') showComingSoon(node.label);
+    }
+    return;
+  }
+
+  updatePlaceholder();
+  document.getElementById('main-search').focus();
+  // Show the next tier immediately — don't wait for input event
+  if (window._showDefaultSuggestions) window._showDefaultSuggestions();
+}
+
+function showComingSoon(label) {
+  const row = document.getElementById('search-row');
+  const existing = row.querySelector('.search-coming-soon');
+  if (existing) existing.remove();
+  const msg = document.createElement('div');
+  msg.className = 'search-coming-soon';
+  msg.textContent = `${label} is coming soon — check back shortly!`;
+  row.appendChild(msg);
+  setTimeout(() => msg && msg.remove(), 3500);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  // Render default state
+  renderEventsPanel('default');
+  renderMap('default');
+
+  const input = document.getElementById('main-search');
+  function showDefaultSuggestions() {
+    // All direct children, no cap — sorted alphabetically in renderSuggestions
+    const children = currentNode.children || [];
+    if (children.length) renderSuggestions(children);
+    else clearSuggestions();
+  }
+  // Expose for commitNode to call directly
+  window._showDefaultSuggestions = showDefaultSuggestions;
+  // Expose for nav search in script.js to share state with this panel
+  window._commitNode = commitNode;
+  window._getCurrentNode = () => currentNode;
+
+  input.addEventListener('focus', () => {
+    if (!input.value.trim()) showDefaultSuggestions();
+  });
+
+  input.addEventListener('click', () => {
+    if (!input.value.trim()) showDefaultSuggestions();
+  });
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim();
+    if (!q) { showDefaultSuggestions(); return; }
+    const q2 = norm(q);
+    const directMatches = (currentNode.children || [])
+      .filter(c => c.aliases.some(a => a.includes(q2)));
+    const deepMatches = allDescendants(currentNode)
+      .filter(c => !directMatches.includes(c) && c.aliases.some(a => a.includes(q2)));
+    renderSuggestions([...directMatches, ...deepMatches]);
+  });
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); attemptCommit(); }
+    if (e.key === 'Escape') clearSuggestions();
+  });
+
+  function attemptCommit() {
+    const q = input.value.trim();
+    if (!q) return;
+    const q2 = norm(q);
+    const match = allDescendants(currentNode)
+      .find(c => c.aliases.some(a => a === q2 || a.includes(q2)));
+    if (match) { commitNode(match); }
+    else { showComingSoon(q); clearSuggestions(); }
+  }
+
+  document.addEventListener('click', e => {
+    if (!document.getElementById('tiered-search').contains(e.target)) clearSuggestions();
+  });
+});
+
+// ── SUGGEST TABS ──────────────────────────────────────────────────
+function switchSuggestTab(btn, tab) {
+  document.querySelectorAll('.suggest-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('suggest-place').style.display = tab === 'place' ? '' : 'none';
+  document.getElementById('suggest-event').style.display = tab === 'event' ? '' : 'none';
+}
+
+// ── TIP SUBMIT ────────────────────────────────────────────────────
+function handleTipSubmit(inputId, wrapId) {
+  const input = document.getElementById(inputId || 'suggest-input');
+  if (!input || !input.value.trim()) return;
+  const suggest = document.getElementById('suggest');
+  suggest.innerHTML = '<p style="color:var(--gold);font-size:0.85rem;font-weight:600;padding-top:0.25rem;">✓ Got it — thanks! We\'ll verify and post within 24–48 hours.</p>';
+}
+</script>
+</body>
+</html>

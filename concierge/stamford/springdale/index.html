@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Springdale — Stamford, CT · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-wrap { position: fixed; top: 68px; left: 0; right: 0; bottom: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white); }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+    .neighborhood-hero { padding: 2rem 5% 1.75rem; text-align: center; }
+    .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin: 0.4rem 0 0.75rem; }
+    .neighborhood-hero p { font-size: 0.9rem; max-width: 540px; }
+    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
+    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
+    .highlight-card h4 { font-size: 0.85rem; color: var(--navy); margin-bottom: 0.15rem; }
+    .highlight-card p { font-size: 0.77rem; color: var(--sub); }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .cat-section { padding: 2.25rem 5%; }
+    .sidebar-box { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem; margin-bottom: 1.25rem; }
+    .sidebar-box h4 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 0.65rem; }
+    .news-links a { display: block; color: var(--navy); font-size: 0.83rem; padding: 0.3rem 0; text-decoration: none; border-bottom: 1px solid var(--border); }
+    .news-links a:last-child { border-bottom: none; }
+    .news-links a:hover { color: var(--gold); }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+    .events-list { display: flex; flex-direction: column; }
+    .instagram-section { padding: 2.25rem 5%; background: var(--mist); }
+    .ig-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.75rem; margin-top: 1.25rem; }
+    .ig-account-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); display: flex; align-items: center; gap: 0.75rem; text-decoration: none; transition: box-shadow 0.2s; }
+    .ig-account-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.13); }
+    .ig-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .ig-info { min-width: 0; }
+    .ig-handle { font-size: 0.82rem; font-weight: 600; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ig-desc { font-size: 0.74rem; color: var(--sub); margin-top: 0.1rem; }
+    @media (max-width: 900px) { .highlight-strip { grid-template-columns: repeat(2, 1fr); } .two-col { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) { .highlight-strip { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-page-location="Stamford">
+
+<nav>
+  <a href="../../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../index.html'">Stamford, CT</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Springdale</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../../index.html">Home</a>
+  <a href="../index.html">Stamford, CT</a>
+  <a href="index.html" class="active">Springdale</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <a href="../../index.html">Home</a>
+    <span class="sep">›</span>
+    <span>Connecticut</span>
+    <span class="sep">›</span>
+    <a href="../index.html">Stamford</a>
+    <span class="sep">›</span>
+    <span>Springdale</span>
+  </div>
+
+  <section class="neighborhood-hero" style="background: linear-gradient(135deg, #1a3a1a 0%, #2d5a2d 100%); color:var(--white);">
+    <div class="section-label" style="color:var(--gold-lt);">Neighborhood</div>
+    <h1 style="font-family:'Playfair Display',serif; font-weight:700; color:var(--white);">Spring<span style="color:var(--gold-lt);">dale</span></h1>
+    <p style="margin:0 auto 1.25rem; color:rgba(255,255,255,0.82); line-height:1.6;">A dense, diverse, and walkable mid-city neighborhood built around the Springdale train station. Immigrant-owned restaurants, lively local commerce, and Stamford's most authentic multicultural street life.</p>
+    <div class="city-hero-meta" style="justify-content:center;">
+      <span>🚆 Springdale Train Station</span>
+      <span>🌍 Multicultural Dining</span>
+      <span>🛒 Local Markets</span>
+      <span>🌳 Mianus River Park</span>
+    </div>
+  </section>
+
+  <section style="padding: 1.75rem 5%; background: var(--white);">
+    <div class="highlight-strip">
+      <div class="highlight-card">
+        <div class="big-num">40+</div>
+        <h4>Cuisines</h4>
+        <p>Most diverse dining in Stamford</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">35 min</div>
+        <h4>Train to NYC</h4>
+        <p>Springdale station on Metro-North</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">2</div>
+        <h4>Parks</h4>
+        <p>Mianus River & Springdale Park</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">$</div>
+        <h4>Affordable</h4>
+        <p>Best value dining in the city</p>
+      </div>
+    </div>
+    <div class="category-pills">
+      <button class="pill active" data-cat="all">All</button>
+      <button class="pill" data-cat="dining">🍽 Dining</button>
+      <button class="pill" data-cat="outdoors">🌿 Outdoors</button>
+    </div>
+  </section>
+
+  <!-- DINING -->
+  <section class="cat-section" data-cat="dining" style="background:var(--mist);">
+    <div class="section-label">Where to Eat</div>
+    <h2 class="section-title">Dining</h2>
+    <hr class="section-divider" />
+    <div class="grid-3">
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#7d0000,#c0392b);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">Brazilian</span><span class="card-tag featured">Hidden Gem</span></div>
+          <h3 class="card-title">Braza Brazilian BBQ</h3>
+          <p class="card-desc">Authentic Brazilian churrascaria with all-you-can-eat rodízio service — skewered meats carved tableside, fresh salad bar, and the best caipirinha in Fairfield County.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Hope St · $$ · Dinner nightly</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#0e4d69,#1a7a9c);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">Peruvian</span><span class="card-tag featured">Local Favorite</span></div>
+          <h3 class="card-title">El Charrito</h3>
+          <p class="card-desc">A Springdale institution for 20+ years. Rotisserie chicken, ceviche, lomo saltado, and a loyal following that drives from all over Fairfield County. BYOB and always packed.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Hope St · $ · Lunch & Dinner daily</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a6b3a,#27ae60);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">Mexican</span></div>
+          <h3 class="card-title">Taco Loco</h3>
+          <p class="card-desc">No-frills, no-seats, no-nonsense Mexican food truck turned brick-and-mortar. The al pastor tacos are among the best in Connecticut. Cash only, always fresh.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Hope St · $ · Lunch & Dinner</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#4a235a,#7d3c98);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">Indian</span></div>
+          <h3 class="card-title">Swagat Indian Cuisine</h3>
+          <p class="card-desc">Family-run North Indian restaurant with excellent biryanis, rich curries, and a lunch buffet that's become a local ritual. One of the best Indian kitchens in Fairfield County.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Hope St · $$ · Lunch & Dinner</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#641e16,#922b21);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">Dominican</span></div>
+          <h3 class="card-title">La Hacienda Restaurant</h3>
+          <p class="card-desc">Authentic Dominican and Puerto Rican cooking with mofongo, pernil, and sancocho that feel straight from the island. Loud, fun, and extremely filling.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Springdale Ave · $ · Lunch & Dinner</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#1b4332,#2d6a4f);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">Italian</span><span class="card-tag featured">Local Favorite</span></div>
+          <h3 class="card-title">Springdale Pizza & Restaurant</h3>
+          <p class="card-desc">Old-school neighborhood pizza joint with crispy-bottomed pies, hearty red sauce pasta, and a regulars-only feel that's been going strong since the 1960s.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Hope St · $ · Lunch & Dinner daily</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- OUTDOORS -->
+  <section class="cat-section" data-cat="outdoors" style="background:var(--white);">
+    <div class="section-label">Get Outside</div>
+    <h2 class="section-title">Outdoors</h2>
+    <hr class="section-divider" />
+    <div class="grid-3">
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#1e8449,#27ae60);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag outdoors">Park</span><span class="card-tag featured">Must Visit</span></div>
+          <h3 class="card-title">Mianus River Park</h3>
+          <p class="card-desc">A 400-acre network of wooded trails, the Mianus River gorge, and rocky outcroppings straddling the Stamford-Greenwich border. One of the finest nature preserves in lower Fairfield County.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Mianus River Rd · Open dawn to dusk · Free</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#117a65,#1abc9c);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag outdoors">Park</span></div>
+          <h3 class="card-title">Springdale Park</h3>
+          <p class="card-desc">Community park with ball fields, a playground, picnic areas, and a well-used walking trail. The social hub of the neighborhood — lively on weekends from morning to dusk.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Hope St · Open daily · Free</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a5276,#2e86c1);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag outdoors">Trail</span></div>
+          <h3 class="card-title">Rails to Trails Greenway</h3>
+          <p class="card-desc">A paved multi-use trail on a converted rail corridor connecting Springdale to downtown and to Greenwich. Perfect for cycling, running, or a long walk through the city.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Access near Springdale Station · Open daily · Free</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="instagram-section">
+    <div class="section-label">Follow the Scene</div>
+    <h2 class="section-title">Local Instagram Accounts</h2>
+    <hr class="section-divider" />
+    <p style="font-size:0.88rem;color:var(--sub);max-width:580px;margin-bottom:1.25rem;">Stay current on Springdale and all of Stamford — these accounts cover real-time events, food finds, and community life.</p>
+    <div class="ig-grid">
+      <a class="ig-account-card" href="https://instagram.com/stamford_events" target="_blank" rel="noopener">
+        <div class="ig-avatar">📅</div>
+        <div class="ig-info"><div class="ig-handle">@stamford_events</div><div class="ig-desc">Events calendar & nightlife</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/heystamford" target="_blank" rel="noopener">
+        <div class="ig-avatar">📍</div>
+        <div class="ig-info"><div class="ig-handle">@heystamford</div><div class="ig-desc">City news & community</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/stamfordfoodia" target="_blank" rel="noopener">
+        <div class="ig-avatar">🍽</div>
+        <div class="ig-info"><div class="ig-handle">@stamfordfoodia</div><div class="ig-desc">Food & restaurant coverage</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/stamfordcommunity" target="_blank" rel="noopener">
+        <div class="ig-avatar">🤝</div>
+        <div class="ig-info"><div class="ig-handle">@stamfordcommunity</div><div class="ig-desc">Neighborhood life</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/stamford.runclub" target="_blank" rel="noopener">
+        <div class="ig-avatar">🏃</div>
+        <div class="ig-info"><div class="ig-handle">@stamford.runclub</div><div class="ig-desc">Running routes & meetups</div></div>
+      </a>
+    </div>
+  </section>
+
+  <section id="suggest" style="background:var(--navy); padding:3rem 5%; text-align:center;">
+    <div class="section-label" style="color:var(--gold-lt);">Community</div>
+    <h2 style="font-family:'Playfair Display',serif; color:var(--white); font-size:clamp(1.5rem,3vw,2rem); margin-bottom:0.65rem;">Know Something We Don't?</h2>
+    <p style="color:rgba(255,255,255,0.75); max-width:480px; margin:0 auto 1.75rem; font-size:0.9rem;">A new restaurant, a pop-up, an event that isn't listed — tell us and we'll verify it.</p>
+    <form id="suggest-form-main" onsubmit="handleSidebarSubmit(event,'suggest-form-main')" style="max-width:480px; margin:0 auto; display:flex; flex-direction:column; gap:0.65rem;">
+      <input type="text" placeholder="What's the tip?" style="padding:0.75rem 1rem; border:none; border-radius:8px; font-size:0.9rem; width:100%; box-sizing:border-box;" />
+      <textarea rows="3" placeholder="More details..." style="padding:0.75rem 1rem; border:none; border-radius:8px; font-size:0.9rem; resize:vertical; width:100%; box-sizing:border-box;"></textarea>
+      <button type="submit" style="background:var(--gold); color:var(--navy); border:none; padding:0.8rem; border-radius:8px; font-weight:700; font-size:0.9rem; cursor:pointer;">Send It In</button>
+    </form>
+  </section>
+
+
+  <!-- Compact Map -->
+  <div class="section" style="padding-top: 1rem; padding-bottom: 2rem;">
+    <h3 class="section-title" style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--sub); font-weight: 600; letter-spacing: 0.04em;">MAP</h3>
+    <div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border);">
+      <iframe
+        title="Springdale, Stamford"
+        src="https://maps.google.com/maps?q=Springdale+Stamford+CT&output=embed&z=14"
+        style="display:block; width:100%; height:260px; border:none;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p class="footer-tagline">Live, verified local intelligence — from the neighborhood up.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Springdale</h5>
+        <ul>
+          <li><a href="#">Dining</a></li>
+          <li><a href="#">Outdoors</a></li>
+          <li><a href="#suggest">Suggest a Place</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Stamford</h5>
+        <ul>
+          <li><a href="../index.html">Stamford Overview</a></li>
+          <li><a href="../downtown/index.html">Downtown</a></li>
+          <li><a href="../glenbrook/index.html">Glenbrook</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>The Concierge</h5>
+        <ul>
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../index.html">Explore Cities</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 The Concierge · All rights reserved</span>
+      <span>Live local intelligence, community verified</span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="../../script.js"></script>
+<script>
+function handleSidebarSubmit(e, formId) {
+  e.preventDefault();
+  const form = document.getElementById(formId);
+  if (!form) return;
+  form.innerHTML = `<div style="text-align:center;padding:1.5rem 0;"><div style="font-size:2rem;margin-bottom:0.5rem;">✓</div><p style="color:var(--white);font-weight:600;margin-bottom:0.25rem;">Got it — thanks!</p><p style="color:rgba(255,255,255,0.7);font-size:0.85rem;">Our team will verify it. If it checks out, it'll be live within 24–48 hours.</p></div>`;
+}
+</script>
+</body>
+</html>

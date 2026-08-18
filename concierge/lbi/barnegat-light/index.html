@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barnegat Light — Long Beach Island · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-wrap { position: fixed; top: 68px; left: 0; right: 0; bottom: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white); }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+    .neighborhood-hero { padding: 2.5rem 5% 2.25rem; }
+    .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
+    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
+    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
+    .highlight-card h4 { font-size: 0.85rem; color: var(--navy); margin-bottom: 0.15rem; }
+    .highlight-card p { font-size: 0.77rem; color: var(--sub); }
+    .section { padding: 2.25rem 5%; }
+    .section-sm { padding: 1.75rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+    .cat-section { padding: 2.25rem 5%; }
+    .sidebar-box { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem; margin-bottom: 1.25rem; }
+    .sidebar-box h4 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 0.65rem; }
+    .info-row { display: flex; gap: 0.5rem; align-items: flex-start; margin-bottom: 0.5rem; }
+    .info-row .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+    .info-row p { font-size: 0.8rem; color: var(--sub); line-height: 1.5; margin: 0; }
+    .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .map-embed-wrap iframe { display: block; width: 100%; height: 260px; border: none; }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .highlight-strip { grid-template-columns: repeat(2,1fr); } }
+  </style>
+</head>
+<body data-page-location="Barnegat Light">
+
+<nav>
+  <a href="../../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../index.html'">LBI</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Barnegat Light</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../../index.html">Home</a>
+  <a href="../index.html">Long Beach Island</a>
+  <a href="index.html" class="active">Barnegat Light</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="../../index.html">Home</a><span>›</span>
+      <a href="../../new-jersey/index.html">New Jersey</a><span>›</span>
+      <a href="../index.html">Long Beach Island</a><span>›</span>
+      <span>Barnegat Light</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="neighborhood-hero" style="background: linear-gradient(135deg, #0d1a2e 0%, #1a3a5c 50%, #2e6a8c 100%); color: white;">
+    <div class="section-label" style="color:rgba(120,190,240,0.9);">Northernmost LBI · Old Barney</div>
+    <h1 style="font-family:'Playfair Display',serif;color:white;">Barnegat Light</h1>
+    <p style="color:rgba(255,255,255,0.82);max-width:580px;line-height:1.65;margin-bottom:1rem;">The iconic tip of LBI, anchored by the 172-foot red-and-white lighthouse that has guided ships through Barnegat Inlet since 1859. A historic fishing village with a working fleet at Viking Village, extraordinary restaurants, and beaches so wide the ocean feels a mile away. The most atmospheric town on the island.</p>
+    <div class="city-hero-meta">
+      <span>🏛️ Barnegat Lighthouse (Old Barney)</span>
+      <span>🚢 Viking Village Fishing Fleet</span>
+      <span>🍽️ Kubel's · Wally's · Daymark</span>
+      <span>🏖️ Broadest Beach on LBI</span>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="section-sm" style="background:var(--white);">
+    <div class="highlight-strip">
+      <div class="highlight-card"><div class="big-num">172ft</div><h4>Lighthouse Height</h4><p>217 steps to the top — panoramic views of the inlet</p></div>
+      <div class="highlight-card"><div class="big-num">1859</div><h4>Light First Lit</h4><p>Current lighthouse replaced the original 1835 structure</p></div>
+      <div class="highlight-card"><div class="big-num">100+</div><h4>Viking Village Boats</h4><p>Working commercial fishing fleet, largest on LBI</p></div>
+      <div class="highlight-card"><div class="big-num">900ft</div><h4>Beach Width</h4><p>The widest beaches on the entire Jersey Shore</p></div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="cat-section" style="background:var(--mist);">
+    <div class="two-col">
+      <div>
+
+        <!-- Landmarks -->
+        <div class="section-header"><h2 class="section-title">Landmarks</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#8b0000,#cc3333);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag featured">Iconic</span><span class="card-tag">Historic</span></div>
+              <h3 class="card-title">Barnegat Lighthouse State Park</h3>
+              <p class="card-desc">New Jersey's most iconic lighthouse — "Old Barney" — has stood at the northern tip of LBI since 1859. Climb 217 steps through the restored interior to the top for sweeping views of Barnegat Inlet, the bay, and the open Atlantic. The surrounding state park offers jetty fishing, a nature trail through maritime forest, and beach access at the inlet. A New Jersey landmark by any measure.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 N. Broadway, Barnegat Light · Small admission fee · Open daily in season</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#0d1a2e,#2e6a8c);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag featured">Working Port</span><span class="card-tag outdoors">Fishing</span></div>
+              <h3 class="card-title">Viking Village</h3>
+              <p class="card-desc">A genuine working fishing village on the bay side — one of the last authentic commercial fishing ports on the Jersey Shore. Watch the fleet come in each morning to unload fresh catch. Several retail fish shops sell direct from the boats at the docks. Walk the boardwalk alongside the working vessels, fish markets, and crab shacks. Head Boats (party fishing boats) depart daily for bay and offshore trips. A living piece of LBI maritime history.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 19th St, bay side · Free to walk · Head boats depart daily</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#1a2a1a,#3a6a3a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag outdoors">Jetty Fishing</span></div>
+              <h3 class="card-title">Barnegat Inlet Jetty</h3>
+              <p class="card-desc">The north and south rock jetties flanking Barnegat Inlet are legendary among surf fishermen. Striped bass, bluefish, and weakfish run the inlet rips seasonally. The jetty walk at the state park offers a dramatic view of the inlet and the open ocean beyond. One of the most visually striking spots on LBI at any time of year — especially during a northeast swell.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Barnegat Light State Park · NJ fishing license required</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#1a1a3a,#3a3a7a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag outdoors">Beach</span><span class="card-tag featured">Widest on Shore</span></div>
+              <h3 class="card-title">Barnegat Light Beach</h3>
+              <p class="card-desc">The broadest ocean beach on LBI — some sections approach 900 feet from dune to waterline at low tide. The result of the offshore sand shoals that historically made this inlet treacherous for navigation. Clean, clear water with light crowds outside of peak season. Free beach access in the state park. Badge-required beach access at the southern municipal sections.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Ocean side · State park section free · Municipal section badge required</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dining -->
+        <div class="section-header"><h2 class="section-title">Dining</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#2a0a0a,#8a2a1a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">American BYOB</span><span class="card-tag featured">Legendary</span></div>
+              <h3 class="card-title">Kubel's</h3>
+              <p class="card-desc">A Barnegat Light institution that belongs in the pantheon of great Shore restaurants. Kubel's has been feeding LBI families for decades from its no-frills dining room — excellent seafood, reliable American classics, and a warm familiarity that no new restaurant can manufacture. BYOB. Gets crowded on summer evenings. Go for the whole flounder or the crab cakes. The kind of place grandparents bring grandchildren to the restaurant they first came to as children.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Barnegat Light · BYOB · Seasonal · Dinner only</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#0a2a3a,#1a6a8a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Seafood BYOB</span><span class="card-tag featured">Top Rated</span></div>
+              <h3 class="card-title">Wally's Restaurant</h3>
+              <p class="card-desc">Creative seafood in a relaxed, well-designed dining room. Wally's has developed a strong following for its thoughtful preparations of local fish and shellfish, rotating seasonal menu, and warm service. BYOB. Reservations recommended in summer. One of the best all-around dining experiences in Barnegat Light — particularly strong on the fish dishes sourced directly from the Viking Village fleet.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Barnegat Light · BYOB · Reservations recommended</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#1a1a2a,#2a2a5a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Waterfront</span><span class="card-tag nightlife">Bar</span></div>
+              <h3 class="card-title">Daymark Restaurant & Bar</h3>
+              <p class="card-desc">A newer addition to the Barnegat Light dining scene with a prime waterfront location and full bar — the only place with bay views and cocktails in town. The menu runs from casual lunch bites to proper dinner plates, all with a fresh seafood emphasis. Outdoor deck seating on summer evenings is among the best settings for a meal anywhere on LBI. Sunset over the bay from here is something to plan around.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Bay side, Barnegat Light · Full bar · Waterfront deck</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#0d2a0d,#1a5a1a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Seafood Market</span></div>
+              <h3 class="card-title">Viking Village Fish Market</h3>
+              <p class="card-desc">Buy your seafood direct from the boats at the Viking Village docks. The freshest product on LBI — fillets, whole fish, live lobsters, and local shellfish sold at dockside prices. Morning arrivals bring the best selection. Bring a cooler. The retail shops along the Viking Village boardwalk also carry smoked fish, chowder, and prepared seafood for the trip home.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Viking Village docks · Morning for best selection · Cash preferred</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Practical Notes -->
+        <div class="section-header"><h2 class="section-title">Practical Notes</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:0.75rem;">
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Lighthouse Timing</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Arrive at the lighthouse by 9am on summer weekends to skip lines. The climb is 217 steps — sturdy shoes are recommended. Views from the top encompass the full island to the south, the inlet, and on clear days, the Atlantic City skyline to the southwest.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">End of the Road</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Barnegat Light is the northern terminus of LBI — the road ends here. That finality gives it a distinct character: quieter, more purposeful, more local. You drive all the way up the island to get here, and it's always worth the trip.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Head Boat Fishing</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Viking Village runs head boats (party fishing vessels) for half-day and full-day offshore trips. Book in advance for summer departures. Tackle and bait provided. No experience necessary — a classic Jersey Shore fishing experience.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Off-Season Visit</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Barnegat Light in October or November is one of the most atmospheric places on the Jersey Shore. The commercial fleet is still active, a few restaurants remain open, the lighthouse and state park are uncrowded, and the inlet in a northeast wind is a spectacle. Worth the drive.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="map-embed-wrap" style="margin-bottom:1.25rem;">
+          <iframe title="Barnegat Light NJ Map" src="https://maps.google.com/maps?q=Barnegat+Light,+NJ&output=embed&z=14" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Need to Know</h4>
+          <div class="info-row"><span class="icon">🗺</span><p><strong>Location:</strong> Northern tip of LBI, Barnegat Light Borough</p></div>
+          <div class="info-row"><span class="icon">🏛️</span><p><strong>Lighthouse:</strong> (609) 494-2016 · Barnegat Lighthouse State Park</p></div>
+          <div class="info-row"><span class="icon">🚗</span><p><strong>Parking:</strong> State park lot (fee in season). Street parking near Viking Village. Can fill by 10am on summer weekends.</p></div>
+          <div class="info-row"><span class="icon">🏖</span><p><strong>Beach badges:</strong> State park beach is free. Municipal beach sections require a badge.</p></div>
+          <div class="info-row"><span class="icon">🚌</span><p><strong>LBI Shuttle:</strong> Seasonal shuttle bus runs the length of LBI from Beach Haven to Barnegat Light.</p></div>
+          <div class="info-row"><span class="icon">📅</span><p><strong>Best seasons:</strong> Summer for restaurants and beach. Fall for atmosphere, fishing, and uncrowded lighthouse.</p></div>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Down the Island</h4>
+          <a href="../harvey-cedars/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">← Harvey Cedars</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../surf-city/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">← Surf City</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../ship-bottom/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">← Ship Bottom</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../beach-haven/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">← Beach Haven</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">All LBI Towns →</span>
+            <span style="font-size:0.72rem;color:var(--gold);">6 towns</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p>Your local intelligence platform — curated, verified, and always expanding.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Long Beach Island</h4>
+        <a href="../index.html">LBI Overview</a>
+        <a href="../holgate/index.html">Holgate</a>
+        <a href="../beach-haven/index.html">Beach Haven</a>
+        <a href="../ship-bottom/index.html">Ship Bottom</a>
+        <a href="../surf-city/index.html">Surf City</a>
+        <a href="../harvey-cedars/index.html">Harvey Cedars</a>
+        <a href="index.html">Barnegat Light</a>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="../../index.html">Home</a>
+        <a href="../../new-jersey/index.html">New Jersey</a>
+        <a href="../../connecticut/index.html">Connecticut</a>
+      </div>
+      <div class="footer-links">
+        <h4>The Concierge</h4>
+        <a href="../../index.html">About</a>
+        <a href="../../index.html#suggest">Suggest a Place</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 The Concierge. All rights reserved.</div>
+  </footer>
+
+</div>
+<script src="../../script.js"></script>
+</body>
+</html>

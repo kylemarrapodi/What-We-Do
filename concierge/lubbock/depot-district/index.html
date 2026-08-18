@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Depot District — Lubbock, TX · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+
+    .page-wrap {
+      position: fixed;
+      top: 68px; left: 0; right: 0; bottom: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      background: var(--white);
+    }
+
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+
+    .section { padding: 2.5rem 5%; }
+    .section-sm { padding: 1.75rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+
+    .neighborhood-hero { padding: 2.5rem 5% 2rem; }
+    .neighborhood-hero h1 { font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 0.4rem; }
+
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+
+    .ig-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.75rem; }
+    .ig-account-card {
+      background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem;
+      box-shadow: var(--shadow); display: flex; align-items: center; gap: 0.75rem;
+      text-decoration: none; transition: box-shadow 0.2s;
+    }
+    .ig-account-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+    .ig-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .ig-handle { font-size: 0.82rem; font-weight: 600; color: var(--navy); }
+    .ig-desc { font-size: 0.74rem; color: var(--sub); margin-top: 0.1rem; }
+
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-page-location="Depot District">
+
+<!-- NAV -->
+<nav>
+  <a href="../../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../index.html'">Lubbock, TX</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Depot District</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../../index.html">Home</a>
+  <a href="../index.html">Lubbock, TX</a>
+  <a href="index.html" class="active">Depot District</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <a href="../../index.html">Home</a>
+    <span class="sep">›</span>
+    <span>Texas</span>
+    <span class="sep">›</span>
+    <a href="../index.html">Lubbock</a>
+    <span class="sep">›</span>
+    <span>Depot District</span>
+  </div>
+
+  <section class="neighborhood-hero">
+    <div class="section-label">Lubbock</div>
+    <h1>Depot District <span style="font-size:0.55em;color:var(--sub);font-family:'Inter',sans-serif;font-weight:400;">Lubbock, TX</span></h1>
+    <p class="hero-sub" style="font-size:0.9rem;color:var(--sub);margin-bottom:0.75rem;">Lubbock's live music heartbeat. Historic rail depot turned entertainment district — Texas Red Dirt, country, and blues pour out every door on weekend nights.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;font-size:0.8rem;color:var(--sub);">
+      <span>🎸 Live music every weekend</span>
+      <span>🍺 Craft beer & cocktail bars</span>
+      <span>🎵 Buddy Holly heritage</span>
+      <span>🌮 Late-night food</span>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="section cat-section" data-cat="events" style="padding-top:1.5rem;">
+    <div class="section-label">What's On</div>
+    <h2 class="section-title">Depot District Events</h2>
+    <hr class="section-divider" />
+
+    <div class="two-col">
+      <div class="events-list">
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">FRI</div><div class="day">WKL</div></div>
+          <div class="event-info">
+            <h4>Live Music at Blue Light Live</h4>
+            <p>Texas singer-songwriters and Red Dirt country every Friday and Saturday. The most authentic live music experience in Lubbock — no cover most nights.</p>
+            <div class="event-venue">📍 1806 Buddy Holly Ave · Depot District</div>
+            <a class="event-link" href="https://thebluelightlive.com" target="_blank" rel="noopener">See who's playing →</a>
+          </div>
+          <span class="badge badge-open">Weekly</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">SEP</div><div class="day">13</div></div>
+          <div class="event-info">
+            <h4>Buddy Holly Music Festival</h4>
+            <p>Annual citywide celebration of Lubbock's music legacy. Multiple stages in and around the Depot District, free outdoor concerts, food vendors, and a day-long block party feel.</p>
+            <div class="event-venue">📍 Buddy Holly Center &amp; Depot District</div>
+            <a class="event-link" href="https://buddyhollycenter.org" target="_blank" rel="noopener">Event info →</a>
+          </div>
+          <span class="badge badge-soon">Sep 13</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">NOV</div><div class="day">15</div></div>
+          <div class="event-info">
+            <h4>Depot District Live Music Crawl</h4>
+            <p>Annual wristband bar crawl — every venue in the Depot District has a live band. One of the best nights of the year in Lubbock. $15 wristband gets you into everything.</p>
+            <div class="event-venue">📍 All Depot District venues · 7 PM – 2 AM</div>
+            <a class="event-link" href="https://lubbockdepotdistrict.com" target="_blank" rel="noopener">Get wristband →</a>
+          </div>
+          <span class="badge badge-soon">Nov 15</span>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date-box"><div class="month">SAT</div><div class="day">WKL</div></div>
+          <div class="event-info">
+            <h4>Saturday Night on Buddy Holly Ave</h4>
+            <p>Every Saturday night the Depot District comes alive. Walk from venue to venue — Blue Light, Crickets, JoJo's Bohemia, and Triple J are all within a few blocks. No plans needed.</p>
+            <div class="event-venue">📍 Buddy Holly Ave &amp; 19th St · All night</div>
+          </div>
+          <span class="badge badge-open">Weekly</span>
+        </div>
+
+      </div>
+
+      <div>
+        <div class="submit-form" id="suggest">
+          <h3>Know something happening?</h3>
+          <p>Submit an event and we'll verify and add it.</p>
+          <form id="suggest-form" onsubmit="handleSubmit(event)">
+            <div class="form-group" style="margin-bottom:0.75rem;">
+              <label>Event or place name</label>
+              <input type="text" placeholder="e.g. Josh Abbott Band at Blue Light" />
+            </div>
+            <div class="form-group" style="margin-bottom:0.75rem;">
+              <label>Details</label>
+              <textarea placeholder="Date, venue, any details…"></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;">Submit →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE MUSIC -->
+  <section class="section cat-section" data-cat="nightlife" style="background:var(--mist);">
+    <div class="section-label">Live Music &amp; Bars</div>
+    <h2 class="section-title">Where to Go</h2>
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Live Music</span>
+          <div class="card-title">Blue Light Live</div>
+          <div class="card-meta"><span>📍 1806 Buddy Holly Ave</span></div>
+          <p class="card-desc">The soul of the Depot District. Intimate stage with the best Texas Red Dirt and singer-songwriter acts in the state. $5–$10 cover on most nights. Local legend: if you haven't been to Blue Light, you haven't been to Lubbock.</p>
+          <a class="event-link" href="https://thebluelightlive.com" target="_blank" rel="noopener">Show calendar →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Bar &amp; Grill</span>
+          <div class="card-title">Triple J Chophouse &amp; Brew</div>
+          <div class="card-meta"><span>📍 1807 Buddy Holly Ave</span></div>
+          <p class="card-desc">House-brewed craft beers, craft burgers, and a patio right in the heart of the Depot. A great first stop before heading to the music venues. The Triple J Burger is essential.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Live Music</span>
+          <div class="card-title">Crickets Bar &amp; Grill</div>
+          <div class="card-meta"><span>📍 Depot District</span></div>
+          <p class="card-desc">Named for Buddy Holly's legendary band. Live music Thursday–Saturday with strong local and regional acts. Huge Texas craft beer selection and killer wings. Always packed after 9 PM.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Cocktail Bar</span>
+          <div class="card-title">JoJo's Bohemia</div>
+          <div class="card-meta"><span>📍 Depot District</span></div>
+          <p class="card-desc">Artsy, eclectic craft cocktail bar with mismatched furniture, local art on the walls, and a rotating drink menu. Live jazz and acoustic acts on weekends. The anti-frat bar in a great way.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Music Venue</span>
+          <div class="card-title">Bash Riprock's</div>
+          <div class="card-meta"><span>📍 Depot District</span></div>
+          <p class="card-desc">A Lubbock institution for decades. Rock and country cover bands, large dance floor, and cold beer. Gets absolutely packed on football Saturdays. The older crowd's pick in the Depot.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Patio Bar</span>
+          <div class="card-title">The Depot District Patio Scene</div>
+          <div class="card-meta"><span>📍 Around 19th St &amp; Buddy Holly Ave</span></div>
+          <p class="card-desc">Multiple venues have outdoor patios connected to the street. On warm nights the whole block becomes one big outdoor party — music spills out of every door and people flow between venues freely.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DINING -->
+  <section class="section cat-section" data-cat="dining">
+    <div class="section-label">Where to Eat</div>
+    <h2 class="section-title">Depot District Dining</h2>
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">American · $$$</span>
+          <div class="card-title">The Nicolett</div>
+          <div class="card-meta"><span>📍 2407 19th St</span></div>
+          <p class="card-desc">The finest dining in the Depot District. House-aged steaks, seasonal menus, and an excellent Texas wine list. Book ahead for weekend game nights — it fills up fast.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Burgers · $</span>
+          <div class="card-title">Triple J Chophouse</div>
+          <div class="card-meta"><span>📍 1807 Buddy Holly Ave</span></div>
+          <p class="card-desc">Pre-show staple. House-ground burgers, fresh-cut fries, and the full craft beer menu. Loud and fun — not a quiet dinner spot, and that's the point.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Late Night · $</span>
+          <div class="card-title">Food Trucks on 19th St</div>
+          <div class="card-meta"><span>📍 19th St · Late nights Fri–Sat</span></div>
+          <p class="card-desc">After the shows wind down, food trucks line up on 19th Street. Tacos, loaded fries, elote, and late-night bites. The post-concert ritual for the Depot District crowd.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="instagram-section">
+    <div class="section-label">Follow the Scene</div>
+    <h2 class="section-title">Local Instagram Accounts</h2>
+    <hr class="section-divider" />
+    <p style="font-size:0.88rem;color:var(--sub);max-width:580px;margin-bottom:1.25rem;">The Depot District moves fast — follow these accounts to know who's playing and what's happening before it sells out.</p>
+    <div class="ig-grid">
+      <a class="ig-account-card" href="https://instagram.com/depotdistrict_lbb" target="_blank" rel="noopener">
+        <div class="ig-avatar">🎸</div>
+        <div class="ig-info"><div class="ig-handle">@depotdistrict_lbb</div><div class="ig-desc">Events & live music</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/bluelightlive" target="_blank" rel="noopener">
+        <div class="ig-avatar">💙</div>
+        <div class="ig-info"><div class="ig-handle">@bluelightlive</div><div class="ig-desc">Blue Light show announcements</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/buddyhollyhall" target="_blank" rel="noopener">
+        <div class="ig-avatar">🎵</div>
+        <div class="ig-info"><div class="ig-handle">@buddyhollyhall</div><div class="ig-desc">Buddy Holly Hall events</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/lubbock" target="_blank" rel="noopener">
+        <div class="ig-avatar">📍</div>
+        <div class="ig-info"><div class="ig-handle">@lubbock</div><div class="ig-desc">City events & happenings</div></div>
+      </a>
+      <a class="ig-account-card" href="https://instagram.com/visitlubbock" target="_blank" rel="noopener">
+        <div class="ig-avatar">🌵</div>
+        <div class="ig-info"><div class="ig-handle">@visitlubbock</div><div class="ig-desc">Tourism & local picks</div></div>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- Compact Map -->
+  <div class="section" style="padding-top: 1rem; padding-bottom: 2rem;">
+    <h3 class="section-title" style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--sub); font-weight: 600; letter-spacing: 0.04em;">MAP</h3>
+    <div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border);">
+      <iframe
+        title="Depot District, Lubbock"
+        src="https://maps.google.com/maps?q=Depot+District+Lubbock+TX&output=embed&z=15"
+        style="display:block; width:100%; height:260px; border:none;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p class="footer-tagline">Your local intelligence platform. Curated, verified, always up to date.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Lubbock</h5>
+        <ul>
+          <li><a href="../index.html">Lubbock Overview</a></li>
+          <li><a href="index.html">Depot District</a></li>
+          <li><a href="../tech-district/index.html">Tech District</a></li>
+          <li><a href="../historic-district/index.html">Historic District</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>The Concierge</h5>
+        <ul>
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="#suggest">Suggest a Place</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 The Concierge · All rights reserved.</span>
+      <span>Lubbock, TX</span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="../../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ship Bottom — Long Beach Island · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-wrap { position: fixed; top: 68px; left: 0; right: 0; bottom: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white); }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+    .neighborhood-hero { padding: 2.5rem 5% 2.25rem; }
+    .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
+    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
+    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
+    .highlight-card h4 { font-size: 0.85rem; color: var(--navy); margin-bottom: 0.15rem; }
+    .highlight-card p { font-size: 0.77rem; color: var(--sub); }
+    .section { padding: 2.25rem 5%; }
+    .section-sm { padding: 1.75rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+    .cat-section { padding: 2.25rem 5%; }
+    .sidebar-box { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem; margin-bottom: 1.25rem; }
+    .sidebar-box h4 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 0.65rem; }
+    .info-row { display: flex; gap: 0.5rem; align-items: flex-start; margin-bottom: 0.5rem; }
+    .info-row .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+    .info-row p { font-size: 0.8rem; color: var(--sub); line-height: 1.5; margin: 0; }
+    .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .map-embed-wrap iframe { display: block; width: 100%; height: 260px; border: none; }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .highlight-strip { grid-template-columns: repeat(2,1fr); } }
+  </style>
+</head>
+<body data-page-location="Ship Bottom">
+
+<nav>
+  <a href="../../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../index.html'">LBI</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Ship Bottom</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../../index.html">Home</a>
+  <a href="../index.html">Long Beach Island</a>
+  <a href="index.html" class="active">Ship Bottom</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="../../index.html">Home</a><span>›</span>
+      <a href="../../new-jersey/index.html">New Jersey</a><span>›</span>
+      <a href="../index.html">Long Beach Island</a><span>›</span>
+      <span>Ship Bottom</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="neighborhood-hero" style="background: linear-gradient(135deg, #0d2137 0%, #1a4a7a 55%, #2e86c1 100%); color: white;">
+    <div class="section-label" style="color:rgba(100,180,255,0.9);">Gateway to LBI · The Causeway Town</div>
+    <h1 style="font-family:'Playfair Display',serif;color:white;">Ship Bottom</h1>
+    <p style="color:rgba(255,255,255,0.82);max-width:580px;line-height:1.65;margin-bottom:1rem;">Where the causeway meets the island. The first and last town you pass through on every LBI trip — a low-key, unpretentious community that punches above its weight with a legendary brewery, excellent seafood, a great local bar scene, and the island's most iconic kite festival.</p>
+    <div class="city-hero-meta">
+      <span>🍺 Ship Bottom Brewery</span>
+      <span>🪁 LBI Kite Festival</span>
+      <span>🦞 Shellfish Company</span>
+      <span>🌉 Manahawkin Bay Views</span>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="section-sm" style="background:var(--white);">
+    <div class="highlight-strip">
+      <div class="highlight-card"><div class="big-num">1</div><h4>Bridge to LBI</h4><p>Ship Bottom is where Route 72 meets the island</p></div>
+      <div class="highlight-card"><div class="big-num">1948</div><h4>Borough Founded</h4><p>Named for a 19th-century shipwreck rescue legend</p></div>
+      <div class="highlight-card"><div class="big-num">Oct</div><h4>Kite Festival</h4><p>Largest kite festival on the Jersey Shore</p></div>
+      <div class="highlight-card"><div class="big-num">2mi</div><h4>Manahawkin Bay</h4><p>Bay fishing, crabbing & sunset views</p></div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="cat-section" style="background:var(--mist);">
+    <div class="two-col">
+      <div>
+
+        <!-- Bars & Breweries -->
+        <div class="section-header"><h2 class="section-title">Bars & Breweries</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#0d2137,#2e86c1);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag featured">Craft Beer</span><span class="card-tag">Brewery</span></div>
+              <h3 class="card-title">Ship Bottom Brewery</h3>
+              <p class="card-desc">LBI's premier craft brewery and a genuine Shore destination. Rotating taps of house-brewed IPAs, stouts, lagers, and seasonal specialties. The taproom has an easy-going bayview vibe, regular live music, and food from rotating food trucks. Growler fills and canned beer to go. One of the best brewery taprooms in the region — worth the trip by itself.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Ship Bottom · Taproom open daily · Food trucks on weekends</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#1c0a3a,#5a2d82);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag nightlife">Bar</span><span class="card-tag featured">Local Favorite</span></div>
+              <h3 class="card-title">The Arlington</h3>
+              <p class="card-desc">A beloved Ship Bottom bar that's been a staple of LBI nightlife for decades. No pretense, strong drinks, and a crowd that ranges from sun-burned beachgoers to year-round locals. Live music on weekends, great for watching sports, and one of the few bars on LBI with a genuinely local feel. The kind of place you go once and keep coming back.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Ship Bottom · Full bar · Live music weekends</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dining -->
+        <div class="section-header"><h2 class="section-title">Dining</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#0a2a1a,#1a6b3c);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Seafood</span><span class="card-tag featured">Must-Try</span></div>
+              <h3 class="card-title">Ship Bottom Shellfish Co.</h3>
+              <p class="card-desc">The freshest local shellfish on the island, sourced directly from Barnegat Bay. Raw bar with local oysters, clams, and shrimp. Steamed lobsters, crab claws, and market-price fish fillets. A no-frills, dockside operation that reminds you where you are. Get there early — they sell out. Outdoor picnic table seating.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Bay side, Ship Bottom · Cash preferred · Seasonal hours</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#2a1a0a,#7a4a1e);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">American</span></div>
+              <h3 class="card-title">Show Place Ice Cream</h3>
+              <p class="card-desc">The iconic Ship Bottom ice cream institution — a LBI rite of passage for decades of summer visitors. Dozens of flavors, generous portions, and a line that snakes down the block on summer evenings. Old-fashioned counter service and a classic Jersey Shore ice cream parlor vibe. Don't skip it.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Long Beach Blvd, Ship Bottom · Cash · Seasonal</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#1a1a1a,#4a4a4a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Pizza</span></div>
+              <h3 class="card-title">LBI Pizza & Pasta</h3>
+              <p class="card-desc">Reliable, family-friendly pizza and Italian classics that hit the spot after a day at the beach. Whole pies, slices, pasta dishes, subs, and salads. Quick service and solid value — the kind of place you return to every trip. Delivery available to nearby rentals in summer.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Ship Bottom · Dine in & delivery · Open late in season</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#1a2a4a,#2a4a7a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Breakfast</span></div>
+              <h3 class="card-title">Uncle Will's Pancake House</h3>
+              <p class="card-desc">A long-running Ship Bottom breakfast institution. Stacks of pancakes, fluffy omelets, egg sandwiches, and bottomless coffee. A beloved LBI morning ritual for families and regulars. Gets busy on weekend mornings — worth the short wait. Cash and card accepted.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Ship Bottom · Breakfast & lunch · Seasonal</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Events -->
+        <div class="section-header"><h2 class="section-title">Events</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in">
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag featured">Annual Festival</span><span class="card-tag outdoors">October</span></div>
+              <h3 class="card-title">LBI Kite Festival</h3>
+              <p class="card-desc">The largest kite festival on the Jersey Shore, held annually on the Ship Bottom beach in October. Hundreds of kites — from single-line beginner kites to massive show kites and elaborate artistic designs — fill the sky over the ocean. Demonstrations, competitions, vendors, and kite flying for all ages. A stunning visual spectacle and the signature Ship Bottom event of the year.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Ship Bottom beach · October · Free · All ages</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag">Bay Activity</span><span class="card-tag outdoors">Summer</span></div>
+              <h3 class="card-title">Bay Fishing & Crabbing</h3>
+              <p class="card-desc">Ship Bottom's bay-side location makes it a prime spot for recreational fishing and crabbing in Manahawkin Bay. Flounder, weakfish, and blue crabs are common catches from the bay docks and bridges. Several bait-and-tackle shops on the boulevard supply everything you need. No boat required — land-based crabbing spots abound.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Manahawkin Bay docks · NJ fishing license required</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Practical Notes -->
+        <div class="section-header"><h2 class="section-title">Practical Notes</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:0.75rem;">
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Gateway Position</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Ship Bottom is the first town you reach crossing the causeway from Route 72. It's a natural stop for groceries, beer runs, and supplies before heading elsewhere on the island. Several grocery stores and the best off-sale liquor selection on LBI are here.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Supply Stop</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Stock up here. Acme Markets, a ShopRite, multiple liquor stores, bait shops, surf shops, and hardware stores are all in Ship Bottom — conveniences that aren't as accessible in the smaller towns further up or down the island.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Beach Badges</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Ship Bottom sells its own beach badges, valid on Ship Bottom beaches only. Purchase at the municipal building or at the beach entrance booths. Daily, weekly, and seasonal badges available.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Off-Season Vibe</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">More year-round residents than most LBI towns. Ship Bottom Brewery, The Arlington, and a handful of restaurants stay open through fall and winter. If you're visiting in the off-season, Ship Bottom has more life than the quieter residential towns.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="map-embed-wrap" style="margin-bottom:1.25rem;">
+          <iframe title="Ship Bottom NJ Map" src="https://maps.google.com/maps?q=Ship+Bottom,+NJ&output=embed&z=14" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Need to Know</h4>
+          <div class="info-row"><span class="icon">🗺</span><p><strong>Location:</strong> Central LBI, where Route 72 causeway meets the island</p></div>
+          <div class="info-row"><span class="icon">🚗</span><p><strong>Parking:</strong> Easier than southern towns. Municipal lot near the beach. Street parking on side streets.</p></div>
+          <div class="info-row"><span class="icon">🏖</span><p><strong>Beach:</strong> Wide, clean ocean beach. Less crowded than Beach Haven in peak season.</p></div>
+          <div class="info-row"><span class="icon">🛒</span><p><strong>Groceries:</strong> Best grocery selection on LBI — Acme Markets and ShopRite both here.</p></div>
+          <div class="info-row"><span class="icon">🍺</span><p><strong>Liquor:</strong> Best off-sale liquor selection on the island for BYOB restaurants.</p></div>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Explore LBI</h4>
+          <a href="../beach-haven/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">← Beach Haven</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../surf-city/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Surf City →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../harvey-cedars/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Harvey Cedars →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../barnegat-light/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Barnegat Light →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">All LBI Towns →</span>
+            <span style="font-size:0.72rem;color:var(--gold);">6 towns</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p>Your local intelligence platform — curated, verified, and always expanding.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Long Beach Island</h4>
+        <a href="../index.html">LBI Overview</a>
+        <a href="../holgate/index.html">Holgate</a>
+        <a href="../beach-haven/index.html">Beach Haven</a>
+        <a href="index.html">Ship Bottom</a>
+        <a href="../surf-city/index.html">Surf City</a>
+        <a href="../harvey-cedars/index.html">Harvey Cedars</a>
+        <a href="../barnegat-light/index.html">Barnegat Light</a>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="../../index.html">Home</a>
+        <a href="../../new-jersey/index.html">New Jersey</a>
+        <a href="../../connecticut/index.html">Connecticut</a>
+      </div>
+      <div class="footer-links">
+        <h4>The Concierge</h4>
+        <a href="../../index.html">About</a>
+        <a href="../../index.html#suggest">Suggest a Place</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 The Concierge. All rights reserved.</div>
+  </footer>
+
+</div>
+<script src="../../script.js"></script>
+</body>
+</html>

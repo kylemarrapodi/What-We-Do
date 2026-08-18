@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harvey Cedars — Long Beach Island · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-wrap { position: fixed; top: 68px; left: 0; right: 0; bottom: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white); }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+    .neighborhood-hero { padding: 2.5rem 5% 2.25rem; }
+    .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
+    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
+    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
+    .highlight-card h4 { font-size: 0.85rem; color: var(--navy); margin-bottom: 0.15rem; }
+    .highlight-card p { font-size: 0.77rem; color: var(--sub); }
+    .section { padding: 2.25rem 5%; }
+    .section-sm { padding: 1.75rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+    .cat-section { padding: 2.25rem 5%; }
+    .sidebar-box { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem; margin-bottom: 1.25rem; }
+    .sidebar-box h4 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 0.65rem; }
+    .info-row { display: flex; gap: 0.5rem; align-items: flex-start; margin-bottom: 0.5rem; }
+    .info-row .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+    .info-row p { font-size: 0.8rem; color: var(--sub); line-height: 1.5; margin: 0; }
+    .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .map-embed-wrap iframe { display: block; width: 100%; height: 260px; border: none; }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .highlight-strip { grid-template-columns: repeat(2,1fr); } }
+  </style>
+</head>
+<body data-page-location="Harvey Cedars">
+
+<nav>
+  <a href="../../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../index.html'">LBI</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Harvey Cedars</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../../index.html">Home</a>
+  <a href="../index.html">Long Beach Island</a>
+  <a href="index.html" class="active">Harvey Cedars</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="../../index.html">Home</a><span>›</span>
+      <a href="../../new-jersey/index.html">New Jersey</a><span>›</span>
+      <a href="../index.html">Long Beach Island</a><span>›</span>
+      <span>Harvey Cedars</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="neighborhood-hero" style="background: linear-gradient(135deg, #1a2a1a 0%, #2d5a2d 50%, #5a8a3a 100%); color: white;">
+    <div class="section-label" style="color:rgba(150,220,120,0.9);">Upper LBI · The Quiet Side</div>
+    <h1 style="font-family:'Playfair Display',serif;color:white;">Harvey Cedars</h1>
+    <p style="color:rgba(255,255,255,0.82);max-width:580px;line-height:1.65;margin-bottom:1rem;">LBI's most beloved small town. A quiet, residential community with an outsized reputation for exceptional food, a legendary shellfish company, a celebrated coffee roaster, and the widest, most pristine beach on the island. The kind of place regulars guard jealously and first-timers never stop talking about.</p>
+    <div class="city-hero-meta">
+      <span>🌸 Black Eyed Susan's</span>
+      <span>🦪 Harvey Cedars Shellfish Co.</span>
+      <span>☕ Marigold Coffee</span>
+      <span>🏖️ Widest Beach on LBI</span>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="section-sm" style="background:var(--white);">
+    <div class="highlight-strip">
+      <div class="highlight-card"><div class="big-num">~900</div><h4>Year-Round Pop.</h4><p>One of the smallest, most tight-knit towns on LBI</p></div>
+      <div class="highlight-card"><div class="big-num">Widest</div><h4>Beach on LBI</h4><p>The broadest, most generous stretch of sand on the island</p></div>
+      <div class="highlight-card"><div class="big-num">Fri</div><h4>Farmers Market</h4><p>Friday market at Veterans Memorial Park, summer season</p></div>
+      <div class="highlight-card"><div class="big-num">BYOB</div><h4>Dining Culture</h4><p>Best BYOB restaurants on LBI, including a James Beard–noted spot</p></div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="cat-section" style="background:var(--mist);">
+    <div class="two-col">
+      <div>
+
+        <!-- Dining -->
+        <div class="section-header"><h2 class="section-title">Dining</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#3a0a2a,#9a2a6a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">American BYOB</span><span class="card-tag featured">Best on LBI</span></div>
+              <h3 class="card-title">Black Eyed Susan's</h3>
+              <p class="card-desc">The most acclaimed restaurant on Long Beach Island — full stop. Creative American cuisine with a focus on fresh, local ingredients, executed with a level of care and skill that would impress in any major city. The seasonal menu changes constantly. BYOB. Tables are coveted: reservations required weeks in advance for peak summer. A mandatory dining experience for any serious LBI visitor.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Harvey Cedars · BYOB · Reservations weeks in advance</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#0a2a0a,#1a7a3a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Seafood</span><span class="card-tag featured">Local Legend</span></div>
+              <h3 class="card-title">Harvey Cedars Shellfish Co.</h3>
+              <p class="card-desc">A Harvey Cedars institution operating since 1978. Fresh, direct-from-the-bay seafood at honest prices — local oysters, hard clams, steamed crabs, lobster, and daily fish. BYOB. The deck seating on warm evenings is perfect. A cash operation (ATM on site) with an unmistakable Shore character that no upscale restaurant can replicate. Order the steamed crabs and stay a while.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Harvey Cedars · BYOB · Cash preferred · Seasonal</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#2a1a0a,#7a5a1a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Coffee</span><span class="card-tag featured">Must-Visit</span></div>
+              <h3 class="card-title">Marigold Coffee Roasters</h3>
+              <p class="card-desc">Arguably the best coffee on LBI — a genuine specialty roaster with a warm, bright café that's become a Harvey Cedars anchor. Single-origin pour-overs, beautifully made lattes, and exceptional cold brew. The pastries are excellent. A reliable morning ritual for locals and visitors who know their coffee. Small but never feels rushed.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Harvey Cedars · Morning–afternoon · Seasonal hours</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#0a1a3a,#1a4a7a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">American</span></div>
+              <h3 class="card-title">Birdy's</h3>
+              <p class="card-desc">A newer addition to the Harvey Cedars dining scene that's quickly earned a loyal following. Approachable American menu — elevated bar food, excellent burgers, and a selection of fresh fish dishes. Full bar. Casual and comfortable, with a back patio that catches the bay breeze on summer evenings. A welcome addition to a town already blessed with great food options.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Harvey Cedars · Full bar · Seasonal</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Beach & Outdoors -->
+        <div class="section-header"><h2 class="section-title">Beach & Outdoors</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#0a2a4a,#2a6a8a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag outdoors">Beach</span><span class="card-tag featured">Best on LBI</span></div>
+              <h3 class="card-title">Harvey Cedars Beach</h3>
+              <p class="card-desc">The widest, most expansive beach on LBI — a broad sweep of clean sand with generous dune protection and clear, clean water. Less crowded than Beach Haven even in peak season because fewer visitors make it this far north. The beach has a calm, unhurried quality that matches the town's character. Worth the extra drive from the causeway.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Ocean side, Harvey Cedars · Badge required · Lifeguards in season</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#1a3a1a,#3a7a3a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag outdoors">Market</span></div>
+              <h3 class="card-title">Friday Farmers Market</h3>
+              <p class="card-desc">Weekly Friday market at Veterans Memorial Park throughout summer. Local growers, specialty food producers, fresh-baked goods, handmade crafts, and prepared food vendors. Smaller and more intimate than the Surf City Saturday market, but the quality of vendors is exceptional. A casual, low-key way to start a Harvey Cedars Friday.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Veterans Memorial Park · Fri morning · June–September</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Practical Notes -->
+        <div class="section-header"><h2 class="section-title">Practical Notes</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:0.75rem;">
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Book Restaurants Early</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Black Eyed Susan's books out weeks in advance for summer Saturdays. If it's a dining priority, check availability before you even book your rental. Birdy's and Harvey Cedars Shellfish Co. are more walk-in friendly but can have waits on summer evenings.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Quiet by Design</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Harvey Cedars is a quiet residential community that attracts visitors who want that. There are no arcades, no big nightlife scene, no crowds. If you're here for the beach, the food, and the bay — it's perfect. If you need entertainment, Beach Haven is a short drive south.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">BYOB Culture</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Harvey Cedars' best restaurants are BYOB. Stock up on wine and beer at the Ship Bottom liquor stores before heading north. No corkage fee at most spots. White wine in the fridge, red out on the deck — plan accordingly.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Getting There</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">About 12 miles north of the causeway — a 20-minute drive up Long Beach Blvd in normal traffic. By bike, the bay-side path from Surf City makes for a pleasant ride. Barnegat Light is just 4 miles further north if you want to keep going.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="map-embed-wrap" style="margin-bottom:1.25rem;">
+          <iframe title="Harvey Cedars NJ Map" src="https://maps.google.com/maps?q=Harvey+Cedars,+NJ&output=embed&z=14" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Need to Know</h4>
+          <div class="info-row"><span class="icon">🗺</span><p><strong>Location:</strong> Northern LBI, Harvey Cedars Borough</p></div>
+          <div class="info-row"><span class="icon">🚗</span><p><strong>Parking:</strong> Easy street parking in most areas. Not a problem outside peak weekends.</p></div>
+          <div class="info-row"><span class="icon">🏖</span><p><strong>Beach badges:</strong> Required on ocean beaches. Purchase at beach entrance booths.</p></div>
+          <div class="info-row"><span class="icon">🍷</span><p><strong>BYOB tip:</strong> Stock up before you arrive — no liquor stores in Harvey Cedars itself.</p></div>
+          <div class="info-row"><span class="icon">📅</span><p><strong>Best season:</strong> Summer and early fall. The beach is exceptional. Some restaurants reduce hours post–Labor Day.</p></div>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Explore LBI</h4>
+          <a href="../surf-city/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">← Surf City</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../barnegat-light/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Barnegat Light →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">All LBI Towns →</span>
+            <span style="font-size:0.72rem;color:var(--gold);">6 towns</span>
+          </a>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>This Week</h4>
+          <div class="info-row"><span class="icon">☕</span><p>Marigold opens 7am daily. Get there early on summer weekends — seats go fast.</p></div>
+          <div class="info-row"><span class="icon">🌸</span><p>Black Eyed Susan's fills every seat every night. Call ahead before you arrive on the island.</p></div>
+          <div class="info-row"><span class="icon">🦀</span><p>Harvey Cedars Shellfish Co. hours vary — check before making the drive.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p>Your local intelligence platform — curated, verified, and always expanding.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Long Beach Island</h4>
+        <a href="../index.html">LBI Overview</a>
+        <a href="../holgate/index.html">Holgate</a>
+        <a href="../beach-haven/index.html">Beach Haven</a>
+        <a href="../ship-bottom/index.html">Ship Bottom</a>
+        <a href="../surf-city/index.html">Surf City</a>
+        <a href="index.html">Harvey Cedars</a>
+        <a href="../barnegat-light/index.html">Barnegat Light</a>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="../../index.html">Home</a>
+        <a href="../../new-jersey/index.html">New Jersey</a>
+        <a href="../../connecticut/index.html">Connecticut</a>
+      </div>
+      <div class="footer-links">
+        <h4>The Concierge</h4>
+        <a href="../../index.html">About</a>
+        <a href="../../index.html#suggest">Suggest a Place</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 The Concierge. All rights reserved.</div>
+  </footer>
+
+</div>
+<script src="../../script.js"></script>
+</body>
+</html>
