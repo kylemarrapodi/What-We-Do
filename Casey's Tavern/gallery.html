@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gallery | Casey's Tavern</title>
+<meta name="description" content="Photos from Casey's Tavern, an Irish pub in downtown Stamford, CT." />
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<!-- NAV -->
+<nav>
+<a href="index.html" class="nav-logo">Casey's <span>Tavern</span></a>
+<ul class="nav-links">
+<li><a href="about.html">Our Story</a></li>
+<li><a href="menu.html">Menu</a></li>
+<li><a href="gallery.html" class="active">Gallery</a></li>
+<li><a href="contact.html" class="nav-cta">Visit Us</a></li>
+</ul>
+<button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+<a href="index.html">Home</a>
+<a href="about.html">Our Story</a>
+<a href="menu.html">Menu</a>
+<a href="gallery.html" class="active">Gallery</a>
+<a href="contact.html" class="mobile-cta">Visit Us</a>
+</div>
+<div class="page-wrap">
+<div class="page-inner">
+<div class="page-header">
+<div class="page-header-left">
+<div class="section-label">Photo Gallery</div>
+<h1>A Look Inside</h1>
+<p>Real photos of Casey's Tavern, sourced from the bar's own Yelp business listing — every image below is genuine, none are stock.</p>
+</div>
+<div class="page-header-right">
+<a href="menu.html" class="btn-primary">View Menu</a>
+</div>
+</div>
+<div class="page-content">
+<div class="menu-note" style="margin-bottom:1.5rem;">
+This is an independent design proposal, not photos taken on assignment for the bar. All 15 photos below are <strong>real</strong>, downloaded directly from Casey's Tavern's public photo listing on Yelp — no stock photography was needed for this proposal. The four "Menu" photos are split between two different printed menus found during research (one more recent, one an older/extended version) — see the Menu page and README for how pricing was reconciled between them.
+</div>
+<div class="gallery-tabs">
+<button class="gallery-tab active" onclick="switchTab(event, 'all')">All Photos</button>
+<button class="gallery-tab" onclick="switchTab(event, 'food')">Food</button>
+<button class="gallery-tab" onclick="switchTab(event, 'drink')">Drink</button>
+<button class="gallery-tab" onclick="switchTab(event, 'space')">Inside &amp; Outside</button>
+<button class="gallery-tab" onclick="switchTab(event, 'menu')">Menu</button>
+</div>
+<!-- ALL -->
+<div class="gallery-panel active" id="panel-all">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/bar-interior-bw-real.jpg" alt="A black-and-white photo of the real bar and tap line at Casey's Tavern" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/exterior-real.jpg" alt="The real Casey's Tavern storefront signage on Woodside Street, Stamford" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/interior-1-real.jpg" alt="Inside Casey's Tavern on a busy night, with dartboards and TVs in the background" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/interior-2-real.jpg" alt="The back room pool table and dartboards at Casey's Tavern" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/grilled-chicken-wrap-real.jpg" alt="A grilled chicken wrap and fries plated at Casey's Tavern" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/fish-and-chips-real.jpg" alt="Beer-battered fish and chips with coleslaw and tartar sauce at Casey's Tavern" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/philly-cheesesteak-wrap-real.jpg" alt="A Philly steak wrap and fries at Casey's Tavern" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/dark-beer-pint-real.jpg" alt="A dark beer poured into a Samuel Adams pint glass at the Casey's Tavern bar" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/perfect-pint-real.jpg" alt="A freshly poured pint at the Casey's Tavern bar" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/beer-bottle-shelf-real.jpg" alt="The Caseys bar sign above a shelf of bottled beer and local police/fire patches" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/menu-and-guinness-real.jpg" alt="A Guinness on the bar next to Casey's Tavern's printed menu" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/menu-appetizers-salads-real.jpg" alt="Casey's Tavern's current printed menu, appetizers and soups & salads page" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/menu-sandwiches-entrees-real.jpg" alt="Casey's Tavern's current printed menu, sandwiches, burgers, and entrees page" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/menu-board-1-real.jpg" alt="An earlier printed Casey's Tavern menu found during research, appetizers and entrees page" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/menu-board-2-real.jpg" alt="An earlier printed Casey's Tavern menu found during research, wraps and sandwiches page" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+<!-- FOOD -->
+<div class="gallery-panel" id="panel-food">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/grilled-chicken-wrap-real.jpg" alt="A grilled chicken wrap and fries plated at Casey's Tavern" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/fish-and-chips-real.jpg" alt="Beer-battered fish and chips with coleslaw and tartar sauce at Casey's Tavern" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/philly-cheesesteak-wrap-real.jpg" alt="A Philly steak wrap and fries at Casey's Tavern" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+<!-- DRINK -->
+<div class="gallery-panel" id="panel-drink">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/perfect-pint-real.jpg" alt="A freshly poured pint at the Casey's Tavern bar" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/dark-beer-pint-real.jpg" alt="A dark beer poured into a Samuel Adams pint glass at the Casey's Tavern bar" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/beer-bottle-shelf-real.jpg" alt="The Caseys bar sign above a shelf of bottled beer and local police/fire patches" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/menu-and-guinness-real.jpg" alt="A Guinness on the bar next to Casey's Tavern's printed menu" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+<!-- INSIDE & OUTSIDE -->
+<div class="gallery-panel" id="panel-space">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/bar-interior-bw-real.jpg" alt="A black-and-white photo of the real bar and tap line at Casey's Tavern" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/exterior-real.jpg" alt="The real Casey's Tavern storefront signage on Woodside Street, Stamford" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/interior-1-real.jpg" alt="Inside Casey's Tavern on a busy night, with dartboards and TVs in the background" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/interior-2-real.jpg" alt="The back room pool table and dartboards at Casey's Tavern" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+<!-- MENU -->
+<div class="gallery-panel" id="panel-menu">
+<div class="gallery-grid has-featured">
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/menu-appetizers-salads-real.jpg" alt="Casey's Tavern's current printed menu, appetizers and soups & salads page" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/menu-sandwiches-entrees-real.jpg" alt="Casey's Tavern's current printed menu, sandwiches, burgers, and entrees page" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/menu-board-1-real.jpg" alt="An earlier printed Casey's Tavern menu found during research, appetizers and entrees page" />
+<div class="img-overlay">⛶</div>
+</div>
+<div class="gallery-item" onclick="openLightbox(this)">
+<span class="gallery-tag">Real Photo</span>
+<img src="photos/menu-board-2-real.jpg" alt="An earlier printed Casey's Tavern menu found during research, wraps and sandwiches page" />
+<div class="img-overlay">⛶</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
+<button class="lightbox-close" onclick="closeLightbox()">✕</button>
+<button class="lightbox-prev" onclick="shiftLightbox(-1)">&#8249;</button>
+<img id="lightbox-img" src="" alt="" />
+<button class="lightbox-next" onclick="shiftLightbox(1)">&#8250;</button>
+<div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
