@@ -14,7 +14,8 @@
       position: fixed;
       top: 68px; left: 0; right: 0; bottom: 0;
       display: grid;
-      grid-template-columns: 320px 1fr;
+      grid-template-columns: var(--panel-w) 1fr;
+      transition: grid-template-columns 0.25s ease;
     }
 
     /* ── LEFT PANEL ── */
@@ -25,6 +26,9 @@
       overflow: hidden;
       border-right: 1px solid rgba(255,255,255,0.07);
     }
+    /* Zones keep their open width so nothing reflows while the panel slides */
+    .home-left > * { width: var(--panel-w-open); }
+    body.panel-collapsed .home-left { border-right: none; }
 
     /* Top zone — brand + search + go button. Always visible, never scrolls. */
     .home-left-top {
@@ -349,7 +353,8 @@
   <a href="index.html" class="active">Home</a>
   <a href="stamford/index.html">Stamford, CT</a>
   <a href="lubbock/index.html">Lubbock, TX</a>
-  <a href="#" onclick="alert('LBI coming soon!')">Long Beach Island, NJ</a>
+  <a href="lbi/index.html">Long Beach Island, NJ</a>
+  <a href="princeton/index.html">Princeton, NJ</a>
 </div>
 
 <!-- FULL-SCREEN SPLIT -->
@@ -471,7 +476,8 @@ const LOCATIONS = {
     pins: [
       { label:'Stamford, CT', tag:'live', left:44, top:42, url:'stamford/index.html' },
       { label:'Lubbock, TX',  tag:'live', left:20, top:68, url:'lubbock/index.html' },
-      { label:'Long Beach Island, NJ', tag:'soon', left:36, top:50, url:null },
+      { label:'Long Beach Island, NJ', tag:'live', left:36, top:50, url:'lbi/index.html' },
+      { label:'Princeton, NJ', tag:'live', left:34, top:47, url:'princeton/index.html' },
       { label:'New York City', tag:'soon', left:40, top:44, url:null },
     ]
   },
@@ -496,7 +502,8 @@ const LOCATIONS = {
     pins: [
       { label:'Stamford, CT', tag:'live', left:44, top:42, url:'stamford/index.html' },
       { label:'Lubbock, TX',  tag:'live', left:20, top:68, url:'lubbock/index.html' },
-      { label:'Long Beach Island, NJ', tag:'soon', left:36, top:50, url:null },
+      { label:'Long Beach Island, NJ', tag:'live', left:36, top:50, url:'lbi/index.html' },
+      { label:'Princeton, NJ', tag:'live', left:34, top:47, url:'princeton/index.html' },
       { label:'New York City', tag:'soon', left:40, top:44, url:null },
     ]
   },
@@ -570,9 +577,34 @@ const LOCATIONS = {
     mapLabel: 'New Jersey',
     eventsLabel: 'New Jersey',
     eventsLink: { href: 'new-jersey/index.html', text: 'New Jersey Guide →' },
-    events: [],
+    events: [
+      { mo:'WED', dy:'WKLY', tag:'arts',      tagLabel:'Free Concert', name:'Concerts on the Green',              meta:'Veterans Bicentennial Park · Beach Haven', url:'lbi/beach-haven/index.html', ticket:'https://beachhavencap.org/summer-concerts/' },
+      { mo:'WED', dy:'–SUN', tag:'nightlife', tagLabel:'Live Band',    name:"Bird & Betty's",                     meta:'529 Dock Rd · Beach Haven, LBI',           url:'lbi/beach-haven/index.html', ticket:'https://www.birdandbettys.com/events' },
+      { mo:'WED', dy:'WKLY', tag:'arts',      tagLabel:'Live Band',    name:'Bands at the Alchemist & Barrister', meta:'28 Witherspoon St · Princeton',            url:'princeton/palmer-square/index.html' },
+      { mo:'SEP', dy:'–MAY', tag:'arts',      tagLabel:'Concerts',     name:'Princeton University Concerts',      meta:'Richardson Auditorium · Princeton',        url:'princeton/university/index.html', ticket:'https://concerts.princeton.edu' },
+    ],
     pins: [
-      { label:'Long Beach Island', tag:'soon', left:52, top:58, url:null },
+      { label:'Long Beach Island', tag:'live', left:52, top:58, url:'lbi/index.html' },
+      { label:'Princeton', tag:'live', left:34, top:40, url:'princeton/index.html' },
+    ]
+  },
+
+  'Princeton': {
+    mapSrc: 'https://maps.google.com/maps?q=Princeton,+NJ&output=embed&z=14',
+    mapLabel: 'Princeton, NJ',
+    eventsLabel: 'Princeton Live Music',
+    eventsLink: { href: 'princeton/index.html', text: 'Princeton Guide →' },
+    events: [
+      { mo:'WED', dy:'WKLY', tag:'arts',      tagLabel:'Live Band', name:'Bands at the Alchemist & Barrister', meta:'28 Witherspoon St · Wed, Thu & Sun',     url:'princeton/palmer-square/index.html' },
+      { mo:'THU', dy:'WKLY', tag:'nightlife', tagLabel:'Brewpub',   name:'Live Music at Triumph Brewing',      meta:'Nassau St · rotating weekly calendar',   url:'princeton/palmer-square/index.html' },
+      { mo:'SEP', dy:'–MAY', tag:'arts',      tagLabel:'Concerts',  name:'Princeton University Concerts',      meta:'Richardson Auditorium · 2026–27 season', url:'princeton/university/index.html', ticket:'https://concerts.princeton.edu' },
+      { mo:'ALL', dy:'YEAR', tag:'arts',      tagLabel:'Theatre',   name:'McCarter Theatre Center',            meta:'University Place · year-round',          url:'princeton/university/index.html' },
+    ],
+    pins: [
+      { label:'Palmer Square', tag:'live', left:50, top:48, url:'princeton/palmer-square/index.html' },
+      { label:'Witherspoon-Jackson', tag:'live', left:47, top:41, url:'princeton/witherspoon-jackson/index.html' },
+      { label:'University Campus', tag:'live', left:52, top:58, url:'princeton/university/index.html' },
+      { label:'Western Section', tag:'live', left:38, top:56, url:'princeton/western-section/index.html' },
     ]
   },
 
@@ -583,9 +615,9 @@ const LOCATIONS = {
     eventsLink: null,
     events: [],
     pins: [
-      { label:'Beach Haven', tag:'soon', left:48, top:54, url:null },
-      { label:'Ship Bottom',  tag:'soon', left:50, top:42, url:null },
-      { label:'Surf City',    tag:'soon', left:51, top:36, url:null },
+      { label:'Beach Haven', tag:'live', left:48, top:54, url:'lbi/beach-haven/index.html' },
+      { label:'Ship Bottom',  tag:'live', left:50, top:42, url:'lbi/ship-bottom/index.html' },
+      { label:'Surf City',    tag:'live', left:51, top:36, url:'lbi/surf-city/index.html' },
     ]
   },
 

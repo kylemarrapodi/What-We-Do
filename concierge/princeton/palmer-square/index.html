@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palmer Square — Princeton, NJ · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-wrap { position: fixed; top: 68px; left: 0; right: 0; bottom: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white); }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+    .neighborhood-hero { padding: 2rem 5% 1.75rem; text-align: center; }
+    .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin: 0.4rem 0 0.75rem; }
+    .neighborhood-hero p { font-size: 0.9rem; max-width: 560px; }
+    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
+    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
+    .highlight-card h4 { font-size: 0.85rem; color: var(--navy); margin-bottom: 0.15rem; }
+    .highlight-card p { font-size: 0.77rem; color: var(--sub); }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .cat-section { padding: 2.25rem 5%; }
+    @media (max-width: 900px) { .highlight-strip { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .highlight-strip { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body data-page-location="Princeton" data-music-key="palmer-square">
+
+<nav>
+  <a href="../../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../index.html'">Princeton, NJ</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Palmer Square</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../../index.html">Home</a>
+  <a href="../index.html">Princeton, NJ</a>
+  <a href="index.html" class="active">Palmer Square</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <a href="../../index.html">Home</a>
+    <span class="sep">›</span>
+    <a href="../../new-jersey/index.html">New Jersey</a>
+    <span class="sep">›</span>
+    <a href="../index.html">Princeton</a>
+    <span class="sep">›</span>
+    <span>Palmer Square</span>
+  </div>
+
+  <section class="neighborhood-hero" style="background: linear-gradient(135deg, #1a2744 0%, #3d5a80 100%); color:var(--white);">
+    <div class="section-label" style="color:var(--gold-lt);">Neighborhood</div>
+    <h1 style="font-family:'Playfair Display',serif; font-weight:700; color:var(--white);">Palmer <span style="color:var(--gold-lt);">Square</span></h1>
+    <p style="margin:0 auto 1.25rem; color:rgba(255,255,255,0.82); line-height:1.6;">The commercial heart of Princeton — a Colonial Revival square built between 1936 and 1939 by Edgar Palmer, anchored by the historic Nassau Inn and facing the University across Nassau Street. Shops and restaurants by day; by night, three of the only bars in town licensed to pour until 2 AM.</p>
+    <div class="city-hero-meta" style="justify-content:center;">
+      <span>🏛 Built 1936–1939</span>
+      <span>🛍 Boutiques &amp; Bookstores</span>
+      <span>🍸 Late-Night Bars</span>
+      <span>🎸 Live Music</span>
+    </div>
+  </section>
+
+  <section style="padding: 1.75rem 5%; background: var(--white);">
+    <div class="highlight-strip">
+      <div class="highlight-card">
+        <div class="big-num">1936</div>
+        <h4>Built</h4>
+        <p>Edgar Palmer's Colonial Revival square, by architect Thomas Stapleton</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">2 AM</div>
+        <h4>Last Call</h4>
+        <p>Three of Princeton's late-license bars are here</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">3</div>
+        <h4>Music Rooms</h4>
+        <p>Bands most nights of the week</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">0</div>
+        <h4>Blocks</h4>
+        <p>Nassau Street is the campus property line</p>
+      </div>
+    </div>
+    <div class="category-pills">
+      <button class="pill active" data-cat="all">All</button>
+      <button class="pill" data-cat="dining">🍽 Dining</button>
+      <button class="pill" data-cat="nightlife">🍸 Nightlife</button>
+      <button class="pill" data-cat="music">🎸 Live Music</button>
+      <button class="pill" data-cat="shopping">🛍 Shops</button>
+    </div>
+  </section>
+
+  <section class="cat-section" data-cat="dining" style="background:var(--mist);">
+    <div class="section-label">Where to Eat</div>
+    <h2 class="section-title">Dining</h2>
+    <hr class="section-divider" />
+    <div class="grid-3">
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#3d1f1f,#7b3f3f);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">Steakhouse</span></div>
+          <h3 class="card-title">Witherspoon Grill</h3>
+          <p class="card-desc">The square's dependable special-occasion room — steaks, a busy bar, and a patio that fills the moment the weather turns. Walking distance from everything on Palmer Square.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Palmer Square · $$$ · Lunch &amp; Dinner</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#1b3a4b,#2e6b7a);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">French</span></div>
+          <h3 class="card-title">Mistral</h3>
+          <p class="card-desc">Small plates and a modern French-Mediterranean kitchen, and the more adventurous of the square's sit-down options. Same ownership lineage as Elements, Princeton's tasting-menu room.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Palmer Square area · $$$ · Dinner</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#0d3b4f,#1a6b8a);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">Seafood</span><span class="card-tag featured">Local Favorite</span></div>
+          <h3 class="card-title">Blue Point Grill</h3>
+          <p class="card-desc">Open since 1999 and still the town's benchmark for fish — a raw bar and a daily catch list sourced from the seafood market next door. Indoor and patio seating, and a loyal following that books it out.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 258 Nassau St · $$$ · Dinner</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#4a2511,#8b5a2b);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">Italian</span></div>
+          <h3 class="card-title">La Mezzaluna</h3>
+          <p class="card-desc">Long-running Italian on the square — pasta, a decent list, and tables outside facing the green. The kind of place that survives in a college town by being consistent rather than fashionable.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Palmer Square · $$ · Lunch &amp; Dinner</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#2c1810,#5a3420);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">Coffee</span><span class="card-tag featured">Institution</span></div>
+          <h3 class="card-title">Small World Coffee</h3>
+          <p class="card-desc">The town's coffee institution and the unofficial second office of half of Princeton. Roasts its own, and the line out the door on a Saturday morning is part of the experience.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Nassau St · $ · Opens early</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a3a2a,#2e6b4f);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag dining">American</span></div>
+          <h3 class="card-title">Agricola</h3>
+          <p class="card-desc">Communal tables, wood-fired cooking, and plates built to share — roasted carrots, crispy trout salad, that register. Modern American with enough international technique to keep it interesting.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Downtown Princeton · $$$ · Dinner</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cat-section" data-cat="nightlife" style="background:var(--white);">
+    <div class="section-label">After Dark</div>
+    <h2 class="section-title">Nightlife</h2>
+    <hr class="section-divider" />
+    <div class="grid-3">
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#2c1810,#6b4423);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag nightlife">Tavern</span><span class="card-tag featured">Landmark</span></div>
+          <h3 class="card-title">The Alchemist &amp; Barrister</h3>
+          <p class="card-desc">Known around town as the "Cheers of Princeton" — a landmark tavern in a historic building, with live local bands on Wednesday, Thursday and Sunday nights. One of the few Princeton bars that can stay open until 2 AM.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 28 Witherspoon St · Open until 2 AM</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#4a3a11,#8a7a2b);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag nightlife">Brewpub</span></div>
+          <h3 class="card-title">Triumph Brewing Company</h3>
+          <p class="card-desc">A Nassau Street microbrewery with a genuinely mixed room — students, locals and the corporate crowd — and a rotating live-music calendar spread through the week rather than parked on the weekend.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Nassau St · Open until 2 AM</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#1b2631,#3d4f5c);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag nightlife">Dive Bar</span></div>
+          <h3 class="card-title">Ivy Inn</h3>
+          <p class="card-desc">Pool tables, cheap drinks, friendly bartenders and music that turns up without much warning. The least polished of Princeton's late-license bars, which is exactly why people are loyal to it.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Princeton · Open until 2 AM</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cat-section" data-cat="shopping" style="background:var(--mist);">
+    <div class="section-label">Browse</div>
+    <h2 class="section-title">Shops &amp; Screens</h2>
+    <hr class="section-divider" />
+    <div class="grid-3">
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#2d1b3d,#5c3a6b);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag arts">Record Store</span><span class="card-tag featured">World-Class</span></div>
+          <h3 class="card-title">Princeton Record Exchange</h3>
+          <p class="card-desc">Buying and selling music and movies since 1980, with an inventory north of 100,000 LPs, CDs and DVDs that turns over constantly. Routinely named among the leading independent record stores in the world — people drive hours for it.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Princeton · Open daily</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#3d2c1b,#6b5a3a);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag arts">Cinema</span></div>
+          <h3 class="card-title">Princeton Garden Theatre</h3>
+          <p class="card-desc">Owned by the University and run by Renew Theaters — first-run films of real artistic quality, plus classics, foreign language programming and Saturday kids' matinees. NJ.com named it the best movie theater in New Jersey.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Nassau St · Daily screenings</p>
+        </div>
+      </div>
+
+      <div class="card animate-in">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a2744,#3d5a80);"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="card-tag arts">Hotel</span><span class="card-tag featured">Historic</span></div>
+          <h3 class="card-title">The Nassau Inn</h3>
+          <p class="card-desc">The anchor of Palmer Square since the square was built, and the reason the whole block is laid out the way it is. Worth walking through even if you are not staying.</p>
+          <p style="font-size:0.78rem;color:var(--sub);">📍 Palmer Square · Est. 1937</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LIVE MUSIC (rendered by initLiveMusic in script.js) -->
+  <section class="section cat-section" data-cat="music" id="live-music" style="background:var(--mist);"></section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p>Your local guide to the places worth knowing about — verified, current, and written by people who actually go.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="../../index.html">Home</a>
+        <a href="../../new-jersey/index.html">New Jersey</a>
+        <a href="../../connecticut/index.html">Connecticut</a>
+      </div>
+      <div class="footer-links">
+        <h4>The Concierge</h4>
+        <a href="../../index.html">About</a>
+        <a href="../../index.html#suggest">Suggest a Place</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 The Concierge. All rights reserved.</div>
+  </footer>
+
+</div>
+<script src="../../script.js"></script>
+</body>
+</html>

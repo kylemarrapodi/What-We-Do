@@ -32,7 +32,7 @@
     @media (max-width: 600px) { .highlight-strip { grid-template-columns: 1fr; } }
   </style>
 </head>
-<body data-page-location="Stamford">
+<body data-page-location="Stamford" data-music-key="waterside">
 
 <nav>
   <a href="../../index.html" class="nav-logo">The <span>Concierge</span></a>
@@ -108,6 +108,7 @@
       <button class="pill active" data-cat="all">All</button>
       <button class="pill" data-cat="dining">🍽 Dining</button>
       <button class="pill" data-cat="nightlife">🍸 Drinks</button>
+      <button class="pill" data-cat="music">🎸 Live Music</button>
       <button class="pill" data-cat="outdoors">🌿 Outdoors</button>
     </div>
   </section>
@@ -275,6 +276,9 @@
       </a>
     </div>
   </section>
+
+  <!-- LIVE MUSIC (rendered by initLiveMusic in script.js) -->
+  <section class="section cat-section" data-cat="music" id="live-music" style="background:var(--mist);"></section>
 
   <section id="suggest" style="background:var(--navy); padding:3rem 5%; text-align:center;">
     <div class="section-label" style="color:var(--gold-lt);">Community</div>

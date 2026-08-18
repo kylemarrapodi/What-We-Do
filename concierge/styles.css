@@ -18,7 +18,15 @@
   --radius:  8px;
   --shadow:  0 2px 12px rgba(0,0,0,0.08);
   --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+
+  /* Left panel width. --panel-w-open never changes (inner content is sized
+     against it so nothing reflows mid-animation); --panel-w is what the
+     layout actually uses, and drops to 0 when the panel is collapsed. */
+  --panel-w-open: 320px;
+  --panel-w: var(--panel-w-open);
 }
+
+body.panel-collapsed { --panel-w: 0px; }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -822,14 +830,18 @@ footer {
 .site-left-panel {
   position: fixed;
   top: 68px; left: 0; bottom: 0;
-  width: 320px;
+  width: var(--panel-w);
   background: var(--deep);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   border-right: 1px solid rgba(255,255,255,0.07);
   z-index: 90;
+  transition: width 0.25s ease;
 }
+/* Children keep their full width so text doesn't reflow while the panel slides */
+.site-left-panel > * { width: var(--panel-w-open); }
+body.panel-collapsed .site-left-panel { border-right: none; }
 .site-panel-top {
   padding: 1.5rem 1.25rem 1rem;
   flex-shrink: 0;
@@ -856,7 +868,103 @@ footer {
   flex-shrink: 0;
 }
 .page-wrap-with-panel {
-  left: 320px !important;
+  left: var(--panel-w) !important;
+  transition: left 0.25s ease;
+}
+
+/* ---- Panel collapse toggle ----
+   A drawer handle pinned to the panel's right edge. Sits at the edge whether
+   the panel is open or closed, so it is always reachable. */
+.panel-toggle {
+  position: fixed;
+  top: 50%;
+  left: var(--panel-w);
+  transform: translateY(-50%);
+  width: 22px;
+  height: 62px;
+  padding: 0;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-left: none;
+  border-radius: 0 6px 6px 0;
+  background: var(--deep);
+  color: var(--gold);
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 95;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: left 0.25s ease, background 0.2s, color 0.2s;
+}
+.panel-toggle:hover { background: var(--navy); color: var(--gold-lt); }
+.panel-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* Suppress the slide on first paint so a remembered collapsed state
+   doesn't animate shut in front of the user on every page load. */
+body.panel-no-anim .site-left-panel,
+body.panel-no-anim .page-wrap-with-panel,
+body.panel-no-anim .home-split,
+body.panel-no-anim .panel-toggle { transition: none !important; }
+
+/* Backdrop behind the mobile drawer — tap it to close. Desktop never shows it. */
+.panel-backdrop {
+  display: none;
+  position: fixed;
+  top: 68px; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.45);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 110;
+  transition: opacity 0.25s ease;
+}
+
+/* On narrow screens the home page drops the map and the panel IS the page,
+   so collapsing it would leave a blank screen. */
+@media (max-width: 900px) {
+  body.has-home-panel .panel-toggle { display: none; }
+  body.has-home-panel.panel-collapsed { --panel-w: var(--panel-w-open); }
+}
+
+/* ---- Phones: the side panel becomes an off-canvas drawer ----
+   Pushing the content sideways by a fixed 320px leaves almost nothing on a
+   phone, so below 768px the panel floats over the page instead and the
+   content always gets the full width. */
+@media (max-width: 768px) {
+  body:not(.has-home-panel) { --panel-w: 0px; }
+
+  body:not(.has-home-panel) .site-left-panel {
+    width: min(var(--panel-w-open), 86vw);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 120;
+    box-shadow: var(--shadow-lg);
+  }
+  body:not(.has-home-panel):not(.panel-collapsed) .site-left-panel { transform: translateX(0); }
+  body:not(.has-home-panel) .site-left-panel > * { width: min(var(--panel-w-open), 86vw); }
+
+  /* Content is never shifted — the drawer sits on top of it */
+  body:not(.has-home-panel) .page-wrap-with-panel { left: 0 !important; }
+
+  /* Bigger tap target, and it rides the drawer's edge when open */
+  body:not(.has-home-panel) .panel-toggle {
+    width: 28px;
+    height: 78px;
+    font-size: 1.1rem;
+    left: 0;
+    z-index: 121;
+  }
+  body:not(.has-home-panel):not(.panel-collapsed) .panel-toggle {
+    left: min(var(--panel-w-open), 86vw);
+  }
+
+  body:not(.has-home-panel) .panel-backdrop { display: block; }
+  body:not(.has-home-panel):not(.panel-collapsed) .panel-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  body.panel-no-anim .site-left-panel { transition: none !important; }
 }
 
 /* ---- Shared panel typography & event item styles ---- */
@@ -982,4 +1090,184 @@ footer {
   .neighborhood-grid { grid-template-columns: repeat(2, 1fr); }
   .category-pills { gap: 0.4rem; }
   .pill { font-size: 0.78rem; padding: 0.4rem 0.85rem; }
+}
+
+/* =====================================================
+   LIVE MUSIC — venue cards, series cards
+   Rendered by initLiveMusic() into <section id="live-music">
+   ===================================================== */
+
+.music-blurb {
+  max-width: 70ch;
+  color: var(--sub);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.music-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+.music-grid-series { margin-top: 1.25rem; }
+
+.music-card,
+.music-series {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 1.35rem 1.5rem;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.music-card:hover,
+.music-series:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.music-series {
+  border-left-color: var(--coral);
+  background: var(--mist);
+}
+.music-series-tag {
+  display: inline-block;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--coral);
+  margin-bottom: 0.5rem;
+}
+
+.music-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.35rem;
+}
+
+.music-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  line-height: 1.3;
+  color: var(--navy);
+}
+
+.music-kind {
+  flex-shrink: 0;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate);
+  background: var(--mist);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 0.2rem 0.6rem;
+}
+
+.music-meta {
+  font-size: 0.78rem;
+  color: var(--sub);
+  margin-bottom: 0.5rem;
+}
+
+.music-nights {
+  display: flex;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--navy);
+  background: rgba(201, 168, 76, 0.12);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  margin-bottom: 0.7rem;
+}
+.music-nights span { color: var(--gold); }
+
+.music-desc {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text);
+  margin-bottom: 0.7rem;
+}
+
+.music-acts {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--sub);
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--border);
+}
+.music-acts strong { color: var(--slate); }
+
+.music-dated {
+  list-style: none;
+  margin-top: 0.7rem;
+  border-top: 1px dashed var(--border);
+  padding-top: 0.6rem;
+}
+.music-dated li {
+  display: flex;
+  gap: 0.6rem;
+  font-size: 0.83rem;
+  padding: 0.25rem 0;
+  color: var(--text);
+}
+.music-date {
+  flex-shrink: 0;
+  min-width: 6.5rem;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding-top: 0.1rem;
+}
+
+.music-note {
+  font-size: 0.76rem;
+  font-style: italic;
+  color: var(--sub);
+  margin-top: 0.6rem;
+}
+
+.music-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+.music-cal {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 1px;
+  transition: color 0.2s;
+}
+.music-cal:hover { color: var(--gold); }
+
+.music-nearest {
+  margin-top: 1.5rem;
+  font-size: 0.88rem;
+  color: var(--sub);
+}
+.music-nearest a {
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold);
+}
+.music-nearest a:hover { color: var(--gold); }
+
+@media (max-width: 640px) {
+  .music-grid { grid-template-columns: 1fr; }
+  .music-date { min-width: 5.5rem; }
 }

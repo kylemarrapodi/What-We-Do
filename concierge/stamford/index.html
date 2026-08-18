@@ -80,7 +80,7 @@
     }
   </style>
 </head>
-<body data-page-location="Stamford">
+<body data-page-location="Stamford" data-music-key="stamford">
 
 <!-- NAV -->
 <nav>
@@ -158,6 +158,7 @@
       <button class="pill" data-cat="events">🎟 Events</button>
       <button class="pill" data-cat="dining">🍽 Dining</button>
       <button class="pill" data-cat="nightlife">🍸 Nightlife</button>
+      <button class="pill" data-cat="music">🎸 Live Music</button>
       <button class="pill" data-cat="arts">🎭 Arts &amp; Culture</button>
       <button class="pill" data-cat="outdoors">🌿 Outdoors</button>
       <button class="pill" data-cat="shopping">🛍 Shopping</button>
@@ -629,6 +630,9 @@
       </iframe>
     </div>
   </div>
+  <!-- LIVE MUSIC (rendered by initLiveMusic in script.js) -->
+  <section class="section cat-section" data-cat="music" id="live-music" style="background:var(--mist);"></section>
+
   <footer>
     <div class="footer-inner">
       <div>
