@@ -21,11 +21,19 @@
     .city-hero { padding: 2.5rem 5% 2rem; }
     .city-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
     .city-hero .hero-sub { font-size: 0.9rem; margin-bottom: 1rem; }
-    .highlight-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
-    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
-    .highlight-card h4 { font-size: 0.88rem; color: var(--navy); margin-bottom: 0.2rem; }
-    .highlight-card p { font-size: 0.78rem; color: var(--sub); }
-    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.75rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
+    /* Hero stat bubbles: compact vertical stack, right of the title */
+    .hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; }
+    .hero-main { flex: 1; min-width: 0; }
+    .hero-stats-stack { display: flex; flex-direction: column; gap: 0.5rem; flex-shrink: 0; width: 172px; }
+    .hero-stat-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-radius: var(--radius); padding: 0.5rem 0.85rem; text-align: right; }
+    .hero-stat-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--gold); font-weight: 700; line-height: 1; }
+    .hero-stat-card h4 { font-size: 0.64rem; color: rgba(255,255,255,0.92); margin: 0.15rem 0 0.1rem; text-transform: uppercase; letter-spacing: 0.02em; font-weight: 600; }
+    .hero-stat-card p { font-size: 0.62rem; color: rgba(255,255,255,0.6); line-height: 1.3; margin: 0; }
+    @media (max-width: 720px) {
+      .hero-top { flex-direction: column; }
+      .hero-stats-stack { width: 100%; flex-direction: row; flex-wrap: wrap; }
+      .hero-stat-card { flex: 1; min-width: 130px; text-align: left; }
+    }
     .section { padding: 2.5rem 5%; }
     .section-sm { padding: 1.75rem 5%; }
     .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
@@ -83,35 +91,35 @@
 
   <!-- Hero -->
   <div class="city-hero" style="background: linear-gradient(135deg, #1a0a0a 0%, #8B0000 50%, #cc0000 100%); color: white; padding-bottom: 2.5rem;">
-    <div style="font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,200,0,0.85); margin-bottom: 0.4rem;">The Concierge</div>
-    <h1 style="color: white; font-family: 'Playfair Display', serif;">Texas</h1>
-    <p class="hero-sub" style="color: rgba(255,255,255,0.75); max-width: 540px;">From the Red Raider spirit of Lubbock to the rolling Hill Country and Gulf Coast beaches — the Lone Star State has something for everyone.</p>
-    <div class="city-chips" style="margin-top: 1.25rem;">
-      <a href="../lubbock/index.html" class="city-chip"><span>Lubbock, TX</span><span class="chip-badge">Live</span></a>
-      <span class="city-chip" style="cursor:default; opacity:0.6;"><span>Austin, TX</span><span class="chip-badge soon">Soon</span></span>
-      <span class="city-chip" style="cursor:default; opacity:0.6;"><span>Dallas, TX</span><span class="chip-badge soon">Soon</span></span>
-      <span class="city-chip" style="cursor:default; opacity:0.6;"><span>Houston, TX</span><span class="chip-badge soon">Soon</span></span>
-      <span class="city-chip" style="cursor:default; opacity:0.6;"><span>San Antonio, TX</span><span class="chip-badge soon">Soon</span></span>
-    </div>
-  </div>
-
-  <!-- Stats strip -->
-  <div class="section-sm" style="background: var(--mist);">
-    <div class="highlight-strip">
-      <div class="highlight-card">
-        <div class="big-num">29M+</div>
-        <h4>Population</h4>
-        <p>2nd largest state by population in the US</p>
+    <div class="hero-top">
+      <div class="hero-main">
+        <div style="font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,200,0,0.85); margin-bottom: 0.4rem;">The Concierge</div>
+        <h1 style="color: white; font-family: 'Playfair Display', serif;">Texas</h1>
+        <p class="hero-sub" style="color: rgba(255,255,255,0.75); max-width: 540px;">From the Red Raider spirit of Lubbock to the rolling Hill Country and Gulf Coast beaches — the Lone Star State has something for everyone.</p>
+        <div class="city-chips" style="margin-top: 1.25rem;">
+          <a href="../lubbock/index.html" class="city-chip"><span>Lubbock, TX</span><span class="chip-badge">Live</span></a>
+          <span class="city-chip" style="cursor:default; opacity:0.6;"><span>Austin, TX</span><span class="chip-badge soon">Soon</span></span>
+          <span class="city-chip" style="cursor:default; opacity:0.6;"><span>Dallas, TX</span><span class="chip-badge soon">Soon</span></span>
+          <span class="city-chip" style="cursor:default; opacity:0.6;"><span>Houston, TX</span><span class="chip-badge soon">Soon</span></span>
+          <span class="city-chip" style="cursor:default; opacity:0.6;"><span>San Antonio, TX</span><span class="chip-badge soon">Soon</span></span>
+        </div>
       </div>
-      <div class="highlight-card">
-        <div class="big-num">268K</div>
-        <h4>Square Miles</h4>
-        <p>Largest of the contiguous 48 states</p>
-      </div>
-      <div class="highlight-card">
-        <div class="big-num">254</div>
-        <h4>Counties</h4>
-        <p>More counties than any other US state</p>
+      <div class="hero-stats-stack">
+        <div class="hero-stat-card">
+          <div class="big-num">29M+</div>
+          <h4>Population</h4>
+          <p>2nd largest state by population in the US</p>
+        </div>
+        <div class="hero-stat-card">
+          <div class="big-num">268K</div>
+          <h4>Square Miles</h4>
+          <p>Largest of the contiguous 48 states</p>
+        </div>
+        <div class="hero-stat-card">
+          <div class="big-num">254</div>
+          <h4>Counties</h4>
+          <p>More counties than any other US state</p>
+        </div>
       </div>
     </div>
   </div>

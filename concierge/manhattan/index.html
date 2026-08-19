@@ -25,11 +25,19 @@
     .city-hero .hero-sub { font-size: 0.9rem; margin-bottom: 1rem; }
     .city-hero-meta { font-size: 0.8rem; gap: 1rem; }
 
-    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
-    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
-    .highlight-card h4 { font-size: 0.88rem; color: var(--navy); margin-bottom: 0.2rem; }
-    .highlight-card p { font-size: 0.78rem; color: var(--sub); }
-    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
+    /* Hero stat bubbles: compact vertical stack, right of the title */
+    .hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; }
+    .hero-main { flex: 1; min-width: 0; }
+    .hero-stats-stack { display: flex; flex-direction: column; gap: 0.5rem; flex-shrink: 0; width: 176px; }
+    .hero-stat-card { background: var(--white); border-radius: var(--radius); padding: 0.5rem 0.85rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); text-align: right; }
+    .hero-stat-card h4 { font-size: 0.64rem; color: var(--navy); margin: 0.12rem 0 0.08rem; }
+    .hero-stat-card p { font-size: 0.6rem; color: var(--sub); line-height: 1.25; }
+    .hero-stat-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold); font-weight: 700; line-height: 1; }
+    @media (max-width: 720px) {
+      .hero-top { flex-direction: column; }
+      .hero-stats-stack { width: 100%; flex-direction: row; flex-wrap: wrap; }
+      .hero-stat-card { flex: 1; min-width: 130px; text-align: left; }
+    }
 
     .section { padding: 2.5rem 5%; }
     .section-sm { padding: 1.75rem 5%; }
@@ -65,14 +73,15 @@
     .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border); }
 
     @media (max-width: 900px) {
-      .highlight-strip { grid-template-columns: repeat(2, 1fr); }
       .two-col { grid-template-columns: 1fr; }
       .content-grid { grid-template-columns: 1fr; }
       .map-sidebar { position: static; }
     }
-    @media (max-width: 600px) {
-      .highlight-strip { grid-template-columns: 1fr; }
-    }
+
+    /* Tighter listing cards now that descriptions are one short sentence */
+    .nbhood-grid .card-body { padding: 0.9rem 1rem; }
+    .nbhood-grid .card-desc { font-size: 0.82rem; line-height: 1.4; }
+    .nbhood-grid .card-meta { margin-bottom: 0.3rem; }
   </style>
 </head>
 <body data-page-location="Manhattan" data-music-key="manhattan">
@@ -117,14 +126,40 @@
 
   <!-- CITY HERO -->
   <section class="city-hero">
-    <div class="section-label">New York</div>
-    <h1>Manhattan, <span>NY</span></h1>
-    <p class="hero-sub">From the cast-iron blocks of SoHo to the brownstones of Harlem — eight neighborhoods, one very dense island, and more history per square foot than almost anywhere in the country. Settled by the Dutch as New Amsterdam in 1624, taken by the English in 1664, and gridded by the Commissioners' Plan of 1811 — today it's the financial, cultural, and media capital most people picture when they say "New York."</p>
-    <div class="city-hero-meta">
-      <span>📍 New York County, NY</span>
-      <span>🏙️ ~1.66M residents</span>
-      <span>🗽 22.7 sq mi</span>
-      <span>🚇 24-hour subway</span>
+    <div class="hero-top">
+      <div class="hero-main">
+        <div class="section-label">New York</div>
+        <h1>Manhattan, <span>NY</span></h1>
+        <p class="hero-sub">From the cast-iron blocks of SoHo to the brownstones of Harlem — eight neighborhoods, one very dense island, and more history per square foot than almost anywhere in the country. Settled by the Dutch as New Amsterdam in 1624, taken by the English in 1664, and gridded by the Commissioners' Plan of 1811 — today it's the financial, cultural, and media capital most people picture when they say "New York."</p>
+        <div class="city-hero-meta">
+          <span>📍 New York County, NY</span>
+          <span>🏙️ ~1.66M residents</span>
+          <span>🗽 22.7 sq mi</span>
+          <span>🚇 24-hour subway</span>
+        </div>
+      </div>
+      <div class="hero-stats-stack">
+        <div class="hero-stat-card">
+          <div class="big-num">1.66M</div>
+          <h4>Residents</h4>
+          <p>Densest of NYC's five boroughs</p>
+        </div>
+        <div class="hero-stat-card">
+          <div class="big-num">1624</div>
+          <h4>Settled</h4>
+          <p>Dutch New Amsterdam</p>
+        </div>
+        <div class="hero-stat-card">
+          <div class="big-num">1811</div>
+          <h4>The Grid</h4>
+          <p>Commissioners' Plan street grid</p>
+        </div>
+        <div class="hero-stat-card">
+          <div class="big-num">8</div>
+          <h4>Neighborhoods</h4>
+          <p>Covered here so far</p>
+        </div>
+      </div>
     </div>
     <div class="jump-nav">
       <a href="#tribeca">Tribeca</a>
@@ -135,32 +170,6 @@
       <a href="#upper-west-side">Upper West Side</a>
       <a href="#harlem">Harlem</a>
       <a href="#financial-district">Financial District</a>
-    </div>
-  </section>
-
-  <!-- QUICK STATS -->
-  <section class="section-sm" style="background:var(--white);">
-    <div class="highlight-strip">
-      <div class="highlight-card">
-        <div class="big-num">1.66M</div>
-        <h4>Residents</h4>
-        <p>Most densely populated of NYC's five boroughs</p>
-      </div>
-      <div class="highlight-card">
-        <div class="big-num">1624</div>
-        <h4>Settled</h4>
-        <p>Dutch West India Company's New Amsterdam</p>
-      </div>
-      <div class="highlight-card">
-        <div class="big-num">1811</div>
-        <h4>The Grid</h4>
-        <p>Commissioners' Plan laid out the street grid</p>
-      </div>
-      <div class="highlight-card">
-        <div class="big-num">8</div>
-        <h4>Neighborhoods</h4>
-        <p>Covered here so far — the island has dozens more</p>
-      </div>
     </div>
   </section>
 
@@ -184,7 +193,7 @@
           <span class="card-tag dining">Brasserie · Since 1980</span>
           <div class="card-title">The Odeon</div>
           <div class="card-meta"><span>📍 145 West Broadway</span></div>
-          <p class="card-desc">Keith McNally's French-American brasserie put Tribeca on the map for New Yorkers in the first place — the crowd from Saturday Night Live followed it downtown in the '80s, and it's still going strong more than four decades later.</p>
+          <p class="card-desc">Keith McNally's French-American brasserie that put Tribeca on the map — still going strong more than four decades later.</p>
         </div>
       </div>
       <div class="card">
@@ -192,7 +201,7 @@
           <span class="card-tag dining">American · Since 1990</span>
           <div class="card-title">Bubby's</div>
           <div class="card-meta"><span>📍 120 Hudson St</span></div>
-          <p class="card-desc">Started as a pie company out of a tiny kitchen on Hudson Street; now a neighborhood breakfast-and-comfort-food institution that's outlasted most of the restaurants that opened around it.</p>
+          <p class="card-desc">Started as a pie company on Hudson Street; now a neighborhood breakfast-and-comfort-food institution.</p>
         </div>
       </div>
       <div class="card">
@@ -200,7 +209,7 @@
           <span class="card-tag arts">Annual Festival · June</span>
           <div class="card-title">Tribeca Festival</div>
           <div class="card-meta"><span>📍 Venues across Lower Manhattan</span></div>
-          <p class="card-desc">More than 600 screenings and roughly 150,000 attendees each June — founded in 2001 as a one-time event to bring people back downtown, it never stopped.</p>
+          <p class="card-desc">More than 600 screenings and roughly 150,000 attendees each June, founded in 2001 to bring people back downtown.</p>
         </div>
       </div>
     </div>
@@ -221,7 +230,7 @@
           <span class="card-tag dining">French Brasserie · Since 1997</span>
           <div class="card-title">Balthazar</div>
           <div class="card-meta"><span>📍 80 Spring St</span></div>
-          <p class="card-desc">Keith McNally's second SoHo landmark (after The Odeon) — a big, brass-and-mirror Parisian brasserie that's stayed a scene since it opened, with an adjoining bakery out front.</p>
+          <p class="card-desc">Keith McNally's second SoHo landmark — a big, brass-and-mirror Parisian brasserie that's stayed a scene since it opened.</p>
         </div>
       </div>
       <div class="card">
@@ -229,7 +238,7 @@
           <span class="card-tag dining">Bakery · Since 2011</span>
           <div class="card-title">Dominique Ansel Bakery</div>
           <div class="card-meta"><span>📍 189 Spring St</span></div>
-          <p class="card-desc">Where pastry chef Dominique Ansel invented the Cronut in May 2013 — a croissant-doughnut hybrid that sold out in minutes and got copied worldwide within weeks.</p>
+          <p class="card-desc">Where pastry chef Dominique Ansel invented the Cronut in May 2013 — sold out in minutes, copied worldwide.</p>
         </div>
       </div>
       <div class="card">
@@ -237,7 +246,7 @@
           <span class="card-tag arts">Architecture</span>
           <div class="card-title">SoHo-Cast Iron Historic District</div>
           <div class="card-meta"><span>📍 Roughly Canal to Houston, Crosby to West Broadway</span></div>
-          <p class="card-desc">Walk Greene Street or Broadway for the concentration of 1840s–1890s cast-iron facades that gives the neighborhood its name and its National Register listing.</p>
+          <p class="card-desc">Walk Greene Street or Broadway for the 1840s–1890s cast-iron facades that give the neighborhood its name.</p>
         </div>
       </div>
     </div>
@@ -258,7 +267,7 @@
           <span class="card-tag nightlife">Jazz Club · Since 1935</span>
           <div class="card-title">Village Vanguard</div>
           <div class="card-meta"><span>📍 178 Seventh Ave South</span></div>
-          <p class="card-desc">The oldest operating jazz club in New York City — a basement room that hosted Bill Evans and John Coltrane's most famous engagements. The Vanguard Jazz Orchestra has played every Monday night since 1966.</p>
+          <p class="card-desc">The oldest operating jazz club in New York City — a basement room that hosted Bill Evans and Coltrane's most famous sets.</p>
         </div>
       </div>
       <div class="card">
@@ -266,7 +275,7 @@
           <span class="card-tag nightlife">Jazz Club · Since 1981</span>
           <div class="card-title">Blue Note</div>
           <div class="card-meta"><span>📍 131 W 3rd St</span></div>
-          <p class="card-desc">An intimate, upscale room that's hosted Dizzy Gillespie, Dave Brubeck, and Wynton Marsalis alongside up-and-coming acts since founder Danny Bensusan opened it in 1981.</p>
+          <p class="card-desc">An intimate, upscale room that's hosted Dizzy Gillespie, Dave Brubeck, and Wynton Marsalis since 1981.</p>
         </div>
       </div>
       <div class="card">
@@ -274,7 +283,7 @@
           <span class="card-tag nightlife">Live Music Bar · 40+ Years</span>
           <div class="card-title">The Red Lion</div>
           <div class="card-meta"><span>📍 151 Bleecker St</span></div>
-          <p class="card-desc">A Bleecker Street rock bar with a band on stage seven nights a week, 7 PM to close — blues, classic rock, soul and funk covers, no cover charge Sunday through Thursday.</p>
+          <p class="card-desc">A Bleecker Street rock bar with a band on stage seven nights a week — no cover Sunday through Thursday.</p>
         </div>
       </div>
       <div class="card">
@@ -282,7 +291,7 @@
           <span class="card-tag arts">University Performing Arts Center</span>
           <div class="card-title">NYU Skirball Center</div>
           <div class="card-meta"><span>📍 566 LaGuardia Pl</span></div>
-          <p class="card-desc">NYU's 850-seat theater near Washington Square Park runs two public seasons a year of music, dance, theater and comedy — open to anyone, not just students.</p>
+          <p class="card-desc">NYU's 850-seat theater runs two public seasons a year of music, dance, theater and comedy.</p>
         </div>
       </div>
       <div class="card">
@@ -290,7 +299,7 @@
           <span class="card-tag events">Annual Parade · Oct 31</span>
           <div class="card-title">Village Halloween Parade</div>
           <div class="card-meta"><span>📍 Sixth Ave, from Spring St to 16th St</span></div>
-          <p class="card-desc">Started in 1974 by puppeteer Ralph Lee with a small march through the neighborhood — now the world's largest Halloween parade, with tens of thousands of costumed marchers and roughly two million spectators.</p>
+          <p class="card-desc">Started in 1974 as a small neighborhood march — now the world's largest Halloween parade, drawing roughly two million spectators.</p>
         </div>
       </div>
     </div>
@@ -311,7 +320,7 @@
           <span class="card-tag dining">Ukrainian Diner · Since 1954</span>
           <div class="card-title">Veselka</div>
           <div class="card-meta"><span>📍 144 Second Ave</span></div>
-          <p class="card-desc">Opened as a candy store by Ukrainian refugees, then grew into a 24-hour diner serving pierogi and borscht to generations of East Villagers — now run by the founders' grandson.</p>
+          <p class="card-desc">Opened as a candy store by Ukrainian refugees, now a 24-hour diner serving pierogi and borscht, run by the founders' grandson.</p>
         </div>
       </div>
       <div class="card">
@@ -319,7 +328,7 @@
           <span class="card-tag nightlife">Concert Venue</span>
           <div class="card-title">Webster Hall</div>
           <div class="card-meta"><span>📍 125 E 11th St</span></div>
-          <p class="card-desc">A four-story, 2,500-capacity venue with a Grand Ballroom and several smaller rooms — one of the city's premier stops for touring acts and club nights alike.</p>
+          <p class="card-desc">A four-story, 2,500-capacity venue with a Grand Ballroom — a premier stop for touring acts and club nights.</p>
         </div>
       </div>
       <div class="card">
@@ -327,7 +336,7 @@
           <span class="card-tag outdoors">Park · Est. 1834</span>
           <div class="card-title">Tompkins Square Park</div>
           <div class="card-meta"><span>📍 Ave A to Ave B, 7th to 10th St</span></div>
-          <p class="card-desc">Roughly 450 elm trees planted after an 1878 redesign still shade the park's paths — the neighborhood's front yard since before the Civil War.</p>
+          <p class="card-desc">Roughly 450 elm trees shade the park's paths — the neighborhood's front yard since before the Civil War.</p>
         </div>
       </div>
     </div>
@@ -348,7 +357,7 @@
           <span class="card-tag outdoors">Elevated Park · Opened 2009</span>
           <div class="card-title">The High Line</div>
           <div class="card-meta"><span>📍 Gansevoort St to W 34th St</span></div>
-          <p class="card-desc">A mile and a half of gardens, art installations, and river views built on a defunct 1930s freight line — one of the most-copied park ideas in the world since it opened.</p>
+          <p class="card-desc">A mile and a half of gardens, art installations, and river views built on a defunct 1930s freight line.</p>
         </div>
       </div>
       <div class="card">
@@ -356,7 +365,7 @@
           <span class="card-tag dining">Food Hall · Since 1997</span>
           <div class="card-title">Chelsea Market</div>
           <div class="card-meta"><span>📍 75 Ninth Ave</span></div>
-          <p class="card-desc">Built inside the old Nabisco factory complex — where the Oreo cookie was first produced — the ground-floor concourse is now dozens of vendors under one roof.</p>
+          <p class="card-desc">Built inside the old Nabisco factory where the Oreo cookie was first produced — dozens of vendors under one roof.</p>
         </div>
       </div>
       <div class="card">
@@ -364,7 +373,7 @@
           <span class="card-tag arts">Art District</span>
           <div class="card-title">Chelsea Arts District</div>
           <div class="card-meta"><span>📍 18th–28th St, 10th–11th Ave</span></div>
-          <p class="card-desc">The city's densest concentration of contemporary art galleries, most with free admission and rotating shows most weeks of the year.</p>
+          <p class="card-desc">The city's densest concentration of contemporary art galleries, most with free admission.</p>
         </div>
       </div>
       <div class="card">
@@ -372,7 +381,7 @@
           <span class="card-tag nightlife">Arena</span>
           <div class="card-title">Madison Square Garden</div>
           <div class="card-meta"><span>📍 4 Pennsylvania Plaza</span></div>
-          <p class="card-desc">The city's marquee arena, home to the Knicks and Rangers and a regular stop for the biggest touring concerts — Gorillaz and Doja Cat are both booked here later this year.</p>
+          <p class="card-desc">The city's marquee arena, home to the Knicks and Rangers and a regular stop for major touring concerts.</p>
         </div>
       </div>
     </div>
@@ -393,7 +402,7 @@
           <span class="card-tag dining">Appetizing Store · Since 1934</span>
           <div class="card-title">Zabar's</div>
           <div class="card-meta"><span>📍 2245 Broadway (at 80th St)</span></div>
-          <p class="card-desc">Four generations of the Zabar family running the same smoked-fish-and-coffee institution — as much a neighborhood landmark as anything on a map.</p>
+          <p class="card-desc">Four generations of the Zabar family running the same smoked-fish-and-coffee institution since 1934.</p>
         </div>
       </div>
       <div class="card">
@@ -401,7 +410,7 @@
           <span class="card-tag dining">Bakery · Since 1995</span>
           <div class="card-title">Levain Bakery</div>
           <div class="card-meta"><span>📍 167 W 74th St</span></div>
-          <p class="card-desc">The original location of the six-ounce chocolate-chip-walnut cookie that launched a national chain — still a line-out-the-door basement bakery on a residential block.</p>
+          <p class="card-desc">The original location of the six-ounce chocolate-chip-walnut cookie that launched a national chain.</p>
         </div>
       </div>
       <div class="card">
@@ -409,7 +418,7 @@
           <span class="card-tag arts">Museum</span>
           <div class="card-title">American Museum of Natural History</div>
           <div class="card-meta"><span>📍 Central Park West at 79th St</span></div>
-          <p class="card-desc">21 interconnected buildings, 45 exhibition halls, and a planetarium — one of the largest natural history museums on Earth.</p>
+          <p class="card-desc">21 buildings and 45 exhibition halls — one of the largest natural history museums on Earth.</p>
         </div>
       </div>
       <div class="card">
@@ -417,7 +426,7 @@
           <span class="card-tag nightlife">Theatre · Since 1929</span>
           <div class="card-title">Beacon Theatre</div>
           <div class="card-meta"><span>📍 2124 Broadway</span></div>
-          <p class="card-desc">A 2,894-seat Beaux-Arts movie palace turned National Historic Landmark — one of the city's best-loved rooms for touring concerts, with shows most weeks of the year.</p>
+          <p class="card-desc">A 2,894-seat Beaux-Arts movie palace turned National Historic Landmark, with touring concerts most weeks.</p>
         </div>
       </div>
     </div>
@@ -438,7 +447,7 @@
           <span class="card-tag dining">Soul Food · Since 1962</span>
           <div class="card-title">Sylvia's Restaurant</div>
           <div class="card-meta"><span>📍 328 Malcolm X Blvd</span></div>
-          <p class="card-desc">Founded by Sylvia Woods, "The Queen of Soul Food," in a 35-seat storefront — now a nearly block-long Harlem institution that's fed everyone from neighborhood regulars to visiting presidents.</p>
+          <p class="card-desc">Founded by Sylvia Woods, "The Queen of Soul Food," in a 35-seat storefront — now a nearly block-long institution.</p>
         </div>
       </div>
       <div class="card">
@@ -446,7 +455,7 @@
           <span class="card-tag dining">American</span>
           <div class="card-title">Red Rooster</div>
           <div class="card-meta"><span>📍 310 Lenox Ave</span></div>
-          <p class="card-desc">Chef Marcus Samuelsson's restaurant, named for a legendary Harlem speakeasy that once hosted Duke Ellington and James Baldwin — comfort food and live music on Lenox Avenue.</p>
+          <p class="card-desc">Chef Marcus Samuelsson's restaurant, named for a legendary speakeasy that hosted Duke Ellington and James Baldwin.</p>
         </div>
       </div>
       <div class="card">
@@ -454,7 +463,7 @@
           <span class="card-tag events">Annual Festival · Aug 1–16</span>
           <div class="card-title">Harlem Week</div>
           <div class="card-meta"><span>📍 Citywide, centered on Harlem</span></div>
-          <p class="card-desc">Started as a single day in 1974 to lift the neighborhood's spirits during a hard decade; the 2026 edition marked its 52nd straight year, still built around "A Great Day in Harlem" and Harlem Day.</p>
+          <p class="card-desc">Started as a single day in 1974; the 2026 edition marked its 52nd straight year.</p>
         </div>
       </div>
     </div>
@@ -475,7 +484,7 @@
           <span class="card-tag dining">Tavern &amp; Museum · Since 1762</span>
           <div class="card-title">Fraunces Tavern</div>
           <div class="card-meta"><span>📍 54 Pearl St</span></div>
-          <p class="card-desc">The oldest building in Manhattan — George Washington's watering hole and the site of his farewell address to his officers in 1783. Still a working restaurant, with a museum on the upper floors.</p>
+          <p class="card-desc">The oldest building in Manhattan — Washington's watering hole, still a working restaurant with a museum upstairs.</p>
         </div>
       </div>
       <div class="card">
@@ -483,7 +492,7 @@
           <span class="card-tag dining">Steakhouse · Dating to 1837</span>
           <div class="card-title">Delmonico's</div>
           <div class="card-meta"><span>📍 56 Beaver St</span></div>
-          <p class="card-desc">Widely credited as one of America's first fine-dining restaurants. Closed during the pandemic in 2020 and reopened at its historic Beaver Street address in September 2023.</p>
+          <p class="card-desc">Widely credited as one of America's first fine-dining restaurants, reopened at its historic address in 2023.</p>
         </div>
       </div>
       <div class="card">
@@ -491,7 +500,7 @@
           <span class="card-tag arts">Memorial &amp; Museum</span>
           <div class="card-title">9/11 Memorial &amp; Museum</div>
           <div class="card-meta"><span>📍 180 Greenwich St</span></div>
-          <p class="card-desc">The outdoor Memorial plaza is free, no reservation required; the underground museum, built around the World Trade Center's original foundations, requires a timed ticket.</p>
+          <p class="card-desc">The outdoor Memorial plaza is free; the underground museum requires a timed ticket.</p>
         </div>
       </div>
     </div>

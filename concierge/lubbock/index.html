@@ -31,28 +31,24 @@
     .city-hero .hero-sub { font-size: 0.9rem; margin-bottom: 1rem; }
     .city-hero-meta { font-size: 0.8rem; gap: 1rem; }
 
-    .highlight-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-bottom: 1.25rem;
-    }
-    .highlight-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 1rem 1.1rem;
-      box-shadow: var(--shadow);
-      border-left: 4px solid var(--gold);
-    }
-    .highlight-card h4 { font-size: 0.88rem; color: var(--navy); margin-bottom: 0.2rem; }
-    .highlight-card p { font-size: 0.78rem; color: var(--sub); }
-    .highlight-card .big-num {
+    /* Hero stat bubbles: compact vertical stack, right of the title */
+    .hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; }
+    .hero-main { flex: 1; min-width: 0; }
+    .hero-stats-stack { display: flex; flex-direction: column; gap: 0.5rem; flex-shrink: 0; width: 176px; }
+    .hero-stat-card { background: var(--white); border-radius: var(--radius); padding: 0.5rem 0.85rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); text-align: right; }
+    .hero-stat-card h4 { font-size: 0.66rem; color: var(--navy); margin: 0.12rem 0 0.08rem; }
+    .hero-stat-card p { font-size: 0.62rem; color: var(--sub); line-height: 1.25; }
+    .hero-stat-card .big-num {
       font-family: 'Playfair Display', serif;
-      font-size: 1.75rem;
+      font-size: 1.15rem;
       color: var(--gold);
       font-weight: 700;
       line-height: 1;
-      margin-bottom: 0.15rem;
+    }
+    @media (max-width: 720px) {
+      .hero-top { flex-direction: column; }
+      .hero-stats-stack { width: 100%; flex-direction: row; flex-wrap: wrap; }
+      .hero-stat-card { flex: 1; min-width: 130px; text-align: left; }
     }
 
     .section { padding: 2.5rem 5%; }
@@ -99,6 +95,12 @@
     .ig-handle { font-size: 0.82rem; font-weight: 600; color: var(--navy); }
     .ig-desc { font-size: 0.74rem; color: var(--sub); margin-top: 0.1rem; }
 
+    /* Tighter listing cards now that descriptions are one short sentence */
+    .cat-section .card-body { padding: 0.9rem 1rem; }
+    .cat-section .card-desc { font-size: 0.82rem; line-height: 1.4; }
+    .cat-section .card-meta { margin-bottom: 0.3rem; }
+    .event-item { padding: 0.85rem 0; }
+
     /* Page-level content grid: main content column + persistent map sidebar,
        placed the same way Connecticut places its map — right column, near the
        top — but stretched down the whole page and pinned with position:sticky
@@ -110,13 +112,9 @@
     .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border); }
 
     @media (max-width: 900px) {
-      .highlight-strip { grid-template-columns: repeat(3, 1fr); }
       .two-col { grid-template-columns: 1fr; }
       .content-grid { grid-template-columns: 1fr; }
       .map-sidebar { position: static; }
-    }
-    @media (max-width: 600px) {
-      .highlight-strip { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -161,37 +159,40 @@
 
   <!-- CITY HERO -->
   <section class="city-hero">
-    <div class="section-label">Texas</div>
-    <h1>Lubbock, <span>TX</span></h1>
-    <p class="hero-sub">Home of Texas Tech University, the Buddy Holly birthplace, and a live music and BBQ scene that punches well above its weight on the South Plains.</p>
-    <div class="city-hero-meta">
-      <span>📍 Lubbock County, TX</span>
-      <span>🏟️ Texas Tech Red Raiders</span>
-      <span>🎸 Birthplace of Buddy Holly</span>
-      <span>🌾 Hub of the South Plains</span>
+    <div class="hero-top">
+      <div class="hero-main">
+        <div class="section-label">Texas</div>
+        <h1>Lubbock, <span>TX</span></h1>
+        <p class="hero-sub">Home of Texas Tech University, the Buddy Holly birthplace, and a live music and BBQ scene that punches well above its weight on the South Plains.</p>
+        <div class="city-hero-meta">
+          <span>📍 Lubbock County, TX</span>
+          <span>🏟️ Texas Tech Red Raiders</span>
+          <span>🎸 Birthplace of Buddy Holly</span>
+          <span>🌾 Hub of the South Plains</span>
+        </div>
+      </div>
+      <div class="hero-stats-stack">
+        <div class="hero-stat-card">
+          <div class="big-num">40K+</div>
+          <h4>Texas Tech Students</h4>
+          <p>Fuels a vibrant college-town energy</p>
+        </div>
+        <div class="hero-stat-card">
+          <div class="big-num">60K</div>
+          <h4>Jones AT&amp;T Stadium</h4>
+          <p>Loudest atmospheres in the Big 12</p>
+        </div>
+        <div class="hero-stat-card">
+          <div class="big-num">3</div>
+          <h4>Districts</h4>
+          <p>Depot, Tech &amp; Historic Overton</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- QUICK STATS -->
+  <!-- CATEGORY FILTER -->
   <section class="section-sm" style="background:var(--white);">
-    <div class="highlight-strip">
-      <div class="highlight-card">
-        <div class="big-num">40K+</div>
-        <h4>Texas Tech Students</h4>
-        <p>One of the largest universities in the nation, fueling a vibrant college-town energy</p>
-      </div>
-      <div class="highlight-card">
-        <div class="big-num">60K</div>
-        <h4>Jones AT&amp;T Stadium</h4>
-        <p>Home of Red Raider football — one of the loudest and most electric atmospheres in the Big 12</p>
-      </div>
-      <div class="highlight-card">
-        <div class="big-num">3</div>
-        <h4>Districts</h4>
-        <p>Depot District, Tech District, and the Historic Overton neighborhood each with their own scene</p>
-      </div>
-    </div>
-
     <!-- Category filter -->
     <div class="category-pills">
       <button class="pill active" data-cat="all">All</button>
@@ -224,7 +225,7 @@
           </div>
           <div class="event-info">
             <h4>🏈 Texas Tech Football Season Opener</h4>
-            <p>Red Raiders kick off the 2025 season at Jones AT&amp;T Stadium. The biggest party in Lubbock — tailgates start 4 hours before kickoff on The Strip.</p>
+            <p>Red Raiders kick off the 2025 season — tailgates start 4 hours early on The Strip.</p>
             <div class="event-venue">📍 Jones AT&amp;T Stadium · Texas Tech Campus</div>
             <a class="event-link" href="https://texastech.com/sports/football" target="_blank" rel="noopener">Get tickets →</a>
           </div>
@@ -238,7 +239,7 @@
           </div>
           <div class="event-info">
             <h4>🎸 Buddy Holly Music Festival</h4>
-            <p>Annual tribute to Lubbock's most famous son. Multiple stages, local and national artists, food vendors, and a free outdoor concert at Buddy Holly Hall.</p>
+            <p>Annual tribute to Lubbock's most famous son, with multiple stages and a free outdoor concert.</p>
             <div class="event-venue">📍 Buddy Holly Hall &amp; Depot District · Downtown</div>
             <a class="event-link" href="https://buddyhollycenter.org" target="_blank" rel="noopener">Event info →</a>
           </div>
@@ -252,7 +253,7 @@
           </div>
           <div class="event-info">
             <h4>🏈 Texas Tech vs. Oklahoma State</h4>
-            <p>Big 12 conference clash at Jones AT&amp;T Stadium. Always one of the loudest home games of the year. Wreck 'Em Tech.</p>
+            <p>Big 12 conference clash — always one of the loudest home games of the year.</p>
             <div class="event-venue">📍 Jones AT&amp;T Stadium · 6:30 PM kickoff (TBD)</div>
             <a class="event-link" href="https://texastech.com/sports/football" target="_blank" rel="noopener">Get tickets →</a>
           </div>
@@ -266,7 +267,7 @@
           </div>
           <div class="event-info">
             <h4>🎤 Reba McEntire at United Supermarkets Arena</h4>
-            <p>Country legend and Lubbock favorite brings her 2025 tour to the USA. One of the biggest shows of the year in the Hub City.</p>
+            <p>Country legend and Lubbock favorite brings her 2025 tour to the USA.</p>
             <div class="event-venue">📍 United Supermarkets Arena · Texas Tech Campus</div>
             <a class="event-link" href="https://www.unitedssa.com" target="_blank" rel="noopener">Get tickets →</a>
           </div>
@@ -280,7 +281,7 @@
           </div>
           <div class="event-info">
             <h4>🏈 Texas Tech Homecoming</h4>
-            <p>The biggest weekend on the Texas Tech calendar. Alumni events all week, parade through campus, and the homecoming game at Jones AT&amp;T Stadium.</p>
+            <p>The biggest weekend on the Texas Tech calendar — alumni events, a parade, and the homecoming game.</p>
             <div class="event-venue">📍 Texas Tech Campus · Weekend of Oct 11</div>
             <a class="event-link" href="https://texastech.com" target="_blank" rel="noopener">Event info →</a>
           </div>
@@ -294,7 +295,7 @@
           </div>
           <div class="event-info">
             <h4>🌮 Lubbock on the Square Food &amp; Wine Festival</h4>
-            <p>Downtown food festival showcasing local chefs, Texas wineries from the High Plains, and live music from area bands. Family-friendly.</p>
+            <p>Downtown food festival with local chefs, High Plains wineries, and live music. Family-friendly.</p>
             <div class="event-venue">📍 Courthouse Square · Downtown Lubbock</div>
             <a class="event-link" href="https://downtownlubbock.org" target="_blank" rel="noopener">Event info →</a>
           </div>
@@ -308,7 +309,7 @@
           </div>
           <div class="event-info">
             <h4>🏀 Texas Tech Men's Basketball Season Opener</h4>
-            <p>Red Raiders tip off the 2025–26 season at United Supermarkets Arena. TTU basketball has become one of the premier programs in college basketball.</p>
+            <p>Red Raiders tip off the 2025–26 season — one of the premier programs in college basketball.</p>
             <div class="event-venue">📍 United Supermarkets Arena · Texas Tech Campus</div>
             <a class="event-link" href="https://texastech.com/sports/mens-basketball" target="_blank" rel="noopener">Get tickets →</a>
           </div>
@@ -322,7 +323,7 @@
           </div>
           <div class="event-info">
             <h4>🎸 Depot District Live Music Crawl</h4>
-            <p>Annual bar crawl through the Depot District — Lubbock's live music hub. Dozens of bands, beer gardens, and late-night food trucks. $15 wristband.</p>
+            <p>Annual bar crawl through Lubbock's live music hub — dozens of bands, $15 wristband.</p>
             <div class="event-venue">📍 Depot District · Avenue Q &amp; 19th St</div>
             <a class="event-link" href="https://lubbockdepotdistrict.com" target="_blank" rel="noopener">Event info →</a>
           </div>
@@ -336,7 +337,7 @@
           </div>
           <div class="event-info">
             <h4>🎵 Live Music on the Strip</h4>
-            <p>Every Friday and Saturday night, the bars along University Avenue (The Strip) fill up with live local bands. Cover bands, country, blues, and originals. No tickets needed — walk in.</p>
+            <p>Fri–Sat nights, bars along University Ave fill up with live local bands. No tickets needed.</p>
             <div class="event-venue">📍 University Ave · The Strip · Fri–Sat nights</div>
           </div>
           <span class="badge badge-open">Weekly</span>
@@ -411,7 +412,7 @@
           <span class="card-tag dining">BBQ · $$</span>
           <div class="card-title">Evie Mae's Pit Barbecue</div>
           <div class="card-meta"><span>📍 8108 Slide Rd · West Lubbock</span></div>
-          <p class="card-desc">The undisputed king of Lubbock BBQ. Brisket, ribs, sausage, and pulled pork that rival anything in Austin or the Hill Country. Sells out daily — arrive early.</p>
+          <p class="card-desc">Lubbock's top-rated BBQ — brisket, ribs, and pulled pork that sell out daily.</p>
         </div>
       </div>
 
@@ -420,7 +421,7 @@
           <span class="card-tag dining">Tex-Mex · $$</span>
           <div class="card-title">Abuelo's Mexican Restaurant</div>
           <div class="card-meta"><span>📍 Multiple locations · Lubbock</span></div>
-          <p class="card-desc">Lubbock-founded upscale Tex-Mex chain beloved citywide. Fajitas, margaritas, and enchiladas done right. The original location is where it all started.</p>
+          <p class="card-desc">Lubbock-founded upscale Tex-Mex chain beloved citywide for fajitas and margaritas.</p>
         </div>
       </div>
 
@@ -429,7 +430,7 @@
           <span class="card-tag dining">American · $$$</span>
           <div class="card-title">The Nicolett</div>
           <div class="card-meta"><span>📍 2407 19th St · Depot District</span></div>
-          <p class="card-desc">Upscale American in the heart of the Depot District. Hand-cut steaks, locally-sourced ingredients, and one of the best wine lists in West Texas. Perfect for a game-night dinner.</p>
+          <p class="card-desc">Upscale American in the Depot District — hand-cut steaks and one of West Texas's best wine lists.</p>
         </div>
       </div>
 
@@ -438,7 +439,7 @@
           <span class="card-tag dining">Burgers · $</span>
           <div class="card-title">Triple J Chophouse &amp; Brew</div>
           <div class="card-meta"><span>📍 1807 Buddy Holly Ave · Depot</span></div>
-          <p class="card-desc">Craft burgers and house-brewed beer steps from the music venues. A Depot District staple before a show. The Triple J Burger is iconic.</p>
+          <p class="card-desc">Craft burgers and house-brewed beer steps from the music venues — a Depot District staple.</p>
         </div>
       </div>
 
@@ -447,7 +448,7 @@
           <span class="card-tag dining">Italian · $$</span>
           <div class="card-title">Orlando's Italian Restaurant</div>
           <div class="card-meta"><span>📍 2402 Ave Q · Near Campus</span></div>
-          <p class="card-desc">Family-owned Italian institution loved by students and locals alike since the 1980s. Generous portions, BYOB wine policy, and pasta that'll have you coming back every visit.</p>
+          <p class="card-desc">Family-owned Italian institution since the 1980s, loved by students and locals alike.</p>
         </div>
       </div>
 
@@ -456,7 +457,7 @@
           <span class="card-tag dining">Breakfast · $</span>
           <div class="card-title">J&amp;L Home Cooking Restaurant</div>
           <div class="card-meta"><span>📍 3107 34th St · South Lubbock</span></div>
-          <p class="card-desc">The definitive Lubbock breakfast spot. Biscuits and gravy, chicken fried steak, and eggs the way West Texas does it. Cash only, lines out the door on weekends.</p>
+          <p class="card-desc">The definitive Lubbock breakfast spot — cash only, lines out the door on weekends.</p>
         </div>
       </div>
 
@@ -475,7 +476,7 @@
           <span class="card-tag nightlife">Live Music</span>
           <div class="card-title">Blue Light Live</div>
           <div class="card-meta"><span>📍 1806 Buddy Holly Ave · Depot District</span></div>
-          <p class="card-desc">The quintessential Lubbock music venue. Texas singer-songwriters, outlaw country, and Red Dirt music every weekend. Intimate, warm, and completely authentic.</p>
+          <p class="card-desc">The quintessential Lubbock music venue — Texas singer-songwriters and Red Dirt every weekend.</p>
           <a class="event-link" href="https://thebluelightlive.com" target="_blank" rel="noopener">See shows →</a>
         </div>
       </div>
@@ -485,7 +486,7 @@
           <span class="card-tag nightlife">Country Bar</span>
           <div class="card-title">Whiskey Dicks</div>
           <div class="card-meta"><span>📍 2419 University Ave · The Strip</span></div>
-          <p class="card-desc">The Strip's most legendary bar. Country music, mechanical bull, cheap beer, and wall-to-wall Red Raiders gear. The pre-game bar for home games. Opens early on football Saturdays.</p>
+          <p class="card-desc">The Strip's most legendary bar — mechanical bull, cheap beer, and the pre-game headquarters.</p>
         </div>
       </div>
 
@@ -494,7 +495,7 @@
           <span class="card-tag nightlife">Dive Bar</span>
           <div class="card-title">The Library Bar</div>
           <div class="card-meta"><span>📍 1516 University Ave · The Strip</span></div>
-          <p class="card-desc">A Texas Tech institution. Pool tables, cold beer, and a relaxed crowd. The kind of bar you tell people you're going to "the library." Live music some weekends.</p>
+          <p class="card-desc">A Texas Tech institution — pool tables, cold beer, and a relaxed crowd.</p>
         </div>
       </div>
 
@@ -503,7 +504,7 @@
           <span class="card-tag nightlife">Live Music</span>
           <div class="card-title">Crickets Bar &amp; Grill</div>
           <div class="card-meta"><span>📍 Depot District</span></div>
-          <p class="card-desc">Named for Buddy Holly's band, Crickets is a cornerstone of the Depot District scene. Live music Thursday–Saturday, strong Texas craft beer selection, great wings.</p>
+          <p class="card-desc">Named for Buddy Holly's band — live music Thursday–Saturday and a strong craft beer selection.</p>
         </div>
       </div>
 
@@ -512,7 +513,7 @@
           <span class="card-tag nightlife">Cocktail Bar</span>
           <div class="card-title">JoJo's Bohemia</div>
           <div class="card-meta"><span>📍 Depot District</span></div>
-          <p class="card-desc">Craft cocktails and an eclectic, artsy vibe in the Depot District. Popular with the TTU arts crowd. Live jazz and acoustic on weekends. Great for a date or a night out with friends.</p>
+          <p class="card-desc">Craft cocktails and an eclectic, artsy vibe — live jazz and acoustic on weekends.</p>
         </div>
       </div>
 
@@ -521,7 +522,7 @@
           <span class="card-tag nightlife">Rooftop Bar</span>
           <div class="card-title">1520 Bar &amp; Lounge</div>
           <div class="card-meta"><span>📍 1520 University Ave · The Strip</span></div>
-          <p class="card-desc">Multi-level bar with rooftop views of the campus and city. DJ nights on weekends, craft cocktails, and a VIP section that's always hopping after TTU home games.</p>
+          <p class="card-desc">Multi-level bar with rooftop views — DJ nights and craft cocktails, hopping after TTU home games.</p>
         </div>
       </div>
 
@@ -543,7 +544,7 @@
           <span class="card-tag events">Football · Big 12</span>
           <div class="card-title">Jones AT&amp;T Stadium</div>
           <div class="card-meta"><span>📍 2526 6th St · Texas Tech Campus</span></div>
-          <p class="card-desc">60,454-seat home of Red Raider football. One of the most electric atmospheres in the Big 12. Tailgate scene on The Strip and Flint Ave is legendary — arrive early. Season: Sep–Nov.</p>
+          <p class="card-desc">60,454-seat home of Red Raider football — one of the most electric atmospheres in the Big 12. Season: Sep–Nov.</p>
           <a class="event-link" href="https://texastech.com/sports/football" target="_blank" rel="noopener">Football schedule →</a>
         </div>
       </div>
@@ -553,7 +554,7 @@
           <span class="card-tag events">Basketball · Big 12</span>
           <div class="card-title">United Supermarkets Arena</div>
           <div class="card-meta"><span>📍 1701 Indiana Ave · Texas Tech Campus</span></div>
-          <p class="card-desc">15,098-seat arena hosting men's and women's basketball, plus major concerts and events. TTU basketball has been a Final Four contender in recent years. Season: Nov–Mar.</p>
+          <p class="card-desc">15,098-seat arena hosting men's and women's basketball plus major concerts. Season: Nov–Mar.</p>
           <a class="event-link" href="https://www.unitedssa.com" target="_blank" rel="noopener">Arena events →</a>
         </div>
       </div>
@@ -563,7 +564,7 @@
           <span class="card-tag events">Baseball · Big 12</span>
           <div class="card-title">Dan Law Field / Rip Griffin Park</div>
           <div class="card-meta"><span>📍 Texas Tech Campus</span></div>
-          <p class="card-desc">Home of Red Raider baseball — one of the most consistent Big 12 programs. Intimate ballpark atmosphere with great sightlines. Season: Feb–May. National championship contender.</p>
+          <p class="card-desc">Home of Red Raider baseball, one of the most consistent Big 12 programs. Season: Feb–May.</p>
           <a class="event-link" href="https://texastech.com/sports/baseball" target="_blank" rel="noopener">Baseball schedule →</a>
         </div>
       </div>
@@ -573,7 +574,7 @@
           <span class="card-tag events">Game Day</span>
           <div class="card-title">The Strip — University Ave</div>
           <div class="card-meta"><span>📍 University Ave · Near Campus</span></div>
-          <p class="card-desc">The main artery of game-day Lubbock. Bars like Whiskey Dicks, Depot, and the Varsity fill up hours before kickoff. Red and black everywhere. The official pre-game headquarters.</p>
+          <p class="card-desc">The main artery of game-day Lubbock — bars fill up hours before kickoff, red and black everywhere.</p>
         </div>
       </div>
 
@@ -582,7 +583,7 @@
           <span class="card-tag events">Women's Sports</span>
           <div class="card-title">TTU Women's Basketball</div>
           <div class="card-meta"><span>📍 United Supermarkets Arena</span></div>
-          <p class="card-desc">The Lady Raiders have been a Big 12 force for decades. Games at United Supermarkets Arena draw passionate crowds and strong rivalries with Baylor, UT, and Kansas.</p>
+          <p class="card-desc">The Lady Raiders have been a Big 12 force for decades, with strong rivalries against Baylor and UT.</p>
           <a class="event-link" href="https://texastech.com/sports/womens-basketball" target="_blank" rel="noopener">Schedule →</a>
         </div>
       </div>
@@ -592,7 +593,7 @@
           <span class="card-tag events">Volleyball · Soccer</span>
           <div class="card-title">More Red Raider Sports</div>
           <div class="card-meta"><span>📍 Texas Tech Campus</span></div>
-          <p class="card-desc">TTU fields 17 varsity sports including volleyball (Lubbock Memorial Civic Center), soccer, golf, tennis, and track &amp; field. Full schedule on the official athletics site.</p>
+          <p class="card-desc">TTU fields 17 varsity sports, including volleyball, soccer, golf, tennis, and track &amp; field.</p>
           <a class="event-link" href="https://texastech.com/sports" target="_blank" rel="noopener">All TTU sports →</a>
         </div>
       </div>
@@ -636,7 +637,7 @@
           <span class="card-tag arts">Music Hall</span>
           <div class="card-title">Buddy Holly Hall of Performing Arts</div>
           <div class="card-meta"><span>📍 1300 Mac Davis Ln · Downtown</span></div>
-          <p class="card-desc">Opened 2021 — Lubbock's crown jewel. 2,200-seat Concert Hall and 450-seat Crickets Theatre. World-class acoustics hosting Broadway tours, symphonies, and major concerts.</p>
+          <p class="card-desc">Opened 2021 — Lubbock's crown jewel, hosting Broadway tours, symphonies, and major concerts.</p>
           <a class="event-link" href="https://buddyhollyhall.com" target="_blank" rel="noopener">See schedule →</a>
         </div>
       </div>
@@ -646,7 +647,7 @@
           <span class="card-tag arts">Museum</span>
           <div class="card-title">Buddy Holly Center</div>
           <div class="card-meta"><span>📍 1801 Crickets Ave · Depot District</span></div>
-          <p class="card-desc">A must-visit. The definitive collection of Buddy Holly memorabilia, plus the West Texas Walk of Fame, and rotating exhibits on the Lubbock music scene.</p>
+          <p class="card-desc">The definitive collection of Buddy Holly memorabilia, plus the West Texas Walk of Fame.</p>
           <a class="event-link" href="https://buddyhollycenter.org" target="_blank" rel="noopener">Plan your visit →</a>
         </div>
       </div>
@@ -656,7 +657,7 @@
           <span class="card-tag arts">Museum</span>
           <div class="card-title">National Ranching Heritage Center</div>
           <div class="card-meta"><span>📍 3121 4th St · Texas Tech Campus</span></div>
-          <p class="card-desc">37-acre outdoor museum with 48 authentic historic ranch structures. Tells the story of ranching from the 1780s to the 20th century. Free admission. A uniquely Texan experience.</p>
+          <p class="card-desc">37-acre outdoor museum with 48 authentic historic ranch structures. Free admission.</p>
           <a class="event-link" href="https://nrhc.ttu.edu" target="_blank" rel="noopener">Learn more →</a>
         </div>
       </div>
@@ -666,7 +667,7 @@
           <span class="card-tag arts">Museum</span>
           <div class="card-title">Museum of Texas Tech University</div>
           <div class="card-meta"><span>📍 3301 4th St · Texas Tech Campus</span></div>
-          <p class="card-desc">One of the largest university museums in the US. Collections spanning natural science, anthropology, art, and history. The Moody Planetarium is a local favorite.</p>
+          <p class="card-desc">One of the largest university museums in the US, spanning natural science, art, and history.</p>
           <a class="event-link" href="https://www.depts.ttu.edu/museumttu" target="_blank" rel="noopener">Visit info →</a>
         </div>
       </div>
@@ -676,7 +677,7 @@
           <span class="card-tag arts">Concert Venue</span>
           <div class="card-title">United Supermarkets Arena</div>
           <div class="card-meta"><span>📍 1701 Indiana Ave · Texas Tech Campus</span></div>
-          <p class="card-desc">Beyond basketball, the USA hosts major national acts — recent shows include country legends, pop tours, and rodeo events. Check the calendar year-round.</p>
+          <p class="card-desc">Beyond basketball, the USA hosts major national acts — country, pop tours, and rodeo events.</p>
           <a class="event-link" href="https://www.unitedssa.com" target="_blank" rel="noopener">Event calendar →</a>
         </div>
       </div>
@@ -686,7 +687,7 @@
           <span class="card-tag arts">Winery</span>
           <div class="card-title">Cap*Rock Winery</div>
           <div class="card-meta"><span>📍 408 E Woodrow Rd · Lubbock</span></div>
-          <p class="card-desc">The Texas High Plains AVA produces excellent wine and Lubbock is at its center. Cap*Rock is the most accessible tasting room in the city — tours, tastings, and a stunning view.</p>
+          <p class="card-desc">The most accessible tasting room in the Texas High Plains AVA — tours, tastings, and a stunning view.</p>
         </div>
       </div>
 
@@ -704,7 +705,7 @@
           <span class="card-tag outdoors">Park / Trail</span>
           <div class="card-title">Mackenzie Park</div>
           <div class="card-meta"><span>📍 301 I-27 Frontage Rd · East Lubbock</span></div>
-          <p class="card-desc">900+ acres with a golf course, Prairie Dog Town, jogging trails, a miniature train, and the Meadowbrook Golf Course. The largest public park in Lubbock and a local landmark.</p>
+          <p class="card-desc">900+ acres with Prairie Dog Town, jogging trails, and a miniature train — the largest park in Lubbock.</p>
         </div>
       </div>
 
@@ -713,7 +714,7 @@
           <span class="card-tag outdoors">Nature</span>
           <div class="card-title">Lubbock Lake Landmark</div>
           <div class="card-meta"><span>📍 2401 Landmark Dr · North Lubbock</span></div>
-          <p class="card-desc">National Historic Landmark with 12,000 years of continuous human occupation history. Walking trails through the playa lake ecosystem. Archaeology museum on-site. Free.</p>
+          <p class="card-desc">National Historic Landmark with 12,000 years of continuous human occupation history. Free.</p>
         </div>
       </div>
 
@@ -722,7 +723,7 @@
           <span class="card-tag outdoors">Campus</span>
           <div class="card-title">Texas Tech University Campus</div>
           <div class="card-meta"><span>📍 Texas Tech Pkwy · West Lubbock</span></div>
-          <p class="card-desc">1,839-acre Spanish Renaissance campus is one of the most beautiful in the country. Walk the Memorial Circle, Carol of Lights at Christmas, and the stunning architecture.</p>
+          <p class="card-desc">1,839-acre Spanish Renaissance campus, one of the most beautiful in the country.</p>
         </div>
       </div>
 
@@ -731,7 +732,7 @@
           <span class="card-tag outdoors">Golf</span>
           <div class="card-title">Rawls Course at Texas Tech</div>
           <div class="card-meta"><span>📍 3720 4th St · Texas Tech Campus</span></div>
-          <p class="card-desc">One of the top public university golf courses in the country. Designed by Tom Doak, it has hosted NCAA Regionals. Stunning prairie landscape design. Open to the public.</p>
+          <p class="card-desc">Tom Doak–designed course that's hosted NCAA Regionals — open to the public.</p>
           <a class="event-link" href="https://rawlscourse.com" target="_blank" rel="noopener">Tee times →</a>
         </div>
       </div>
@@ -741,7 +742,7 @@
           <span class="card-tag outdoors">Lake</span>
           <div class="card-title">Buffalo Springs Lake</div>
           <div class="card-meta"><span>📍 9999 High Meadow Rd · Outside Lubbock</span></div>
-          <p class="card-desc">The closest real swimming, camping, and fishing to Lubbock. Water sports, kayaking, and a beach area. Popular weekend destination for locals. 15 minutes from downtown.</p>
+          <p class="card-desc">The closest real swimming, camping, and fishing to Lubbock — 15 minutes from downtown.</p>
         </div>
       </div>
 
@@ -750,7 +751,7 @@
           <span class="card-tag outdoors">Wineries</span>
           <div class="card-title">Texas High Plains Wine Trail</div>
           <div class="card-meta"><span>📍 Multiple locations · Lubbock area</span></div>
-          <p class="card-desc">The High Plains AVA produces 80% of Texas's wine grapes. A half-dozen tasting rooms within 30 minutes of downtown — Cap*Rock, McPherson Cellars, and Llano Estacado are the anchors.</p>
+          <p class="card-desc">The High Plains AVA produces 80% of Texas's wine grapes, with tasting rooms within 30 minutes of downtown.</p>
         </div>
       </div>
 
