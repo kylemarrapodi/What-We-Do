@@ -306,14 +306,18 @@ function buildSearchIndex() {
     { label:"Bubby's",            sub:'Tribeca, Manhattan',    type:'place',  url: p+'manhattan/index.html#tribeca',          keywords:['bubbys','bubby','tribeca breakfast'] },
     { label:'Balthazar',          sub:'SoHo, Manhattan',       type:'place',  url: p+'manhattan/index.html#soho',             keywords:['balthazar','soho brasserie','french restaurant soho'] },
     { label:'Dominique Ansel Bakery', sub:'SoHo, Manhattan',   type:'place',  url: p+'manhattan/index.html#soho',             keywords:['dominique ansel','cronut','soho bakery'] },
+    { label:'The Red Lion',       sub:'Greenwich Village, Manhattan', type:'place', url: p+'manhattan/index.html#greenwich-village', keywords:['red lion','red lion nyc','bleecker street bar','live music bar'] },
     { label:'Village Vanguard',   sub:'Greenwich Village, Manhattan', type:'place', url: p+'manhattan/index.html#greenwich-village', keywords:['village vanguard','jazz club','oldest jazz club nyc'] },
     { label:'Blue Note',          sub:'Greenwich Village, Manhattan', type:'place', url: p+'manhattan/index.html#greenwich-village', keywords:['blue note','blue note jazz club','jazz greenwich village'] },
+    { label:'NYU Skirball Center',sub:'Greenwich Village, Manhattan', type:'place', url: p+'manhattan/index.html#greenwich-village', keywords:['nyu skirball','skirball center','nyu performing arts','university concert hall'] },
     { label:'Veselka',            sub:'East Village, Manhattan', type:'place', url: p+'manhattan/index.html#east-village',     keywords:['veselka','ukrainian diner','east village restaurant'] },
     { label:'Webster Hall',       sub:'East Village, Manhattan', type:'place', url: p+'manhattan/index.html#east-village',     keywords:['webster hall','concert venue east village'] },
     { label:'The High Line',      sub:'Chelsea, Manhattan',    type:'place',  url: p+'manhattan/index.html#chelsea',          keywords:['high line','elevated park','chelsea park'] },
     { label:'Chelsea Market',     sub:'Chelsea, Manhattan',    type:'place',  url: p+'manhattan/index.html#chelsea',          keywords:['chelsea market','food hall chelsea','nabisco factory'] },
+    { label:'Madison Square Garden', sub:'Chelsea, Manhattan', type:'place',  url: p+'manhattan/index.html#chelsea',          keywords:['madison square garden','msg','the garden','knicks','rangers','arena'] },
     { label:"Zabar's",            sub:'Upper West Side, Manhattan', type:'place', url: p+'manhattan/index.html#upper-west-side', keywords:['zabars','appetizing store','upper west side food'] },
     { label:'Levain Bakery',      sub:'Upper West Side, Manhattan', type:'place', url: p+'manhattan/index.html#upper-west-side', keywords:['levain bakery','levain cookie','upper west side bakery'] },
+    { label:'Beacon Theatre',     sub:'Upper West Side, Manhattan', type:'place', url: p+'manhattan/index.html#upper-west-side', keywords:['beacon theatre','beacon theater','upper west side concert hall'] },
     { label:"Sylvia's Restaurant",sub:'Harlem, Manhattan',     type:'place',  url: p+'manhattan/index.html#harlem',           keywords:['sylvias','soul food harlem','queen of soul food'] },
     { label:'Red Rooster',        sub:'Harlem, Manhattan',     type:'place',  url: p+'manhattan/index.html#harlem',           keywords:['red rooster','marcus samuelsson','harlem restaurant'] },
     { label:'Fraunces Tavern',    sub:'Financial District, Manhattan', type:'place', url: p+'manhattan/index.html#financial-district', keywords:['fraunces tavern','oldest building manhattan','washington farewell'] },
@@ -322,6 +326,8 @@ function buildSearchIndex() {
     { label:'Tribeca Festival',   sub:'Jun · Tribeca',         type:'event',  url: p+'manhattan/index.html#tribeca',          keywords:['tribeca festival','tribeca film festival','robert de niro film festival'] },
     { label:'Village Halloween Parade', sub:'Oct 31 · Greenwich Village', type:'event', url: p+'manhattan/index.html#greenwich-village', keywords:['village halloween parade','halloween parade nyc','sixth avenue parade'] },
     { label:'Harlem Week',        sub:'Aug 1–16 · Harlem',     type:'event',  url: p+'manhattan/index.html#harlem',           keywords:['harlem week','harlem day','a great day in harlem'] },
+    { label:'Gorillaz at Madison Square Garden', sub:'Sep 29 · Chelsea', type:'event', url: p+'manhattan/index.html#chelsea', keywords:['gorillaz','the mountain tour','msg concert','madison square garden concert'] },
+    { label:'Doja Cat at Madison Square Garden', sub:'Dec 1 · Chelsea',  type:'event', url: p+'manhattan/index.html#chelsea', keywords:['doja cat','tour ma vie','msg concert','madison square garden concert'] },
   ];
 }
 
@@ -871,9 +877,19 @@ const LIVE_MUSIC = {
   },
 
   // ── Manhattan ─────────────────────────────────────────────────────────
+  // Verified Aug 2026 against each venue's own site plus a second source
+  // (Yelp, Ticketmaster, Live Nation, or press coverage) where noted below.
+  // Columbia University's Miller Theatre (Morningside Heights) turned up in
+  // research but sits outside the 8 neighborhoods this page currently
+  // covers — noted here rather than added as a linked entry.
   'manhattan': {
-    blurb: 'Manhattan\'s music rooms are spread across the neighborhoods covered here — a basement jazz club that\'s been open since 1935, an upscale room that helped revive New York jazz in the \'80s, a big-room concert venue in the East Village, and the amateur-talent stage that launched Ella Fitzgerald.',
+    blurb: 'Manhattan\'s music rooms are spread across the neighborhoods covered here — a Bleecker Street rock bar with a band on stage seven nights a week, a basement jazz club that\'s been open since 1935, an upscale room that helped revive New York jazz in the \'80s, a university performing-arts hall, a big-room concert venue in the East Village, the arena that hosts the Knicks, Rangers and the city\'s biggest touring concerts, a Beaux-Arts theatre on the Upper West Side, and the amateur-talent stage that launched Ella Fitzgerald. (Columbia University\'s Miller Theatre, in Morningside Heights, is a real public concert venue too, but it\'s outside the 8 neighborhoods covered on this page.)',
     venues: [
+      { name: 'The Red Lion', kind: 'Live Music Bar', addr: '151 Bleecker St, Greenwich Village', phone: '(212) 260-9797',
+        nights: 'Live music every night, 7 PM–4 AM · cover charge Friday, Saturday and holidays only',
+        desc: 'A Bleecker Street fixture for more than 40 years — a small stage with a band on it seven nights a week, running blues, classic rock, soul, funk and covers until closing. No reservations needed for the music; walk-ins welcome.',
+        cal: { href: 'https://www.redlionnyc.com/live-music/', label: 'redlionnyc.com/live-music' },
+        link: 'manhattan/index.html#greenwich-village' },
       { name: 'Village Vanguard', kind: 'Jazz Club', addr: '178 Seventh Ave South, Greenwich Village',
         nights: 'Nightly sets · the Vanguard Jazz Orchestra has played every Monday since 1966',
         acts: ['Vanguard Jazz Orchestra', 'touring jazz headliners'],
@@ -885,11 +901,30 @@ const LIVE_MUSIC = {
         desc: 'Opened in 1981 and credited with reviving New York\'s jazz-club scene — an intimate, upscale room that\'s hosted Dizzy Gillespie, Chick Corea and Wynton Marsalis.',
         cal: { href: 'https://www.bluenotejazz.com/nyc/', label: 'bluenotejazz.com/nyc' },
         link: 'manhattan/index.html#greenwich-village' },
+      { name: 'NYU Skirball Center for the Performing Arts', kind: 'University Performing Arts Center', addr: '566 LaGuardia Pl, Greenwich Village',
+        nights: 'Two curated seasons of ticketed shows a year, running fall through spring',
+        desc: 'NYU\'s 850-seat theater near Washington Square Park, booking music, dance, theater and comedy for both the university and the neighborhood — not a student-only stage.',
+        cal: { href: 'https://nyuskirball.org/events/', label: 'nyuskirball.org/events' },
+        link: 'manhattan/index.html#greenwich-village' },
       { name: 'Webster Hall', kind: 'Concert Venue', addr: '125 E 11th St, East Village',
         nights: 'Touring acts and club nights most nights of the week',
         desc: 'A four-story, 2,500-capacity room with a Grand Ballroom and several smaller stages — one of downtown\'s biggest bookings for touring artists.',
         cal: { href: 'https://www.websterhall.com/calendar', label: 'websterhall.com/calendar' },
         link: 'manhattan/index.html#east-village' },
+      { name: 'Madison Square Garden', kind: 'Arena', addr: '4 Pennsylvania Plaza, Chelsea',
+        nights: 'Year-round — Knicks and Rangers home games plus touring concerts most weeks',
+        desc: 'The city\'s marquee arena, 4 Pennsylvania Plaza above Penn Station — home to the Knicks and Rangers and a regular stop for the biggest touring acts. Falls just inside the Chelsea neighborhood boundary used on this site.',
+        dated: [
+          { date: 'Sep 29, 2026', act: 'Gorillaz — The Mountain Tour, with Little Simz & Deltron 3030' },
+          { date: 'Dec 1, 2026', act: 'Doja Cat — Tour Ma Vie World Tour, with Latto' },
+        ],
+        cal: { href: 'https://www.msg.com/madison-square-garden', label: 'msg.com/madison-square-garden' },
+        link: 'manhattan/index.html#chelsea' },
+      { name: 'Beacon Theatre', kind: 'Theatre', addr: '2124 Broadway, Upper West Side',
+        nights: 'Touring concerts several nights most weeks, year-round',
+        desc: 'A 2,894-seat Beaux-Arts movie palace from 1929, now a National Historic Landmark and one of the city\'s best-loved mid-size concert rooms — operated by the same company that runs Madison Square Garden.',
+        cal: { href: 'https://www.msg.com/beacon-theatre', label: 'msg.com/beacon-theatre' },
+        link: 'manhattan/index.html#upper-west-side' },
       { name: 'Apollo Theater', kind: 'Historic Theater', addr: '253 W 125th St, Harlem',
         nights: 'Amateur Night every Wednesday, plus a year-round concert calendar',
         desc: 'Opened in 1934; Amateur Night has launched acts from Ella Fitzgerald to Lauryn Hill. Still the marquee room in Harlem for both new talent and touring headliners.',
@@ -1415,8 +1450,10 @@ const PANEL_EVENTS = {
   'Manhattan': {
     label: 'Manhattan Events', link: { href: 'manhattan/index.html', text: 'Manhattan Guide →' },
     events: [
+      { mo:'SEP', dy:'29',   tag:'arts',   tagLabel:'Concert',  name:'Gorillaz — The Mountain Tour', meta:'Madison Square Garden · 8 PM',        url:'manhattan/index.html#chelsea', ticket:'https://www.msg.com/events-tickets/gorillaz-little-simz-deltron-3030-madison-square-garden-september-2026/3B0064599DDAA6E6' },
       { mo:'AUG', dy:'1–16', tag:'events', tagLabel:'Festival', name:'Harlem Week',              meta:'Citywide · Harlem',                  url:'manhattan/index.html#harlem', ticket:'https://harlemweek.org' },
       { mo:'OCT', dy:'31',   tag:'events', tagLabel:'Parade',   name:'Village Halloween Parade', meta:'Sixth Ave · Greenwich Village · 7 PM',url:'manhattan/index.html#greenwich-village', ticket:'https://halloween-nyc.com' },
+      { mo:'DEC', dy:'1',    tag:'arts',   tagLabel:'Concert',  name:'Doja Cat — Tour Ma Vie World Tour', meta:'Madison Square Garden · 7:30 PM', url:'manhattan/index.html#chelsea', ticket:'https://www.msg.com/events-tickets/doja-cat-madison-square-garden-december-2026/3B00633A23FD3029' },
       { mo:'JUN', dy:'TBD',  tag:'arts',   tagLabel:'Film Fest',name:'Tribeca Festival',          meta:'Venues across Lower Manhattan',       url:'manhattan/index.html#tribeca', ticket:'https://tribecafilm.com/festival' },
     ]
   },
