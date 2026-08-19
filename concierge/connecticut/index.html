@@ -6,8 +6,10 @@
   <title>Connecticut — The Concierge</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     html, body { height: 100%; overflow: hidden; }
+    .nb-label { background: rgba(255,255,255,0.92); border: none; box-shadow: 0 1px 4px rgba(0,0,0,0.2); font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600; color: var(--navy); }
     .page-wrap {
       position: fixed;
       top: 68px; left: 0; right: 0; bottom: 0;
@@ -235,13 +237,8 @@
       <!-- Map + Cities sidebar -->
       <div style="display: flex; flex-direction: column; gap: 1.5rem;">
         <div class="map-embed-wrap">
-          <iframe
-            title="Connecticut Map"
-            src="https://maps.google.com/maps?q=Connecticut,+USA&output=embed&z=9"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
+          <div id="ct-map" style="height:320px;"></div>
+          <p style="font-size:0.7rem;color:var(--sub);padding:0.5rem 0.75rem 0;">Hover Stamford to preview, click to explore its neighborhoods. Map data &copy; OpenStreetMap contributors.</p>
         </div>
 
         <div>
@@ -314,5 +311,15 @@
 </div>
 
 <script src="../script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../interactive-map.js"></script>
+<script>
+initCityBoundaryMap('ct-map', {
+  center: [41.05, -73.53],
+  zoom: 10,
+  boundaryUrl: '../data/stamford-boundary.geojson',
+  onClick: function () { window.location.href = '../stamford/index.html'; },
+});
+</script>
 </body>
 </html>

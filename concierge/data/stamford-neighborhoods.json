@@ -1,0 +1,13 @@
+{
+  "source": "Center points are real OpenStreetMap coordinates (place=neighbourhood/suburb nodes, or a representative landmark where no node exists). None of Stamford's informal neighborhoods have official boundary polygons anywhere in OSM, so the regions shown on the map are computed (nearest-point / Voronoi) from these real centers and clipped to Stamford's real city boundary — they are a reasonable approximation, not surveyed lines.",
+  "neighborhoods": [
+    { "id": "downtown", "name": "Downtown", "lat": 41.0498106, "lon": -73.5399373, "url": "downtown/index.html" },
+    { "id": "harbor-point", "name": "Harbor Point", "lat": 41.0414926, "lon": -73.5407340, "url": "harbor-point/index.html" },
+    { "id": "shippan-point", "name": "Shippan Point", "lat": 41.0278749, "lon": -73.5237332, "url": "shippan-point/index.html" },
+    { "id": "springdale", "name": "Springdale", "lat": 41.0900420, "lon": -73.5175916, "url": "springdale/index.html" },
+    { "id": "glenbrook", "name": "Glenbrook", "lat": 41.0712285, "lon": -73.5207021, "url": "glenbrook/index.html" },
+    { "id": "north-stamford", "name": "North Stamford", "lat": 41.1381518, "lon": -73.5434574, "url": "north-stamford/index.html" },
+    { "id": "cove", "name": "Cove", "lat": 41.0490115, "lon": -73.5091368, "url": "cove/index.html" },
+    { "id": "waterside", "name": "Waterside", "lat": 41.0403266, "lon": -73.5480800, "url": "waterside/index.html" }
+  ]
+}
