@@ -66,8 +66,20 @@
 
     .neighborhood-section { padding: 2.5rem 5%; background: var(--mist); }
 
+    /* Page-level content grid: main content column + persistent map sidebar,
+       placed the same way Connecticut places its map — right column, near the
+       top — but stretched down the whole page and pinned with position:sticky
+       so the map stays visible the entire time a visitor scrolls, not just
+       while they're in one section. */
+    .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; padding: 0 5%; align-items: start; }
+    .content-main { min-width: 0; }
+    .map-sidebar { position: sticky; top: 68px; display: flex; flex-direction: column; gap: 1.5rem; }
+    .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border); }
+
     @media (max-width: 900px) {
       .highlight-strip { grid-template-columns: repeat(3, 1fr); }
+      .content-grid { grid-template-columns: 1fr; }
+      .map-sidebar { position: static; }
     }
     @media (max-width: 600px) {
       .highlight-strip { grid-template-columns: 1fr; }
@@ -170,34 +182,17 @@
     </div>
   </section>
 
-  <!-- NEIGHBORHOODS -->
-  <section class="neighborhood-section cat-section" data-cat="all">
-    <div class="section-label">Explore Princeton</div>
-    <h2 class="section-title">Neighborhoods</h2>
-    <p class="section-sub" style="margin-bottom:1.5rem;">Four distinct pieces of a very small town. Dive in.</p>
+  <div class="content-grid">
+  <div class="content-main">
 
-    <div class="neighborhood-grid">
-      <a href="palmer-square/index.html" class="neighborhood-chip">
-        <span class="chip-icon">🏛️</span>
-        <span class="chip-name">Palmer Square</span>
-        <span class="chip-sub">Shops · Dining · Late-night bars</span>
-      </a>
-      <a href="witherspoon-jackson/index.html" class="neighborhood-chip">
-        <span class="chip-icon">⛪</span>
-        <span class="chip-name">Witherspoon-Jackson</span>
-        <span class="chip-sub">Historic district · Community</span>
-      </a>
-      <a href="university/index.html" class="neighborhood-chip">
-        <span class="chip-icon">🎓</span>
-        <span class="chip-name">University Campus</span>
-        <span class="chip-sub">Concerts · Theatre · Art museum</span>
-      </a>
-      <a href="western-section/index.html" class="neighborhood-chip">
-        <span class="chip-icon">🌲</span>
-        <span class="chip-name">Western Section</span>
-        <span class="chip-sub">Morven · Battlefield · Trails</span>
-      </a>
+  <!-- EVENTS (live-fetched Princeton Athletics schedule) -->
+  <section class="section" style="background:var(--white);">
+    <h2 class="section-title">Upcoming Home Games<span class="live-badge">Live</span></h2>
+    <hr class="section-divider" />
+    <div class="events-list" id="princeton-sports-events">
+      <p style="font-size:0.82rem;color:var(--sub);">Loading upcoming games…</p>
     </div>
+    <p style="font-size:0.72rem;color:var(--sub);">Pulled automatically from Princeton Athletics' own schedule — every varsity home game, no manual updates needed.</p>
   </section>
 
   <!-- DINING -->
@@ -308,6 +303,36 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- NEIGHBORHOODS -->
+  <section class="neighborhood-section cat-section" data-cat="all">
+    <div class="section-label">Explore Princeton</div>
+    <h2 class="section-title">Neighborhoods</h2>
+    <p class="section-sub" style="margin-bottom:1.5rem;">Four distinct pieces of a very small town. Dive in.</p>
+
+    <div class="neighborhood-grid">
+      <a href="palmer-square/index.html" class="neighborhood-chip">
+        <span class="chip-icon">🏛️</span>
+        <span class="chip-name">Palmer Square</span>
+        <span class="chip-sub">Shops · Dining · Late-night bars</span>
+      </a>
+      <a href="witherspoon-jackson/index.html" class="neighborhood-chip">
+        <span class="chip-icon">⛪</span>
+        <span class="chip-name">Witherspoon-Jackson</span>
+        <span class="chip-sub">Historic district · Community</span>
+      </a>
+      <a href="university/index.html" class="neighborhood-chip">
+        <span class="chip-icon">🎓</span>
+        <span class="chip-name">University Campus</span>
+        <span class="chip-sub">Concerts · Theatre · Art museum</span>
+      </a>
+      <a href="western-section/index.html" class="neighborhood-chip">
+        <span class="chip-icon">🌲</span>
+        <span class="chip-name">Western Section</span>
+        <span class="chip-sub">Morven · Battlefield · Trails</span>
+      </a>
     </div>
   </section>
 
@@ -424,23 +449,20 @@
     </div>
   </section>
 
-  <section class="section" style="background:var(--white);">
-    <h2 class="section-title">Upcoming Home Games<span class="live-badge">Live</span></h2>
-    <hr class="section-divider" />
-    <div class="events-list" id="princeton-sports-events">
-      <p style="font-size:0.82rem;color:var(--sub);">Loading upcoming games…</p>
-    </div>
-    <p style="font-size:0.72rem;color:var(--sub);">Pulled automatically from Princeton Athletics' own schedule — every varsity home game, no manual updates needed.</p>
-  </section>
+  </div><!-- /.content-main -->
 
-  <!-- Compact Map -->
-  <div class="section" style="padding-top: 1rem; padding-bottom: 2rem;">
-    <h3 class="section-title" style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--sub); font-weight: 600; letter-spacing: 0.04em;">MAP</h3>
-    <div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border);">
+  <!-- MAP SIDEBAR — moved from the bottom of the page to a persistent right
+       column, same structural placement as Connecticut's map, but sticky so
+       it's visible at all times as the visitor scrolls through the rest of
+       the page (per the site owner's request). -->
+  <div class="map-sidebar">
+    <div class="map-embed-wrap">
       <div id="princeton-map" style="height:380px;"></div>
     </div>
-    <p style="font-size:0.7rem;color:var(--sub);margin-top:0.5rem;">Hover a neighborhood to preview, click to explore. Neighborhood regions are computed from real center points (Princeton has no official neighborhood boundary lines) — see <a href="../data/princeton-neighborhoods.json" target="_blank" rel="noopener" style="color:var(--sub);text-decoration:underline;">data source</a>. Map data &copy; OpenStreetMap contributors.</p>
+    <p style="font-size:0.7rem;color:var(--sub);">Hover a neighborhood to preview, click to explore. Neighborhood regions are computed from real center points (Princeton has no official neighborhood boundary lines) — see <a href="../data/princeton-neighborhoods.json" target="_blank" rel="noopener" style="color:var(--sub);text-decoration:underline;">data source</a>. Map data &copy; OpenStreetMap contributors.</p>
   </div>
+
+  </div><!-- /.content-grid -->
 
   <footer>
     <div class="footer-grid">

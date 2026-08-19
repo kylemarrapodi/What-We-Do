@@ -54,9 +54,21 @@
     .nbhood-desc { font-size: 0.9rem; color: var(--ink, #333); line-height: 1.7; max-width: 780px; margin-bottom: 1.25rem; }
     .nbhood-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
 
+    /* Page-level content grid: main content column + persistent map sidebar,
+       placed the same way Connecticut places its map — right column, near the
+       top — but stretched down the whole page and pinned with position:sticky
+       so the map stays visible the entire time a visitor scrolls, not just
+       while they're in one section. */
+    .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; padding: 0 5%; align-items: start; }
+    .content-main { min-width: 0; }
+    .map-sidebar { position: sticky; top: 68px; display: flex; flex-direction: column; gap: 1.5rem; }
+    .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border); }
+
     @media (max-width: 900px) {
       .highlight-strip { grid-template-columns: repeat(2, 1fr); }
       .two-col { grid-template-columns: 1fr; }
+      .content-grid { grid-template-columns: 1fr; }
+      .map-sidebar { position: static; }
     }
     @media (max-width: 600px) {
       .highlight-strip { grid-template-columns: 1fr; }
@@ -107,7 +119,7 @@
   <section class="city-hero">
     <div class="section-label">New York</div>
     <h1>Manhattan, <span>NY</span></h1>
-    <p class="hero-sub">From the cast-iron blocks of SoHo to the brownstones of Harlem — eight neighborhoods, one very dense island, and more history per square foot than almost anywhere in the country.</p>
+    <p class="hero-sub">From the cast-iron blocks of SoHo to the brownstones of Harlem — eight neighborhoods, one very dense island, and more history per square foot than almost anywhere in the country. Settled by the Dutch as New Amsterdam in 1624, taken by the English in 1664, and gridded by the Commissioners' Plan of 1811 — today it's the financial, cultural, and media capital most people picture when they say "New York."</p>
     <div class="city-hero-meta">
       <span>📍 New York County, NY</span>
       <span>🏙️ ~1.66M residents</span>
@@ -152,17 +164,8 @@
     </div>
   </section>
 
-  <!-- OVERVIEW / HISTORY -->
-  <section class="section" style="padding-top:0.5rem;">
-    <div class="section-label">The Island</div>
-    <h2 class="section-title">A Short History of Manhattan</h2>
-    <hr class="section-divider" />
-    <div class="two-col" style="grid-template-columns: 1fr;">
-      <p class="nbhood-desc" style="max-width:900px;">
-        Manhattan takes its name from the Lenape word for the island, long inhabited by the Lenape people before the Dutch West India Company established the trading post of New Amsterdam here in 1624, buying the island from the Lenape two years later. The English seized it in 1664 and renamed it New York; it briefly served as the young United States' first capital, with George Washington taking the presidential oath at Federal Hall on Wall Street in 1789. The Commissioners' Plan of 1811 imposed the numbered street-and-avenue grid north of Houston Street that still defines how the island reads today, and the 19th and 20th centuries piled on the rest — Ellis Island processing waves of immigrants within sight of the Statue of Liberty, the elevator and steel frame turning the skyline vertical, and each new wave of arrivals leaving its own neighborhood behind, from Little Germany in the East Village to the Great Migration that built Harlem into the capital of Black America. Today it's the financial, cultural, and media capital most people picture when they say "New York" — 22.7 square miles carrying the densest concentration of skyscrapers, museums, and restaurants in the country.
-      </p>
-    </div>
-  </section>
+  <div class="content-grid">
+  <div class="content-main">
 
   <!-- ══════════════ NEIGHBORHOODS ══════════════ -->
 
@@ -465,16 +468,23 @@
   <!-- LIVE MUSIC (rendered by initLiveMusic in script.js) -->
   <section class="section cat-section" data-cat="music" id="live-music" style="background:var(--mist);"></section>
 
-  <!-- MAP -->
-  <div class="section" style="padding-top: 1rem; padding-bottom: 2rem;">
-    <h3 class="section-title" style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--sub); font-weight: 600; letter-spacing: 0.04em;">MAP</h3>
-    <div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border);">
+  </div><!-- /.content-main -->
+
+  <!-- MAP SIDEBAR — moved from the bottom of the page to a persistent right
+       column, same structural placement as Connecticut's map, but sticky so
+       it's visible at all times as the visitor scrolls through the rest of
+       the page (per the site owner's request). Click-to-select still jumps to
+       the matching neighborhood section below via the onClick handler. -->
+  <div class="map-sidebar">
+    <div class="map-embed-wrap">
       <div id="manhattan-map" style="height:420px;"></div>
     </div>
-    <p style="font-size:0.7rem;color:var(--sub);margin-top:0.5rem;">
-      Hover a neighborhood to preview, click to jump to its section above. Unlike most towns on this site, these eight are drawn from each neighborhood's real OpenStreetMap boundary (relations tagged <code>boundary=place</code>) rather than computed regions — Manhattan's well-known neighborhoods are unusually well-mapped, so real shapes were used directly instead of the nearest-point approximation. See <a href="../data/manhattan-neighborhoods.geojson" target="_blank" rel="noopener" style="color:var(--sub);text-decoration:underline;">data source</a>. Map data &copy; OpenStreetMap contributors.
+    <p style="font-size:0.7rem;color:var(--sub);">
+      Hover a neighborhood to preview, click to jump to its section. Unlike most towns on this site, these eight are drawn from each neighborhood's real OpenStreetMap boundary (relations tagged <code>boundary=place</code>) rather than computed regions — Manhattan's well-known neighborhoods are unusually well-mapped, so real shapes were used directly instead of the nearest-point approximation. See <a href="../data/manhattan-neighborhoods.geojson" target="_blank" rel="noopener" style="color:var(--sub);text-decoration:underline;">data source</a>. Map data &copy; OpenStreetMap contributors.
     </p>
   </div>
+
+  </div><!-- /.content-grid -->
 
   <footer>
     <div class="footer-inner">
