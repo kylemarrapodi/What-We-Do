@@ -43,7 +43,7 @@ box-shadow: 0 1px 10px rgba(26, 58, 92, 0.12);
 backdrop-filter: blur(8px);
 }
 .nav-logo {
-font-family: 'Pacifico', cursive;
+font-family: 'Kaushan Script', cursive;
 font-size: 2rem;
 color: var(--navy);
 text-decoration: none;
@@ -110,7 +110,7 @@ font-size: 0.78rem;
 font-weight: 600;
 letter-spacing: 0.06em;
 text-transform: uppercase;
-margin-bottom: 1.25rem;
+margin-bottom: 2rem;
 }
 .home-rating .star { color: #fbbf24; }
 .home-logo {
