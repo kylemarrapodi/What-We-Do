@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manhattan, NY — The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .nb-label { background: rgba(255,255,255,0.92); border: none; box-shadow: 0 1px 4px rgba(0,0,0,0.2); font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600; color: var(--navy); }
+
+    .page-wrap {
+      position: fixed;
+      top: 68px; left: 0; right: 0; bottom: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      background: var(--white);
+    }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+
+    .city-hero { padding: 2.5rem 5% 2rem; }
+    .city-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
+    .city-hero .hero-sub { font-size: 0.9rem; margin-bottom: 1rem; }
+    .city-hero-meta { font-size: 0.8rem; gap: 1rem; }
+
+    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
+    .highlight-card h4 { font-size: 0.88rem; color: var(--navy); margin-bottom: 0.2rem; }
+    .highlight-card p { font-size: 0.78rem; color: var(--sub); }
+    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
+
+    .section { padding: 2.5rem 5%; }
+    .section-sm { padding: 1.75rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+
+    /* Jump nav to neighborhood sections */
+    .jump-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .jump-nav a {
+      font-size: 0.78rem; font-weight: 600; color: var(--navy);
+      background: var(--white); border: 1px solid var(--border); border-radius: 50px;
+      padding: 0.4rem 0.9rem; text-decoration: none; transition: all 0.15s;
+    }
+    .jump-nav a:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+
+    /* Neighborhood section block */
+    .nbhood { padding: 2.25rem 5%; scroll-margin-top: 80px; }
+    .nbhood:nth-child(even) { background: var(--mist); }
+    .nbhood-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.35rem; }
+    .nbhood-head h2 { font-size: 1.5rem; }
+    .nbhood-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--gold); background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.35); border-radius: 50px; padding: 0.25rem 0.7rem; white-space: nowrap; }
+    .nbhood-desc { font-size: 0.9rem; color: var(--ink, #333); line-height: 1.7; max-width: 780px; margin-bottom: 1.25rem; }
+    .nbhood-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+
+    @media (max-width: 900px) {
+      .highlight-strip { grid-template-columns: repeat(2, 1fr); }
+      .two-col { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .highlight-strip { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-page-location="Manhattan" data-music-key="manhattan">
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../new-york/index.html'">New York</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Manhattan</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../index.html">Home</a>
+  <a href="../new-york/index.html">New York</a>
+  <a href="index.html" class="active">Manhattan, NY</a>
+</div>
+
+<!-- SCROLLABLE PAGE PANEL -->
+<div class="page-wrap">
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="../index.html">Home</a>
+    <span class="sep">›</span>
+    <a href="../new-york/index.html">New York</a>
+    <span class="sep">›</span>
+    <span>Manhattan</span>
+  </div>
+
+  <!-- CITY HERO -->
+  <section class="city-hero">
+    <div class="section-label">New York</div>
+    <h1>Manhattan, <span>NY</span></h1>
+    <p class="hero-sub">From the cast-iron blocks of SoHo to the brownstones of Harlem — eight neighborhoods, one very dense island, and more history per square foot than almost anywhere in the country.</p>
+    <div class="city-hero-meta">
+      <span>📍 New York County, NY</span>
+      <span>🏙️ ~1.66M residents</span>
+      <span>🗽 22.7 sq mi</span>
+      <span>🚇 24-hour subway</span>
+    </div>
+    <div class="jump-nav">
+      <a href="#tribeca">Tribeca</a>
+      <a href="#soho">SoHo</a>
+      <a href="#greenwich-village">Greenwich Village</a>
+      <a href="#east-village">East Village</a>
+      <a href="#chelsea">Chelsea</a>
+      <a href="#upper-west-side">Upper West Side</a>
+      <a href="#harlem">Harlem</a>
+      <a href="#financial-district">Financial District</a>
+    </div>
+  </section>
+
+  <!-- QUICK STATS -->
+  <section class="section-sm" style="background:var(--white);">
+    <div class="highlight-strip">
+      <div class="highlight-card">
+        <div class="big-num">1.66M</div>
+        <h4>Residents</h4>
+        <p>Most densely populated of NYC's five boroughs</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">1624</div>
+        <h4>Settled</h4>
+        <p>Dutch West India Company's New Amsterdam</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">1811</div>
+        <h4>The Grid</h4>
+        <p>Commissioners' Plan laid out the street grid</p>
+      </div>
+      <div class="highlight-card">
+        <div class="big-num">8</div>
+        <h4>Neighborhoods</h4>
+        <p>Covered here so far — the island has dozens more</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW / HISTORY -->
+  <section class="section" style="padding-top:0.5rem;">
+    <div class="section-label">The Island</div>
+    <h2 class="section-title">A Short History of Manhattan</h2>
+    <hr class="section-divider" />
+    <div class="two-col" style="grid-template-columns: 1fr;">
+      <p class="nbhood-desc" style="max-width:900px;">
+        Manhattan takes its name from the Lenape word for the island, long inhabited by the Lenape people before the Dutch West India Company established the trading post of New Amsterdam here in 1624, buying the island from the Lenape two years later. The English seized it in 1664 and renamed it New York; it briefly served as the young United States' first capital, with George Washington taking the presidential oath at Federal Hall on Wall Street in 1789. The Commissioners' Plan of 1811 imposed the numbered street-and-avenue grid north of Houston Street that still defines how the island reads today, and the 19th and 20th centuries piled on the rest — Ellis Island processing waves of immigrants within sight of the Statue of Liberty, the elevator and steel frame turning the skyline vertical, and each new wave of arrivals leaving its own neighborhood behind, from Little Germany in the East Village to the Great Migration that built Harlem into the capital of Black America. Today it's the financial, cultural, and media capital most people picture when they say "New York" — 22.7 square miles carrying the densest concentration of skyscrapers, museums, and restaurants in the country.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════ NEIGHBORHOODS ══════════════ -->
+
+  <!-- TRIBECA -->
+  <section class="nbhood" id="tribeca">
+    <div class="nbhood-head">
+      <h2>Tribeca</h2>
+      <span class="nbhood-tag">Lower Manhattan</span>
+    </div>
+    <p class="nbhood-desc">
+      The name is short for "Triangle Below Canal Street" — a former warehouse and manufacturing district that artists began converting into loft housing in the 1970s and '80s, the same way SoHo did just to the north. It's quieter and pricier than it looks on a map, all cobblestone and cast-iron facades, and it's had an outsized cultural footprint since Robert De Niro, Jane Rosenthal, and Craig Hatkoff founded the Tribeca Festival in 2001 to help pull Lower Manhattan back on its feet after 9/11 — it's now grown to roughly 150,000 attendees a year.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Brasserie · Since 1980</span>
+          <div class="card-title">The Odeon</div>
+          <div class="card-meta"><span>📍 145 West Broadway</span></div>
+          <p class="card-desc">Keith McNally's French-American brasserie put Tribeca on the map for New Yorkers in the first place — the crowd from Saturday Night Live followed it downtown in the '80s, and it's still going strong more than four decades later.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">American · Since 1990</span>
+          <div class="card-title">Bubby's</div>
+          <div class="card-meta"><span>📍 120 Hudson St</span></div>
+          <p class="card-desc">Started as a pie company out of a tiny kitchen on Hudson Street; now a neighborhood breakfast-and-comfort-food institution that's outlasted most of the restaurants that opened around it.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Annual Festival · June</span>
+          <div class="card-title">Tribeca Festival</div>
+          <div class="card-meta"><span>📍 Venues across Lower Manhattan</span></div>
+          <p class="card-desc">More than 600 screenings and roughly 150,000 attendees each June — founded in 2001 as a one-time event to bring people back downtown, it never stopped.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOHO -->
+  <section class="nbhood" id="soho">
+    <div class="nbhood-head">
+      <h2>SoHo</h2>
+      <span class="nbhood-tag">South of Houston</span>
+    </div>
+    <p class="nbhood-desc">
+      SoHo — "South of Houston Street" — holds the largest collection of cast-iron architecture anywhere in the world: roughly 250 surviving cast-iron facades across about 26 blocks, designated the SoHo-Cast Iron Historic District in 1973. Cast iron was cheap to cast into ornate, Corinthian-columned facades that mimicked carved stone, and it let 19th-century manufacturers build enormous window openings for showrooms below and light-filled loft floors above. Artists moved into those lofts, illegally at first, in the 1960s and '70s; the galleries eventually gave way to the flagship stores and boutiques that fill the district now.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">French Brasserie · Since 1997</span>
+          <div class="card-title">Balthazar</div>
+          <div class="card-meta"><span>📍 80 Spring St</span></div>
+          <p class="card-desc">Keith McNally's second SoHo landmark (after The Odeon) — a big, brass-and-mirror Parisian brasserie that's stayed a scene since it opened, with an adjoining bakery out front.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Bakery · Since 2011</span>
+          <div class="card-title">Dominique Ansel Bakery</div>
+          <div class="card-meta"><span>📍 189 Spring St</span></div>
+          <p class="card-desc">Where pastry chef Dominique Ansel invented the Cronut in May 2013 — a croissant-doughnut hybrid that sold out in minutes and got copied worldwide within weeks.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Architecture</span>
+          <div class="card-title">SoHo-Cast Iron Historic District</div>
+          <div class="card-meta"><span>📍 Roughly Canal to Houston, Crosby to West Broadway</span></div>
+          <p class="card-desc">Walk Greene Street or Broadway for the concentration of 1840s–1890s cast-iron facades that gives the neighborhood its name and its National Register listing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GREENWICH VILLAGE -->
+  <section class="nbhood" id="greenwich-village">
+    <div class="nbhood-head">
+      <h2>Greenwich Village</h2>
+      <span class="nbhood-tag">The Village</span>
+    </div>
+    <p class="nbhood-desc">
+      New York's bohemian capital for over a century — the birthplace of American folk and beat culture, and of the modern LGBTQ+ rights movement. The Stonewall Inn at 51–53 Christopher Street was the site of the June 1969 uprising that followed a police raid; in 2016 it became the country's first national monument dedicated to LGBTQ+ history. Washington Square Park, ringed by New York University, has been the neighborhood's gathering point since the 19th century, and the crooked, tree-lined streets around it still don't follow the numbered grid that took over the rest of the island in 1811.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Jazz Club · Since 1935</span>
+          <div class="card-title">Village Vanguard</div>
+          <div class="card-meta"><span>📍 178 Seventh Ave South</span></div>
+          <p class="card-desc">The oldest operating jazz club in New York City — a basement room that hosted Bill Evans and John Coltrane's most famous engagements. The Vanguard Jazz Orchestra has played every Monday night since 1966.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Jazz Club · Since 1981</span>
+          <div class="card-title">Blue Note</div>
+          <div class="card-meta"><span>📍 131 W 3rd St</span></div>
+          <p class="card-desc">An intimate, upscale room that's hosted Dizzy Gillespie, Dave Brubeck, and Wynton Marsalis alongside up-and-coming acts since founder Danny Bensusan opened it in 1981.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag events">Annual Parade · Oct 31</span>
+          <div class="card-title">Village Halloween Parade</div>
+          <div class="card-meta"><span>📍 Sixth Ave, from Spring St to 16th St</span></div>
+          <p class="card-desc">Started in 1974 by puppeteer Ralph Lee with a small march through the neighborhood — now the world's largest Halloween parade, with tens of thousands of costumed marchers and roughly two million spectators.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EAST VILLAGE -->
+  <section class="nbhood" id="east-village">
+    <div class="nbhood-head">
+      <h2>East Village</h2>
+      <span class="nbhood-tag">Alphabet City &amp; St. Marks</span>
+    </div>
+    <p class="nbhood-desc">
+      Once the eastern edge of Greenwich Village, the East Village became its own identity in the 1960s counterculture years. A century earlier it was "Kleindeutschland" — Little Germany — the largest German-speaking neighborhood outside Central Europe, later home to waves of Russian, Ukrainian, and Polish immigrants; St. Marks Place still carries that layered immigrant history in its storefronts. Tompkins Square Park, opened in 1834, has been ground zero for the neighborhood's protests and riots more than once, most famously in 1988.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Ukrainian Diner · Since 1954</span>
+          <div class="card-title">Veselka</div>
+          <div class="card-meta"><span>📍 144 Second Ave</span></div>
+          <p class="card-desc">Opened as a candy store by Ukrainian refugees, then grew into a 24-hour diner serving pierogi and borscht to generations of East Villagers — now run by the founders' grandson.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Concert Venue</span>
+          <div class="card-title">Webster Hall</div>
+          <div class="card-meta"><span>📍 125 E 11th St</span></div>
+          <p class="card-desc">A four-story, 2,500-capacity venue with a Grand Ballroom and several smaller rooms — one of the city's premier stops for touring acts and club nights alike.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Park · Est. 1834</span>
+          <div class="card-title">Tompkins Square Park</div>
+          <div class="card-meta"><span>📍 Ave A to Ave B, 7th to 10th St</span></div>
+          <p class="card-desc">Roughly 450 elm trees planted after an 1878 redesign still shade the park's paths — the neighborhood's front yard since before the Civil War.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHELSEA -->
+  <section class="nbhood" id="chelsea">
+    <div class="nbhood-head">
+      <h2>Chelsea</h2>
+      <span class="nbhood-tag">Galleries &amp; the High Line</span>
+    </div>
+    <p class="nbhood-desc">
+      A former industrial waterfront reinvented twice over. Chelsea Market, on Ninth Avenue, occupies the 1890s National Biscuit Company complex where the Oreo was invented; it's now a food hall threaded by the High Line, the elevated freight rail line that closed in 1980, sat derelict for two decades, and reopened in 2009 as an elevated park running from Gansevoort Street up to Hudson Yards at 34th. West Chelsea's old factory blocks, roughly 18th to 28th Street between Tenth and Eleventh Avenues, became the city's dominant art-gallery district starting in the late 1990s and still are.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Elevated Park · Opened 2009</span>
+          <div class="card-title">The High Line</div>
+          <div class="card-meta"><span>📍 Gansevoort St to W 34th St</span></div>
+          <p class="card-desc">A mile and a half of gardens, art installations, and river views built on a defunct 1930s freight line — one of the most-copied park ideas in the world since it opened.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Food Hall · Since 1997</span>
+          <div class="card-title">Chelsea Market</div>
+          <div class="card-meta"><span>📍 75 Ninth Ave</span></div>
+          <p class="card-desc">Built inside the old Nabisco factory complex — where the Oreo cookie was first produced — the ground-floor concourse is now dozens of vendors under one roof.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Art District</span>
+          <div class="card-title">Chelsea Arts District</div>
+          <div class="card-meta"><span>📍 18th–28th St, 10th–11th Ave</span></div>
+          <p class="card-desc">The city's densest concentration of contemporary art galleries, most with free admission and rotating shows most weeks of the year.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UPPER WEST SIDE -->
+  <section class="nbhood" id="upper-west-side">
+    <div class="nbhood-head">
+      <h2>Upper West Side</h2>
+      <span class="nbhood-tag">Lincoln Center &amp; the Museum</span>
+    </div>
+    <p class="nbhood-desc">
+      A residential neighborhood between the Hudson River and Central Park, built up around two of the city's cultural anchors: Lincoln Center, the performing-arts campus that's home to the Metropolitan Opera and New York Philharmonic, and the American Museum of Natural History, a complex of 21 interconnected buildings holding 45 permanent exhibition halls plus a planetarium and research library. The blocks around Broadway in the 70s and 80s still run on a handful of century-old food institutions rather than turnover.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Appetizing Store · Since 1934</span>
+          <div class="card-title">Zabar's</div>
+          <div class="card-meta"><span>📍 2245 Broadway (at 80th St)</span></div>
+          <p class="card-desc">Four generations of the Zabar family running the same smoked-fish-and-coffee institution — as much a neighborhood landmark as anything on a map.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Bakery · Since 1995</span>
+          <div class="card-title">Levain Bakery</div>
+          <div class="card-meta"><span>📍 167 W 74th St</span></div>
+          <p class="card-desc">The original location of the six-ounce chocolate-chip-walnut cookie that launched a national chain — still a line-out-the-door basement bakery on a residential block.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Museum</span>
+          <div class="card-title">American Museum of Natural History</div>
+          <div class="card-meta"><span>📍 Central Park West at 79th St</span></div>
+          <p class="card-desc">21 interconnected buildings, 45 exhibition halls, and a planetarium — one of the largest natural history museums on Earth.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HARLEM -->
+  <section class="nbhood" id="harlem">
+    <div class="nbhood-head">
+      <h2>Harlem</h2>
+      <span class="nbhood-tag">The Capital of Black America</span>
+    </div>
+    <p class="nbhood-desc">
+      The center of African American culture, politics, and the arts since the Great Migration, and home to the Harlem Renaissance of the 1920s and '30s. The Apollo Theater, opened in 1934, launched Amateur Night the same year — Ella Fitzgerald won it at fifteen — and the tradition continues today. The Studio Museum in Harlem, the leading institution for Black artists in the country, reopened in November 2025 in a new $160-million, seven-floor building on 125th Street designed by Adjaye Associates.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Soul Food · Since 1962</span>
+          <div class="card-title">Sylvia's Restaurant</div>
+          <div class="card-meta"><span>📍 328 Malcolm X Blvd</span></div>
+          <p class="card-desc">Founded by Sylvia Woods, "The Queen of Soul Food," in a 35-seat storefront — now a nearly block-long Harlem institution that's fed everyone from neighborhood regulars to visiting presidents.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">American</span>
+          <div class="card-title">Red Rooster</div>
+          <div class="card-meta"><span>📍 310 Lenox Ave</span></div>
+          <p class="card-desc">Chef Marcus Samuelsson's restaurant, named for a legendary Harlem speakeasy that once hosted Duke Ellington and James Baldwin — comfort food and live music on Lenox Avenue.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag events">Annual Festival · Aug 1–16</span>
+          <div class="card-title">Harlem Week</div>
+          <div class="card-meta"><span>📍 Citywide, centered on Harlem</span></div>
+          <p class="card-desc">Started as a single day in 1974 to lift the neighborhood's spirits during a hard decade; the 2026 edition marked its 52nd straight year, still built around "A Great Day in Harlem" and Harlem Day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINANCIAL DISTRICT -->
+  <section class="nbhood" id="financial-district">
+    <div class="nbhood-head">
+      <h2>Financial District</h2>
+      <span class="nbhood-tag">FiDi &amp; Wall Street</span>
+    </div>
+    <p class="nbhood-desc">
+      The oldest settled part of Manhattan and, since the 1792 Buttonwood Agreement organized 24 stockbrokers under a tree on Wall Street, the financial capital of the country. Federal Hall, at Wall and Nassau, is where George Washington took the first presidential oath in 1789. A few blocks of cobblestone on Stone Street — the Stone Street Historic District — are what's left of Dutch-era New Amsterdam. The 9/11 Memorial & Museum, at the World Trade Center site, anchors the district's more recent history.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Tavern &amp; Museum · Since 1762</span>
+          <div class="card-title">Fraunces Tavern</div>
+          <div class="card-meta"><span>📍 54 Pearl St</span></div>
+          <p class="card-desc">The oldest building in Manhattan — George Washington's watering hole and the site of his farewell address to his officers in 1783. Still a working restaurant, with a museum on the upper floors.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Steakhouse · Dating to 1837</span>
+          <div class="card-title">Delmonico's</div>
+          <div class="card-meta"><span>📍 56 Beaver St</span></div>
+          <p class="card-desc">Widely credited as one of America's first fine-dining restaurants. Closed during the pandemic in 2020 and reopened at its historic Beaver Street address in September 2023.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Memorial &amp; Museum</span>
+          <div class="card-title">9/11 Memorial &amp; Museum</div>
+          <div class="card-meta"><span>📍 180 Greenwich St</span></div>
+          <p class="card-desc">The outdoor Memorial plaza is free, no reservation required; the underground museum, built around the World Trade Center's original foundations, requires a timed ticket.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE MUSIC (rendered by initLiveMusic in script.js) -->
+  <section class="section cat-section" data-cat="music" id="live-music" style="background:var(--mist);"></section>
+
+  <!-- MAP -->
+  <div class="section" style="padding-top: 1rem; padding-bottom: 2rem;">
+    <h3 class="section-title" style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--sub); font-weight: 600; letter-spacing: 0.04em;">MAP</h3>
+    <div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border);">
+      <div id="manhattan-map" style="height:420px;"></div>
+    </div>
+    <p style="font-size:0.7rem;color:var(--sub);margin-top:0.5rem;">
+      Hover a neighborhood to preview, click to jump to its section above. Unlike most towns on this site, these eight are drawn from each neighborhood's real OpenStreetMap boundary (relations tagged <code>boundary=place</code>) rather than computed regions — Manhattan's well-known neighborhoods are unusually well-mapped, so real shapes were used directly instead of the nearest-point approximation. See <a href="../data/manhattan-neighborhoods.geojson" target="_blank" rel="noopener" style="color:var(--sub);text-decoration:underline;">data source</a>. Map data &copy; OpenStreetMap contributors.
+    </p>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p class="footer-tagline">Your local intelligence platform. Curated, verified, always up to date.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Manhattan</h5>
+        <ul>
+          <li><a href="#tribeca">Tribeca</a></li>
+          <li><a href="#soho">SoHo</a></li>
+          <li><a href="#greenwich-village">Greenwich Village</a></li>
+          <li><a href="#east-village">East Village</a></li>
+          <li><a href="#chelsea">Chelsea</a></li>
+          <li><a href="#upper-west-side">Upper West Side</a></li>
+          <li><a href="#harlem">Harlem</a></li>
+          <li><a href="#financial-district">Financial District</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../new-york/index.html">New York</a></li>
+          <li><a href="../connecticut/index.html">Connecticut</a></li>
+          <li><a href="../texas/index.html">Texas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>The Concierge</h5>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#suggest">Suggest a Place</a></li>
+          <li><a href="#">Advertise</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 The Concierge · All rights reserved.</span>
+      <span>Manhattan, NY</span>
+    </div>
+  </footer>
+
+</div><!-- /.page-wrap -->
+
+<script src="../script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../interactive-map.js"></script>
+<script>
+initCityBoundaryMap('manhattan-map', {
+  center: [40.775, -73.965],
+  zoom: 12,
+  boundaryUrl: '../data/manhattan-neighborhoods.geojson',
+  onClick: function (f) {
+    const el = document.querySelector(f.properties.url);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  },
+});
+</script>
+</body>
+</html>

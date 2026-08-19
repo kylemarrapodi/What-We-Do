@@ -355,6 +355,7 @@
   <a href="lubbock/index.html">Lubbock, TX</a>
   <a href="lbi/index.html">Long Beach Island, NJ</a>
   <a href="princeton/index.html">Princeton, NJ</a>
+  <a href="manhattan/index.html">Manhattan, NY</a>
 </div>
 
 <!-- FULL-SCREEN SPLIT -->
@@ -470,6 +471,7 @@ const LOCATIONS = {
       { mo:'SEP', dy:'26', tag:'events',   tagLabel:'Concert',   name:'Reba McEntire',                 meta:'United Supermarkets Arena · Lubbock',  url:'lubbock/historic-district/index.html',ticket:'https://www.unitedssa.com' },
       { mo:'OCT', dy:'11', tag:'events',   tagLabel:'Festival',  name:"That's Amore Italian Fest",     meta:'Columbus Park · Stamford, CT',         url:'stamford/downtown/index.html',       ticket:'https://stamford-downtown.com' },
       { mo:'OCT', dy:'18', tag:'dining',   tagLabel:'Food Fest', name:'Lubbock on the Square',         meta:'Courthouse Square · Lubbock, TX',      url:'lubbock/historic-district/index.html',ticket:'https://downtownlubbock.org' },
+      { mo:'OCT', dy:'31', tag:'events',   tagLabel:'Parade',    name:'Village Halloween Parade',      meta:'Sixth Ave · Greenwich Village, NYC',   url:'manhattan/index.html#greenwich-village',ticket:'https://halloween-nyc.com' },
       { mo:'NOV', dy:'8',  tag:'events',   tagLabel:'Basketball',name:'TTU Basketball Season Opener',  meta:'United Supermarkets Arena · Lubbock',  url:'lubbock/tech-district/index.html',   ticket:'https://texastech.com/sports/mens-basketball' },
       { mo:'SAT', dy:'WKL',tag:'outdoors', tagLabel:'Market',    name:'Downtown Farmers Market',       meta:'Veterans Memorial Park · Stamford, CT',url:'stamford/index.html',                ticket:'https://stamford-downtown.com/markets' },
     ],
@@ -478,7 +480,7 @@ const LOCATIONS = {
       { label:'Lubbock, TX',  tag:'live', left:20, top:68, url:'lubbock/index.html' },
       { label:'Long Beach Island, NJ', tag:'live', left:36, top:50, url:'lbi/index.html' },
       { label:'Princeton, NJ', tag:'live', left:34, top:47, url:'princeton/index.html' },
-      { label:'New York City', tag:'soon', left:40, top:44, url:null },
+      { label:'Manhattan, NY', tag:'live', left:40, top:44, url:'manhattan/index.html' },
     ]
   },
 
@@ -496,6 +498,7 @@ const LOCATIONS = {
       { mo:'SEP', dy:'26', tag:'events',   tagLabel:'Concert',   name:'Reba McEntire',                 meta:'United Supermarkets Arena · Lubbock',  url:'lubbock/historic-district/index.html',ticket:'https://www.unitedssa.com' },
       { mo:'OCT', dy:'11', tag:'events',   tagLabel:'Festival',  name:"That's Amore Italian Fest",     meta:'Columbus Park · Stamford, CT',         url:'stamford/downtown/index.html',       ticket:'https://stamford-downtown.com' },
       { mo:'OCT', dy:'18', tag:'dining',   tagLabel:'Food Fest', name:'Lubbock on the Square',         meta:'Courthouse Square · Lubbock, TX',      url:'lubbock/historic-district/index.html',ticket:'https://downtownlubbock.org' },
+      { mo:'OCT', dy:'31', tag:'events',   tagLabel:'Parade',    name:'Village Halloween Parade',      meta:'Sixth Ave · Greenwich Village, NYC',   url:'manhattan/index.html#greenwich-village',ticket:'https://halloween-nyc.com' },
       { mo:'NOV', dy:'8',  tag:'events',   tagLabel:'Basketball',name:'TTU Basketball Season Opener',  meta:'United Supermarkets Arena · Lubbock',  url:'lubbock/tech-district/index.html',   ticket:'https://texastech.com/sports/mens-basketball' },
       { mo:'SAT', dy:'WKL',tag:'outdoors', tagLabel:'Market',    name:'Downtown Farmers Market',       meta:'Veterans Memorial Park · Stamford, CT',url:'stamford/index.html',                ticket:'https://stamford-downtown.com/markets' },
     ],
@@ -504,7 +507,7 @@ const LOCATIONS = {
       { label:'Lubbock, TX',  tag:'live', left:20, top:68, url:'lubbock/index.html' },
       { label:'Long Beach Island, NJ', tag:'live', left:36, top:50, url:'lbi/index.html' },
       { label:'Princeton, NJ', tag:'live', left:34, top:47, url:'princeton/index.html' },
-      { label:'New York City', tag:'soon', left:40, top:44, url:null },
+      { label:'Manhattan, NY', tag:'live', left:40, top:44, url:'manhattan/index.html' },
     ]
   },
 
@@ -667,21 +670,38 @@ const LOCATIONS = {
   'New York': {
     mapSrc: 'https://maps.google.com/maps?q=New+York+State,+USA&output=embed&z=7',
     mapLabel: 'New York',
-    eventsLabel: 'New York',
-    eventsLink: null,
-    events: [],
+    eventsLabel: 'New York Events',
+    eventsLink: { href: 'new-york/index.html', text: 'New York Guide →' },
+    events: [
+      { mo:'AUG', dy:'1–16', tag:'events', tagLabel:'Festival', name:'Harlem Week',              meta:'Citywide · Harlem',                     url:'manhattan/index.html#harlem',            ticket:'https://harlemweek.org' },
+      { mo:'OCT', dy:'31',   tag:'events', tagLabel:'Parade',   name:'Village Halloween Parade', meta:'Sixth Ave · Greenwich Village · 7 PM',  url:'manhattan/index.html#greenwich-village',  ticket:'https://halloween-nyc.com' },
+      { mo:'JUN', dy:'TBD',  tag:'arts',   tagLabel:'Film Fest',name:'Tribeca Festival',          meta:'Venues across Lower Manhattan',         url:'manhattan/index.html#tribeca',            ticket:'https://tribecafilm.com/festival' },
+    ],
     pins: [
-      { label:'New York City', tag:'soon', left:46, top:60, url:null },
+      { label:'Manhattan', tag:'live', left:58, top:80, url:'manhattan/index.html' },
     ]
   },
 
-  'New York City': {
-    mapSrc: 'https://maps.google.com/maps?q=New+York+City,+NY&output=embed&z=12',
-    mapLabel: 'New York City',
-    eventsLabel: 'NYC Events',
-    eventsLink: null,
-    events: [],
-    pins: []
+  'Manhattan': {
+    mapSrc: 'https://maps.google.com/maps?q=Manhattan,+New+York,+NY&output=embed&z=12',
+    mapLabel: 'Manhattan, NY',
+    eventsLabel: 'Manhattan Events',
+    eventsLink: { href: 'manhattan/index.html', text: 'Manhattan Guide →' },
+    events: [
+      { mo:'AUG', dy:'1–16', tag:'events', tagLabel:'Festival', name:'Harlem Week',              meta:'Citywide · Harlem',                     url:'manhattan/index.html#harlem',            ticket:'https://harlemweek.org' },
+      { mo:'OCT', dy:'31',   tag:'events', tagLabel:'Parade',   name:'Village Halloween Parade', meta:'Sixth Ave · Greenwich Village · 7 PM',  url:'manhattan/index.html#greenwich-village',  ticket:'https://halloween-nyc.com' },
+      { mo:'JUN', dy:'TBD',  tag:'arts',   tagLabel:'Film Fest',name:'Tribeca Festival',          meta:'Venues across Lower Manhattan',         url:'manhattan/index.html#tribeca',            ticket:'https://tribecafilm.com/festival' },
+    ],
+    pins: [
+      { label:'Tribeca',             tag:'live', left:30, top:73, url:'manhattan/index.html#tribeca' },
+      { label:'Financial District',  tag:'live', left:35, top:85, url:'manhattan/index.html#financial-district' },
+      { label:'SoHo',                tag:'live', left:38, top:66, url:'manhattan/index.html#soho' },
+      { label:'Greenwich Village',   tag:'live', left:35, top:58, url:'manhattan/index.html#greenwich-village' },
+      { label:'East Village',        tag:'live', left:52, top:57, url:'manhattan/index.html#east-village' },
+      { label:'Chelsea',             tag:'live', left:28, top:50, url:'manhattan/index.html#chelsea' },
+      { label:'Upper West Side',     tag:'live', left:33, top:26, url:'manhattan/index.html#upper-west-side' },
+      { label:'Harlem',              tag:'live', left:48, top:10, url:'manhattan/index.html#harlem' },
+    ]
   },
 
   'Texas': {

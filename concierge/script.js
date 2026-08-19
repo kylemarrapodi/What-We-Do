@@ -107,9 +107,21 @@ const SHARED_SEARCH_TREE = {
           ]
         },
         {
-          label: 'New York', aliases: ['new york','ny'], status: null, url: null,
+          label: 'New York', aliases: ['new york','ny','new york state','empire state'], status: 'live', url: 'new-york/index.html',
           children: [
-            { label:'New York City', aliases:['new york city','nyc','manhattan'], status:'soon', url:null, children:[] },
+            {
+              label: 'Manhattan', aliases: ['manhattan','new york city','nyc'], status: 'live', url: 'manhattan/index.html',
+              children: [
+                { label:'Tribeca',            aliases:['tribeca'],                                          status:'live', url:'manhattan/index.html#tribeca',            children:[] },
+                { label:'SoHo',               aliases:['soho','south of houston'],                          status:'live', url:'manhattan/index.html#soho',               children:[] },
+                { label:'Greenwich Village',  aliases:['greenwich village','the village','stonewall'],      status:'live', url:'manhattan/index.html#greenwich-village',  children:[] },
+                { label:'East Village',       aliases:['east village','st marks','st marks place','alphabet city'], status:'live', url:'manhattan/index.html#east-village', children:[] },
+                { label:'Chelsea',            aliases:['chelsea','high line','chelsea market'],             status:'live', url:'manhattan/index.html#chelsea',            children:[] },
+                { label:'Upper West Side',    aliases:['upper west side','uws','lincoln center'],           status:'live', url:'manhattan/index.html#upper-west-side',    children:[] },
+                { label:'Harlem',             aliases:['harlem','apollo theater'],                          status:'live', url:'manhattan/index.html#harlem',             children:[] },
+                { label:'Financial District', aliases:['financial district','fidi','wall street'],          status:'live', url:'manhattan/index.html#financial-district', children:[] },
+              ]
+            },
           ]
         },
         {
@@ -278,6 +290,38 @@ function buildSearchIndex() {
     { label:'Exit Zero Jazz Festival', sub:'May & Oct · Cape May', type:'event', url: p+'cape-may/index.html',                keywords:['exit zero jazz festival','jazz festival cape may','exit 0'] },
     { label:'Cape May Food & Wine Celebration', sub:'Sep · Cape May', type:'event', url: p+'cape-may/index.html',            keywords:['cape may food and wine','food wine celebration','wine festival cape may'] },
     { label:'Christmas in Cape May', sub:'Nov–Jan · Cape May',  type:'event', url: p+'cape-may/index.html',                  keywords:['christmas in cape may','holiday lights cape may','victorian christmas'] },
+    // ── New York ──
+    { label:'New York',           sub:'United States',         type:'place',  url: p+'new-york/index.html',                   keywords:['new york','new york state','empire state','ny'] },
+    // ── Manhattan ──
+    { label:'Manhattan, NY',      sub:'New York',              type:'place',  url: p+'manhattan/index.html',                  keywords:['manhattan','new york city','nyc','new york county'] },
+    { label:'Tribeca',            sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#tribeca',          keywords:['tribeca','triangle below canal','lower manhattan'] },
+    { label:'SoHo',               sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#soho',             keywords:['soho','south of houston','cast iron historic district'] },
+    { label:'Greenwich Village',  sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#greenwich-village',keywords:['greenwich village','the village','washington square park','stonewall inn'] },
+    { label:'East Village',       sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#east-village',     keywords:['east village','st marks place','tompkins square park','alphabet city'] },
+    { label:'Chelsea',            sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#chelsea',          keywords:['chelsea','high line','chelsea market','chelsea galleries'] },
+    { label:'Upper West Side',    sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#upper-west-side',  keywords:['upper west side','uws','lincoln center','natural history museum'] },
+    { label:'Harlem',             sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#harlem',           keywords:['harlem','apollo theater','studio museum in harlem','malcolm x blvd'] },
+    { label:'Financial District', sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#financial-district',keywords:['financial district','fidi','wall street','stone street','9/11 memorial'] },
+    { label:'The Odeon',          sub:'Tribeca, Manhattan',    type:'place',  url: p+'manhattan/index.html#tribeca',          keywords:['the odeon','odeon','tribeca brasserie'] },
+    { label:"Bubby's",            sub:'Tribeca, Manhattan',    type:'place',  url: p+'manhattan/index.html#tribeca',          keywords:['bubbys','bubby','tribeca breakfast'] },
+    { label:'Balthazar',          sub:'SoHo, Manhattan',       type:'place',  url: p+'manhattan/index.html#soho',             keywords:['balthazar','soho brasserie','french restaurant soho'] },
+    { label:'Dominique Ansel Bakery', sub:'SoHo, Manhattan',   type:'place',  url: p+'manhattan/index.html#soho',             keywords:['dominique ansel','cronut','soho bakery'] },
+    { label:'Village Vanguard',   sub:'Greenwich Village, Manhattan', type:'place', url: p+'manhattan/index.html#greenwich-village', keywords:['village vanguard','jazz club','oldest jazz club nyc'] },
+    { label:'Blue Note',          sub:'Greenwich Village, Manhattan', type:'place', url: p+'manhattan/index.html#greenwich-village', keywords:['blue note','blue note jazz club','jazz greenwich village'] },
+    { label:'Veselka',            sub:'East Village, Manhattan', type:'place', url: p+'manhattan/index.html#east-village',     keywords:['veselka','ukrainian diner','east village restaurant'] },
+    { label:'Webster Hall',       sub:'East Village, Manhattan', type:'place', url: p+'manhattan/index.html#east-village',     keywords:['webster hall','concert venue east village'] },
+    { label:'The High Line',      sub:'Chelsea, Manhattan',    type:'place',  url: p+'manhattan/index.html#chelsea',          keywords:['high line','elevated park','chelsea park'] },
+    { label:'Chelsea Market',     sub:'Chelsea, Manhattan',    type:'place',  url: p+'manhattan/index.html#chelsea',          keywords:['chelsea market','food hall chelsea','nabisco factory'] },
+    { label:"Zabar's",            sub:'Upper West Side, Manhattan', type:'place', url: p+'manhattan/index.html#upper-west-side', keywords:['zabars','appetizing store','upper west side food'] },
+    { label:'Levain Bakery',      sub:'Upper West Side, Manhattan', type:'place', url: p+'manhattan/index.html#upper-west-side', keywords:['levain bakery','levain cookie','upper west side bakery'] },
+    { label:"Sylvia's Restaurant",sub:'Harlem, Manhattan',     type:'place',  url: p+'manhattan/index.html#harlem',           keywords:['sylvias','soul food harlem','queen of soul food'] },
+    { label:'Red Rooster',        sub:'Harlem, Manhattan',     type:'place',  url: p+'manhattan/index.html#harlem',           keywords:['red rooster','marcus samuelsson','harlem restaurant'] },
+    { label:'Fraunces Tavern',    sub:'Financial District, Manhattan', type:'place', url: p+'manhattan/index.html#financial-district', keywords:['fraunces tavern','oldest building manhattan','washington farewell'] },
+    { label:"Delmonico's",        sub:'Financial District, Manhattan', type:'place', url: p+'manhattan/index.html#financial-district', keywords:['delmonicos','steakhouse fidi','wall street restaurant'] },
+    { label:'9/11 Memorial & Museum', sub:'Financial District, Manhattan', type:'place', url: p+'manhattan/index.html#financial-district', keywords:['9/11 memorial','world trade center','ground zero museum'] },
+    { label:'Tribeca Festival',   sub:'Jun · Tribeca',         type:'event',  url: p+'manhattan/index.html#tribeca',          keywords:['tribeca festival','tribeca film festival','robert de niro film festival'] },
+    { label:'Village Halloween Parade', sub:'Oct 31 · Greenwich Village', type:'event', url: p+'manhattan/index.html#greenwich-village', keywords:['village halloween parade','halloween parade nyc','sixth avenue parade'] },
+    { label:'Harlem Week',        sub:'Aug 1–16 · Harlem',     type:'event',  url: p+'manhattan/index.html#harlem',           keywords:['harlem week','harlem day','a great day in harlem'] },
   ];
 }
 
@@ -826,6 +870,35 @@ const LIVE_MUSIC = {
     series: []
   },
 
+  // ── Manhattan ─────────────────────────────────────────────────────────
+  'manhattan': {
+    blurb: 'Manhattan\'s music rooms are spread across the neighborhoods covered here — a basement jazz club that\'s been open since 1935, an upscale room that helped revive New York jazz in the \'80s, a big-room concert venue in the East Village, and the amateur-talent stage that launched Ella Fitzgerald.',
+    venues: [
+      { name: 'Village Vanguard', kind: 'Jazz Club', addr: '178 Seventh Ave South, Greenwich Village',
+        nights: 'Nightly sets · the Vanguard Jazz Orchestra has played every Monday since 1966',
+        acts: ['Vanguard Jazz Orchestra', 'touring jazz headliners'],
+        desc: 'The oldest operating jazz club in New York City, running in the same basement room since 1935. Bill Evans and John Coltrane both recorded their most famous live albums here.',
+        cal: { href: 'https://villagevanguard.com/', label: 'villagevanguard.com' },
+        link: 'manhattan/index.html#greenwich-village' },
+      { name: 'Blue Note', kind: 'Jazz Club', addr: '131 W 3rd St, Greenwich Village',
+        nights: 'Sets nightly, typically two shows a night',
+        desc: 'Opened in 1981 and credited with reviving New York\'s jazz-club scene — an intimate, upscale room that\'s hosted Dizzy Gillespie, Chick Corea and Wynton Marsalis.',
+        cal: { href: 'https://www.bluenotejazz.com/nyc/', label: 'bluenotejazz.com/nyc' },
+        link: 'manhattan/index.html#greenwich-village' },
+      { name: 'Webster Hall', kind: 'Concert Venue', addr: '125 E 11th St, East Village',
+        nights: 'Touring acts and club nights most nights of the week',
+        desc: 'A four-story, 2,500-capacity room with a Grand Ballroom and several smaller stages — one of downtown\'s biggest bookings for touring artists.',
+        cal: { href: 'https://www.websterhall.com/calendar', label: 'websterhall.com/calendar' },
+        link: 'manhattan/index.html#east-village' },
+      { name: 'Apollo Theater', kind: 'Historic Theater', addr: '253 W 125th St, Harlem',
+        nights: 'Amateur Night every Wednesday, plus a year-round concert calendar',
+        desc: 'Opened in 1934; Amateur Night has launched acts from Ella Fitzgerald to Lauryn Hill. Still the marquee room in Harlem for both new talent and touring headliners.',
+        cal: { href: 'https://www.apollotheater.org/calendar/', label: 'apollotheater.org/calendar' },
+        link: 'manhattan/index.html#harlem' },
+    ],
+    series: []
+  },
+
   // ── Stamford ───────────────────────────────────────────────────────
   'stamford': {
     blurb: 'Stamford\'s music splits three ways: the bar circuit downtown, the summer waterfront programming at Harbor Point, and touring acts at the Palace. Note that Alive@Five — the summer series that ran downtown for 27 years — has ended; what replaced it is spread across Mill River Park, Harbor Point and the arboretum.',
@@ -1329,6 +1402,22 @@ const PANEL_EVENTS = {
       { mo:'MAY', dy:'&OCT', tag:'arts',    tagLabel:'Jazz Fest',  name:'Exit Zero Jazz Festival',          meta:'Venues citywide · Spring & Fall',     url:'cape-may/index.html', ticket:'https://www.exitzerojazzfestival.com/' },
       { mo:'SEP', dy:'TBD',  tag:'dining',  tagLabel:'Food Fest',  name:'Cape May Food & Wine Celebration', meta:'Restaurants & inns citywide',         url:'cape-may/index.html', ticket:null },
       { mo:'NOV', dy:'–JAN', tag:'events',  tagLabel:'Holiday',    name:'Christmas in Cape May',             meta:'Physick Estate & citywide',           url:'cape-may/index.html', ticket:null },
+    ]
+  },
+  'New York': {
+    label: 'New York Events', link: { href: 'new-york/index.html', text: 'New York Guide →' },
+    events: [
+      { mo:'AUG', dy:'1–16', tag:'events', tagLabel:'Festival', name:'Harlem Week',              meta:'Citywide · Harlem',                  url:'manhattan/index.html#harlem', ticket:'https://harlemweek.org' },
+      { mo:'OCT', dy:'31',   tag:'events', tagLabel:'Parade',   name:'Village Halloween Parade', meta:'Sixth Ave · Greenwich Village · 7 PM',url:'manhattan/index.html#greenwich-village', ticket:'https://halloween-nyc.com' },
+      { mo:'JUN', dy:'TBD',  tag:'arts',   tagLabel:'Film Fest',name:'Tribeca Festival',          meta:'Venues across Lower Manhattan',       url:'manhattan/index.html#tribeca', ticket:'https://tribecafilm.com/festival' },
+    ]
+  },
+  'Manhattan': {
+    label: 'Manhattan Events', link: { href: 'manhattan/index.html', text: 'Manhattan Guide →' },
+    events: [
+      { mo:'AUG', dy:'1–16', tag:'events', tagLabel:'Festival', name:'Harlem Week',              meta:'Citywide · Harlem',                  url:'manhattan/index.html#harlem', ticket:'https://harlemweek.org' },
+      { mo:'OCT', dy:'31',   tag:'events', tagLabel:'Parade',   name:'Village Halloween Parade', meta:'Sixth Ave · Greenwich Village · 7 PM',url:'manhattan/index.html#greenwich-village', ticket:'https://halloween-nyc.com' },
+      { mo:'JUN', dy:'TBD',  tag:'arts',   tagLabel:'Film Fest',name:'Tribeca Festival',          meta:'Venues across Lower Manhattan',       url:'manhattan/index.html#tribeca', ticket:'https://tribecafilm.com/festival' },
     ]
   },
   'Long Beach Island': {
