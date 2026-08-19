@@ -6,17 +6,19 @@
   <title>Harvey Cedars — Long Beach Island · The Concierge</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     html, body { height: 100%; overflow: hidden; }
     .page-wrap { position: fixed; top: 68px; left: 0; right: 0; bottom: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white); }
     .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
     .neighborhood-hero { padding: 2.5rem 5% 2.25rem; }
     .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
-    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
-    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
-    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
-    .highlight-card h4 { font-size: 0.85rem; color: var(--navy); margin-bottom: 0.15rem; }
-    .highlight-card p { font-size: 0.77rem; color: var(--sub); }
+    .hero-flex { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap; }
+    .hero-main { flex: 1 1 340px; min-width: 0; }
+    .hero-stats { display: flex; flex-direction: column; gap: 0.5rem; flex-shrink: 0; }
+    .hero-stat { display: flex; align-items: baseline; justify-content: flex-end; gap: 0.5rem; background: rgba(255,255,255,0.1); border-right: 3px solid var(--gold); border-radius: 6px; padding: 0.4rem 0.75rem; min-width: 165px; }
+    .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold); line-height: 1; white-space: nowrap; }
+    .hero-stat-label { font-size: 0.68rem; color: rgba(255,255,255,0.85); text-align: right; line-height: 1.2; }
     .section { padding: 2.25rem 5%; }
     .section-sm { padding: 1.75rem 5%; }
     .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
@@ -29,7 +31,7 @@
     .info-row p { font-size: 0.8rem; color: var(--sub); line-height: 1.5; margin: 0; }
     .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
     .map-embed-wrap iframe { display: block; width: 100%; height: 260px; border: none; }
-    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .highlight-strip { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .hero-flex { flex-direction: column; } .hero-stats { width: 100%; } .hero-stat { justify-content: flex-start; } }
   </style>
 </head>
 <body data-page-location="Harvey Cedars" data-music-key="harvey-cedars">
@@ -70,24 +72,24 @@
 
   <!-- Hero -->
   <section class="neighborhood-hero" style="background: linear-gradient(135deg, #1a2a1a 0%, #2d5a2d 50%, #5a8a3a 100%); color: white;">
-    <div class="section-label" style="color:rgba(150,220,120,0.9);">Upper LBI · The Quiet Side</div>
-    <h1 style="font-family:'Playfair Display',serif;color:white;">Harvey Cedars</h1>
-    <p style="color:rgba(255,255,255,0.82);max-width:580px;line-height:1.65;margin-bottom:1rem;">LBI's most beloved small town. A quiet, residential community with an outsized reputation for exceptional food, a legendary shellfish company, a celebrated coffee roaster, and the widest, most pristine beach on the island. The kind of place regulars guard jealously and first-timers never stop talking about.</p>
-    <div class="city-hero-meta">
-      <span>🌸 Black Eyed Susan's</span>
-      <span>🦪 Harvey Cedars Shellfish Co.</span>
-      <span>☕ Marigold Coffee</span>
-      <span>🏖️ Widest Beach on LBI</span>
-    </div>
-  </section>
-
-  <!-- Stats -->
-  <section class="section-sm" style="background:var(--white);">
-    <div class="highlight-strip">
-      <div class="highlight-card"><div class="big-num">~900</div><h4>Year-Round Pop.</h4><p>One of the smallest, most tight-knit towns on LBI</p></div>
-      <div class="highlight-card"><div class="big-num">Widest</div><h4>Beach on LBI</h4><p>The broadest, most generous stretch of sand on the island</p></div>
-      <div class="highlight-card"><div class="big-num">Fri</div><h4>Farmers Market</h4><p>Friday market at Veterans Memorial Park, summer season</p></div>
-      <div class="highlight-card"><div class="big-num">BYOB</div><h4>Dining Culture</h4><p>Best BYOB restaurants on LBI, including a James Beard–noted spot</p></div>
+    <div class="hero-flex">
+      <div class="hero-main">
+        <div class="section-label" style="color:rgba(150,220,120,0.9);">Upper LBI · The Quiet Side</div>
+        <h1 style="font-family:'Playfair Display',serif;color:white;">Harvey Cedars</h1>
+        <p style="color:rgba(255,255,255,0.82);max-width:580px;line-height:1.65;margin-bottom:1rem;">LBI's most beloved small town. A quiet, residential community with an outsized reputation for exceptional food, a legendary shellfish company, a celebrated coffee roaster, and the widest, most pristine beach on the island. The kind of place regulars guard jealously and first-timers never stop talking about.</p>
+        <div class="city-hero-meta">
+          <span>🌸 Black Eyed Susan's</span>
+          <span>🦪 Harvey Cedars Shellfish Co.</span>
+          <span>☕ Marigold Coffee</span>
+          <span>🏖️ Widest Beach on LBI</span>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">~900</span><span class="hero-stat-label">Year-Round Pop.</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">Widest</span><span class="hero-stat-label">Beach on LBI</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">Fri</span><span class="hero-stat-label">Farmers Market</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">BYOB</span><span class="hero-stat-label">Dining Culture</span></div>
+      </div>
     </div>
   </section>
 
@@ -102,41 +104,37 @@
         <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
 
           <div class="card animate-in">
-            <div class="card-img" style="background:linear-gradient(135deg,#3a0a2a,#9a2a6a);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag dining">American BYOB</span><span class="card-tag featured">Best on LBI</span></div>
               <h3 class="card-title">Black Eyed Susan's</h3>
-              <p class="card-desc">The most acclaimed restaurant on Long Beach Island — full stop. Creative American cuisine with a focus on fresh, local ingredients, executed with a level of care and skill that would impress in any major city. The seasonal menu changes constantly. BYOB. Tables are coveted: reservations required weeks in advance for peak summer. A mandatory dining experience for any serious LBI visitor.</p>
+              <p class="card-desc">The most acclaimed restaurant on LBI — creative, seasonal American cuisine, BYOB, reserve weeks ahead.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 Harvey Cedars · BYOB · Reservations weeks in advance</p>
             </div>
           </div>
 
           <div class="card animate-in">
-            <div class="card-img" style="background:linear-gradient(135deg,#0a2a0a,#1a7a3a);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag dining">Seafood</span><span class="card-tag featured">Local Legend</span></div>
               <h3 class="card-title">Harvey Cedars Shellfish Co.</h3>
-              <p class="card-desc">A Harvey Cedars institution operating since 1978. Fresh, direct-from-the-bay seafood at honest prices — local oysters, hard clams, steamed crabs, lobster, and daily fish. BYOB. The deck seating on warm evenings is perfect. A cash operation (ATM on site) with an unmistakable Shore character that no upscale restaurant can replicate. Order the steamed crabs and stay a while.</p>
+              <p class="card-desc">Fresh, direct-from-the-bay seafood since 1978 — oysters, clams, and steamed crabs, BYOB, cash preferred.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 Harvey Cedars · BYOB · Cash preferred · Seasonal</p>
             </div>
           </div>
 
           <div class="card animate-in">
-            <div class="card-img" style="background:linear-gradient(135deg,#2a1a0a,#7a5a1a);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag dining">Coffee</span><span class="card-tag featured">Must-Visit</span></div>
               <h3 class="card-title">Marigold Coffee Roasters</h3>
-              <p class="card-desc">Arguably the best coffee on LBI — a genuine specialty roaster with a warm, bright café that's become a Harvey Cedars anchor. Single-origin pour-overs, beautifully made lattes, and exceptional cold brew. The pastries are excellent. A reliable morning ritual for locals and visitors who know their coffee. Small but never feels rushed.</p>
+              <p class="card-desc">Arguably the best coffee on LBI — pour-overs, lattes, and excellent pastries.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 Harvey Cedars · Morning–afternoon · Seasonal hours</p>
             </div>
           </div>
 
           <div class="card animate-in">
-            <div class="card-img" style="background:linear-gradient(135deg,#0a1a3a,#1a4a7a);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag dining">American</span></div>
               <h3 class="card-title">Birdy's</h3>
-              <p class="card-desc">A newer addition to the Harvey Cedars dining scene that's quickly earned a loyal following. Approachable American menu — elevated bar food, excellent burgers, and a selection of fresh fish dishes. Full bar. Casual and comfortable, with a back patio that catches the bay breeze on summer evenings. A welcome addition to a town already blessed with great food options.</p>
+              <p class="card-desc">Newer local favorite — elevated bar food, burgers, and a bay-breeze back patio.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 Harvey Cedars · Full bar · Seasonal</p>
             </div>
           </div>
@@ -149,21 +147,19 @@
         <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
 
           <div class="card animate-in">
-            <div class="card-img" style="background:linear-gradient(135deg,#0a2a4a,#2a6a8a);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag outdoors">Beach</span><span class="card-tag featured">Best on LBI</span></div>
               <h3 class="card-title">Harvey Cedars Beach</h3>
-              <p class="card-desc">The widest, most expansive beach on LBI — a broad sweep of clean sand with generous dune protection and clear, clean water. Less crowded than Beach Haven even in peak season because fewer visitors make it this far north. The beach has a calm, unhurried quality that matches the town's character. Worth the extra drive from the causeway.</p>
+              <p class="card-desc">The widest beach on LBI — broad clean sand, clear water, and lighter crowds than the south end.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 Ocean side, Harvey Cedars · Badge required · Lifeguards in season</p>
             </div>
           </div>
 
           <div class="card animate-in">
-            <div class="card-img" style="background:linear-gradient(135deg,#1a3a1a,#3a7a3a);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag outdoors">Market</span></div>
               <h3 class="card-title">Friday Farmers Market</h3>
-              <p class="card-desc">Weekly Friday market at Veterans Memorial Park throughout summer. Local growers, specialty food producers, fresh-baked goods, handmade crafts, and prepared food vendors. Smaller and more intimate than the Surf City Saturday market, but the quality of vendors is exceptional. A casual, low-key way to start a Harvey Cedars Friday.</p>
+              <p class="card-desc">Small, intimate weekly market at Veterans Memorial Park — growers, baked goods, and crafts.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 Veterans Memorial Park · Fri morning · June–September</p>
             </div>
           </div>
@@ -196,9 +192,10 @@
 
       <!-- Sidebar -->
       <div>
-        <div class="map-embed-wrap" style="margin-bottom:1.25rem;">
-          <iframe title="Harvey Cedars NJ Map" src="https://maps.google.com/maps?q=Harvey+Cedars,+NJ&output=embed&z=14" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="map-embed-wrap" style="margin-bottom:0.5rem;">
+          <div id="town-map" style="height:260px;"></div>
         </div>
+        <p style="font-size:0.68rem;color:var(--sub);margin:0 0 1.25rem;">Hover a town to preview, click to explore. Map data &copy; OpenStreetMap contributors.</p>
 
         <div class="sidebar-box">
           <h4>Need to Know</h4>
@@ -271,5 +268,15 @@
 
 </div>
 <script src="../../script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../../interactive-map.js"></script>
+<script>
+initCityBoundaryMap('town-map', {
+  center: [39.60, -74.24],
+  zoom: 11,
+  boundaryUrl: '../../data/lbi-towns.geojson',
+  onClick: function (f) { window.location.href = '../' + f.properties.url; },
+});
+</script>
 </body>
 </html>

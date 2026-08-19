@@ -20,11 +20,12 @@
     .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
     .city-hero { padding: 2.5rem 5% 2.5rem; }
     .city-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
-    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
-    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
-    .highlight-card h4 { font-size: 0.88rem; color: var(--navy); margin-bottom: 0.2rem; }
-    .highlight-card p { font-size: 0.78rem; color: var(--sub); }
-    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.75rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
+    .hero-flex { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap; }
+    .hero-main { flex: 1 1 340px; min-width: 0; }
+    .hero-stats { display: flex; flex-direction: column; gap: 0.5rem; flex-shrink: 0; }
+    .hero-stat { display: flex; align-items: baseline; justify-content: flex-end; gap: 0.5rem; background: rgba(255,255,255,0.1); border-right: 3px solid var(--gold); border-radius: 6px; padding: 0.4rem 0.75rem; min-width: 165px; }
+    .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold); line-height: 1; white-space: nowrap; }
+    .hero-stat-label { font-size: 0.68rem; color: rgba(255,255,255,0.85); text-align: right; line-height: 1.2; }
     .section { padding: 2.5rem 5%; }
     .section-sm { padding: 1.75rem 5%; }
     .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
@@ -39,7 +40,7 @@
     .map-embed-wrap iframe { display: block; width: 100%; height: 320px; border: none; }
     .events-list { display: flex; flex-direction: column; }
     .map-sidebar { position: sticky; top: 68px; display: flex; flex-direction: column; gap: 1.5rem; }
-    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .highlight-strip { grid-template-columns: repeat(2,1fr); } .map-sidebar { position: static; } }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .map-sidebar { position: static; } .hero-flex { flex-direction: column; } .hero-stats { width: 100%; } .hero-stat { justify-content: flex-start; } }
   </style>
 </head>
 <body data-page-location="Long Beach Island" data-music-key="lbi">
@@ -82,26 +83,26 @@
 
   <!-- Hero -->
   <div class="city-hero" style="background: linear-gradient(135deg, #0a3d62 0%, #1e6fa5 50%, #2d9cdb 100%); color: white;">
-    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(201,168,76,0.85);margin-bottom:0.4rem;">The Concierge</div>
-    <h1 style="color:white;font-family:'Playfair Display',serif;">Long Beach Island</h1>
-    <p style="color:rgba(255,255,255,0.8);max-width:580px;font-size:0.92rem;line-height:1.6;margin-bottom:0.5rem;">18 miles of Atlantic shoreline, no boardwalk, no chains — just independent restaurants, pristine beaches, working fishing docks, and a pace of life that hasn't changed in decades.</p>
-    <div class="city-chips">
-      <a href="holgate/index.html" class="city-chip"><span>Holgate</span><span class="chip-badge live">Live</span></a>
-      <a href="beach-haven/index.html" class="city-chip"><span>Beach Haven</span><span class="chip-badge live">Live</span></a>
-      <a href="ship-bottom/index.html" class="city-chip"><span>Ship Bottom</span><span class="chip-badge live">Live</span></a>
-      <a href="surf-city/index.html" class="city-chip"><span>Surf City</span><span class="chip-badge live">Live</span></a>
-      <a href="harvey-cedars/index.html" class="city-chip"><span>Harvey Cedars</span><span class="chip-badge live">Live</span></a>
-      <a href="barnegat-light/index.html" class="city-chip"><span>Barnegat Light</span><span class="chip-badge live">Live</span></a>
-    </div>
-  </div>
-
-  <!-- Stats -->
-  <div class="section-sm" style="background:var(--mist);">
-    <div class="highlight-strip">
-      <div class="highlight-card"><div class="big-num">18mi</div><h4>Long</h4><p>Miles of barrier island from Holgate to Barnegat Light</p></div>
-      <div class="highlight-card"><div class="big-num">130K+</div><h4>Summer Population</h4><p>Year-round residents swell 10x in July–August</p></div>
-      <div class="highlight-card"><div class="big-num">1</div><h4>Bridge In</h4><p>Route 72 Causeway — the only way on and off the island</p></div>
-      <div class="highlight-card"><div class="big-num">0</div><h4>Chain Restaurants</h4><p>Every restaurant on LBI is independently owned</p></div>
+    <div class="hero-flex">
+      <div class="hero-main">
+        <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(201,168,76,0.85);margin-bottom:0.4rem;">The Concierge</div>
+        <h1 style="color:white;font-family:'Playfair Display',serif;">Long Beach Island</h1>
+        <p style="color:rgba(255,255,255,0.8);max-width:580px;font-size:0.92rem;line-height:1.6;margin-bottom:0.5rem;">18 miles of Atlantic shoreline, no boardwalk, no chains — just independent restaurants, pristine beaches, working fishing docks, and a pace of life that hasn't changed in decades.</p>
+        <div class="city-chips">
+          <a href="holgate/index.html" class="city-chip"><span>Holgate</span><span class="chip-badge live">Live</span></a>
+          <a href="beach-haven/index.html" class="city-chip"><span>Beach Haven</span><span class="chip-badge live">Live</span></a>
+          <a href="ship-bottom/index.html" class="city-chip"><span>Ship Bottom</span><span class="chip-badge live">Live</span></a>
+          <a href="surf-city/index.html" class="city-chip"><span>Surf City</span><span class="chip-badge live">Live</span></a>
+          <a href="harvey-cedars/index.html" class="city-chip"><span>Harvey Cedars</span><span class="chip-badge live">Live</span></a>
+          <a href="barnegat-light/index.html" class="city-chip"><span>Barnegat Light</span><span class="chip-badge live">Live</span></a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">18mi</span><span class="hero-stat-label">Long</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">130K+</span><span class="hero-stat-label">Summer Population</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">1</span><span class="hero-stat-label">Bridge In</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">0</span><span class="hero-stat-label">Chain Restaurants</span></div>
+      </div>
     </div>
   </div>
 
@@ -119,7 +120,7 @@
               <div class="event-tags"><span class="tag tag-arts">Film Festival</span><span class="tag tag-featured">Featured</span></div>
               <h4 class="event-title">Lighthouse International Film Festival</h4>
               <p class="event-detail">Multiple venues · LBI · June 9–13</p>
-              <p class="event-desc">Named "Coolest Film Festival" by MovieMaker Magazine. Films from Sundance, Tribeca, Cannes, and SXSW screened across island venues. 18th annual edition.</p>
+              <p class="event-desc">Named "Coolest Film Festival" by MovieMaker Magazine — 18th annual edition.</p>
               <div class="event-actions"><a href="https://lighthousefilmfestival.org" target="_blank" rel="noopener" class="event-link event-ticket">Info →</a></div>
             </div>
           </div>
@@ -130,7 +131,7 @@
               <div class="event-tags"><span class="tag tag-outdoors">Surf</span></div>
               <h4 class="event-title">Coquina Jam Surf Competition</h4>
               <p class="event-detail">Beach Haven · 18th Annual</p>
-              <p class="event-desc">One of the shore's best amateur surf competitions. Free to watch on the beach.</p>
+              <p class="event-desc">One of the shore's best amateur surf competitions — free to watch.</p>
               <div class="event-actions"><a href="beach-haven/index.html" class="event-link">Beach Haven Guide →</a></div>
             </div>
           </div>
@@ -141,7 +142,7 @@
               <div class="event-tags"><span class="tag tag-community">Carnival</span><span class="tag tag-featured">Featured</span></div>
               <h4 class="event-title">Festival of the Sea</h4>
               <p class="event-detail">St. Francis of Assisi · Brant Beach · Jul 28–Aug 1</p>
-              <p class="event-desc">Five-night carnival with rides, games, food, and live music. Features Neurodiverse Night (sensory-friendly) and First Responder/Veterans Night. LBI's most beloved summer tradition.</p>
+              <p class="event-desc">Five-night carnival with rides, games, food, and live music — LBI's most beloved summer tradition.</p>
               <div class="event-actions"><a href="ship-bottom/index.html" class="event-link">Ship Bottom Guide →</a></div>
             </div>
           </div>
@@ -152,7 +153,7 @@
               <div class="event-tags"><span class="tag tag-arts">Tour</span></div>
               <h4 class="event-title">Annual Seashore House Tour</h4>
               <p class="event-detail">Island-wide · 60th Anniversary</p>
-              <p class="event-desc">Six stunning island homes opened for tours. Architectural panel discussions. A deep look at the most beautiful private residences on LBI.</p>
+              <p class="event-desc">Six stunning island homes opened for self-guided tours.</p>
               <div class="event-actions"><a href="https://lbimuseum.org" target="_blank" rel="noopener" class="event-link event-ticket">Info →</a></div>
             </div>
           </div>
@@ -163,7 +164,7 @@
               <div class="event-tags"><span class="tag tag-outdoors">Kites</span></div>
               <h4 class="event-title">LBI FLY International Kite Festival</h4>
               <p class="event-detail">Ship Bottom Beach · Oct 9–10 · Free</p>
-              <p class="event-desc">Professional international kite flyers, giant display kites, night fly, and kids' activities. 12th annual. One of the best fall events on the Jersey Shore.</p>
+              <p class="event-desc">Professional kite flyers, giant display kites, and kids' activities — 12th annual.</p>
               <div class="event-actions"><a href="ship-bottom/index.html" class="event-link">Ship Bottom Guide →</a></div>
             </div>
           </div>
@@ -174,7 +175,7 @@
               <div class="event-tags"><span class="tag tag-food">Food Fest</span><span class="tag tag-featured">Featured</span></div>
               <h4 class="event-title">Chowderfest</h4>
               <p class="event-detail">Taylor Ave Waterfront · Beach Haven · October</p>
-              <p class="event-desc">Thousands descend on Beach Haven to sample clam chowder from every restaurant on the island. Live music, merchant marketplace. The unofficial end to LBI's summer season.</p>
+              <p class="event-desc">Thousands sample clam chowder from every restaurant on the island — the unofficial end of summer.</p>
               <div class="event-actions"><a href="beach-haven/index.html" class="event-link">Beach Haven Guide →</a></div>
             </div>
           </div>

@@ -6,17 +6,19 @@
   <title>Beach Haven — Long Beach Island · The Concierge</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     html, body { height: 100%; overflow: hidden; }
     .page-wrap { position: fixed; top: 68px; left: 0; right: 0; bottom: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white); }
     .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
     .neighborhood-hero { padding: 2.5rem 5% 2.25rem; }
     .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
-    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
-    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
-    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
-    .highlight-card h4 { font-size: 0.85rem; color: var(--navy); margin-bottom: 0.15rem; }
-    .highlight-card p { font-size: 0.77rem; color: var(--sub); }
+    .hero-flex { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap; }
+    .hero-main { flex: 1 1 340px; min-width: 0; }
+    .hero-stats { display: flex; flex-direction: column; gap: 0.5rem; flex-shrink: 0; }
+    .hero-stat { display: flex; align-items: baseline; justify-content: flex-end; gap: 0.5rem; background: rgba(255,255,255,0.1); border-right: 3px solid var(--gold); border-radius: 6px; padding: 0.4rem 0.75rem; min-width: 165px; }
+    .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold); line-height: 1; white-space: nowrap; }
+    .hero-stat-label { font-size: 0.68rem; color: rgba(255,255,255,0.85); text-align: right; line-height: 1.2; }
     .section { padding: 2.25rem 5%; }
     .section-sm { padding: 1.75rem 5%; }
     .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
@@ -36,7 +38,7 @@
     .event-date-badge .day { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; line-height: 1.1; }
     .event-info h4 { font-size: 0.88rem; color: var(--navy); margin-bottom: 0.2rem; }
     .event-info p { font-size: 0.77rem; color: var(--sub); margin: 0; line-height: 1.45; }
-    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .highlight-strip { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .hero-flex { flex-direction: column; } .hero-stats { width: 100%; } .hero-stat { justify-content: flex-start; } }
   </style>
 </head>
 <body data-page-location="Beach Haven" data-music-key="beach-haven">
@@ -79,24 +81,24 @@
 
   <!-- Hero -->
   <section class="neighborhood-hero" style="background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 60%, #fdbb2d 100%); color: white;">
-    <div class="section-label" style="color:rgba(253,187,45,0.9);">Southern LBI · The Jewel</div>
-    <h1 style="font-family:'Playfair Display',serif;color:white;">Beach Haven</h1>
-    <p style="color:rgba(255,255,255,0.82);max-width:580px;line-height:1.65;margin-bottom:1rem;">The commercial and cultural heart of LBI. A Victorian seaside town with 150 years of history, the island's best dining scene, an iconic amusement park, professional summer theater, and the biggest festivals on the Shore. Beach Haven is where LBI comes alive.</p>
-    <div class="city-hero-meta">
-      <span>🎡 Fantasy Island Amusement Park</span>
-      <span>🎭 Surflight Theatre</span>
-      <span>🍺 Chowderfest · HopSauce</span>
-      <span>🏛️ Victorian Historic District</span>
-    </div>
-  </section>
-
-  <!-- Stats -->
-  <section class="section-sm" style="background:var(--white);">
-    <div class="highlight-strip">
-      <div class="highlight-card"><div class="big-num">1874</div><h4>Founded</h4><p>One of the oldest resort towns on the Jersey Shore</p></div>
-      <div class="highlight-card"><div class="big-num">50+</div><h4>Restaurants & Bars</h4><p>The most diverse dining scene on LBI</p></div>
-      <div class="highlight-card"><div class="big-num">18</div><h4>Amusement Rides</h4><p>Fantasy Island — free admission since 1984</p></div>
-      <div class="highlight-card"><div class="big-num">60+</div><h4>Years of Theater</h4><p>Surflight Theatre — professional productions since 1950</p></div>
+    <div class="hero-flex">
+      <div class="hero-main">
+        <div class="section-label" style="color:rgba(253,187,45,0.9);">Southern LBI · The Jewel</div>
+        <h1 style="font-family:'Playfair Display',serif;color:white;">Beach Haven</h1>
+        <p style="color:rgba(255,255,255,0.82);max-width:580px;line-height:1.65;margin-bottom:1rem;">The commercial and cultural heart of LBI. A Victorian seaside town with 150 years of history, the island's best dining scene, an iconic amusement park, professional summer theater, and the biggest festivals on the Shore. Beach Haven is where LBI comes alive.</p>
+        <div class="city-hero-meta">
+          <span>🎡 Fantasy Island Amusement Park</span>
+          <span>🎭 Surflight Theatre</span>
+          <span>🍺 Chowderfest · HopSauce</span>
+          <span>🏛️ Victorian Historic District</span>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">1874</span><span class="hero-stat-label">Founded</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">50+</span><span class="hero-stat-label">Restaurants & Bars</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">18</span><span class="hero-stat-label">Amusement Rides</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">60+</span><span class="hero-stat-label">Years of Theater</span></div>
+      </div>
     </div>
   </section>
 
@@ -114,7 +116,7 @@
             <div class="event-date-badge"><div class="month">Jun</div><div class="day">14</div></div>
             <div class="event-info">
               <h4>HopSauce Festival</h4>
-              <p>Craft beer meets artisan hot sauce at the Taylor Ave Waterfront. 50+ local and regional breweries, dozens of small-batch hot sauce makers, live music, and food vendors. One of LBI's most popular food festivals — tickets sell out. Held at the bayfront park.</p>
+              <p>50+ breweries and artisan hot sauce makers at the Taylor Ave Waterfront — tickets sell out.</p>
             </div>
           </div>
 
@@ -122,7 +124,7 @@
             <div class="event-date-badge"><div class="month">Jul</div><div class="day">Wed</div></div>
             <div class="event-info">
               <h4>Concerts on the Green</h4>
-              <p>Free Wednesday evening concerts at the Centre Street stage throughout July and August. Genres rotate each week — classic rock, jazz, folk, beach pop. Bring a chair or blanket. Family-friendly and free. A Beach Haven summer tradition going back decades.</p>
+              <p>Free Wednesday evening concerts at the Centre Street stage all July and August — bring a chair.</p>
             </div>
           </div>
 
@@ -130,7 +132,7 @@
             <div class="event-date-badge"><div class="month">Aug</div><div class="day">TBD</div></div>
             <div class="event-info">
               <h4>Coquina Jam Surf Competition</h4>
-              <p>The premier surf competition on LBI, held at Beach Haven's ocean beach. Amateur and professional divisions, spectator-friendly beach access, and a festive atmosphere. Named for the coquina clam shells that dot LBI's beaches. One of the signature surf events on the Jersey Shore.</p>
+              <p>LBI's premier surf competition, amateur and pro divisions, on Beach Haven's ocean beach.</p>
             </div>
           </div>
 
@@ -138,7 +140,7 @@
             <div class="event-date-badge"><div class="month">Sep</div><div class="day">TBD</div></div>
             <div class="event-info">
               <h4>LBI Film Festival</h4>
-              <p>Five days of independent film screenings, filmmaker Q&As, and panel discussions across multiple Beach Haven venues. Attracts filmmakers from across the country. Evening screenings often sell out. The cultural anchor of LBI's fall season, typically held in late September.</p>
+              <p>Five days of independent film screenings and filmmaker Q&As across Beach Haven venues in late September.</p>
             </div>
           </div>
 
@@ -146,7 +148,7 @@
             <div class="event-date-badge"><div class="month">Oct</div><div class="day">TBD</div></div>
             <div class="event-info">
               <h4>Chowderfest</h4>
-              <p>LBI's biggest annual event. Thousands of visitors descend on the Taylor Ave Waterfront to sample clam chowder from dozens of restaurants and vendors competing for the best chowder on the Shore. Live music, beer garden, and a festive fall atmosphere. Held the first weekend of October — book lodging months in advance.</p>
+              <p>LBI's biggest annual event — thousands sample chowder from dozens of restaurants at the Taylor Ave Waterfront.</p>
             </div>
           </div>
 
@@ -154,7 +156,7 @@
             <div class="event-date-badge"><div class="month">Oct</div><div class="day">TBD</div></div>
             <div class="event-info">
               <h4>LBI Chefs Dinner Series</h4>
-              <p>Multi-course collaborative dinners featuring LBI's best restaurant chefs cooking together in the off-season. Intimate ticketed events highlighting local seafood and regional ingredients. A celebration of LBI's serious culinary scene outside the summer frenzy.</p>
+              <p>Intimate, ticketed multi-course dinners featuring LBI's best chefs cooking together in the off-season.</p>
             </div>
           </div>
 
@@ -165,61 +167,55 @@
         <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
 
           <div class="card animate-in" data-subcat="seafood">
-            <div class="card-img" style="background:linear-gradient(135deg,#7c3c0a,#e07b39);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag dining">Seafood BYOB</span><span class="card-tag featured">Top Rated</span></div>
               <h3 class="card-title">Barnacle Bill's</h3>
-              <p class="card-desc">A Beach Haven institution for fresh, unpretentious seafood at honest prices. Locals swear by the whole belly clams, steamed shrimp, and the lobster roll. Cash-friendly, no reservations, BYOB. Expect a wait on summer weekends — worth it. The quintessential LBI seafood experience.</p>
+              <p class="card-desc">Beach Haven institution for fresh, unpretentious seafood — expect a wait on summer weekends.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 10th St & The Boulevard · BYOB · Seasonal</p>
             </div>
           </div>
 
           <div class="card animate-in" data-subcat="new-american">
-            <div class="card-img" style="background:linear-gradient(135deg,#1c3a1c,#3d7a3d);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag dining">American BYOB</span><span class="card-tag featured">Local Favorite</span></div>
               <h3 class="card-title">The Black Whale</h3>
-              <p class="card-desc">The go-to for creative American cuisine in a warm, cozy setting. Menu changes seasonally but consistently features excellent fish dishes, handmade pasta, and inventive appetizers. BYOB adds to the value. Reservations highly recommended in July and August. One of the best overall dining experiences on the island.</p>
+              <p class="card-desc">Creative, seasonally changing American menu with excellent fish and handmade pasta.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 Centre St · BYOB · Reservations recommended</p>
             </div>
           </div>
 
           <div class="card animate-in" data-subcat="sushi">
-            <div class="card-img" style="background:linear-gradient(135deg,#3a1c0a,#8c4a1e);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag dining">Sushi BYOB</span></div>
               <h3 class="card-title">Beach Haven Sushi</h3>
-              <p class="card-desc">Consistently excellent Japanese cuisine — surprising in a Shore town but genuinely outstanding. Fresh fish flown in daily, creative rolls, and solid traditional options. One of the harder tables to get on LBI without advance planning. BYOB. Open for dinner in season.</p>
+              <p class="card-desc">Surprisingly excellent Japanese fare, fresh fish flown in daily — book ahead.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 Beach Haven · BYOB · Reservations recommended</p>
             </div>
           </div>
 
           <div class="card animate-in" data-subcat="bar">
-            <div class="card-img" style="background:linear-gradient(135deg,#0d0d2b,#1a1a5e);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag nightlife">Bar</span><span class="card-tag featured">Iconic</span></div>
               <h3 class="card-title">The Ketch Bar & Grill</h3>
-              <p class="card-desc">LBI's most iconic bar — a true Shore institution that's been a summer gathering spot for decades. Live music on weekends, cold beer, a full bar, and a crowd that's been coming back every summer. Casual food menu. Outdoor deck. The place where LBI summers begin and end for generations of island loyalists.</p>
+              <p class="card-desc">LBI's most iconic bar — decades-old summer gathering spot with live music weekends.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 Beach Haven · Full bar · Live music weekends</p>
             </div>
           </div>
 
           <div class="card animate-in" data-subcat="diner">
-            <div class="card-img" style="background:linear-gradient(135deg,#1a3050,#2c6fa5);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag dining">Breakfast</span></div>
               <h3 class="card-title">Parker's Garage Diner & Filling Station</h3>
-              <p class="card-desc">Beloved breakfast and lunch spot occupying a converted vintage service garage. Great omelets, oversized pancakes, and inventive egg dishes. The retro-industrial décor is part of the charm. A weekend morning ritual for Beach Haven regulars. Expect a line on summer weekends — move early.</p>
+              <p class="card-desc">Beloved breakfast and lunch spot in a converted vintage service garage.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 Beach Haven · Breakfast & lunch · Cash & card</p>
             </div>
           </div>
 
           <div class="card animate-in" data-subcat="bar">
-            <div class="card-img" style="background:linear-gradient(135deg,#3a0a2a,#8c3060);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag nightlife">Bar & Grill</span></div>
               <h3 class="card-title">Tuckers Bar & Grill</h3>
-              <p class="card-desc">A longstanding Beach Haven staple for classic bar food and a lively atmosphere. Wings, burgers, and sandwiches done right. Popular for watching sports, late-night eats, and a drink after the beach. Friendly staff who treat you like you've been coming for years — because many of the regulars have.</p>
+              <p class="card-desc">Longstanding staple for classic bar food, wings, and a lively local crowd.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 Beach Haven · Full bar · Late kitchen</p>
             </div>
           </div>
@@ -232,11 +228,10 @@
         <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
 
           <div class="card animate-in" data-subcat="motel">
-            <div class="card-img" style="background:linear-gradient(135deg,#1a3a5c,#2a7fbf);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag lodging">Motel</span><span class="card-tag featured">9.2 · Excellent</span></div>
               <h3 class="card-title">Sea Spray Motel</h3>
-              <p class="card-desc">Family-owned motel a few blocks from the beach, with 52 rooms and efficiencies, a heated pool, and free parking right on the bay. Simple, comfortable, and walkable to the center of town — a longtime favorite for guests who want an easy, no-fuss LBI stay.</p>
+              <p class="card-desc">Family-owned motel with a heated pool, a few blocks from the beach — simple, comfortable, no-fuss.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 2600 S. Bay Ave · Heated pool · Free parking</p>
             </div>
           </div>
@@ -249,61 +244,55 @@
         <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
 
           <div class="card animate-in">
-            <div class="card-img" style="background:linear-gradient(135deg,#b21f1f,#fdbb2d);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag featured">Iconic</span><span class="card-tag">Amusement</span></div>
               <h3 class="card-title">Fantasy Island Amusement Park</h3>
-              <p class="card-desc">LBI's beloved boardwalk-style amusement park, operating since 1984 at 750 N. Bay Ave. Free admission to the park — pay per ride. 18 rides including a classic carousel, Ferris wheel, bumper cars, and children's rides. Arcade games, skee-ball, and a full midway. Open Memorial Day weekend through Labor Day, evenings in summer.</p>
+              <p class="card-desc">Free-admission, pay-per-ride amusement park since 1984 — 18 rides, arcade, and a full midway.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 750 N. Bay Ave · Free admission · Seasonal</p>
             </div>
           </div>
 
           <div class="card animate-in">
-            <div class="card-img" style="background:linear-gradient(135deg,#005f99,#00b4d8);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag featured">Water Park</span><span class="card-tag">Family</span></div>
               <h3 class="card-title">Thundering Surf Waterpark</h3>
-              <p class="card-desc">The Shore's premier waterpark since 1977, now operated by the Fantasy Island family. Features a FlowRider surf simulator, lazy river, water slides, and a dedicated kids' area. Located at 300 Taylor Ave adjacent to the bay. Admission required. Open daily in summer.</p>
+              <p class="card-desc">The Shore's premier waterpark since 1977 — FlowRider surf simulator, lazy river, and slides.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 300 Taylor Ave · Admission required · Summer daily</p>
             </div>
           </div>
 
           <div class="card animate-in">
-            <div class="card-img" style="background:linear-gradient(135deg,#4a0e8f,#9b5de5);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag arts">Theater</span><span class="card-tag featured">Must-See</span></div>
               <h3 class="card-title">Surflight Theatre</h3>
-              <p class="card-desc">One of New Jersey's most respected professional summer theaters, operating continuously since 1950. Full Broadway-caliber productions — musicals, comedies, and dramas — performed in an intimate 344-seat venue on Engleside Ave. A true LBI institution. Pre-show dining packages available. Book in advance; popular productions sell out.</p>
+              <p class="card-desc">Professional summer theater since 1950 — Broadway-caliber shows in an intimate 344-seat venue.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 Engleside Ave · Seasonal · Advance tickets recommended</p>
             </div>
           </div>
 
           <div class="card animate-in">
-            <div class="card-img" style="background:linear-gradient(135deg,#3d2c14,#8b5e3c);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag">History</span></div>
               <h3 class="card-title">LBI Historical Association Museum</h3>
-              <p class="card-desc">Founded in 1976, the museum preserves the history of Long Beach Island through rotating exhibits, artifacts, historical photographs, and documents. Located at 129 Engleside Ave in a restored historic structure. Celebrating its 50th anniversary in 2026. Free admission. Open in season Tuesday–Sunday.</p>
+              <p class="card-desc">Rotating exhibits on LBI history in a restored building — free admission, founded 1976.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 129 Engleside Ave · Free · Tue–Sun in season</p>
             </div>
           </div>
 
           <div class="card animate-in">
-            <div class="card-img" style="background:linear-gradient(135deg,#1a3c34,#52b788);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag">Architecture</span></div>
               <h3 class="card-title">Victorian Historic District</h3>
-              <p class="card-desc">A remarkable collection of late 19th and early 20th century resort architecture stretching from 5th Street to Chatsworth Avenue. Ornate Queen Anne cottages, Colonial Revival hotels, and shingle-style summer homes line the shaded streets. Pick up a self-guided walking tour map from the Historical Museum. Best explored on foot or by bike.</p>
+              <p class="card-desc">Late 19th/early 20th century resort architecture from 5th St to Chatsworth Ave — self-guided tours.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 5th St to Chatsworth Ave · Self-guided walking tours</p>
             </div>
           </div>
 
           <div class="card animate-in">
-            <div class="card-img" style="background:linear-gradient(135deg,#0a3d62,#1e6fa5);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag outdoors">Bay Beach</span></div>
               <h3 class="card-title">Bay Village & Bayfront</h3>
-              <p class="card-desc">The western bay side of Beach Haven features calm, warm, shallow water ideal for families with young children, kayaking, and paddleboarding. The bayfront park at the end of Centre Street has benches and a boat launch. The Thundering Surf area at Taylor Ave waterfront hosts the major festivals throughout summer and fall.</p>
+              <p class="card-desc">Calm, shallow bay-side water good for families, kayaking, and paddleboarding.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 Taylor Ave Waterfront · Bay beaches along the west side</p>
             </div>
           </div>
@@ -314,9 +303,10 @@
 
       <!-- Sidebar -->
       <div>
-        <div class="map-embed-wrap" style="margin-bottom:1.25rem;">
-          <iframe title="Beach Haven NJ Map" src="https://maps.google.com/maps?q=Beach+Haven,+NJ&output=embed&z=14" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="map-embed-wrap" style="margin-bottom:0.5rem;">
+          <div id="town-map" style="height:260px;"></div>
         </div>
+        <p style="font-size:0.68rem;color:var(--sub);margin:0 0 1.25rem;">Hover a town to preview, click to explore. Map data &copy; OpenStreetMap contributors.</p>
 
         <div class="sidebar-box">
           <h4>Need to Know</h4>
@@ -403,6 +393,16 @@
 
 </div>
 <script src="../../script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../../interactive-map.js"></script>
+<script>
+initCityBoundaryMap('town-map', {
+  center: [39.60, -74.24],
+  zoom: 11,
+  boundaryUrl: '../../data/lbi-towns.geojson',
+  onClick: function (f) { window.location.href = '../' + f.properties.url; },
+});
+</script>
 <script>
 /* ── PARTNER-SITE VIEWER: hides "alike" listings and shows a way back when
    arriving via a partner business's own site link (e.g. Sea Spray Motel's

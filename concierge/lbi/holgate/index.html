@@ -6,17 +6,19 @@
   <title>Holgate — Long Beach Island · The Concierge</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     html, body { height: 100%; overflow: hidden; }
     .page-wrap { position: fixed; top: 68px; left: 0; right: 0; bottom: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white); }
     .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
     .neighborhood-hero { padding: 2.5rem 5% 2.25rem; }
     .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
-    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
-    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
-    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
-    .highlight-card h4 { font-size: 0.85rem; color: var(--navy); margin-bottom: 0.15rem; }
-    .highlight-card p { font-size: 0.77rem; color: var(--sub); }
+    .hero-flex { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap; }
+    .hero-main { flex: 1 1 340px; min-width: 0; }
+    .hero-stats { display: flex; flex-direction: column; gap: 0.5rem; flex-shrink: 0; }
+    .hero-stat { display: flex; align-items: baseline; justify-content: flex-end; gap: 0.5rem; background: rgba(255,255,255,0.1); border-right: 3px solid var(--gold); border-radius: 6px; padding: 0.4rem 0.75rem; min-width: 165px; }
+    .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold); line-height: 1; white-space: nowrap; }
+    .hero-stat-label { font-size: 0.68rem; color: rgba(255,255,255,0.85); text-align: right; line-height: 1.2; }
     .section { padding: 2.25rem 5%; }
     .section-sm { padding: 1.75rem 5%; }
     .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
@@ -29,7 +31,7 @@
     .info-row p { font-size: 0.8rem; color: var(--sub); line-height: 1.5; margin: 0; }
     .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
     .map-embed-wrap iframe { display: block; width: 100%; height: 260px; border: none; }
-    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .highlight-strip { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .hero-flex { flex-direction: column; } .hero-stats { width: 100%; } .hero-stat { justify-content: flex-start; } }
   </style>
 </head>
 <body data-page-location="Holgate" data-music-key="holgate">
@@ -70,24 +72,24 @@
 
   <!-- Hero -->
   <section class="neighborhood-hero" style="background: linear-gradient(135deg, #1a3c34 0%, #2d6a4f 60%, #52b788 100%); color: white;">
-    <div class="section-label" style="color:rgba(201,168,76,0.85);">Southernmost LBI</div>
-    <h1 style="font-family:'Playfair Display',serif;color:white;">Holgate</h1>
-    <p style="color:rgba(255,255,255,0.82);max-width:560px;line-height:1.65;margin-bottom:1rem;">The wild, untouched southern tip of LBI. Where the paved road ends, three miles of federally protected wilderness beach begins — no lifeguards, no concessions, just surf, piping plovers, and empty dunes stretching south toward Atlantic City.</p>
-    <div class="city-hero-meta">
-      <span>🌿 Forsythe Wildlife Refuge</span>
-      <span>🎣 World-Class Surf Fishing</span>
-      <span>🐦 Piping Plover Nesting</span>
-      <span>🚗 Beach Driving (Fall/Winter)</span>
-    </div>
-  </section>
-
-  <!-- Stats -->
-  <section class="section-sm" style="background:var(--white);">
-    <div class="highlight-strip">
-      <div class="highlight-card"><div class="big-num">3mi</div><h4>Wilderness Beach</h4><p>Federally protected, no lifeguards</p></div>
-      <div class="highlight-card"><div class="big-num">400+</div><h4>Refuge Acres</h4><p>Barrier beach, dunes & tidal salt marsh</p></div>
-      <div class="highlight-card"><div class="big-num">50+</div><h4>Bird Species</h4><p>Critical Atlantic Flyway migration stop</p></div>
-      <div class="highlight-card"><div class="big-num">Sep–Mar</div><h4>Beach Driving</h4><p>4WD permitted seaward of berm crest</p></div>
+    <div class="hero-flex">
+      <div class="hero-main">
+        <div class="section-label" style="color:rgba(201,168,76,0.85);">Southernmost LBI</div>
+        <h1 style="font-family:'Playfair Display',serif;color:white;">Holgate</h1>
+        <p style="color:rgba(255,255,255,0.82);max-width:560px;line-height:1.65;margin-bottom:1rem;">The wild, untouched southern tip of LBI. Where the paved road ends, three miles of federally protected wilderness beach begins — no lifeguards, no concessions, just surf, piping plovers, and empty dunes stretching south toward Atlantic City.</p>
+        <div class="city-hero-meta">
+          <span>🌿 Forsythe Wildlife Refuge</span>
+          <span>🎣 World-Class Surf Fishing</span>
+          <span>🐦 Piping Plover Nesting</span>
+          <span>🚗 Beach Driving (Fall/Winter)</span>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">3mi</span><span class="hero-stat-label">Wilderness Beach</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">400+</span><span class="hero-stat-label">Refuge Acres</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">50+</span><span class="hero-stat-label">Bird Species</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">Sep–Mar</span><span class="hero-stat-label">Beach Driving</span></div>
+      </div>
     </div>
   </section>
 
@@ -100,41 +102,37 @@
 
         <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
           <div class="card animate-in">
-            <div class="card-img" style="background:linear-gradient(135deg,#1a3c34,#52b788);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag outdoors">Wildlife Refuge</span><span class="card-tag featured">Must-See</span></div>
               <h3 class="card-title">Forsythe Wilderness Beach</h3>
-              <p class="card-desc">Edwin B. Forsythe National Wildlife Refuge. Over 400 acres of pristine barrier beach, high dunes, and tidal salt marsh designated a federal Wilderness Area in 1975. No development, no facilities — just the most unspoiled stretch of beach on the Jersey Shore.</p>
+              <p class="card-desc">400+ acres of undeveloped barrier beach and salt marsh — the most unspoiled stretch on the Shore.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 End of Barnegat Ave · Free · Sunrise to sunset</p>
             </div>
           </div>
 
           <div class="card animate-in">
-            <div class="card-img" style="background:linear-gradient(135deg,#0a3d62,#1e6fa5);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag outdoors">Fishing</span><span class="card-tag featured">Local Favorite</span></div>
               <h3 class="card-title">Surf Fishing</h3>
-              <p class="card-desc">Among the best surf fishing on the entire East Coast. Striped bass, bluefish, weakfish, and flounder run the Holgate tip seasonally. The point where the bay meets the ocean creates exceptional structure for feeding fish. Serious anglers come specifically for Holgate.</p>
+              <p class="card-desc">Among the best surf fishing on the East Coast — striped bass, bluefish, weakfish, and flounder.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 Ocean & bay sides · NJ fishing license required</p>
             </div>
           </div>
 
           <div class="card animate-in">
-            <div class="card-img" style="background:linear-gradient(135deg,#2d4a22,#6aab3a);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag outdoors">Wildlife</span></div>
               <h3 class="card-title">Birding & Wildlife</h3>
-              <p class="card-desc">One of New Jersey's largest breeding grounds for federally threatened piping plovers. Also nests American oystercatchers, black skimmers, and least terns. Critical link on the Atlantic Flyway migration route — exceptional for fall shorebird watching.</p>
+              <p class="card-desc">Major piping plover breeding ground and Atlantic Flyway stop — exceptional fall shorebird watching.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 Entire refuge · Best: spring nesting & fall migration</p>
             </div>
           </div>
 
           <div class="card animate-in">
-            <div class="card-img" style="background:linear-gradient(135deg,#5c3d0e,#b5651d);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag outdoors">Beach Driving</span></div>
               <h3 class="card-title">4WD Beach Access</h3>
-              <p class="card-desc">One of the few NJ beaches where you can drive on the sand — but only September 1 through March 31. Vehicles must obtain a beach buggy permit from Long Beach Township and stay seaward of the berm crest. 4WD and proper tire deflation required.</p>
+              <p class="card-desc">Sand driving permitted Sep 1–Mar 31 with an LBT beach buggy permit and 4WD.</p>
               <p style="font-size:0.78rem;color:var(--sub);">📍 Permitted Sep 1–Mar 31 · LBT permit required · 4WD only</p>
             </div>
           </div>
@@ -146,7 +144,7 @@
           <div class="card-body">
             <div class="card-tags"><span class="card-tag outdoors">Bay Activity</span></div>
             <h3 class="card-title">Holgate Clamming Trail</h3>
-            <p class="card-desc">A 0.4-mile bay-side trail open for clamming from September 1 through March 15. Boat landing permitted. Hard clams (quahogs) and soft-shell clams (steamers) are commonly found. A classic Jersey Shore experience — bring a rake and a bucket.</p>
+            <p class="card-desc">0.4-mile bay-side trail open for clamming Sep 1–Mar 15 — bring a rake and a bucket.</p>
             <p style="font-size:0.78rem;color:var(--sub);">📍 Bay side, south end · Sep 1–Mar 15 · NJ shellfish license required</p>
           </div>
         </div>
@@ -175,9 +173,10 @@
 
       <!-- Sidebar -->
       <div>
-        <div class="map-embed-wrap" style="margin-bottom:1.25rem;">
-          <iframe title="Holgate NJ Map" src="https://maps.google.com/maps?q=Holgate,+Long+Beach+Township,+NJ&output=embed&z=14" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="map-embed-wrap" style="margin-bottom:0.5rem;">
+          <div id="town-map" style="height:260px;"></div>
         </div>
+        <p style="font-size:0.68rem;color:var(--sub);margin:0 0 1.25rem;">Hover a town to preview, click to explore. Map data &copy; OpenStreetMap contributors.</p>
 
         <div class="sidebar-box">
           <h4>Need to Know</h4>
@@ -243,5 +242,15 @@
 
 </div>
 <script src="../../script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../../interactive-map.js"></script>
+<script>
+initCityBoundaryMap('town-map', {
+  center: [39.60, -74.24],
+  zoom: 11,
+  boundaryUrl: '../../data/lbi-towns.geojson',
+  onClick: function (f) { window.location.href = '../' + f.properties.url; },
+});
+</script>
 </body>
 </html>
