@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cape May — New Jersey · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-wrap { position: fixed; top: 68px; left: 0; right: 0; bottom: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white); }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+    .neighborhood-hero { padding: 2.5rem 5% 2.25rem; }
+    .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
+    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
+    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
+    .highlight-card h4 { font-size: 0.85rem; color: var(--navy); margin-bottom: 0.15rem; }
+    .highlight-card p { font-size: 0.77rem; color: var(--sub); }
+    .section { padding: 2.25rem 5%; }
+    .section-sm { padding: 1.75rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+    .cat-section { padding: 2.25rem 5%; }
+    .sidebar-box { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem; margin-bottom: 1.25rem; }
+    .sidebar-box h4 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 0.65rem; }
+    .info-row { display: flex; gap: 0.5rem; align-items: flex-start; margin-bottom: 0.5rem; }
+    .info-row .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+    .info-row p { font-size: 0.8rem; color: var(--sub); line-height: 1.5; margin: 0; }
+    .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .map-embed-wrap #cape-may-map { width: 100%; height: 260px; }
+    .events-list { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+    .event-row { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 0.85rem 1rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .event-date-badge { background: var(--gold); color: var(--navy); border-radius: 6px; padding: 0.3rem 0.55rem; text-align: center; flex-shrink: 0; min-width: 44px; }
+    .event-date-badge .month { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1; }
+    .event-date-badge .day { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; line-height: 1.1; }
+    .event-info h4 { font-size: 0.88rem; color: var(--navy); margin-bottom: 0.2rem; }
+    .event-info p { font-size: 0.77rem; color: var(--sub); margin: 0; line-height: 1.45; }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .highlight-strip { grid-template-columns: repeat(2,1fr); } }
+  </style>
+</head>
+<body data-page-location="Cape May" data-music-key="cape-may">
+
+<nav>
+  <a href="../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Cape May</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../index.html">Home</a>
+  <a href="../new-jersey/index.html">New Jersey</a>
+  <a href="index.html" class="active">Cape May</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../new-jersey/index.html">New Jersey</a><span>›</span>
+      <span>Cape May</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="neighborhood-hero" style="background: linear-gradient(135deg, #341c2e 0%, #7a3355 50%, #d98c3f 100%); color: white;">
+    <div class="section-label" style="color:rgba(253,187,45,0.9);">Cape May County · Southern Jersey Shore</div>
+    <h1 style="font-family:'Playfair Display',serif;color:white;">Cape May</h1>
+    <p style="color:rgba(255,255,255,0.82);max-width:640px;line-height:1.65;margin-bottom:1rem;">The nation's oldest seaside resort, at the southernmost tip of New Jersey — and the only city in the country wholly designated a National Historic Landmark. Roughly 600 Victorian buildings, most rebuilt after a five-day fire tore through downtown in 1878, fill a 2.5-square-mile city that runs on the pedestrian Washington Street Mall by day and a nearly two-mile beachfront promenade at every hour. First drawing Philadelphia vacationers in the 1700s, it was still pulling presidents a century later — and the gingerbread trim never went out of style.</p>
+    <div class="city-hero-meta">
+      <span>🏛️ National Historic Landmark City</span>
+      <span>🎀 Victorian Architecture</span>
+      <span>🏖️ Beach &amp; Promenade</span>
+      <span>🦅 Migration Crossroads</span>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="section-sm" style="background:var(--white);">
+    <div class="highlight-strip">
+      <div class="highlight-card"><div class="big-num">1848</div><h4>Founded</h4><p>Incorporated as Cape Island Borough; renamed Cape May City in 1869</p></div>
+      <div class="highlight-card"><div class="big-num">2,768</div><h4>Population</h4><p>2020 Census, Cape May County — swells many times over in summer</p></div>
+      <div class="highlight-card"><div class="big-num">2.47</div><h4>Sq. Mi. Land</h4><p>A compact city — walkable end to end in about 40 minutes</p></div>
+      <div class="highlight-card"><div class="big-num">1976</div><h4>NHL Since</h4><p>Whole-city National Historic Landmark, for its Victorian architecture</p></div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="cat-section" style="background:var(--mist);">
+    <div class="two-col">
+      <div>
+
+        <!-- Attractions -->
+        <div class="section-header"><h2 class="section-title">Attractions</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#4a1e3a,#c9598f);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag featured">Pedestrian Mall</span><span class="card-tag">Downtown</span></div>
+              <h3 class="card-title">Washington Street Mall</h3>
+              <p class="card-desc">A three-block pedestrian promenade — the southernmost stretch of Washington Street, from Ocean Street to Perry Street — lined with boutiques, fudge shops, galleries and sidewalk cafés. The commercial heart of the historic downtown since the street was closed to cars in 1971.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Washington St, Ocean St to Perry St · Open-air, year-round</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#3a2c1a,#a08040);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag">Museum</span><span class="card-tag featured">Built 1879</span></div>
+              <h3 class="card-title">Emlen Physick Estate</h3>
+              <p class="card-desc">An 18-room Stick Style mansion designed by architect Frank Furness for Dr. Emlen Physick Jr., now the centerpiece house-museum of Cape May MAC's guided tours — period rooms, a carriage house and grounds that anchor the city's Victorian identity.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 1048 Washington St · Guided tours, Cape May MAC</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#1a2a3a,#4a6a8a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag">Since 1816</span><span class="card-tag featured">National Historic Landmark</span></div>
+              <h3 class="card-title">Congress Hall</h3>
+              <p class="card-desc">America's first seaside resort hotel — a wooden boarding house rebuilt in brick after the 1878 fire, and a Cape May landmark ever since. Occupies its own block between Beach Avenue and Congress Place, with the Blue Pig Tavern and the Boiler Room music club inside.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 251 Beach Ave / 200 Congress Pl</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#0a3d62,#1e9fd8);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag outdoors">~2 Miles</span><span class="card-tag">Free</span></div>
+              <h3 class="card-title">The Promenade &amp; Beach</h3>
+              <p class="card-desc">A paved seawall promenade runs parallel to Beach Avenue for nearly two miles, replacing the wooden boardwalk the 1962 Ash Wednesday nor'easter destroyed. Cape May was the first Jersey Shore resort to build a boardwalk at all, back in the late 1860s. Beach tags are required in season.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Beach Ave, city-wide · Beach badges required Memorial Day–Labor Day</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#2c1810,#6b4423);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag">Rebuilt 2012</span><span class="card-tag featured">Beachfront</span></div>
+              <h3 class="card-title">Cape May Convention Hall</h3>
+              <p class="card-desc">A 20,000-square-foot beachfront hall for concerts, seminars and events, on the site of the original 1918 Convention Hall lost in the same 1962 storm that took the boardwalk. Reopened in 2012 with concerts and community events on the sand.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 714 Beach Ave · Seasonal events calendar</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#0d3b3b,#1f8080);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag outdoors">Harbor Cruises</span></div>
+              <h3 class="card-title">Whale &amp; Dolphin Watching</h3>
+              <p class="card-desc">Two boats sail out of Cape May Harbor for the Delaware Bay and Atlantic — the Cape May Whale Watcher from Miss Chris Marina, running since 1993, and the Cape May Whale Watch &amp; Research Center's American Star. Bottlenose dolphins are a near-guaranteed sight; whales are seasonal.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Miss Chris Marina, Cape May Harbor · Seasonal, March–December</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="section-header"><h2 class="section-title">Dining &amp; Nightlife</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in" data-subcat="fine-dining">
+            <div class="card-img" style="background:linear-gradient(135deg,#4a0e0e,#a03030);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">New American</span><span class="card-tag featured">Virginia Hotel</span></div>
+              <h3 class="card-title">The Ebbitt Room</h3>
+              <p class="card-desc">Seasonal tasting menus built around Cape May scallops and produce from Beach Plum Farm, in the Virginia Hotel's elegant dining room with live piano most nights. One of the city's standing fine-dining rooms.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 25 Jackson St · Reservations recommended</p>
+            </div>
+          </div>
+
+          <div class="card animate-in" data-subcat="american">
+            <div class="card-img" style="background:linear-gradient(135deg,#7c3c0a,#e0a739);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Breakfast · Dinner</span><span class="card-tag featured">Cape May Institution</span></div>
+              <h3 class="card-title">The Mad Batter</h3>
+              <p class="card-desc">A longtime Cape May favorite for breakfast, lunch and dinner in a Victorian guesthouse setting with porch seating — famous locally for its breakfasts as much as its dinner menu.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 19 Jackson St</p>
+            </div>
+          </div>
+
+          <div class="card animate-in" data-subcat="tavern">
+            <div class="card-img" style="background:linear-gradient(135deg,#1a3050,#2c6fa5);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Farm-to-Table</span><span class="card-tag">Inside Congress Hall</span></div>
+              <h3 class="card-title">Blue Pig Tavern</h3>
+              <p class="card-desc">Congress Hall's all-day tavern — breakfast, brunch, lunch and dinner built largely on ingredients from Beach Plum Farm three miles away, served in a corner room of the historic hotel.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 251 Beach Ave, Congress Hall</p>
+            </div>
+          </div>
+
+          <div class="card animate-in" data-subcat="fine-dining">
+            <div class="card-img" style="background:linear-gradient(135deg,#1c3a1c,#3d7a3d);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">American · Wine Bar</span><span class="card-tag featured">Since 1979</span></div>
+              <h3 class="card-title">Washington Inn &amp; Wine Bar</h3>
+              <p class="card-desc">An 1840 estate turned six-room dining house with the city's deepest wine list, fireside tables and a summer patio — a fixture of Cape May's upscale dinner scene for decades.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 801 Washington St · Complimentary valet</p>
+            </div>
+          </div>
+
+          <div class="card animate-in" data-subcat="fine-dining">
+            <div class="card-img" style="background:linear-gradient(135deg,#3d2c14,#8b5e3c);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Contemporary American</span><span class="card-tag">Beach Ave</span></div>
+              <h3 class="card-title">Peter Shields Inn &amp; Restaurant</h3>
+              <p class="card-desc">Award-winning seasonal dining in a beachfront inn, with outdoor seating and a fireplace dining room — a quieter, less touristy fine-dining option on the beach side of town.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 1301 Beach Ave</p>
+            </div>
+          </div>
+
+          <div class="card animate-in" data-subcat="seafood">
+            <div class="card-img" style="background:linear-gradient(135deg,#0a2a3a,#2e86c1);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Dockside Seafood</span><span class="card-tag featured">Family-Owned</span></div>
+              <h3 class="card-title">The Lobster House</h3>
+              <p class="card-desc">A Cape May Harbor institution at Fisherman's Wharf — a sit-down dining room, a raw bar, and a retail fish market, all family-run and dockside since the fleet still comes in a few steps away. No reservations.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 906 Schellengers Landing Rd, Fisherman's Wharf</p>
+            </div>
+          </div>
+
+          <div class="card animate-in" data-subcat="bar">
+            <div class="card-img" style="background:linear-gradient(135deg,#0d0d2b,#2a2a6e);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag nightlife">Surfer Bar</span><span class="card-tag featured">Since the '70s</span></div>
+              <h3 class="card-title">Rusty Nail</h3>
+              <p class="card-desc">Cape May's iconic surfer bar — "the Nail" to locals — wrapped in the semicircle of the Beach Shack motel, with indoor and outdoor stages for regular live acts through the season. No reservations.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 205 Beach Ave</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Events -->
+        <div class="section-header"><h2 class="section-title">Annual Events</h2></div>
+        <hr class="section-divider" />
+        <div class="events-list">
+
+          <div class="event-row">
+            <div class="event-date-badge"><div class="month">May</div><div class="day">–Jun</div></div>
+            <div class="event-info">
+              <h4>Cape May Music Festival</h4>
+              <p>South Jersey's classical music festival, presented by Cape May MAC — chamber, jazz and brass performances spread across venues from Memorial Day weekend through late June. Now in its fourth decade.</p>
+            </div>
+          </div>
+
+          <div class="event-row">
+            <div class="event-date-badge"><div class="month">May</div><div class="day">&amp; Oct</div></div>
+            <div class="event-info">
+              <h4>Exit Zero Jazz Festival</h4>
+              <p>Twice a year — a spring weekend and a fall weekend — Cape May's music venues fill with a national jazz lineup. Named for the "Exit 0" Garden State Parkway sign that marks the end of the road at Cape May.</p>
+            </div>
+          </div>
+
+          <div class="event-row">
+            <div class="event-date-badge"><div class="month">Sep</div><div class="day">TBD</div></div>
+            <div class="event-info">
+              <h4>Cape May Food &amp; Wine Celebration</h4>
+              <p>A week-plus of winery tastings, beer dinners, restaurant luncheons and harvest events across the city's dining rooms and inns, held annually in September.</p>
+            </div>
+          </div>
+
+          <div class="event-row">
+            <div class="event-date-badge"><div class="month">Nov</div><div class="day">–Jan</div></div>
+            <div class="event-info">
+              <h4>Christmas in Cape May</h4>
+              <p>The whole city strings lights and runs a holiday calendar from late November through New Year's Day — a tree-lighting at the Physick Estate, candlelight house tours, and seasonal shows at Cape May Stage.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="map-embed-wrap" style="margin-bottom:1.25rem;">
+          <div id="cape-may-map"></div>
+          <p style="font-size:0.7rem;color:var(--sub);padding:0.5rem 0.75rem;margin:0;">Cape May's real municipal boundary. Map data &copy; OpenStreetMap contributors.</p>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Need to Know</h4>
+          <div class="info-row"><span class="icon">🗺</span><p><strong>Location:</strong> Cape May County, at the very southern tip of New Jersey — a distinct city, separate from neighboring West Cape May and Cape May Point boroughs.</p></div>
+          <div class="info-row"><span class="icon">🏖</span><p><strong>Beach badges:</strong> Required Memorial Day–Labor Day on the guarded beaches along the promenade.</p></div>
+          <div class="info-row"><span class="icon">🚗</span><p><strong>Getting there:</strong> The end of the Garden State Parkway — Exit 0, the source of the jazz festival's name. About 2.5 hours from Philadelphia or NYC.</p></div>
+          <div class="info-row"><span class="icon">⛴</span><p><strong>Ferry:</strong> The Cape May–Lewes Ferry to Delaware departs from North Cape May, in neighboring Lower Township — a short drive, not inside city limits.</p></div>
+          <div class="info-row"><span class="icon">🗼</span><p><strong>Lighthouse:</strong> The Cape May Lighthouse and hawk-watch platform are about two miles away in Cape May Point State Park (Lower Township / Cape May Point) — a worthwhile side trip, but a separate town from the city itself.</p></div>
+          <div class="info-row"><span class="icon">📅</span><p><strong>Peak season:</strong> Memorial Day–Labor Day, plus a real second season around the Victorian Week and Christmas events each winter.</p></div>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Explore New Jersey</h4>
+          <a href="../lbi/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Long Beach Island →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../princeton/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Princeton →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../sea-bright/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Sea Bright →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../montgomery/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Montgomery Township →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../new-jersey/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">All New Jersey →</span>
+            <span style="font-size:0.72rem;color:var(--gold);">5 places</span>
+          </a>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Quick Tips</h4>
+          <div class="info-row"><span class="icon">🚲</span><p>The city is flat and 2.5 square miles — most visitors leave the car parked and walk or bike everywhere.</p></div>
+          <div class="info-row"><span class="icon">🍽</span><p>Book fine-dining rooms like the Ebbitt Room or Peter Shields Inn ahead in summer; the Lobster House and Rusty Nail don't take reservations.</p></div>
+          <div class="info-row"><span class="icon">🎨</span><p>Every building along Washington Street Mall and the surrounding blocks is part of the same National Historic Landmark district — worth slowing down for.</p></div>
+          <div class="info-row"><span class="icon">🐬</span><p>Dolphin sightings on the harbor cruises are close to guaranteed; whales are seasonal and never promised.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE MUSIC (rendered by initLiveMusic in script.js) -->
+  <section class="section cat-section" data-cat="music" id="live-music" style="background:var(--mist);"></section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p>Your local intelligence platform — curated, verified, and always expanding.</p>
+      </div>
+      <div class="footer-links">
+        <h4>New Jersey</h4>
+        <a href="../new-jersey/index.html">NJ Overview</a>
+        <a href="index.html">Cape May</a>
+        <a href="../lbi/index.html">Long Beach Island</a>
+        <a href="../princeton/index.html">Princeton</a>
+        <a href="../sea-bright/index.html">Sea Bright</a>
+        <a href="../montgomery/index.html">Montgomery Township</a>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="../index.html">Home</a>
+        <a href="../connecticut/index.html">Connecticut</a>
+        <a href="../texas/index.html">Texas</a>
+      </div>
+      <div class="footer-links">
+        <h4>The Concierge</h4>
+        <a href="../index.html">About</a>
+        <a href="../index.html#suggest">Suggest a Place</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 The Concierge. All rights reserved.</div>
+  </footer>
+
+</div>
+<script src="../script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* ── Cape May's own real boundary, static reference map. No neighborhood
+   drill-down on this page — Cape May city's landmarks and downtown all sit
+   inside one compact 2.5-square-mile city, unlike the separate boroughs of
+   West Cape May and Cape May Point next door — so no hover/click
+   interactivity is needed, just the real OpenStreetMap city polygon. ── */
+(function () {
+  var map = L.map('cape-may-map', { scrollWheelZoom: false }).setView([38.939, -74.901], 14);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
+    maxZoom: 19
+  }).addTo(map);
+
+  fetch('../data/cape-may-boundary.geojson')
+    .then(function (r) { return r.json(); })
+    .then(function (fc) {
+      var layer = L.geoJSON(fc, {
+        style: { color: '#a0447a', weight: 2, fillColor: '#a0447a', fillOpacity: 0.12 }
+      }).addTo(map);
+      map.fitBounds(layer.getBounds(), { padding: [16, 16] });
+    })
+    .catch(function () {
+      var el = document.getElementById('cape-may-map');
+      if (el) el.insertAdjacentHTML('beforeend', '<p style="padding:1rem;font-size:0.8rem;color:var(--sub);">Map boundary data unavailable right now.</p>');
+    });
+})();
+</script>
+</body>
+</html>

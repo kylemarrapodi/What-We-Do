@@ -103,6 +103,7 @@ const SHARED_SEARCH_TREE = {
             },
             { label: 'Sea Bright', aliases: ['sea bright'], status: 'live', url: 'sea-bright/index.html', children: [] },
             { label: 'Montgomery Township', aliases: ['montgomery','montgomery township','skillman','belle mead','blawenburg'], status: 'live', url: 'montgomery/index.html', children: [] },
+            { label: 'Cape May', aliases: ['cape may','cape may city','cape may nj'], status: 'live', url: 'cape-may/index.html', children: [] },
           ]
         },
         {
@@ -263,6 +264,20 @@ function buildSearchIndex() {
     { label:'Montgomery Farmers\' Market', sub:'Sat · Municipal Complex · Skillman', type:'event', url: p+'montgomery/index.html', keywords:['montgomery farmers market','farmers market skillman','montgomery friends of open space'] },
     { label:'Montgomery FunFest', sub:'Annual · Montgomery Township', type:'event', url: p+'montgomery/index.html',           keywords:['montgomery funfest','funfest','rotary club montgomery'] },
     { label:'The Blawenburg Band',sub:'Since 1890 · Montgomery Township', type:'place', url: p+'montgomery/index.html',       keywords:['blawenburg band','community band montgomery','concert band nj'] },
+    // ── Cape May ──
+    { label:'Cape May, NJ',       sub:'New Jersey',            type:'place',  url: p+'cape-may/index.html',                   keywords:['cape may','cape may city','cape may county','victorian','national historic landmark'] },
+    { label:'Washington Street Mall', sub:'Cape May, NJ',      type:'place',  url: p+'cape-may/index.html',                   keywords:['washington street mall','downtown cape may','pedestrian mall'] },
+    { label:'Emlen Physick Estate', sub:'Cape May, NJ',        type:'place',  url: p+'cape-may/index.html',                   keywords:['emlen physick estate','physick estate','cape may mac','victorian mansion'] },
+    { label:'Congress Hall',      sub:'Cape May, NJ',          type:'place',  url: p+'cape-may/index.html',                   keywords:['congress hall','blue pig tavern','boiler room cape may'] },
+    { label:'The Promenade',      sub:'Cape May, NJ',          type:'place',  url: p+'cape-may/index.html',                   keywords:['cape may promenade','cape may beach','cape may boardwalk'] },
+    { label:'The Ebbitt Room',    sub:'Cape May, NJ',          type:'place',  url: p+'cape-may/index.html',                   keywords:['ebbitt room','virginia hotel cape may','fine dining cape may'] },
+    { label:'The Mad Batter',     sub:'Cape May, NJ',          type:'place',  url: p+'cape-may/index.html',                   keywords:['mad batter','breakfast cape may','jackson street cape may'] },
+    { label:'The Lobster House',  sub:'Cape May, NJ',          type:'place',  url: p+'cape-may/index.html',                   keywords:['lobster house','fishermans wharf cape may','seafood cape may'] },
+    { label:'Rusty Nail',         sub:'Cape May, NJ',          type:'place',  url: p+'cape-may/index.html',                   keywords:['rusty nail','beach shack cape may','surfer bar cape may'] },
+    { label:'Cape May Music Festival', sub:'May–Jun · Cape May', type:'event', url: p+'cape-may/index.html',                  keywords:['cape may music festival','cape may mac','classical music festival'] },
+    { label:'Exit Zero Jazz Festival', sub:'May & Oct · Cape May', type:'event', url: p+'cape-may/index.html',                keywords:['exit zero jazz festival','jazz festival cape may','exit 0'] },
+    { label:'Cape May Food & Wine Celebration', sub:'Sep · Cape May', type:'event', url: p+'cape-may/index.html',            keywords:['cape may food and wine','food wine celebration','wine festival cape may'] },
+    { label:'Christmas in Cape May', sub:'Nov–Jan · Cape May',  type:'event', url: p+'cape-may/index.html',                  keywords:['christmas in cape may','holiday lights cape may','victorian christmas'] },
   ];
 }
 
@@ -795,6 +810,22 @@ const LIVE_MUSIC = {
     nearest: { text: 'For an actual bar-and-stage circuit, Princeton\'s Palmer Square is about 15 minutes south.', href: 'princeton/palmer-square/index.html' }
   },
 
+  // ── Cape May ──────────────────────────────────────────────────────
+  'cape-may': {
+    blurb: 'Cape May runs two different rooms — a basement pizza-and-music club with a fixed weekly schedule inside Congress Hall, and the Rusty Nail\'s indoor and outdoor stages down at the Beach Shack.',
+    venues: [
+      { name: 'The Boiler Room', kind: 'Music Club & Pizzeria', addr: '251 Beach Ave, Congress Hall (basement)',
+        nights: 'Live music and DJs Wednesday through Saturday, 9 PM–1 AM, in season',
+        desc: 'An artisan-pizza bar and lounge in the basement of Congress Hall, with a regular lineup of bands and DJs running most nights of the week through the season.',
+        cal: { href: 'https://www.caperesorts.com/congress-hall/boiler-room', label: 'caperesorts.com/congress-hall/boiler-room' } },
+      { name: 'Rusty Nail', kind: 'Surfer Bar', addr: '205 Beach Ave, The Beach Shack',
+        nights: 'Regular live acts in season on the indoor and outdoor stages; no fixed weekly night confirmed',
+        desc: 'Cape May\'s iconic surfer bar since the \'70s, wrapped around the Beach Shack motel, with local and touring acts booked through the summer.',
+        cal: { href: 'https://www.caperesorts.com/beach-shack/calendar', label: 'caperesorts.com/beach-shack/calendar' } },
+    ],
+    series: []
+  },
+
   // ── Stamford ───────────────────────────────────────────────────────
   'stamford': {
     blurb: 'Stamford\'s music splits three ways: the bar circuit downtown, the summer waterfront programming at Harbor Point, and touring acts at the Palace. Note that Alive@Five — the summer series that ran downtown for 27 years — has ended; what replaced it is spread across Mill River Park, Harbor Point and the arboretum.',
@@ -1272,6 +1303,7 @@ const PANEL_EVENTS = {
       { mo:'OCT', dy:'TBD', tag:'dining',  tagLabel:'Food Fest',  name:'Chowderfest',           meta:'Taylor Ave Waterfront · Beach Haven', url:'lbi/beach-haven/index.html', ticket:null },
       { mo:'OCT', dy:'TBD', tag:'outdoors',tagLabel:'Kite Fest',  name:'LBI Kite Festival',     meta:'Ship Bottom Beach · LBI',             url:'lbi/ship-bottom/index.html', ticket:null },
       { mo:'SAT', dy:'WKLY',tag:'outdoors',tagLabel:'Market',     name:'Montgomery Farmers\' Market', meta:'Municipal Complex · Montgomery Twp', url:'montgomery/index.html', ticket:null },
+      { mo:'SEP', dy:'TBD', tag:'dining',  tagLabel:'Food Fest',  name:'Cape May Food & Wine Celebration', meta:'Restaurants & inns citywide · Cape May', url:'cape-may/index.html', ticket:null },
     ]
   },
   'Sea Bright': {
@@ -1288,6 +1320,15 @@ const PANEL_EVENTS = {
       { mo:'SAT', dy:'WKLY', tag:'outdoors', tagLabel:'Market',   name:'Montgomery Farmers\' Market', meta:'Municipal Complex · Sat 10 AM–1 PM', url:'montgomery/index.html', ticket:null },
       { mo:'SUN', dy:'TBD',  tag:'events',   tagLabel:'Festival', name:'Montgomery FunFest',           meta:'Rotary Club & Business Assoc.',      url:'montgomery/index.html', ticket:null },
       { mo:'DEC', dy:'TBD',  tag:'events',   tagLabel:'Holiday',  name:'Holiday Tree Lighting',         meta:'Municipal Center, Skillman',         url:'montgomery/index.html', ticket:null },
+    ]
+  },
+  'Cape May': {
+    label: 'Cape May Events', link: { href: 'cape-may/index.html', text: 'Cape May Guide →' },
+    events: [
+      { mo:'MAY', dy:'–JUN', tag:'arts',    tagLabel:'Music Fest', name:'Cape May Music Festival',          meta:'Venues citywide · Cape May MAC',      url:'cape-may/index.html', ticket:'https://capemaymac.org/cape-may-music-festival/' },
+      { mo:'MAY', dy:'&OCT', tag:'arts',    tagLabel:'Jazz Fest',  name:'Exit Zero Jazz Festival',          meta:'Venues citywide · Spring & Fall',     url:'cape-may/index.html', ticket:'https://www.exitzerojazzfestival.com/' },
+      { mo:'SEP', dy:'TBD',  tag:'dining',  tagLabel:'Food Fest',  name:'Cape May Food & Wine Celebration', meta:'Restaurants & inns citywide',         url:'cape-may/index.html', ticket:null },
+      { mo:'NOV', dy:'–JAN', tag:'events',  tagLabel:'Holiday',    name:'Christmas in Cape May',             meta:'Physick Estate & citywide',           url:'cape-may/index.html', ticket:null },
     ]
   },
   'Long Beach Island': {

@@ -588,6 +588,7 @@ const LOCATIONS = {
       { label:'Princeton', tag:'live', left:34, top:40, url:'princeton/index.html' },
       { label:'Sea Bright', tag:'live', left:57, top:38, url:'sea-bright/index.html' },
       { label:'Montgomery Township', tag:'live', left:32, top:36, url:'montgomery/index.html' },
+      { label:'Cape May', tag:'live', left:44, top:92, url:'cape-may/index.html' },
     ]
   },
 
@@ -632,6 +633,20 @@ const LOCATIONS = {
       { mo:'SAT', dy:'WKLY', tag:'outdoors', tagLabel:'Market',   name:'Montgomery Farmers\' Market', meta:'Municipal Complex · Sat 10 AM–1 PM', url:'montgomery/index.html', ticket:null },
       { mo:'SUN', dy:'TBD',  tag:'events',   tagLabel:'Festival', name:'Montgomery FunFest',           meta:'Rotary Club & Business Assoc.',      url:'montgomery/index.html', ticket:null },
       { mo:'DEC', dy:'TBD',  tag:'events',   tagLabel:'Holiday',  name:'Holiday Tree Lighting',         meta:'Municipal Center, Skillman',         url:'montgomery/index.html', ticket:null },
+    ],
+    pins: []
+  },
+
+  'Cape May': {
+    mapSrc: 'https://maps.google.com/maps?q=Cape+May,+NJ&output=embed&z=14',
+    mapLabel: 'Cape May, NJ',
+    eventsLabel: 'Cape May Events',
+    eventsLink: { href: 'cape-may/index.html', text: 'Cape May Guide →' },
+    events: [
+      { mo:'MAY', dy:'–JUN', tag:'arts',   tagLabel:'Music Fest', name:'Cape May Music Festival',          meta:'Venues citywide · Cape May MAC',  url:'cape-may/index.html', ticket:'https://capemaymac.org/cape-may-music-festival/' },
+      { mo:'MAY', dy:'&OCT', tag:'arts',   tagLabel:'Jazz Fest',  name:'Exit Zero Jazz Festival',          meta:'Venues citywide · Spring & Fall', url:'cape-may/index.html', ticket:'https://www.exitzerojazzfestival.com/' },
+      { mo:'SEP', dy:'TBD',  tag:'dining', tagLabel:'Food Fest',  name:'Cape May Food & Wine Celebration', meta:'Restaurants & inns citywide',     url:'cape-may/index.html', ticket:null },
+      { mo:'NOV', dy:'–JAN', tag:'events', tagLabel:'Holiday',    name:'Christmas in Cape May',             meta:'Physick Estate & citywide',       url:'cape-may/index.html', ticket:null },
     ],
     pins: []
   },
