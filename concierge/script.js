@@ -102,6 +102,7 @@ const SHARED_SEARCH_TREE = {
               ]
             },
             { label: 'Sea Bright', aliases: ['sea bright'], status: 'live', url: 'sea-bright/index.html', children: [] },
+            { label: 'Montgomery Township', aliases: ['montgomery','montgomery township','skillman','belle mead','blawenburg'], status: 'live', url: 'montgomery/index.html', children: [] },
           ]
         },
         {
@@ -248,6 +249,20 @@ function buildSearchIndex() {
     { label:'Sea Bright Fall Festival', sub:'Sep · Municipal Complex · Sea Bright', type:'event', url: p+'sea-bright/index.html', keywords:['sea bright fall festival','sea bright festival','bonfire'] },
     { label:'Sea Bright Farm & Artisan Market', sub:'Wed · Jun–Oct · Sea Bright', type:'event', url: p+'sea-bright/index.html', keywords:['sea bright farmers market','farm and artisan market','sea bright market'] },
     { label:'Shrewsbury Riverfront Park', sub:'Sea Bright, NJ', type:'place',  url: p+'sea-bright/index.html',                 keywords:['shrewsbury riverfront park','fishing sea bright','kayak launch sea bright'] },
+    // ── Montgomery Township ──
+    { label:'Montgomery Township, NJ', sub:'New Jersey',        type:'place',  url: p+'montgomery/index.html',                 keywords:['montgomery township','montgomery nj','somerset county','skillman','belle mead','blawenburg'] },
+    { label:'Skillman',           sub:'Montgomery Township, NJ',type:'place',  url: p+'montgomery/index.html',                 keywords:['skillman nj','skillman village','route 601'] },
+    { label:'Belle Mead',         sub:'Montgomery Township, NJ',type:'place',  url: p+'montgomery/index.html',                 keywords:['belle mead nj','belle mead village','route 206'] },
+    { label:'Blawenburg',         sub:'Montgomery Township, NJ',type:'place',  url: p+'montgomery/index.html',                 keywords:['blawenburg nj','blawenburg village','blawenburg historic district'] },
+    { label:'Skillman Park',      sub:'Montgomery Township, NJ',type:'place',  url: p+'montgomery/index.html',                 keywords:['skillman park','somerset county park','dog park montgomery'] },
+    { label:'Montgomery Park',    sub:'Montgomery Township, NJ',type:'place',  url: p+'montgomery/index.html',                 keywords:['montgomery park','harlingen road park','9/11 memorial montgomery'] },
+    { label:'Blawenburg Historic District', sub:'Montgomery Township, NJ', type:'place', url: p+'montgomery/index.html',      keywords:['blawenburg historic district','reformed dutch church','national register montgomery'] },
+    { label:'Blawenburg Bistro',  sub:'Blawenburg, Montgomery Township', type:'place', url: p+'montgomery/index.html',        keywords:['blawenburg bistro','blawenburg cafe','breakfast montgomery'] },
+    { label:'206 Corner Deli',    sub:'Belle Mead, Montgomery Township', type:'place', url: p+'montgomery/index.html',        keywords:['206 corner deli','deli belle mead','route 206 deli'] },
+    { label:'New World Pizza & Cafe', sub:'Skillman, Montgomery Township', type:'place', url: p+'montgomery/index.html',      keywords:['new world pizza','pizza skillman','route 601 pizza'] },
+    { label:'Montgomery Farmers\' Market', sub:'Sat · Municipal Complex · Skillman', type:'event', url: p+'montgomery/index.html', keywords:['montgomery farmers market','farmers market skillman','montgomery friends of open space'] },
+    { label:'Montgomery FunFest', sub:'Annual · Montgomery Township', type:'event', url: p+'montgomery/index.html',           keywords:['montgomery funfest','funfest','rotary club montgomery'] },
+    { label:'The Blawenburg Band',sub:'Since 1890 · Montgomery Township', type:'place', url: p+'montgomery/index.html',       keywords:['blawenburg band','community band montgomery','concert band nj'] },
   ];
 }
 
@@ -767,6 +782,19 @@ const LIVE_MUSIC = {
     series: []
   },
 
+  // ── Montgomery Township ──────────────────────────────────────────────
+  'montgomery': {
+    blurb: 'Montgomery doesn\'t run a bar-and-venue circuit the way Princeton does — its music tradition is a 130-year-old community band that still plays live, free and outdoors most of the summer.',
+    venues: [
+      { name: 'The Blawenburg Band', kind: 'Community Concert Band', where: 'Montgomery Township',
+        nights: 'Roughly 15 outdoor concerts each summer, at parks and venues around the area',
+        desc: 'Founded in the village of Blawenburg in 1890, and one of New Jersey\'s oldest continuously active community concert bands — a genuine piece of township history that still rehearses and performs today, rather than a bar act.',
+        cal: { href: 'https://blawenburgband.org/performance-schedule/', label: 'blawenburgband.org/performance-schedule' } },
+    ],
+    series: [],
+    nearest: { text: 'For an actual bar-and-stage circuit, Princeton\'s Palmer Square is about 15 minutes south.', href: 'princeton/palmer-square/index.html' }
+  },
+
   // ── Stamford ───────────────────────────────────────────────────────
   'stamford': {
     blurb: 'Stamford\'s music splits three ways: the bar circuit downtown, the summer waterfront programming at Harbor Point, and touring acts at the Palace. Note that Alive@Five — the summer series that ran downtown for 27 years — has ended; what replaced it is spread across Mill River Park, Harbor Point and the arboretum.',
@@ -1243,6 +1271,7 @@ const PANEL_EVENTS = {
       { mo:'SEP', dy:'TBD', tag:'events',  tagLabel:'Festival',   name:'Sea Bright Fall Festival', meta:'Municipal Complex · Sea Bright',   url:'sea-bright/index.html', ticket:null },
       { mo:'OCT', dy:'TBD', tag:'dining',  tagLabel:'Food Fest',  name:'Chowderfest',           meta:'Taylor Ave Waterfront · Beach Haven', url:'lbi/beach-haven/index.html', ticket:null },
       { mo:'OCT', dy:'TBD', tag:'outdoors',tagLabel:'Kite Fest',  name:'LBI Kite Festival',     meta:'Ship Bottom Beach · LBI',             url:'lbi/ship-bottom/index.html', ticket:null },
+      { mo:'SAT', dy:'WKLY',tag:'outdoors',tagLabel:'Market',     name:'Montgomery Farmers\' Market', meta:'Municipal Complex · Montgomery Twp', url:'montgomery/index.html', ticket:null },
     ]
   },
   'Sea Bright': {
@@ -1251,6 +1280,14 @@ const PANEL_EVENTS = {
       { mo:'JUN', dy:'–OCT', tag:'outdoors',tagLabel:'Market',    name:'Sea Bright Farm & Artisan Market', meta:'1097 Ocean Ave · Wednesdays 1–6 PM', url:'sea-bright/index.html', ticket:null },
       { mo:'SEP', dy:'TBD',  tag:'events',  tagLabel:'Festival',  name:'Sea Bright Fall Festival',          meta:'Municipal Complex · Late September', url:'sea-bright/index.html', ticket:null },
       { mo:'AUG', dy:'TBD',  tag:'dining',  tagLabel:'Food Fest', name:'Oyster Fest',                       meta:'Driftwood Cabana Club',              url:'sea-bright/index.html', ticket:null },
+    ]
+  },
+  'Montgomery': {
+    label: 'Montgomery Township Events', link: { href: 'montgomery/index.html', text: 'Montgomery Guide →' },
+    events: [
+      { mo:'SAT', dy:'WKLY', tag:'outdoors', tagLabel:'Market',   name:'Montgomery Farmers\' Market', meta:'Municipal Complex · Sat 10 AM–1 PM', url:'montgomery/index.html', ticket:null },
+      { mo:'SUN', dy:'TBD',  tag:'events',   tagLabel:'Festival', name:'Montgomery FunFest',           meta:'Rotary Club & Business Assoc.',      url:'montgomery/index.html', ticket:null },
+      { mo:'DEC', dy:'TBD',  tag:'events',   tagLabel:'Holiday',  name:'Holiday Tree Lighting',         meta:'Municipal Center, Skillman',         url:'montgomery/index.html', ticket:null },
     ]
   },
   'Long Beach Island': {

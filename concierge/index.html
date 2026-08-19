@@ -587,6 +587,7 @@ const LOCATIONS = {
       { label:'Long Beach Island', tag:'live', left:52, top:58, url:'lbi/index.html' },
       { label:'Princeton', tag:'live', left:34, top:40, url:'princeton/index.html' },
       { label:'Sea Bright', tag:'live', left:57, top:38, url:'sea-bright/index.html' },
+      { label:'Montgomery Township', tag:'live', left:32, top:36, url:'montgomery/index.html' },
     ]
   },
 
@@ -618,6 +619,19 @@ const LOCATIONS = {
       { mo:'JUN', dy:'–OCT', tag:'outdoors', tagLabel:'Market',   name:'Sea Bright Farm & Artisan Market', meta:'1097 Ocean Ave · Wednesdays 1–6 PM', url:'sea-bright/index.html', ticket:null },
       { mo:'SEP', dy:'TBD',  tag:'events',   tagLabel:'Festival', name:'Sea Bright Fall Festival',          meta:'Municipal Complex · Late September', url:'sea-bright/index.html', ticket:null },
       { mo:'AUG', dy:'TBD',  tag:'dining',   tagLabel:'Food Fest',name:'Oyster Fest',                       meta:'Driftwood Cabana Club',              url:'sea-bright/index.html', ticket:null },
+    ],
+    pins: []
+  },
+
+  'Montgomery Township': {
+    mapSrc: 'https://maps.google.com/maps?q=Montgomery+Township,+NJ&output=embed&z=12',
+    mapLabel: 'Montgomery Township, NJ',
+    eventsLabel: 'Montgomery Township Events',
+    eventsLink: { href: 'montgomery/index.html', text: 'Montgomery Guide →' },
+    events: [
+      { mo:'SAT', dy:'WKLY', tag:'outdoors', tagLabel:'Market',   name:'Montgomery Farmers\' Market', meta:'Municipal Complex · Sat 10 AM–1 PM', url:'montgomery/index.html', ticket:null },
+      { mo:'SUN', dy:'TBD',  tag:'events',   tagLabel:'Festival', name:'Montgomery FunFest',           meta:'Rotary Club & Business Assoc.',      url:'montgomery/index.html', ticket:null },
+      { mo:'DEC', dy:'TBD',  tag:'events',   tagLabel:'Holiday',  name:'Holiday Tree Lighting',         meta:'Municipal Center, Skillman',         url:'montgomery/index.html', ticket:null },
     ],
     pins: []
   },

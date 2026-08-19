@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Montgomery Township — New Jersey · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-wrap { position: fixed; top: 68px; left: 0; right: 0; bottom: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white); }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+    .neighborhood-hero { padding: 2.5rem 5% 2.25rem; }
+    .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
+    .highlight-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+    .highlight-card { background: var(--white); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
+    .highlight-card .big-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.15rem; }
+    .highlight-card h4 { font-size: 0.85rem; color: var(--navy); margin-bottom: 0.15rem; }
+    .highlight-card p { font-size: 0.77rem; color: var(--sub); }
+    .section { padding: 2.25rem 5%; }
+    .section-sm { padding: 1.75rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+    .cat-section { padding: 2.25rem 5%; }
+    .sidebar-box { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem; margin-bottom: 1.25rem; }
+    .sidebar-box h4 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 0.65rem; }
+    .info-row { display: flex; gap: 0.5rem; align-items: flex-start; margin-bottom: 0.5rem; }
+    .info-row .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+    .info-row p { font-size: 0.8rem; color: var(--sub); line-height: 1.5; margin: 0; }
+    .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .map-embed-wrap #montgomery-map { width: 100%; height: 260px; }
+    .events-list { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+    .event-row { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 0.85rem 1rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .event-date-badge { background: var(--gold); color: var(--navy); border-radius: 6px; padding: 0.3rem 0.55rem; text-align: center; flex-shrink: 0; min-width: 44px; }
+    .event-date-badge .month { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1; }
+    .event-date-badge .day { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; line-height: 1.1; }
+    .event-info h4 { font-size: 0.88rem; color: var(--navy); margin-bottom: 0.2rem; }
+    .event-info p { font-size: 0.77rem; color: var(--sub); margin: 0; line-height: 1.45; }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .highlight-strip { grid-template-columns: repeat(2,1fr); } }
+  </style>
+</head>
+<body data-page-location="Montgomery" data-music-key="montgomery">
+
+<nav>
+  <a href="../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Montgomery Township</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../index.html">Home</a>
+  <a href="../new-jersey/index.html">New Jersey</a>
+  <a href="index.html" class="active">Montgomery Township</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../new-jersey/index.html">New Jersey</a><span>›</span>
+      <span>Montgomery Township</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="neighborhood-hero" style="background: linear-gradient(135deg, #1c2e18 0%, #3f5e2e 55%, #a3873f 100%); color: white;">
+    <div class="section-label" style="color:rgba(253,187,45,0.9);">Somerset County · Central Jersey</div>
+    <h1 style="font-family:'Playfair Display',serif;color:white;">Montgomery Township</h1>
+    <p style="color:rgba(255,255,255,0.82);max-width:620px;line-height:1.65;margin-bottom:1rem;">A 32-square-mile township of old Dutch farmland and new-money cul-de-sacs a few miles north of Princeton, with no single downtown — instead three named villages, Skillman, Belle Mead and Blawenburg, scattered across rolling fields, historic churches and a Route 206 corridor that does most of the everyday business. Montgomery is regularly ranked among New Jersey's wealthiest townships, and still looks, in patches, like the 18th-century farm country it grew out of.</p>
+    <div class="city-hero-meta">
+      <span>🚜 Farmland Heritage</span>
+      <span>🏘️ Skillman · Belle Mead · Blawenburg</span>
+      <span>🎓 Minutes from Princeton</span>
+      <span>🌳 32 Sq. Mi. of Open Space &amp; Trails</span>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="section-sm" style="background:var(--white);">
+    <div class="highlight-strip">
+      <div class="highlight-card"><div class="big-num">1798</div><h4>Founded</h4><p>One of New Jersey's original 104 townships, named for General Richard Montgomery</p></div>
+      <div class="highlight-card"><div class="big-num">23,690</div><h4>Population</h4><p>2020 Census, Somerset County</p></div>
+      <div class="highlight-card"><div class="big-num">32.5</div><h4>Sq. Mi.</h4><p>Rolling farmland, preserved open space and low-density suburban development</p></div>
+      <div class="highlight-card"><div class="big-num">3</div><h4>Historic Villages</h4><p>Skillman, Belle Mead and Blawenburg — plus the smaller hamlet of Harlingen</p></div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="cat-section" style="background:var(--mist);">
+    <div class="two-col">
+      <div>
+
+        <!-- Attractions -->
+        <div class="section-header"><h2 class="section-title">Attractions &amp; History</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#1e4620,#5a9a4a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag outdoors">247 Acres</span><span class="card-tag featured">Trails &amp; Dog Park</span></div>
+              <h3 class="card-title">Skillman Park</h3>
+              <p class="card-desc">Somerset County's newest large park, built on the former North Princeton Developmental Center property the county bought in 2010. A 2.25-mile paved loop trail circles open fields and woods, with a rougher 3.4-mile nature trail, a two-acre leash-free dog run split for large and small dogs, chess tables at the trailheads, and a playground.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Off County Route 601, Skillman · Free · Dawn–dusk</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#2c4a1e,#7a9a4a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag outdoors">Trail Network</span><span class="card-tag">9/11 Memorial</span></div>
+              <h3 class="card-title">Montgomery Park</h3>
+              <p class="card-desc">The township's own trail system off Harlingen Road — an Upper and Lower paved loop, an unpaved nature trail and the Back Brook Trail, linking on to Mill Pond Park. Picnic tables, a playground, seasonal restrooms, a native-plant arboretum and a 9/11 memorial round it out.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Harlingen Road · Free · Three parking areas</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#4a3820,#a08040);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag">History</span><span class="card-tag featured">Since 1965</span></div>
+              <h3 class="card-title">Van Harlingen Historical Society</h3>
+              <p class="card-desc">Montgomery's own historical society, founded in 1965 to preserve the township's Dutch-settled farming heritage. It's restoring the 1752 Dirck Gulick House as its headquarters and archive, runs the one-room Bedensville Schoolhouse at Orchard Hill Elementary for school programs, and maintains the Montgomery Farm Museum.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Belle Mead · Call ahead for tours</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#3a2c1a,#8a6a35);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag">History</span><span class="card-tag featured">National Register</span></div>
+              <h3 class="card-title">Blawenburg Historic District</h3>
+              <p class="card-desc">A 336-acre district along Great Road and County Route 518, settled around 1739 and largely built out by 1873 into the turnpike crossroads village that still stands — a general store, a blacksmith shop, and the 1830 Reformed Dutch Church of Blawenburg, which the congregation raised in just three days. Listed on the National Register of Historic Places since 1990.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Great Road &amp; CR 518, Blawenburg</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#4a2c3a,#9a5a7a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag arts">Arts Center</span><span class="card-tag">Circa 1860</span></div>
+              <h3 class="card-title">Montgomery Center for the Arts</h3>
+              <p class="card-desc">A late Greek Revival farmhouse built around 1860 on what was once the 500-acre Van derVeer family farm, now the township's community arts center — exhibitions, classes and performances inside a genuinely old Montgomery building, known locally as the 1860 House.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 124 Montgomery Rd, Skillman</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-img" style="background:linear-gradient(135deg,#1a2a3a,#4a6a8a);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag">General Aviation</span></div>
+              <h3 class="card-title">Princeton Airport</h3>
+              <p class="card-desc">A small public-use general-aviation field actually sited in Montgomery Township, just west of Route 206 — flight training, charters and based aircraft, despite carrying a Princeton mailing address a few miles south.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 41 Airpark Rd (Princeton mailing address, Montgomery Twp)</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="section-header"><h2 class="section-title">Dining</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in" data-subcat="cafe">
+            <div class="card-img" style="background:linear-gradient(135deg,#5a3a1a,#b08040);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Café · Bistro</span><span class="card-tag featured">Blawenburg Village</span></div>
+              <h3 class="card-title">Blawenburg Bistro</h3>
+              <p class="card-desc">A farmhouse-style café at the historic crossroads of Blawenburg, serving breakfast and lunch — sandwiches, salads and baked goods — inside the turnpike village on County Route 518.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 391 County Rd 518, Blawenburg</p>
+            </div>
+          </div>
+
+          <div class="card animate-in" data-subcat="deli">
+            <div class="card-img" style="background:linear-gradient(135deg,#3a2c1a,#8a6a35);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Deli</span><span class="card-tag featured">Local Favorite</span></div>
+              <h3 class="card-title">206 Corner Deli</h3>
+              <p class="card-desc">A no-frills breakfast-and-lunch deli on Route 206, known as much for its homemade Mexican specials — sopes, chicken flautas, tamales — as for its sandwiches. Closed Sundays.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 2127 US-206, Belle Mead · (908) 262-2308</p>
+            </div>
+          </div>
+
+          <div class="card animate-in" data-subcat="pizza">
+            <div class="card-img" style="background:linear-gradient(135deg,#4a0e0e,#a03030);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Pizza · Italian</span></div>
+              <h3 class="card-title">New World Pizza &amp; Cafe</h3>
+              <p class="card-desc">A family Italian-American pizzeria and café on Belle Mead–Blawenburg Road, with outdoor seating and a menu that runs past pizza into pasta and catering.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 1147 Route 601, Skillman · (609) 333-1300</p>
+            </div>
+          </div>
+
+          <div class="card animate-in" data-subcat="coffee">
+            <div class="card-img" style="background:linear-gradient(135deg,#2c1810,#6b4423);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Coffee · Ice Cream</span></div>
+              <h3 class="card-title">Thomas Sweet Cafe</h3>
+              <p class="card-desc">The Montgomery outpost of the well-known Princeton ice cream and coffee-roasting shop, tucked into the Village Shoppes at Montgomery on Route 206.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 1378 US-206, Village Shoppes, Skillman</p>
+            </div>
+          </div>
+
+          <div class="card animate-in" data-subcat="indian">
+            <div class="card-img" style="background:linear-gradient(135deg,#7c3c0a,#e0a739);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Indian · Vegetarian</span></div>
+              <h3 class="card-title">Srirangam Veg Restaurant</h3>
+              <p class="card-desc">A pure-vegetarian South and North Indian kitchen on Route 206, with Jain options on request and a menu built around dosas, uthappams and traditional thalis.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 2311 US-206, Belle Mead · (908) 829-3169</p>
+            </div>
+          </div>
+
+          <div class="card animate-in" data-subcat="thai">
+            <div class="card-img" style="background:linear-gradient(135deg,#1c3a1c,#3d7a3d);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Thai</span></div>
+              <h3 class="card-title">Ricky's Thai</h3>
+              <p class="card-desc">Thai standards — pad thai, curries, noodle soups — in the same Route 206 shopping center as Thomas Sweet, a regular stop for the township's weekday lunch crowd.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 1378 US-206, Village Shoppes, Skillman · (609) 285-2955</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Events -->
+        <div class="section-header"><h2 class="section-title">Annual Events</h2></div>
+        <hr class="section-divider" />
+        <div class="events-list">
+
+          <div class="event-row">
+            <div class="event-date-badge"><div class="month">Sat</div><div class="day">Wkly</div></div>
+            <div class="event-info">
+              <h4>Montgomery Farmers' Market</h4>
+              <p>A weekly outdoor market at the Municipal Complex, 10 AM–1 PM Saturdays through November, plus indoor spring dates including an April Farmers Market &amp; Tree Festival with free seedlings. Run by Montgomery Friends of Open Space.</p>
+            </div>
+          </div>
+
+          <div class="event-row">
+            <div class="event-date-badge"><div class="month">Sun</div><div class="day">TBD</div></div>
+            <div class="event-info">
+              <h4>Montgomery FunFest</h4>
+              <p>A free, annual community festival presented by the Rotary Club of Montgomery/Rocky Hill and the Montgomery Business Association — local-business booths, art and craft vendors, food, games of chance, live entertainment, rides and kids' activities.</p>
+            </div>
+          </div>
+
+          <div class="event-row">
+            <div class="event-date-badge"><div class="month">Dec</div><div class="day">TBD</div></div>
+            <div class="event-info">
+              <h4>Holiday Tree Lighting</h4>
+              <p>The township's annual tree lighting at the Municipal Center, 100 Community Drive, Skillman — moves indoors in bad weather.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="map-embed-wrap" style="margin-bottom:1.25rem;">
+          <div id="montgomery-map"></div>
+          <p style="font-size:0.7rem;color:var(--sub);padding:0.5rem 0.75rem;margin:0;">Montgomery Township's real municipal boundary. Map data &copy; OpenStreetMap contributors.</p>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Need to Know</h4>
+          <div class="info-row"><span class="icon">🗺</span><p><strong>Location:</strong> Somerset County, bordering Princeton to the south and Hillsborough, Hopewell and Franklin townships.</p></div>
+          <div class="info-row"><span class="icon">🏘</span><p><strong>Villages:</strong> Skillman, Belle Mead and Blawenburg are unincorporated communities within the township, not separate towns — along with smaller Harlingen.</p></div>
+          <div class="info-row"><span class="icon">🚗</span><p><strong>Getting there:</strong> Route 206 runs the length of the township north–south; County Routes 518 and 601 (Great Road) cross it and reach Blawenburg and Skillman.</p></div>
+          <div class="info-row"><span class="icon">🏪</span><p><strong>No real downtown:</strong> Most everyday business — shops, restaurants, services — clusters along the Route 206 corridor rather than in the historic village centers.</p></div>
+          <div class="info-row"><span class="icon">💰</span><p><strong>Character:</strong> Regularly ranked among New Jersey's wealthiest municipalities, with a median household income above $180,000.</p></div>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Explore New Jersey</h4>
+          <a href="../princeton/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Princeton →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../sea-bright/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Sea Bright →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../lbi/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Long Beach Island →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../new-jersey/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">All New Jersey →</span>
+            <span style="font-size:0.72rem;color:var(--gold);">4 places</span>
+          </a>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Quick Tips</h4>
+          <div class="info-row"><span class="icon">🚦</span><p>Blawenburg's historic crossroads is easy to miss at highway speed on CR 518 — worth the deliberate stop.</p></div>
+          <div class="info-row"><span class="icon">🚲</span><p>Skillman Park's paved 2.25-mile loop is the easiest trail in the township for strollers and bikes.</p></div>
+          <div class="info-row"><span class="icon">🍽</span><p>Nearly everything to eat is on Route 206, not inside the historic villages — plan around the corridor.</p></div>
+          <div class="info-row"><span class="icon">✈️</span><p>Princeton Airport (despite the name) is a Montgomery Township landmark, not a Princeton one.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE MUSIC (rendered by initLiveMusic in script.js) -->
+  <section class="section cat-section" data-cat="music" id="live-music" style="background:var(--mist);"></section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p>Your local intelligence platform — curated, verified, and always expanding.</p>
+      </div>
+      <div class="footer-links">
+        <h4>New Jersey</h4>
+        <a href="../new-jersey/index.html">NJ Overview</a>
+        <a href="index.html">Montgomery Township</a>
+        <a href="../princeton/index.html">Princeton</a>
+        <a href="../sea-bright/index.html">Sea Bright</a>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="../index.html">Home</a>
+        <a href="../connecticut/index.html">Connecticut</a>
+        <a href="../texas/index.html">Texas</a>
+      </div>
+      <div class="footer-links">
+        <h4>The Concierge</h4>
+        <a href="../index.html">About</a>
+        <a href="../index.html#suggest">Suggest a Place</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 The Concierge. All rights reserved.</div>
+  </footer>
+
+</div>
+<script src="../script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* ── Montgomery Township's own real boundary, static reference map. No
+   village drill-down on this page (Skillman, Belle Mead and Blawenburg are
+   unincorporated postal/historic communities, not separately mapped towns),
+   so no hover/click interactivity is needed — just the real OpenStreetMap
+   township polygon, styled and fitted. ── */
+(function () {
+  var map = L.map('montgomery-map', { scrollWheelZoom: false }).setView([40.4234, -74.6735], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
+    maxZoom: 19
+  }).addTo(map);
+
+  fetch('../data/montgomery-boundary.geojson')
+    .then(function (r) { return r.json(); })
+    .then(function (fc) {
+      var layer = L.geoJSON(fc, {
+        style: { color: '#3f5e2e', weight: 2, fillColor: '#3f5e2e', fillOpacity: 0.12 }
+      }).addTo(map);
+      map.fitBounds(layer.getBounds(), { padding: [16, 16] });
+    })
+    .catch(function () {
+      var el = document.getElementById('montgomery-map');
+      if (el) el.insertAdjacentHTML('beforeend', '<p style="padding:1rem;font-size:0.8rem;color:var(--sub);">Map boundary data unavailable right now.</p>');
+    });
+})();
+</script>
+</body>
+</html>
