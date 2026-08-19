@@ -38,18 +38,21 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 padding: 0 5%;
-background: rgba(255, 255, 255, 0.96);
+background: rgba(233, 235, 238, 0.97);
 box-shadow: 0 1px 10px rgba(26, 58, 92, 0.12);
 backdrop-filter: blur(8px);
 }
 .nav-logo {
-font-family: 'Kaushan Script', cursive;
-font-size: 2rem;
-color: var(--navy);
+display: flex;
+align-items: center;
 text-decoration: none;
-letter-spacing: 0.01em;
 flex-shrink: 0;
 line-height: 1;
+}
+.nav-logo img {
+height: 44px;
+width: auto;
+display: block;
 }
 .nav-logo span { color: var(--coral); }
 .nav-links { display: flex; gap: 2rem; list-style: none; }
