@@ -6,7 +6,7 @@ Recreated locally from `sea-spray-motel-code.docx` (exported from work email on 
 - index.html, rooms.html, rates.html, amenities.html, contact.html, gallery.html, lbi.html
 - styles.css
 - script.js
-- seaspraylogo_clean.png — placeholder logo (generated)
+- seaspraylogo_clean.png — real logo, cropped from `photos/sign logo.jpg`
 - photos/ — 8 placeholder photos (generated), matching the site's color palette
 
 ## About the placeholder images
@@ -15,10 +15,7 @@ placeholders (labeled "Bedroom", "Pool", "Exterior", etc.) so the site isn't ful
 broken image icons. Swap these out with real photos whenever you have them — same
 filenames, so no HTML changes needed:
 
-- `seaspraylogo_clean.png`
-- `photos/exterior.jpg`, `photos/living.jpg`, `photos/pool.jpg`
-- `photos/bedroom1.jpg`, `photos/bedroom2.jpg`, `photos/bedroom3.jpg`
-- `photos/bathroom1.jpg`, `photos/bathroom2.jpg`
+- `photos/bathroom1.jpg`, `photos/bathroom2.jpg` — still placeholders, no real bathroom photos sourced yet
 
 ## Running locally
 No build step needed — just open index.html in a browser, or serve the folder:
