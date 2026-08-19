@@ -586,6 +586,7 @@ const LOCATIONS = {
     pins: [
       { label:'Long Beach Island', tag:'live', left:52, top:58, url:'lbi/index.html' },
       { label:'Princeton', tag:'live', left:34, top:40, url:'princeton/index.html' },
+      { label:'Sea Bright', tag:'live', left:57, top:38, url:'sea-bright/index.html' },
     ]
   },
 
@@ -606,6 +607,19 @@ const LOCATIONS = {
       { label:'University Campus', tag:'live', left:52, top:58, url:'princeton/university/index.html' },
       { label:'Western Section', tag:'live', left:38, top:56, url:'princeton/western-section/index.html' },
     ]
+  },
+
+  'Sea Bright': {
+    mapSrc: 'https://maps.google.com/maps?q=Sea+Bright,+NJ&output=embed&z=14',
+    mapLabel: 'Sea Bright, NJ',
+    eventsLabel: 'Sea Bright Events',
+    eventsLink: { href: 'sea-bright/index.html', text: 'Sea Bright Guide →' },
+    events: [
+      { mo:'JUN', dy:'–OCT', tag:'outdoors', tagLabel:'Market',   name:'Sea Bright Farm & Artisan Market', meta:'1097 Ocean Ave · Wednesdays 1–6 PM', url:'sea-bright/index.html', ticket:null },
+      { mo:'SEP', dy:'TBD',  tag:'events',   tagLabel:'Festival', name:'Sea Bright Fall Festival',          meta:'Municipal Complex · Late September', url:'sea-bright/index.html', ticket:null },
+      { mo:'AUG', dy:'TBD',  tag:'dining',   tagLabel:'Food Fest',name:'Oyster Fest',                       meta:'Driftwood Cabana Club',              url:'sea-bright/index.html', ticket:null },
+    ],
+    pins: []
   },
 
   'Long Beach Island': {

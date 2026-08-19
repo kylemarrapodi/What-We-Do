@@ -100,7 +100,8 @@ const SHARED_SEARCH_TREE = {
                 { label:'University Campus',   aliases:['university','princeton university','campus'],         status:'live', url:'princeton/university/index.html',         children:[] },
                 { label:'Western Section',     aliases:['western section','battlefield','stockton street'],    status:'live', url:'princeton/western-section/index.html',     children:[] },
               ]
-            }
+            },
+            { label: 'Sea Bright', aliases: ['sea bright'], status: 'live', url: 'sea-bright/index.html', children: [] },
           ]
         },
         {
@@ -238,6 +239,15 @@ function buildSearchIndex() {
     { label:'Ivy Inn',            sub:'Princeton, NJ',                       type:'place', url: p+'princeton/palmer-square/index.html',keywords:['ivy inn','dive bar princeton','pool tables princeton'] },
     { label:'Richardson Auditorium', sub:'Princeton University',             type:'place', url: p+'princeton/university/index.html', keywords:['richardson auditorium','alexander hall','princeton university concerts','chamber music','new jersey symphony'] },
     { label:'McCarter Theatre Center', sub:'Princeton, NJ',                  type:'place', url: p+'princeton/university/index.html', keywords:['mccarter','mccarter theatre','princeton theatre','princeton ballet'] },
+    // ── Sea Bright ──
+    { label:'Sea Bright, NJ',     sub:'New Jersey',            type:'place',  url: p+'sea-bright/index.html',                 keywords:['sea bright','sea bright nj','monmouth county','jersey shore','barrier peninsula'] },
+    { label:"Anjelica's Restaurant", sub:'Sea Bright, NJ',      type:'place',  url: p+'sea-bright/index.html',                 keywords:['anjelicas','angelicas','italian restaurant sea bright','ocean ave'] },
+    { label:"Tommy's Tavern + Tap", sub:'Sea Bright, NJ',       type:'place',  url: p+'sea-bright/index.html',                 keywords:['tommys tavern','tommys tap','sports bar sea bright'] },
+    { label:'Drifthouse',         sub:'Sea Bright, NJ',         type:'place',  url: p+'sea-bright/index.html',                 keywords:['drifthouse','driftwood cabana club','seafood sea bright'] },
+    { label:"Donovan's Reef",     sub:'Sea Bright, NJ',         type:'place',  url: p+'sea-bright/index.html',                 keywords:['donovans reef','beach bar sea bright','cocktails in the sand'] },
+    { label:'Sea Bright Fall Festival', sub:'Sep · Municipal Complex · Sea Bright', type:'event', url: p+'sea-bright/index.html', keywords:['sea bright fall festival','sea bright festival','bonfire'] },
+    { label:'Sea Bright Farm & Artisan Market', sub:'Wed · Jun–Oct · Sea Bright', type:'event', url: p+'sea-bright/index.html', keywords:['sea bright farmers market','farm and artisan market','sea bright market'] },
+    { label:'Shrewsbury Riverfront Park', sub:'Sea Bright, NJ', type:'place',  url: p+'sea-bright/index.html',                 keywords:['shrewsbury riverfront park','fishing sea bright','kayak launch sea bright'] },
   ];
 }
 
@@ -741,6 +751,22 @@ const LIVE_MUSIC = {
     nearest: { text: 'Beach Haven is about five minutes north and has the Island\'s densest run of stages.', href: 'lbi/beach-haven/index.html' }
   },
 
+  // ── Sea Bright ────────────────────────────────────────────────────
+  'sea-bright': {
+    blurb: 'Sea Bright\'s music runs on the beach — an oceanfront bar with a DJ most summer weekends, and a private beach club that books bands for its members through the season.',
+    venues: [
+      { name: "Donovan's Reef", kind: 'Oceanfront Beach Bar', addr: '1171 Ocean Ave',
+        nights: 'Live music and DJs Friday through Sunday, in season',
+        desc: 'A lifeguarded private beach and bar that\'s been serving cocktails in the sand since 1976. Rebuilt after Hurricane Sandy shoved the building off its foundation, and back to running weekend music straight through summer.',
+        cal: { href: 'https://www.donovansreefbeachbar.com/', label: 'donovansreefbeachbar.com' } },
+      { name: 'Driftwood Cabana Club', kind: 'Beach Club', addr: '1485 Ocean Ave',
+        nights: 'Live bands and themed nights through the summer season',
+        desc: 'A family beach club on the ocean since 1957, with a tiki bar that books live acts alongside its Oyster Fest and grilling-competition events. Access is generally for members and their guests rather than a walk-up room.',
+        cal: { href: 'https://www.driftwoodcc.com/', label: 'driftwoodcc.com' } },
+    ],
+    series: []
+  },
+
   // ── Stamford ───────────────────────────────────────────────────────
   'stamford': {
     blurb: 'Stamford\'s music splits three ways: the bar circuit downtown, the summer waterfront programming at Harbor Point, and touring acts at the Palace. Note that Alive@Five — the summer series that ran downtown for 27 years — has ended; what replaced it is spread across Mill River Park, Harbor Point and the arboretum.',
@@ -1214,8 +1240,17 @@ const PANEL_EVENTS = {
     events: [
       { mo:'JUN', dy:'14',  tag:'events',  tagLabel:'Food Fest',  name:'HopSauce Festival',    meta:'Taylor Ave Waterfront · Beach Haven', url:'lbi/beach-haven/index.html', ticket:null },
       { mo:'AUG', dy:'TBD', tag:'outdoors',tagLabel:'Surf Comp',  name:'Coquina Jam',           meta:'Beach Haven Ocean Beach · LBI',       url:'lbi/beach-haven/index.html', ticket:null },
+      { mo:'SEP', dy:'TBD', tag:'events',  tagLabel:'Festival',   name:'Sea Bright Fall Festival', meta:'Municipal Complex · Sea Bright',   url:'sea-bright/index.html', ticket:null },
       { mo:'OCT', dy:'TBD', tag:'dining',  tagLabel:'Food Fest',  name:'Chowderfest',           meta:'Taylor Ave Waterfront · Beach Haven', url:'lbi/beach-haven/index.html', ticket:null },
       { mo:'OCT', dy:'TBD', tag:'outdoors',tagLabel:'Kite Fest',  name:'LBI Kite Festival',     meta:'Ship Bottom Beach · LBI',             url:'lbi/ship-bottom/index.html', ticket:null },
+    ]
+  },
+  'Sea Bright': {
+    label: 'Sea Bright Events', link: { href: 'sea-bright/index.html', text: 'Sea Bright Guide →' },
+    events: [
+      { mo:'JUN', dy:'–OCT', tag:'outdoors',tagLabel:'Market',    name:'Sea Bright Farm & Artisan Market', meta:'1097 Ocean Ave · Wednesdays 1–6 PM', url:'sea-bright/index.html', ticket:null },
+      { mo:'SEP', dy:'TBD',  tag:'events',  tagLabel:'Festival',  name:'Sea Bright Fall Festival',          meta:'Municipal Complex · Late September', url:'sea-bright/index.html', ticket:null },
+      { mo:'AUG', dy:'TBD',  tag:'dining',  tagLabel:'Food Fest', name:'Oyster Fest',                       meta:'Driftwood Cabana Club',              url:'sea-bright/index.html', ticket:null },
     ]
   },
   'Long Beach Island': {
