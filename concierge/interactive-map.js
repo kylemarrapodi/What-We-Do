@@ -47,25 +47,46 @@
     return false;
   }
 
-  /* ── City-level: real boundary polygon, hover to outline, click to visit. ── */
+  /* ── City-level: real boundary polygon(s), hover to outline, click to visit.
+     opts.onHover(feature) / opts.onHoverEnd() are optional — fired on real
+     mouseover/mouseout, AND (if opts.autoFocusOnMove is true) synthetically
+     as the map is panned/zoomed, so a caller can drive an events panel etc.
+     purely from where the map is currently centered, not just direct hover. ── */
   global.initCityBoundaryMap = function (containerId, opts) {
     const map = baseMap(containerId, opts.center, opts.zoom || 12);
+    let focused = null;
+    let layerRef = null;
+
+    function setFocused(feature, lyr) {
+      if (focused === feature) return;
+      if (focused && focused._lyr) focused._lyr.setStyle(baseStyle);
+      focused = feature || null;
+      if (feature && lyr) {
+        feature._lyr = lyr;
+        lyr.setStyle(hoverStyle);
+      }
+      if (feature) {
+        if (opts.onHover) opts.onHover(feature);
+      } else if (opts.onHoverEnd) {
+        opts.onHoverEnd();
+      }
+    }
+
+    const baseStyle = { color: '#2a7fbf', weight: 2, fillColor: '#2a7fbf', fillOpacity: 0.08 };
+    const hoverStyle = { color: '#e8a723', weight: 3, fillColor: '#e8a723', fillOpacity: 0.22 };
 
     fetch(opts.boundaryUrl)
       .then((r) => r.json())
       .then((fc) => {
-        const baseStyle = { color: '#2a7fbf', weight: 2, fillColor: '#2a7fbf', fillOpacity: 0.08 };
-        const hoverStyle = { color: '#e8a723', weight: 3, fillColor: '#e8a723', fillOpacity: 0.22 };
-
         const layer = L.geoJSON(fc, {
           style: baseStyle,
           onEachFeature: function (feature, lyr) {
             lyr.on('mouseover', function () {
-              lyr.setStyle(hoverStyle);
+              setFocused(feature, lyr);
               lyr.bindTooltip(feature.properties.name + ' — click to explore', { sticky: true }).openTooltip();
             });
             lyr.on('mouseout', function () {
-              lyr.setStyle(baseStyle);
+              setFocused(null);
               lyr.closeTooltip();
             });
             lyr.on('click', function () {
@@ -73,8 +94,36 @@
             });
           },
         }).addTo(map);
+        layerRef = layer;
 
         map.fitBounds(layer.getBounds(), { padding: [20, 20] });
+
+        if (opts.autoFocusOnMove) {
+          const minZoom = opts.autoFocusMinZoom || 0;
+          const update = function () {
+            if (map.getZoom() < minZoom) {
+              setFocused(null);
+              return;
+            }
+            const center = map.getCenter();
+            const bounds = map.getBounds();
+            let best = null;
+            let bestDist = Infinity;
+            layer.eachLayer(function (lyr) {
+              const b = lyr.getBounds();
+              if (!bounds.intersects(b)) return;
+              const c = b.getCenter();
+              const d = center.distanceTo(c);
+              if (d < bestDist) {
+                bestDist = d;
+                best = lyr;
+              }
+            });
+            if (best) setFocused(best.feature, best);
+            else setFocused(null);
+          };
+          map.on('moveend zoomend', update);
+        }
       })
       .catch(function () {
         const el = document.getElementById(containerId);

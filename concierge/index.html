@@ -6,6 +6,7 @@
   <title>The Concierge — Your Local Guide, Everywhere</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     html, body { height: 100%; overflow: hidden; }
 
@@ -62,19 +63,9 @@
       padding: 0 1.25rem 1.5rem;
     }
 
-    /* Brand */
-    .home-eyebrow {
-      font-size: 0.68rem; font-weight: 700;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 0.4rem;
-    }
-    .home-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem; color: var(--white);
-      line-height: 1.15; margin-bottom: 0.5rem;
-    }
-    .home-title span { color: var(--gold); }
-    .home-desc { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.65; }
+    /* Brand — just the tagline now; the site title already lives in the
+       persistent top nav, so it isn't repeated here. */
+    .home-desc { font-size: 0.98rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
 
     /* ── TIERED SEARCH ── */
     .home-search { display: flex; flex-direction: column; gap: 0.5rem; }
@@ -305,9 +296,7 @@
 
     /* ── RIGHT PANEL — MAP ── */
     .home-right { position: relative; overflow: hidden; }
-    .home-right iframe { width: 100%; height: 100%; border: none; display: block; }
-
-    /* Map pins — removed pending Google Maps JS API (pins can't track map scroll with iframe) */
+    .home-right #home-map { width: 100%; height: 100%; }
 
     /* Map location label */
     .map-location-badge {
@@ -327,7 +316,6 @@
     }
     @media (max-width: 640px) {
       .home-left-inner { padding: 1.5rem 1.25rem; }
-      .home-title { font-size: 1.6rem; }
     }
   </style>
 </head>
@@ -369,9 +357,7 @@
 
       <!-- Brand -->
       <div class="home-brand">
-        <div class="home-eyebrow">Your Local Intelligence Platform</div>
-        <h1 class="home-title">The <span>Concierge</span></h1>
-        <p class="home-desc">Discover what's happening in your city — restaurants, events, nightlife, and local happenings, curated and verified in real time.</p>
+        <p class="home-desc">Discover what's happening near you</p>
       </div>
 
       <!-- Tiered Search -->
@@ -430,20 +416,16 @@
 
   <!-- RIGHT: Map -->
   <div class="home-right" id="map-panel">
-    <iframe id="map-iframe"
-      title="The Concierge — Explore Map"
-      src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d96855.28796146093!2d-73.6!3d41.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
+    <div id="home-map" style="width:100%;height:100%;"></div>
     <!-- Current location badge -->
-    <div class="map-location-badge" id="map-location-badge">Northeast US</div>
+    <div class="map-location-badge" id="map-location-badge">United States</div>
   </div>
 
 </div>
 
 <script src="script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="interactive-map.js"></script>
 <script>
 // ═══════════════════════════════════════════════════════════════════
 //  LOCATION DATABASE
@@ -533,7 +515,7 @@ const LOCATIONS = {
   'Stamford': {
     mapSrc: 'https://maps.google.com/maps?q=Stamford,+CT&output=embed&z=13',
     mapLabel: 'Stamford, CT',
-    eventsLabel: 'Stamford Events',
+    eventsLabel: 'Happening in Stamford',
     eventsLink: { href: 'stamford/index.html', text: 'Full Stamford Guide →' },
     events: [
       { mo:'JUL', dy:'30', tag:'events',  tagLabel:'Concert',   name:'Ja Rule & Ashanti',          meta:'Mill River Park · 5 PM',        url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
@@ -598,7 +580,7 @@ const LOCATIONS = {
   'Princeton': {
     mapSrc: 'https://maps.google.com/maps?q=Princeton,+NJ&output=embed&z=14',
     mapLabel: 'Princeton, NJ',
-    eventsLabel: 'Princeton Live Music',
+    eventsLabel: 'Happening in Princeton',
     eventsLink: { href: 'princeton/index.html', text: 'Princeton Guide →' },
     events: [
       { mo:'WED', dy:'WKLY', tag:'arts',      tagLabel:'Live Band', name:'Bands at the Alchemist & Barrister', meta:'28 Witherspoon St · Wed, Thu & Sun',     url:'princeton/palmer-square/index.html' },
@@ -617,7 +599,7 @@ const LOCATIONS = {
   'Sea Bright': {
     mapSrc: 'https://maps.google.com/maps?q=Sea+Bright,+NJ&output=embed&z=14',
     mapLabel: 'Sea Bright, NJ',
-    eventsLabel: 'Sea Bright Events',
+    eventsLabel: 'Happening in Sea Bright',
     eventsLink: { href: 'sea-bright/index.html', text: 'Sea Bright Guide →' },
     events: [
       { mo:'JUN', dy:'–OCT', tag:'outdoors', tagLabel:'Market',   name:'Sea Bright Farm & Artisan Market', meta:'1097 Ocean Ave · Wednesdays 1–6 PM', url:'sea-bright/index.html', ticket:null },
@@ -630,7 +612,7 @@ const LOCATIONS = {
   'Montgomery Township': {
     mapSrc: 'https://maps.google.com/maps?q=Montgomery+Township,+NJ&output=embed&z=12',
     mapLabel: 'Montgomery Township, NJ',
-    eventsLabel: 'Montgomery Township Events',
+    eventsLabel: 'Happening in Montgomery Township',
     eventsLink: { href: 'montgomery/index.html', text: 'Montgomery Guide →' },
     events: [
       { mo:'SAT', dy:'WKLY', tag:'outdoors', tagLabel:'Market',   name:'Montgomery Farmers\' Market', meta:'Municipal Complex · Sat 10 AM–1 PM', url:'montgomery/index.html', ticket:null },
@@ -643,7 +625,7 @@ const LOCATIONS = {
   'Cape May': {
     mapSrc: 'https://maps.google.com/maps?q=Cape+May,+NJ&output=embed&z=14',
     mapLabel: 'Cape May, NJ',
-    eventsLabel: 'Cape May Events',
+    eventsLabel: 'Happening in Cape May',
     eventsLink: { href: 'cape-may/index.html', text: 'Cape May Guide →' },
     events: [
       { mo:'MAY', dy:'–JUN', tag:'arts',   tagLabel:'Music Fest', name:'Cape May Music Festival',          meta:'Venues citywide · Cape May MAC',  url:'cape-may/index.html', ticket:'https://capemaymac.org/cape-may-music-festival/' },
@@ -657,7 +639,7 @@ const LOCATIONS = {
   'Long Beach Island': {
     mapSrc: 'https://maps.google.com/maps?q=Long+Beach+Island,+NJ&output=embed&z=12',
     mapLabel: 'Long Beach Island, NJ',
-    eventsLabel: 'LBI Events',
+    eventsLabel: 'Happening on Long Beach Island',
     eventsLink: null,
     events: [],
     pins: [
@@ -685,7 +667,7 @@ const LOCATIONS = {
   'Manhattan': {
     mapSrc: 'https://maps.google.com/maps?q=Manhattan,+New+York,+NY&output=embed&z=12',
     mapLabel: 'Manhattan, NY',
-    eventsLabel: 'Manhattan Events',
+    eventsLabel: 'Happening in Manhattan',
     eventsLink: { href: 'manhattan/index.html', text: 'Manhattan Guide →' },
     events: [
       { mo:'AUG', dy:'1–16', tag:'events', tagLabel:'Festival', name:'Harlem Week',              meta:'Citywide · Harlem',                     url:'manhattan/index.html#harlem',            ticket:'https://harlemweek.org' },
@@ -724,7 +706,7 @@ const LOCATIONS = {
   'Lubbock': {
     mapSrc: 'https://maps.google.com/maps?q=Lubbock,+TX&output=embed&z=12',
     mapLabel: 'Lubbock, TX',
-    eventsLabel: 'Lubbock Events',
+    eventsLabel: 'Happening in Lubbock',
     eventsLink: { href: 'lubbock/index.html', text: 'Full Lubbock Guide →' },
     events: [
       { mo:'AUG', dy:'30', tag:'events', tagLabel:'Football',   name:'TTU Football Season Opener',     meta:'Jones AT&T Stadium · 60K fans',        url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football' },
@@ -839,12 +821,62 @@ function renderEventsPanel(locationKey) {
 
 // ═══════════════════════════════════════════════════════════════════
 //  RENDER — MAP
+//  The map itself is a real interactive Leaflet layer (see initHomeMap
+//  below) showing every built town as a hoverable/clickable shape. This
+//  function is the OTHER direction: when the search box picks a location,
+//  fly the map to it (if we have a real shape for it) and set the "base"
+//  state that the map's hover/zoom-preview reverts to when you move away.
 // ═══════════════════════════════════════════════════════════════════
+let currentSearchLocationKey = 'default';
+
 function renderMap(locationKey) {
+  currentSearchLocationKey = locationKey;
   const data = LOCATIONS[locationKey] || LOCATIONS['default'];
-  const iframe = document.getElementById('map-iframe');
-  if (iframe.src !== data.mapSrc) iframe.src = data.mapSrc;
   document.getElementById('map-location-badge').textContent = data.mapLabel;
+  if (window.homeMapFlyTo) window.homeMapFlyTo(locationKey);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  INTERACTIVE HOME MAP — every built town, hoverable + clickable,
+//  driving the events panel live (hover/zoom preview, reverts to the
+//  current search selection when you move away).
+// ═══════════════════════════════════════════════════════════════════
+function initHomeMap() {
+  const map = initCityBoundaryMap('home-map', {
+    center: [39, -95],
+    zoom: 4,
+    boundaryUrl: 'data/all-places.geojson',
+    autoFocusOnMove: true,
+    autoFocusMinZoom: 9,
+    onHover: function (feature) {
+      renderEventsPanel(feature.properties.eventsKey);
+      document.getElementById('map-location-badge').textContent = feature.properties.name;
+    },
+    onHoverEnd: function () {
+      const data = LOCATIONS[currentSearchLocationKey] || LOCATIONS['default'];
+      renderEventsPanel(currentSearchLocationKey);
+      document.getElementById('map-location-badge').textContent = data.mapLabel;
+    },
+    onClick: function (feature) {
+      window.location.href = feature.properties.url;
+    },
+  });
+
+  let placesLayerBounds = {};
+  fetch('data/all-places.geojson')
+    .then((r) => r.json())
+    .then((fc) => {
+      fc.features.forEach((f) => {
+        const b = L.geoJSON(f).getBounds();
+        const key = f.properties.eventsKey;
+        placesLayerBounds[key] = placesLayerBounds[key] ? placesLayerBounds[key].extend(b) : b;
+      });
+    });
+
+  window.homeMapFlyTo = function (locationKey) {
+    const b = placesLayerBounds[locationKey];
+    if (b) map.fitBounds(b, { padding: [40, 40], maxZoom: 13 });
+  };
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -1033,6 +1065,7 @@ function showComingSoon(label) {
 document.addEventListener('DOMContentLoaded', () => {
   // Render default state
   renderEventsPanel('default');
+  initHomeMap();
   renderMap('default');
 
   const input = document.getElementById('main-search');
