@@ -30,33 +30,40 @@
 
     /* City hero — compact */
     .city-hero { padding: 2.5rem 5% 2rem; }
+    .city-hero-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; }
+    .city-hero-main { flex: 1; min-width: 260px; }
     .city-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
     .city-hero .hero-sub { font-size: 0.9rem; margin-bottom: 1rem; }
     .city-hero-meta { font-size: 0.8rem; gap: 1rem; }
 
-    /* Quick stats */
+    /* Quick stats — compact bubbles stacked top-to-bottom, right-aligned in the hero */
     .highlight-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-bottom: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex-shrink: 0;
+      width: 190px;
     }
     .highlight-card {
       background: var(--white);
       border-radius: var(--radius);
-      padding: 1rem 1.1rem;
+      padding: 0.5rem 0.8rem;
       box-shadow: var(--shadow);
-      border-left: 4px solid var(--gold);
+      border-left: 3px solid var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
     }
-    .highlight-card h4 { font-size: 0.88rem; color: var(--navy); margin-bottom: 0.2rem; }
-    .highlight-card p { font-size: 0.78rem; color: var(--sub); }
+    .highlight-card h4 { font-size: 0.74rem; color: var(--navy); margin-bottom: 0; font-weight: 600; line-height: 1.2; }
+    .highlight-card p { display: none; }
     .highlight-card .big-num {
       font-family: 'Playfair Display', serif;
-      font-size: 1.75rem;
+      font-size: 1.3rem;
       color: var(--gold);
       font-weight: 700;
       line-height: 1;
-      margin-bottom: 0.15rem;
+      margin-bottom: 0;
+      flex-shrink: 0;
     }
 
     /* Section padding — tighter */
@@ -77,12 +84,14 @@
     .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border); }
 
     @media (max-width: 900px) {
-      .highlight-strip { grid-template-columns: repeat(3, 1fr); }
+      .city-hero-inner { flex-direction: column; }
+      .highlight-strip { flex-direction: row; width: 100%; }
+      .highlight-card { flex: 1; }
       .content-grid { grid-template-columns: 1fr; }
       .map-sidebar { position: static; }
     }
     @media (max-width: 600px) {
-      .highlight-strip { grid-template-columns: 1fr; }
+      .highlight-strip { flex-direction: column; }
     }
 
     /* Live sports events (fetched at runtime from data/princeton-sports.json) */
@@ -140,38 +149,39 @@
 
   <!-- CITY HERO -->
   <section class="city-hero">
-    <div class="section-label">New Jersey</div>
-    <h1>Princeton, <span>NJ</span></h1>
-    <p class="hero-sub">A 280-year-old college town that runs two nightlife economies at once — an internationally programmed concert series on one side of Nassau Street, and a handful of stubborn bars playing local bands until 2 AM on the other.</p>
-    <div class="city-hero-meta">
-      <span>📍 Mercer County, NJ</span>
-      <span>🎓 Princeton University, est. 1746</span>
-      <span>🚆 ~1 hr to NYC or Philadelphia</span>
-      <span>🎸 Live music most nights</span>
+    <div class="city-hero-inner">
+      <div class="city-hero-main">
+        <div class="section-label">New Jersey</div>
+        <h1>Princeton, <span>NJ</span></h1>
+        <p class="hero-sub">A 280-year-old college town that runs two nightlife economies at once — an internationally programmed concert series on one side of Nassau Street, and a handful of stubborn bars playing local bands until 2 AM on the other.</p>
+        <div class="city-hero-meta">
+          <span>📍 Mercer County, NJ</span>
+          <span>🎓 Princeton University, est. 1746</span>
+          <span>🚆 ~1 hr to NYC or Philadelphia</span>
+          <span>🎸 Live music most nights</span>
+        </div>
+      </div>
+
+      <!-- QUICK STATS -->
+      <div class="highlight-strip">
+        <div class="highlight-card">
+          <div class="big-num">1746</div>
+          <h4>Founded</h4>
+        </div>
+        <div class="highlight-card">
+          <div class="big-num">2 AM</div>
+          <h4>Last Call</h4>
+        </div>
+        <div class="highlight-card">
+          <div class="big-num">4</div>
+          <h4>Neighborhoods</h4>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- QUICK STATS -->
+  <!-- CATEGORY FILTER -->
   <section class="section-sm" style="background:var(--white);">
-    <div class="highlight-strip">
-      <div class="highlight-card">
-        <div class="big-num">1746</div>
-        <h4>Founded</h4>
-        <p>The University predates the country it sits in by thirty years</p>
-      </div>
-      <div class="highlight-card">
-        <div class="big-num">2 AM</div>
-        <h4>Last Call</h4>
-        <p>Only a handful of downtown bars hold the late license — the rest close at midnight</p>
-      </div>
-      <div class="highlight-card">
-        <div class="big-num">4</div>
-        <h4>Neighborhoods</h4>
-        <p>Palmer Square, Witherspoon-Jackson, the campus, and the historic west end</p>
-      </div>
-    </div>
-
-    <!-- Category filter -->
     <div class="category-pills">
       <button class="pill active" data-cat="all">All</button>
       <button class="pill" data-cat="dining">🍽 Dining</button>
@@ -203,61 +213,55 @@
     <div class="grid-3">
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#0d3b4f,#1a6b8a);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag dining">Seafood</span><span class="card-tag featured">Since 1999</span></div>
           <h3 class="card-title">Blue Point Grill</h3>
-          <p class="card-desc">The town's benchmark for fish — a raw bar and a daily catch list sourced straight from the seafood market next door. Indoor and patio seating, and a following loyal enough to make walk-ins a gamble.</p>
+          <p class="card-desc">The town's benchmark for fish, with a raw bar and a daily catch list.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 258 Nassau St · $$$ · Dinner</p>
         </div>
       </div>
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#1a3a2a,#2e6b4f);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag dining">American</span></div>
           <h3 class="card-title">Agricola</h3>
-          <p class="card-desc">Communal tables, wood-fired cooking and plates built to share — roasted carrots, crispy trout salad, that register. Modern American with enough technique behind it to hold its own.</p>
+          <p class="card-desc">Communal tables and wood-fired, modern American plates built to share.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 Downtown Princeton · $$$ · Dinner</p>
         </div>
       </div>
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#4a2511,#8b5a2b);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag dining">Sandwiches</span><span class="card-tag featured">Institution</span></div>
           <h3 class="card-title">Hoagie Haven</h3>
-          <p class="card-desc">Overstuffed hoagies and cheesesteaks under famously strange names, served since the 1970s. No-frills by design and the default answer to where students actually eat.</p>
+          <p class="card-desc">Overstuffed hoagies and cheesesteaks under famously strange names since the 1970s.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 Princeton · $ · Late</p>
         </div>
       </div>
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#3d1f1f,#7b3f3f);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag dining">Steakhouse</span></div>
           <h3 class="card-title">Witherspoon Grill</h3>
-          <p class="card-desc">Palmer Square's special-occasion room — steaks, a busy bar, and a patio that fills the moment the weather cooperates.</p>
+          <p class="card-desc">Palmer Square's special-occasion room, with steaks and a fair-weather patio.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 Palmer Square · $$$ · Lunch &amp; Dinner</p>
         </div>
       </div>
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#1b3a4b,#2e6b7a);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag dining">French</span></div>
           <h3 class="card-title">Mistral</h3>
-          <p class="card-desc">Small plates and a modern French-Mediterranean kitchen — the more adventurous of the square's sit-down options, and the one to pick when you want the meal to be the event.</p>
+          <p class="card-desc">Small plates from a modern French-Mediterranean kitchen — Palmer Square's more adventurous option.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 Palmer Square area · $$$ · Dinner</p>
         </div>
       </div>
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#2c1810,#5a3420);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag dining">Coffee</span><span class="card-tag featured">Institution</span></div>
           <h3 class="card-title">Small World Coffee</h3>
-          <p class="card-desc">The town's coffee institution and the unofficial second office of half of Princeton. Roasts its own; the Saturday-morning line out the door is part of the deal.</p>
+          <p class="card-desc">The town's coffee institution, roasting its own with a famous Saturday-morning line.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 Nassau St · $ · Opens early</p>
         </div>
       </div>
@@ -274,31 +278,28 @@
     <div class="grid-3">
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#2c1810,#6b4423);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag nightlife">Tavern</span><span class="card-tag featured">Landmark</span></div>
           <h3 class="card-title">The Alchemist &amp; Barrister</h3>
-          <p class="card-desc">The "Cheers of Princeton" — a landmark tavern in a historic building, with live local bands on Wednesday, Thursday and Sunday nights and a late license to see them through.</p>
+          <p class="card-desc">The "Cheers of Princeton," with live local bands Wed, Thu and Sun nights.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 28 Witherspoon St · Open until 2 AM</p>
         </div>
       </div>
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#4a3a11,#8a7a2b);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag nightlife">Brewpub</span></div>
           <h3 class="card-title">Triumph Brewing Company</h3>
-          <p class="card-desc">A Nassau Street microbrewery with a genuinely mixed room — students, locals and the corporate crowd — and a rotating live-music calendar spread through the week.</p>
+          <p class="card-desc">Nassau Street microbrewery with a rotating live-music calendar through the week.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 Nassau St · Open until 2 AM</p>
         </div>
       </div>
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#1b2631,#3d4f5c);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag nightlife">Dive Bar</span></div>
           <h3 class="card-title">Ivy Inn</h3>
-          <p class="card-desc">Pool tables, cheap drinks, friendly bartenders and music that turns up without much warning. The least polished of the late-license three, which is the whole appeal.</p>
+          <p class="card-desc">Pool tables, cheap drinks, and the least polished of the late-license three.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 Princeton · Open until 2 AM</p>
         </div>
       </div>
@@ -347,61 +348,55 @@
     <div class="grid-3">
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#1a2744,#3d5a80);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag arts">Concert Hall</span><span class="card-tag featured">World-Class</span></div>
           <h3 class="card-title">Richardson Auditorium</h3>
-          <p class="card-desc">Inside Alexander Hall, and home to Princeton University Concerts — a chamber series booking at international level, with the New Jersey Symphony playing its Princeton dates here too. Open to the public, not just the University.</p>
+          <p class="card-desc">Home to Princeton University Concerts' internationally booked chamber series, open to the public.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 68 Nassau St · Season runs Sep–May</p>
         </div>
       </div>
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#3d1f3d,#6b3f6b);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag arts">Theatre</span></div>
           <h3 class="card-title">McCarter Theatre Center</h3>
-          <p class="card-desc">The town's big year-round house — live music alongside plays, ballet, circus and cabaret. Programs independently of the University series, so check both calendars.</p>
+          <p class="card-desc">The town's big year-round house for plays, ballet, circus and cabaret.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 University Place · Year-round</p>
         </div>
       </div>
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#2d1b3d,#5c3a6b);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag arts">Record Store</span><span class="card-tag featured">World-Class</span></div>
           <h3 class="card-title">Princeton Record Exchange</h3>
-          <p class="card-desc">Buying and selling music and movies since 1980, with an inventory north of 100,000 LPs, CDs and DVDs that turns over constantly. Routinely named among the best independent record stores anywhere.</p>
+          <p class="card-desc">Buying and selling music since 1980, with 100,000+ LPs, CDs and DVDs in stock.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 Princeton · Open daily</p>
         </div>
       </div>
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#3d2c1b,#6b5a3a);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag arts">Cinema</span></div>
           <h3 class="card-title">Princeton Garden Theatre</h3>
-          <p class="card-desc">University-owned, run by Renew Theaters — first-run films of real artistic quality plus classics, foreign-language programming and Saturday kids' matinees. NJ.com named it the state's best movie theater.</p>
+          <p class="card-desc">University-owned cinema showing first-run and classic films — named NJ's best movie theater by NJ.com.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 Nassau St · Daily screenings</p>
         </div>
       </div>
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#3d2c1b,#6b5a3a);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag arts">Museum</span><span class="card-tag featured">Landmark</span></div>
           <h3 class="card-title">Morven Museum &amp; Garden</h3>
-          <p class="card-desc">Built in the 1750s by Richard Stockton, a signer of the Declaration, and later New Jersey's first governor's mansion. A National Historic Landmark with rotating exhibitions and gardens worth the trip alone.</p>
+          <p class="card-desc">1750s home of a Declaration signer and later NJ's first governor's mansion, now a National Historic Landmark.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 Stockton St · Wed–Sun, 10 AM–4 PM</p>
         </div>
       </div>
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#1b3a4b,#2e6b7a);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag arts">Museum</span><span class="card-tag featured">Free</span></div>
           <h3 class="card-title">Princeton University Art Museum</h3>
-          <p class="card-desc">One of the strongest university collections in the country, spanning antiquity to the contemporary — and free to visit.</p>
+          <p class="card-desc">One of the strongest university collections in the country, free to visit.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 Princeton University campus</p>
         </div>
       </div>
@@ -417,31 +412,28 @@
     <div class="grid-3">
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#1a3a2a,#2e6b4f);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag outdoors">Trails</span><span class="card-tag featured">Free</span></div>
           <h3 class="card-title">Institute Woods</h3>
-          <p class="card-desc">Nearly 600 acres of woodland and meadow behind the Institute for Advanced Study, with easy trails and some of the best birding in central New Jersey. Open to all, and remarkably under-walked.</p>
+          <p class="card-desc">Nearly 600 acres of woodland behind the Institute for Advanced Study, with easy trails and great birding.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 Behind the Institute for Advanced Study</p>
         </div>
       </div>
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#2c1810,#6b4423);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag outdoors">Historic Park</span></div>
           <h3 class="card-title">Princeton Battlefield State Park</h3>
-          <p class="card-desc">Where Washington won the Battle of Princeton in January 1777, ten days after crossing the Delaware. Open fields, the Thomas Clarke House, and one of the quietest significant places in New Jersey.</p>
+          <p class="card-desc">Where Washington won the Battle of Princeton in January 1777, with the Thomas Clarke House on-site.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 Mercer St · Grounds open daily</p>
         </div>
       </div>
 
       <div class="card animate-in">
-        <div class="card-img" style="background: linear-gradient(135deg,#2d5016,#5a8f29);"></div>
         <div class="card-body">
           <div class="card-tags"><span class="card-tag outdoors">Towpath</span></div>
           <h3 class="card-title">D&amp;R Canal Towpath</h3>
-          <p class="card-desc">Flat, shaded and uninterrupted along the edge of town — the best running or cycling route in Princeton by a wide margin.</p>
+          <p class="card-desc">Flat, shaded, and Princeton's best running or cycling route by a wide margin.</p>
           <p style="font-size:0.78rem;color:var(--sub);">📍 Along the D&amp;R Canal · Open daily</p>
         </div>
       </div>

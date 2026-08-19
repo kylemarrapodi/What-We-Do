@@ -32,33 +32,40 @@
     .city-hero {
       padding: 2.5rem 5% 2rem;
     }
+    .city-hero-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; }
+    .city-hero-main { flex: 1; min-width: 260px; }
     .city-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
     .city-hero .hero-sub { font-size: 0.9rem; margin-bottom: 1rem; }
     .city-hero-meta { font-size: 0.8rem; gap: 1rem; }
 
-    /* Quick stats */
+    /* Quick stats — compact bubbles stacked top-to-bottom, right-aligned in the hero */
     .highlight-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-bottom: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex-shrink: 0;
+      width: 190px;
     }
     .highlight-card {
       background: var(--white);
       border-radius: var(--radius);
-      padding: 1rem 1.1rem;
+      padding: 0.5rem 0.8rem;
       box-shadow: var(--shadow);
-      border-left: 4px solid var(--gold);
+      border-left: 3px solid var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
     }
-    .highlight-card h4 { font-size: 0.88rem; color: var(--navy); margin-bottom: 0.2rem; }
-    .highlight-card p { font-size: 0.78rem; color: var(--sub); }
+    .highlight-card h4 { font-size: 0.74rem; color: var(--navy); margin-bottom: 0; font-weight: 600; line-height: 1.2; }
+    .highlight-card p { display: none; }
     .highlight-card .big-num {
       font-family: 'Playfair Display', serif;
-      font-size: 1.75rem;
+      font-size: 1.3rem;
       color: var(--gold);
       font-weight: 700;
       line-height: 1;
-      margin-bottom: 0.15rem;
+      margin-bottom: 0;
+      flex-shrink: 0;
     }
 
     /* Section padding — tighter */
@@ -84,13 +91,15 @@
     .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border); }
 
     @media (max-width: 900px) {
-      .highlight-strip { grid-template-columns: repeat(3, 1fr); }
+      .city-hero-inner { flex-direction: column; }
+      .highlight-strip { flex-direction: row; width: 100%; }
+      .highlight-card { flex: 1; }
       .two-col { grid-template-columns: 1fr; }
       .content-grid { grid-template-columns: 1fr; }
       .map-sidebar { position: static; }
     }
     @media (max-width: 600px) {
-      .highlight-strip { grid-template-columns: 1fr; }
+      .highlight-strip { flex-direction: column; }
     }
   </style>
 </head>
@@ -135,38 +144,39 @@
 
   <!-- CITY HERO -->
   <section class="city-hero">
-    <div class="section-label">Connecticut</div>
-    <h1>Stamford, <span>CT</span></h1>
-    <p class="hero-sub">From waterfront dining in Harbor Point to world-class theatre in Downtown — Stamford is one of Connecticut's most vibrant cities.</p>
-    <div class="city-hero-meta">
-      <span>📍 Fairfield County, CT</span>
-      <span>🏙️ 135,000+ residents</span>
-      <span>🚆 45 min to NYC by Metro-North</span>
-      <span>🌊 19 miles of shoreline</span>
+    <div class="city-hero-inner">
+      <div class="city-hero-main">
+        <div class="section-label">Connecticut</div>
+        <h1>Stamford, <span>CT</span></h1>
+        <p class="hero-sub">From waterfront dining in Harbor Point to world-class theatre in Downtown — Stamford is one of Connecticut's most vibrant cities.</p>
+        <div class="city-hero-meta">
+          <span>📍 Fairfield County, CT</span>
+          <span>🏙️ 135,000+ residents</span>
+          <span>🚆 45 min to NYC by Metro-North</span>
+          <span>🌊 19 miles of shoreline</span>
+        </div>
+      </div>
+
+      <!-- QUICK STATS -->
+      <div class="highlight-strip">
+        <div class="highlight-card">
+          <div class="big-num">150+</div>
+          <h4>Restaurants</h4>
+        </div>
+        <div class="highlight-card">
+          <div class="big-num">40+</div>
+          <h4>Parks &amp; Trails</h4>
+        </div>
+        <div class="highlight-card">
+          <div class="big-num">8</div>
+          <h4>Neighborhoods</h4>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- QUICK STATS -->
+  <!-- CATEGORY FILTER -->
   <section class="section-sm" style="background:var(--white);">
-    <div class="highlight-strip">
-      <div class="highlight-card">
-        <div class="big-num">150+</div>
-        <h4>Restaurants</h4>
-        <p>From harbor waterfront to hidden Italian gems in Springdale</p>
-      </div>
-      <div class="highlight-card">
-        <div class="big-num">40+</div>
-        <h4>Parks &amp; Trails</h4>
-        <p>Cove Island, Mill River, Bartlett Arboretum, and miles of shoreline</p>
-      </div>
-      <div class="highlight-card">
-        <div class="big-num">8</div>
-        <h4>Neighborhoods</h4>
-        <p>Each with its own character, dining scene, and local vibe</p>
-      </div>
-    </div>
-
-    <!-- Category filter -->
     <div class="category-pills">
       <button class="pill active" data-cat="all">All</button>
       <button class="pill" data-cat="events">🎟 Events</button>
@@ -198,7 +208,7 @@
           </div>
           <div class="event-info">
             <h4>Ja Rule &amp; Ashanti — Summer in the Park</h4>
-            <p>The iconic R&amp;B duo performs together at Mill River Park's free summer concert series. We Heart R&amp;B opens the show.</p>
+            <p>The iconic R&amp;B duo headlines Mill River Park's free summer concert series.</p>
             <div class="event-venue">📍 Mill River Park · Downtown · 5 PM – 10 PM</div>
             <a class="event-link" href="https://heystamford.com" target="_blank" rel="noopener">Event info →</a>
           </div>
@@ -212,7 +222,7 @@
           </div>
           <div class="event-info">
             <h4>Hey Stamford! Food Festival</h4>
-            <p>Two-day culinary event with top food vendors, themed bars, celebrity guests, and live music.</p>
+            <p>Two-day culinary event with top food vendors, themed bars, and live music.</p>
             <div class="event-venue">📍 Mill River Park · Downtown · Aug 1–2</div>
             <a class="event-link" href="https://heystamford.com" target="_blank" rel="noopener">Event info →</a>
           </div>
@@ -226,7 +236,7 @@
           </div>
           <div class="event-info">
             <h4>Lower Summer Street Block Party</h4>
-            <p>Open-street festival with expanded outdoor dining patios, live music, and a community atmosphere. Free.</p>
+            <p>Open-street festival with expanded dining patios and live music. Free.</p>
             <div class="event-venue">📍 Summer St · Downtown · 5 PM – 9 PM</div>
             <a class="event-link" href="https://stamford-downtown.com" target="_blank" rel="noopener">Event info →</a>
           </div>
@@ -240,7 +250,7 @@
           </div>
           <div class="event-info">
             <h4>Stamford Beer, Wine &amp; Spirits Fest</h4>
-            <p>Hundreds of tastings from local and regional producers. Tickets required.</p>
+            <p>Hundreds of tastings from local and regional producers; tickets required.</p>
             <div class="event-venue">📍 Mill River Park · Downtown · 1:30 PM</div>
             <a class="event-link" href="https://stamfordbeerwinespirits.com" target="_blank" rel="noopener">Get tickets →</a>
           </div>
@@ -254,7 +264,7 @@
           </div>
           <div class="event-info">
             <h4>Honey Harvest Festival — Bartlett Arboretum</h4>
-            <p>Live music, vendor marketplace, honey tastings, face painting, and educational bee talks on 93 acres of gardens.</p>
+            <p>Live music, honey tastings, and bee talks across 93 acres of gardens.</p>
             <div class="event-venue">📍 Bartlett Arboretum · North Stamford · 11 AM – 4 PM</div>
             <a class="event-link" href="https://bartlettarboretum.org" target="_blank" rel="noopener">Event info →</a>
           </div>
@@ -268,7 +278,7 @@
           </div>
           <div class="event-info">
             <h4>Jim Henson's Labyrinth in Concert</h4>
-            <p>40th anniversary celebration — live band performs David Bowie's full soundtrack with HD film screening.</p>
+            <p>40th-anniversary screening with a live band performing Bowie's full soundtrack.</p>
             <div class="event-venue">📍 Palace Theatre · Downtown · 8 PM</div>
             <a class="event-link" href="https://palacestamford.org" target="_blank" rel="noopener">Get tickets →</a>
           </div>
@@ -282,7 +292,7 @@
           </div>
           <div class="event-info">
             <h4>That's Amore Italian Festival</h4>
-            <p>Columbus Day weekend Italian heritage celebration with live music, authentic food, family activities over two days.</p>
+            <p>Columbus Day weekend Italian heritage festival with live music and food.</p>
             <div class="event-venue">📍 Mill River Park · Downtown · Oct 11–12, Noon–9 PM</div>
             <a class="event-link" href="https://stamford-downtown.com" target="_blank" rel="noopener">Event info →</a>
           </div>
@@ -296,7 +306,7 @@
           </div>
           <div class="event-info">
             <h4>Downtown Farmers Market</h4>
-            <p>Every Saturday through the season — fresh produce, local vendors, artisan goods, and seasonal specialties.</p>
+            <p>Weekly market with fresh produce, local vendors, and artisan goods.</p>
             <div class="event-venue">📍 Veterans Memorial Park · 130 Atlantic St · All morning</div>
           </div>
           <span class="badge badge-open">Weekly</span>
@@ -360,7 +370,7 @@
           <span class="card-tag dining">Dining · $$$</span>
           <div class="card-title">BarVera Modern Mediterranean</div>
           <div class="card-meta"><span>📍 148 Bedford St · Downtown</span></div>
-          <p class="card-desc">Top Chef Winner Chef Charbel Hayek's Middle Eastern-Mediterranean flagship. Opened 2026. One of Stamford's most exciting new openings.</p>
+          <p class="card-desc">Top Chef winner Charbel Hayek's Middle Eastern-Mediterranean flagship, opened 2026.</p>
         </div>
       </div>
 
@@ -369,7 +379,7 @@
           <span class="card-tag dining">Dining · $$$</span>
           <div class="card-title">The Crab Shell</div>
           <div class="card-meta"><span>📍 Harbor Point · South End</span></div>
-          <p class="card-desc">Stamford's beloved dockside seafood institution. 11 boat slips, outdoor patio, frozen drinks, and a dance band on the patio. Open 35+ years.</p>
+          <p class="card-desc">Beloved dockside seafood institution with boat slips and a patio dance band, open 35+ years.</p>
         </div>
       </div>
 
@@ -378,7 +388,7 @@
           <span class="card-tag dining">Dining · $$</span>
           <div class="card-title">Tiernan's Bar &amp; Restaurant</div>
           <div class="card-meta"><span>📍 187 Main St · Downtown</span></div>
-          <p class="card-desc">Stamford's favorite Irish pub since 2004. Live bands Friday–Saturday, trivia Wednesdays, dart league Tuesdays. Classic pub food, outdoor patio on Main St.</p>
+          <p class="card-desc">Stamford's favorite Irish pub since 2004, with live bands Fri–Sat and a Main St patio.</p>
         </div>
       </div>
 
@@ -387,7 +397,7 @@
           <span class="card-tag dining">Dining · $$$</span>
           <div class="card-title">Prime: An American Kitchen</div>
           <div class="card-meta"><span>📍 78 Southfield Ave · Harbor Point</span></div>
-          <p class="card-desc">Modern American cuisine with raw bar, fresh seafood, waterfront views, and boat accessibility. Jazz brunch Sundays.</p>
+          <p class="card-desc">Modern American waterfront kitchen with a raw bar and Sunday jazz brunch.</p>
         </div>
       </div>
 
@@ -396,7 +406,7 @@
           <span class="card-tag dining">Dining · $$</span>
           <div class="card-title">Flinders Lane</div>
           <div class="card-meta"><span>📍 184 Summer St · Downtown</span></div>
-          <p class="card-desc">Australian-inspired with bold flavors and award-winning cocktails. Daily happy hour 4–6 PM. Known for the spiced pineapple margarita.</p>
+          <p class="card-desc">Australian-inspired kitchen known for award-winning cocktails and daily happy hour.</p>
         </div>
       </div>
 
@@ -405,7 +415,7 @@
           <span class="card-tag dining">Dining · $$</span>
           <div class="card-title">Çka Ka Qëllu</div>
           <div class="card-meta"><span>📍 Downtown</span></div>
-          <p class="card-desc">Modern Albanian cuisine reviewed by the New York Times. Immersive dining with beautiful meze and authentic dishes. A true standout.</p>
+          <p class="card-desc">Modern Albanian cuisine reviewed by the New York Times, known for its meze.</p>
         </div>
       </div>
 
@@ -427,7 +437,7 @@
           <span class="card-tag nightlife">Irish Pub</span>
           <div class="card-title">Tiernan's</div>
           <div class="card-meta"><span>📍 187 Main St · Downtown</span></div>
-          <p class="card-desc">Live bands Friday–Saturday. Trivia with MC Hype on Wednesdays. Dart league Tuesdays. Patio on Main St. Happy hour Mon–Fri 4–7 PM.</p>
+          <p class="card-desc">Live bands Fri–Sat, Wednesday trivia, and a Main St patio.</p>
         </div>
       </div>
 
@@ -436,7 +446,7 @@
           <span class="card-tag nightlife">Cocktail Bar</span>
           <div class="card-title">Bar Rosso</div>
           <div class="card-meta"><span>📍 28 Spring St · Downtown</span></div>
-          <p class="card-desc">High-energy Italian craft cocktail bar with wood-burning beehive oven. Mezzanine bar overlooks the main floor. Extensive Italian wine list.</p>
+          <p class="card-desc">High-energy Italian cocktail bar with a wood-burning oven and mezzanine seating.</p>
         </div>
       </div>
 
@@ -445,7 +455,7 @@
           <span class="card-tag nightlife">Lounge</span>
           <div class="card-title">RIZZ Lounge &amp; Grill</div>
           <div class="card-meta"><span>📍 121 Towne St · Downtown</span></div>
-          <p class="card-desc">Modern chic ambiance, premium cocktails. Karaoke every Thursday night. Live entertainment on weekends.</p>
+          <p class="card-desc">Modern lounge with premium cocktails, Thursday karaoke, and weekend live entertainment.</p>
         </div>
       </div>
 
@@ -513,7 +523,7 @@
           <span class="card-tag arts">Theatre</span>
           <div class="card-title">Palace Theatre</div>
           <div class="card-meta"><span>📍 61 Atlantic St · Downtown</span></div>
-          <p class="card-desc">Historic 1,600-seat theatre originally opened in 1927. Broadway musicals, concerts, and major performances. Recently renovated.</p>
+          <p class="card-desc">Historic 1,600-seat theatre (1927) hosting Broadway shows and major concerts.</p>
         </div>
       </div>
 
@@ -522,7 +532,7 @@
           <span class="card-tag arts">Cinema</span>
           <div class="card-title">Avon Theatre Film Center</div>
           <div class="card-meta"><span>📍 Bedford St · Downtown</span></div>
-          <p class="card-desc">Non-profit dedicated to classic, alternative, and art-house films since 1939. Restored in 2004. Two screens.</p>
+          <p class="card-desc">Non-profit art-house cinema since 1939, restored in 2004.</p>
         </div>
       </div>
 
@@ -531,7 +541,7 @@
           <span class="card-tag arts">Museum</span>
           <div class="card-title">Stamford Museum &amp; Nature Center</div>
           <div class="card-meta"><span>📍 39 Scofieldtown Rd · North Stamford</span></div>
-          <p class="card-desc">80+ acres with nature trails, planetarium, Heckscher Farm, and Bendel Mansion galleries. Family favorite year-round.</p>
+          <p class="card-desc">80+ acres with nature trails, a planetarium, and a working farm.</p>
         </div>
       </div>
 
@@ -540,7 +550,7 @@
           <span class="card-tag arts">Theatre</span>
           <div class="card-title">Curtain Call</div>
           <div class="card-meta"><span>📍 1349 Newfield Ave · Springdale</span></div>
-          <p class="card-desc">Fairfield County's longest-running non-profit theatre. 12+ productions annually, annual free outdoor Shakespeare. 30,000+ patrons per year.</p>
+          <p class="card-desc">Fairfield County's longest-running non-profit theatre, staging 12+ shows a year.</p>
         </div>
       </div>
 
@@ -549,7 +559,7 @@
           <span class="card-tag arts">Gardens</span>
           <div class="card-title">Bartlett Arboretum</div>
           <div class="card-meta"><span>📍 151 Brookdale Rd · North Stamford</span></div>
-          <p class="card-desc">93-acre living classroom with 13 gardens, champion trees, native habitats, summer concerts, and the Honey Harvest Festival.</p>
+          <p class="card-desc">93-acre arboretum with 13 gardens and summer concerts.</p>
         </div>
       </div>
 
@@ -558,7 +568,7 @@
           <span class="card-tag arts">Gallery</span>
           <div class="card-title">Yankell Legacy Gallery</div>
           <div class="card-meta"><span>📍 61 Studio Court</span></div>
-          <p class="card-desc">Fine art gallery in the historic stone studio of Gutzon Borglum — the sculptor of Mount Rushmore — built in 1911. By appointment.</p>
+          <p class="card-desc">Fine art gallery in sculptor Gutzon Borglum's 1911 stone studio, by appointment.</p>
         </div>
       </div>
 
@@ -576,7 +586,7 @@
           <span class="card-tag outdoors">Park</span>
           <div class="card-title">Mill River Park</div>
           <div class="card-meta"><span>📍 Downtown</span></div>
-          <p class="card-desc">Stamford's "mini Central Park" — 19 miles of shoreline access, summer concerts, the Nissen Carousel, movie nights, and year-round programming.</p>
+          <p class="card-desc">Stamford's "mini Central Park," with shoreline access, summer concerts, and a historic carousel.</p>
         </div>
       </div>
 
@@ -585,7 +595,7 @@
           <span class="card-tag outdoors">Waterfront</span>
           <div class="card-title">Cove Island Park</div>
           <div class="card-meta"><span>📍 Shippan</span></div>
-          <p class="card-desc">Paved loop trail, beach access, marinas, and picnic areas on Long Island Sound. One of Stamford's most scenic parks.</p>
+          <p class="card-desc">Scenic Long Island Sound park with a paved loop trail and beach access.</p>
         </div>
       </div>
 
@@ -594,7 +604,7 @@
           <span class="card-tag outdoors">Trails</span>
           <div class="card-title">Mianus River State Park</div>
           <div class="card-meta"><span>📍 North Stamford</span></div>
-          <p class="card-desc">Popular hiking and mountain biking. Mianus Maze Trail is a 5-mile moderate loop. Network of fire roads and single-track.</p>
+          <p class="card-desc">Popular hiking and biking park, with the 5-mile Mianus Maze Trail loop.</p>
         </div>
       </div>
 
