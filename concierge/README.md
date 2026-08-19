@@ -65,6 +65,28 @@ in `script.js` (`SHARED_SEARCH_TREE`, `PANEL_EVENTS`, `LIVE_MUSIC`) and inline i
 each page. There's no backend. The "Suggest a Place / Suggest an Event" forms
 don't submit anywhere; they just swap in a thank-you message client-side.
 
+**Exception — Princeton varsity home games are live, not hardcoded.**
+`scripts/fetch-princeton-sports.mjs` pulls every upcoming home game, for every
+Princeton varsity sport, straight from Princeton Athletics' own public JSON API
+(`goprincetontigers.com/api/v2.1/EventsResults` — no key needed) and writes
+`data/princeton-sports.json`. `princeton/index.html` fetches that file at
+runtime and renders the "Upcoming Home Games" section from it — so as
+Princeton's own schedule changes, the site updates automatically, with no one
+hand-editing event data. `.github/workflows/update-princeton-sports.yml` (repo
+root) re-runs the script daily and commits the refreshed data.
+
+To refresh it manually: `node concierge/scripts/fetch-princeton-sports.mjs`
+
+**Not automated yet:** non-sports town events (festivals, concerts, farmers
+markets, etc., for Princeton or anywhere else) are still hand-curated in
+`PANEL_EVENTS`, same as every other location. The likely real sources —
+`experienceprinceton.org/princeton-events` and `princetonol.com/events` — don't
+expose the same kind of clean JSON API Princeton Athletics does (the first
+renders its listings client-side via JS, the second is a classic day-by-day
+calendar rather than a flat feed), so automating those would mean either a
+headless-browser scraper or a more involved per-day crawl. Worth doing, but a
+separate piece of work from the sports feed above.
+
 ## The left panel
 
 Both layouts — the home page's split view and the injected side panel on every

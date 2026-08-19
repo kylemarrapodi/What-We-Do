@@ -70,6 +70,19 @@
     @media (max-width: 600px) {
       .highlight-strip { grid-template-columns: 1fr; }
     }
+
+    /* Live sports events (fetched at runtime from data/princeton-sports.json) */
+    .events-list { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 0.75rem; }
+    .event-row { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 0.85rem 1rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .event-date-badge { background: var(--gold); color: var(--navy); border-radius: 6px; padding: 0.3rem 0.55rem; text-align: center; flex-shrink: 0; min-width: 44px; }
+    .event-date-badge .month { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1; }
+    .event-date-badge .day { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; line-height: 1.1; }
+    .event-info h4 { font-size: 0.88rem; color: var(--navy); margin-bottom: 0.2rem; }
+    .event-info p { font-size: 0.77rem; color: var(--sub); margin: 0; line-height: 1.45; }
+    .event-info a { color: var(--navy); font-weight: 600; text-decoration: none; }
+    .event-info a:hover { text-decoration: underline; }
+    .live-badge { display:inline-flex; align-items:center; gap:0.35rem; font-size:0.7rem; font-weight:600; color:#1e6631; background:#e6f4ea; border-radius:4px; padding:0.2rem 0.5rem; margin-left:0.6rem; vertical-align:middle; }
+    .live-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:#2ba84a; display:inline-block; }
   </style>
 </head>
 <body data-page-location="Princeton" data-music-key="princeton">
@@ -409,6 +422,15 @@
     </div>
   </section>
 
+  <section class="section" style="background:var(--white);">
+    <h2 class="section-title">Upcoming Home Games<span class="live-badge">Live</span></h2>
+    <hr class="section-divider" />
+    <div class="events-list" id="princeton-sports-events">
+      <p style="font-size:0.82rem;color:var(--sub);">Loading upcoming games…</p>
+    </div>
+    <p style="font-size:0.72rem;color:var(--sub);">Pulled automatically from Princeton Athletics' own schedule — every varsity home game, no manual updates needed.</p>
+  </section>
+
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
@@ -433,5 +455,42 @@
 
 </div>
 <script src="../script.js"></script>
+<script>
+/* ── LIVE PRINCETON SPORTS: fetches data/princeton-sports.json (regenerated on
+   a schedule by scripts/fetch-princeton-sports.mjs + the update-princeton-
+   sports GitHub Action) instead of hand-typed events — every varsity home
+   game shows up automatically as Princeton Athletics updates its schedule. ── */
+(function () {
+  const container = document.getElementById('princeton-sports-events');
+  if (!container) return;
+
+  fetch('../data/princeton-sports.json')
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (data) {
+      const events = (data.events || []).slice(0, 8);
+      if (!events.length) {
+        container.innerHTML = '<p style="font-size:0.82rem;color:var(--sub);">No upcoming home games found.</p>';
+        return;
+      }
+      container.innerHTML = events.map(function (ev) {
+        const opponent = ev.opponent ? 'vs. ' + ev.opponent : '';
+        const linkOpen = ev.ticketUrl ? '<a href="' + ev.ticketUrl + '" target="_blank" rel="noopener">' : '';
+        const linkClose = ev.ticketUrl ? '</a>' : '';
+        return (
+          '<div class="event-row">' +
+            '<div class="event-date-badge"><div class="month">' + ev.mo + '</div><div class="day">' + ev.dy + '</div></div>' +
+            '<div class="event-info">' +
+              '<h4>' + linkOpen + ev.sport + ' ' + opponent + linkClose + '</h4>' +
+              '<p>' + (ev.time ? ev.time + ' · ' : '') + ev.location + '</p>' +
+            '</div>' +
+          '</div>'
+        );
+      }).join('');
+    })
+    .catch(function () {
+      container.innerHTML = '<p style="font-size:0.82rem;color:var(--sub);">Live schedule temporarily unavailable.</p>';
+    });
+})();
+</script>
 </body>
 </html>

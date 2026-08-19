@@ -1,0 +1,36 @@
+name: Update Princeton sports events
+
+on:
+  schedule:
+    # 09:00 UTC daily (~5am ET) — Princeton Athletics' own schedule rarely
+    # changes intraday, so once a day is enough to stay current.
+    - cron: '0 9 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch latest Princeton Athletics home games
+        run: node concierge/scripts/fetch-princeton-sports.mjs
+
+      - name: Commit and push if the data changed
+        run: |
+          git config user.name "concierge-events-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet -- concierge/data/princeton-sports.json; then
+            echo "No changes to Princeton sports data."
+          else
+            git add concierge/data/princeton-sports.json
+            git commit -m "Auto-update Princeton sports events"
+            git push
+          fi
