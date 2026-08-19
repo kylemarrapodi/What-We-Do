@@ -6,8 +6,10 @@
   <title>New Jersey — The Concierge</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     html, body { height: 100%; overflow: hidden; }
+    .nb-label { background: rgba(255,255,255,0.92); border: none; box-shadow: 0 1px 4px rgba(0,0,0,0.2); font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600; color: var(--navy); }
     .page-wrap {
       position: fixed;
       top: 68px; left: 0; right: 0; bottom: 0;
@@ -250,13 +252,8 @@
       <!-- Sidebar -->
       <div>
         <div class="map-embed-wrap" style="margin-bottom:1.25rem;">
-          <iframe
-            title="New Jersey Map"
-            src="https://maps.google.com/maps?q=New+Jersey,+USA&output=embed&z=8"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
+          <div id="nj-map" style="height:320px;"></div>
+          <p style="font-size:0.7rem;color:var(--sub);padding:0.5rem 0.75rem 0;">Hover a place to preview, click to explore. Map data &copy; OpenStreetMap contributors.</p>
         </div>
 
         <div class="sidebar-box">
@@ -343,5 +340,15 @@
 </div>
 
 <script src="../script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../interactive-map.js"></script>
+<script>
+initCityBoundaryMap('nj-map', {
+  center: [39.9, -74.3],
+  zoom: 8,
+  boundaryUrl: '../data/new-jersey-places.geojson',
+  onClick: function (f) { window.location.href = f.properties.url; },
+});
+</script>
 </body>
 </html>

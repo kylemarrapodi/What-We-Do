@@ -1,0 +1,33 @@
+{
+  "source": "Center points are real OpenStreetMap coordinates found via Nominatim, all located within Princeton's real administrative boundary: Witherspoon-Jackson and Western Section are actual place=neighbourhood nodes in OSM; Princeton University's center is the amenity=university relation's centroid (used to represent the 'University' campus neighborhood); Palmer Square's center is OSM's landuse=retail feature for the square itself. None of Princeton's informal neighborhoods have official boundary polygons anywhere in OSM, so the regions shown on the map are computed (nearest-point / Voronoi) from these real centers and clipped to Princeton's real city boundary — they are a reasonable approximation, not surveyed lines.",
+  "neighborhoods": [
+    {
+      "id": "palmer-square",
+      "name": "Palmer Square",
+      "lat": 40.3501906,
+      "lon": -74.661098,
+      "url": "palmer-square/index.html"
+    },
+    {
+      "id": "witherspoon-jackson",
+      "name": "Witherspoon-Jackson",
+      "lat": 40.3562156,
+      "lon": -74.6647904,
+      "url": "witherspoon-jackson/index.html"
+    },
+    {
+      "id": "university",
+      "name": "University",
+      "lat": 40.3386752,
+      "lon": -74.6583655,
+      "url": "university/index.html"
+    },
+    {
+      "id": "western-section",
+      "name": "Western Section",
+      "lat": 40.3499061,
+      "lon": -74.6717332,
+      "url": "western-section/index.html"
+    }
+  ]
+}
