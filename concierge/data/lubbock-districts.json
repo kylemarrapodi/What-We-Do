@@ -1,0 +1,26 @@
+{
+  "source": "Center points: Depot District uses a real OpenStreetMap POI named 'Depot District Arts & Entertainment' (way 461600305, on 19th Street) — an actual place=* style feature tagged with that district name in OSM. Tech District and Historic District have no dedicated OSM neighbourhood/place node, so each is anchored to a real, verifiable landmark actually located within that district (confirmed against this site's own researched addresses): Tech District uses the Texas Tech University campus centroid (OSM way 460896580, 2500 Broadway) — matches the district's own copy about the 1,839-acre TTU campus; Historic District uses The Buddy Holly Hall of Performing Arts (OSM way 1067756660, 1300 Mac Davis Ln) — the exact address already cited in this site's Historic District page. All coordinates are real, geocoded locations. The REGIONS shown on the map are computed (nearest-point / Voronoi) from these real points and clipped to Lubbock's real city boundary — Lubbock's informal districts have no official boundary polygons anywhere public, so the shapes are a reasonable approximation, not surveyed lines.",
+  "neighborhoods": [
+    {
+      "id": "depot-district",
+      "name": "Depot District",
+      "lat": 33.5781346,
+      "lon": -101.8447674,
+      "url": "depot-district/index.html"
+    },
+    {
+      "id": "tech-district",
+      "name": "Tech District",
+      "lat": 33.5937526,
+      "lon": -101.8995955,
+      "url": "tech-district/index.html"
+    },
+    {
+      "id": "historic-district",
+      "name": "Historic District",
+      "lat": 33.5908806,
+      "lon": -101.8495622,
+      "url": "historic-district/index.html"
+    }
+  ]
+}

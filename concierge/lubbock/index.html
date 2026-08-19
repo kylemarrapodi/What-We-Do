@@ -6,8 +6,10 @@
   <title>Lubbock, TX — The Concierge</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     html, body { height: 100%; overflow: hidden; }
+    .nb-label { background: rgba(255,255,255,0.92); border: none; box-shadow: 0 1px 4px rgba(0,0,0,0.2); font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600; color: var(--navy); }
 
     .page-wrap {
       position: fixed;
@@ -784,15 +786,9 @@
   <div class="section" style="padding-top: 1rem; padding-bottom: 2rem;">
     <h3 class="section-title" style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--sub); font-weight: 600; letter-spacing: 0.04em;">MAP</h3>
     <div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border);">
-      <iframe
-        title="Lubbock, TX"
-        src="https://maps.google.com/maps?q=Lubbock,+TX&output=embed&z=12"
-        style="display:block; width:100%; height:260px; border:none;"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+      <div id="lubbock-map" style="height:380px;"></div>
     </div>
+    <p style="font-size:0.7rem;color:var(--sub);margin-top:0.5rem;">Hover a district to preview, click to explore. District regions are computed from real center points (Lubbock has no official district boundary lines) — see <a href="../data/lubbock-districts.json" target="_blank" rel="noopener" style="color:var(--sub);text-decoration:underline;">data source</a>. Map data &copy; OpenStreetMap contributors.</p>
   </div>
   <!-- LIVE MUSIC (rendered by initLiveMusic in script.js) -->
   <section class="section cat-section" data-cat="music" id="live-music" style="background:var(--mist);"></section>
@@ -841,5 +837,15 @@
 </div><!-- /.page-wrap -->
 
 <script src="../script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../interactive-map.js"></script>
+<script>
+initNeighborhoodMap('lubbock-map', {
+  center: [33.58, -101.88],
+  zoom: 11,
+  boundaryUrl: '../data/lubbock-boundary.geojson',
+  neighborhoodsUrl: '../data/lubbock-districts.json',
+});
+</script>
 </body>
 </html>
