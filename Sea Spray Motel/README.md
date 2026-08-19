@@ -8,17 +8,24 @@ Recreated locally from `sea-spray-motel-code.docx` (exported from work email on 
   — the Concierge project's own Beach Haven page — instead of a separate, duplicated guide page.
 - styles.css
 - script.js
-- seaspraylogo_clean.png — placeholder logo (generated). Real sign photos are in
-  `photos/` (`sign logo.jpg` etc.) for reference, but not currently used on the site.
-- photos/ — 8 placeholder photos (generated), matching the site's color palette
-
-## About the placeholder images
-The original Word doc only contained code, no real photos. I generated simple branded
-placeholders (labeled "Bedroom", "Pool", "Exterior", etc.) so the site isn't full of
-broken image icons. Swap these out with real photos whenever you have them — same
-filenames, so no HTML changes needed:
-
-- `photos/bathroom1.jpg`, `photos/bathroom2.jpg` — still placeholders, no real bathroom photos sourced yet
+- seaspraylogo.svg — hand-built vector logo (inlined directly into index.html's hero), referencing
+  the real sign photos in `photos/` (`sign logo.jpg`, `sign logo 3.jpg`). Replaces the earlier
+  generated placeholder / raster crop.
+- photos/ — real photos throughout:
+  - `bedroom1-3.jpg`, `living.jpg`, `exterior.jpg`, `pool.jpg` — original real photos (OTA-sourced)
+  - `bathroom1.jpg`, `bathroom2.jpg`, `bathroom3.jpg`, `bathroom4.jpg` — real bathroom photos
+    (bathroom1/2 replace what used to be generated placeholders)
+  - `room-single1-3.jpg`, `room-double1-2.jpg`, `room-kitchenette1-3.jpg`, `kitchen1.jpg` —
+    real room-variety photos
+  - `exterior2-3.jpg`, `exterior-aerial.jpg`, `beach-aerial.jpg` — real exterior/aerial photos,
+    the last one showing the property and the beach together
+  - `pool2.jpg` — real, sharper pool photo (user-provided); now the featured pool photo,
+    `pool.jpg` (the older, lower-resolution wide shot) kept in the gallery but shown ~80%
+    smaller (`.gallery-item-mini` in styles.css)
+  - `sign logo.jpg`, `sign logo 2.jpg`, `sign logo 3.jpg` — real sign photos, used as the
+    reference for `seaspraylogo.svg`, not shown in the gallery itself
+  - All real photos above (except the local uploads) sourced from the motel's own listing
+    on `seaspraymotellongbeach.com`
 
 ## Running locally
 No build step needed — just open index.html in a browser, or serve the folder:
