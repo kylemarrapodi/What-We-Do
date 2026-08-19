@@ -22,7 +22,44 @@
   function baseMap(containerId, center, zoom) {
     const map = L.map(containerId, { scrollWheelZoom: false }).setView(center, zoom);
     L.tileLayer(TILE_URL, { attribution: TILE_ATTRIBUTION, maxZoom: 19 }).addTo(map);
+    attachCtrlScrollZoom(map);
     return map;
+  }
+
+  // ── Regular scroll over the map lets the PAGE scroll, same as before.
+  // Ctrl/Cmd + scroll zooms the map instead (and only the map — the page
+  // doesn't move). A brief hint appears on a plain scroll so it's
+  // discoverable, same pattern Google Maps embeds use. ── */
+  function attachCtrlScrollZoom(map) {
+    const container = map.getContainer();
+    container.style.position = container.style.position || 'relative';
+
+    const hint = document.createElement('div');
+    hint.textContent = (navigator.platform.indexOf('Mac') !== -1 ? '⌘' : 'Ctrl') + ' + scroll to zoom the map';
+    hint.style.cssText =
+      'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;' +
+      'background:rgba(15,22,38,0.55);color:#fff;font:600 0.85rem Inter,sans-serif;' +
+      'z-index:1000;opacity:0;pointer-events:none;transition:opacity 0.15s;text-align:center;padding:1rem;';
+    container.appendChild(hint);
+
+    let hintTimer = null;
+    container.addEventListener(
+      'wheel',
+      function (e) {
+        if (e.ctrlKey || e.metaKey) {
+          e.preventDefault();
+          const delta = e.deltaY < 0 ? 1 : -1;
+          map.setZoom(map.getZoom() + delta, { animate: true });
+        } else {
+          hint.style.opacity = '1';
+          clearTimeout(hintTimer);
+          hintTimer = setTimeout(function () {
+            hint.style.opacity = '0';
+          }, 700);
+        }
+      },
+      { passive: false }
+    );
   }
 
   // ── Ray-casting point-in-polygon. `poly` is a GeoJSON-style ring:
