@@ -8,7 +8,8 @@ Recreated locally from `sea-spray-motel-code.docx` (exported from work email on 
   — the Concierge project's own Beach Haven page — instead of a separate, duplicated guide page.
 - styles.css
 - script.js
-- seaspraylogo_clean.png — real logo, cropped from `photos/sign logo.jpg`
+- seaspraylogo_clean.png — placeholder logo (generated). Real sign photos are in
+  `photos/` (`sign logo.jpg` etc.) for reference, but not currently used on the site.
 - photos/ — 8 placeholder photos (generated), matching the site's color palette
 
 ## About the placeholder images
