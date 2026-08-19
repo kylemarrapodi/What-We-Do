@@ -38,21 +38,23 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 padding: 0 5%;
-background: rgba(26, 58, 92, 0.97);
+background: rgba(255, 255, 255, 0.96);
+box-shadow: 0 1px 10px rgba(26, 58, 92, 0.12);
 backdrop-filter: blur(8px);
 }
 .nav-logo {
-font-family: 'Playfair Display', serif;
-font-size: 1.4rem;
-color: var(--white);
+font-family: 'Pacifico', cursive;
+font-size: 2rem;
+color: var(--navy);
 text-decoration: none;
-letter-spacing: 0.03em;
+letter-spacing: 0.01em;
 flex-shrink: 0;
+line-height: 1;
 }
-.nav-logo span { color: #7ec8e3; }
+.nav-logo span { color: var(--coral); }
 .nav-links { display: flex; gap: 2rem; list-style: none; }
 .nav-links a {
-color: rgba(255,255,255,0.85);
+color: var(--dark);
 text-decoration: none;
 font-size: 0.9rem;
 font-weight: 500;
@@ -60,8 +62,8 @@ letter-spacing: 0.04em;
 text-transform: uppercase;
 transition: color 0.2s;
 }
-.nav-links a:hover { color: #7ec8e3; }
-.nav-links a.active { color: #7ec8e3; }
+.nav-links a:hover { color: var(--ocean); }
+.nav-links a.active { color: var(--ocean); }
 .nav-book {
 background: var(--coral);
 color: var(--white) !important;
@@ -82,8 +84,8 @@ margin-top: var(--nav-h);
 background: linear-gradient(160deg, var(--navy) 0%, #1e4a72 100%);
 display: flex;
 flex-direction: column;
-justify-content: center;
-padding: 3rem 5% 3rem 6%;
+justify-content: flex-start;
+padding: 2rem 5% 3rem 6%;
 overflow-y: auto;
 }
 .home-right {
@@ -591,7 +593,8 @@ border: none;
 padding: 4px;
 z-index: 200;
 }
-.nav-hamburger span { display: block; width: 24px; height: 2px; background: white; border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+.nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); border-radius: 2px; transition: transform 0.3s, opacity 0.3s, background 0.2s; }
+.nav-hamburger.open span { background: white; }
 .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
