@@ -416,7 +416,28 @@ nav {
 .card-tag.arts     { background: #e0f0ff; color: #1a5276; }
 .card-tag.outdoors { background: #e6f4ea; color: #1e6631; }
 .card-tag.shopping { background: #fef9e7; color: #7d6608; }
+.card-tag.lodging  { background: #e0f7fa; color: #00695c; }
 .card-tag.featured { background: var(--gold); color: var(--navy); }
+
+/* ── VIEWER BANNER (shown when arriving from a partner site's own guide link) ── */
+.viewer-banner {
+  background: var(--navy);
+  color: rgba(255,255,255,0.92);
+  padding: 0.7rem 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  text-align: center;
+}
+.viewer-banner a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+}
+.viewer-banner a:hover { text-decoration: underline; }
 
 .card-title {
   font-family: 'Playfair Display', serif;

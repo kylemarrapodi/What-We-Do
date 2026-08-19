@@ -66,6 +66,8 @@
 
 <div class="page-wrap">
 
+  <div id="viewer-banner-slot"></div>
+
   <div class="breadcrumb">
     <div class="breadcrumb-inner">
       <a href="../../index.html">Home</a><span>›</span>
@@ -171,11 +173,27 @@
         </div>
 
         <!-- Dining -->
+        <div class="section-header"><h2 class="section-title">Where to Stay</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in" data-subcat="motel">
+            <div class="card-img" style="background:linear-gradient(135deg,#1a3a5c,#2a7fbf);"></div>
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag lodging">Motel</span><span class="card-tag featured">9.2 · Excellent</span></div>
+              <h3 class="card-title">Sea Spray Motel</h3>
+              <p class="card-desc">Family-owned motel a few blocks from the beach, with 52 rooms and efficiencies, a heated pool, and free parking right on the bay. Simple, comfortable, and walkable to the center of town — a longtime favorite for guests who want an easy, no-fuss LBI stay.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 2600 S. Bay Ave · Heated pool · Free parking</p>
+            </div>
+          </div>
+
+        </div>
+
         <div class="section-header"><h2 class="section-title">Dining & Nightlife</h2></div>
         <hr class="section-divider" />
         <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
 
-          <div class="card animate-in">
+          <div class="card animate-in" data-subcat="seafood">
             <div class="card-img" style="background:linear-gradient(135deg,#7c3c0a,#e07b39);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag dining">Seafood BYOB</span><span class="card-tag featured">Top Rated</span></div>
@@ -185,7 +203,7 @@
             </div>
           </div>
 
-          <div class="card animate-in">
+          <div class="card animate-in" data-subcat="new-american">
             <div class="card-img" style="background:linear-gradient(135deg,#1c3a1c,#3d7a3d);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag dining">American BYOB</span><span class="card-tag featured">Local Favorite</span></div>
@@ -195,7 +213,7 @@
             </div>
           </div>
 
-          <div class="card animate-in">
+          <div class="card animate-in" data-subcat="sushi">
             <div class="card-img" style="background:linear-gradient(135deg,#3a1c0a,#8c4a1e);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag dining">Sushi BYOB</span></div>
@@ -205,7 +223,7 @@
             </div>
           </div>
 
-          <div class="card animate-in">
+          <div class="card animate-in" data-subcat="bar">
             <div class="card-img" style="background:linear-gradient(135deg,#0d0d2b,#1a1a5e);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag nightlife">Bar</span><span class="card-tag featured">Iconic</span></div>
@@ -215,7 +233,7 @@
             </div>
           </div>
 
-          <div class="card animate-in">
+          <div class="card animate-in" data-subcat="diner">
             <div class="card-img" style="background:linear-gradient(135deg,#1a3050,#2c6fa5);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag dining">Breakfast</span></div>
@@ -225,7 +243,7 @@
             </div>
           </div>
 
-          <div class="card animate-in">
+          <div class="card animate-in" data-subcat="bar">
             <div class="card-img" style="background:linear-gradient(135deg,#3a0a2a,#8c3060);"></div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag nightlife">Bar & Grill</span></div>
@@ -385,5 +403,28 @@
 
 </div>
 <script src="../../script.js"></script>
+<script>
+/* ── PARTNER-SITE VIEWER: hides "alike" listings and shows a way back when
+   arriving via a partner business's own site link (e.g. Sea Spray Motel's
+   "LBI Guide" nav item), instead of a plain, un-filtered visit. ── */
+(function () {
+  const VIEWERS = {
+    'motel': { name: 'Sea Spray Motel', back: '../../../Sea%20Spray%20Motel/index.html', subcat: 'motel' }
+  };
+  const key = new URLSearchParams(location.search).get('viewer');
+  const viewer = key && VIEWERS[key];
+  if (!viewer) return;
+
+  document.querySelectorAll('[data-subcat="' + viewer.subcat + '"]').forEach(function (card) {
+    card.style.display = 'none';
+  });
+
+  const slot = document.getElementById('viewer-banner-slot');
+  if (slot) {
+    slot.innerHTML = '<div class="viewer-banner">Viewing via <strong>' + viewer.name +
+      '</strong> — curated for our guests &nbsp;·&nbsp; <a href="' + viewer.back + '">← Back to ' + viewer.name + '</a></div>';
+  }
+})();
+</script>
 </body>
 </html>

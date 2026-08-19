@@ -3,7 +3,9 @@
 Recreated locally from `sea-spray-motel-code.docx` (exported from work email on 2026-08-17).
 
 ## Files
-- index.html, rooms.html, rates.html, amenities.html, contact.html, gallery.html, lbi.html
+- index.html, rooms.html, rates.html, amenities.html, contact.html, gallery.html
+- The "LBI Guide" nav link now goes straight to `../concierge/lbi/beach-haven/index.html?viewer=motel`
+  — the Concierge project's own Beach Haven page — instead of a separate, duplicated guide page.
 - styles.css
 - script.js
 - seaspraylogo_clean.png — real logo, cropped from `photos/sign logo.jpg`
