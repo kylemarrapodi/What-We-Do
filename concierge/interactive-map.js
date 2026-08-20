@@ -123,7 +123,11 @@
           onEachFeature: function (feature, lyr) {
             lyr.on('mouseover', function () {
               setFocused(feature, lyr);
-              lyr.bindTooltip(feature.properties.name + ' — click to explore', { sticky: true }).openTooltip();
+              // Single-town pages (a town's own boundary on its own page) pass
+              // tooltipSuffix: '' so the tooltip doesn't invite a click that
+              // goes nowhere; every existing multi-place map keeps the default.
+              var suffix = opts.tooltipSuffix !== undefined ? opts.tooltipSuffix : ' — click to explore';
+              lyr.bindTooltip(feature.properties.name + suffix, { sticky: true }).openTooltip();
             });
             lyr.on('mouseout', function () {
               setFocused(null);
