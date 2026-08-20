@@ -345,6 +345,7 @@
   <a href="princeton/index.html">Princeton, NJ</a>
   <a href="manhattan/index.html">Manhattan, NY</a>
   <a href="queens/index.html">Queens, NY</a>
+  <a href="brooklyn/index.html">Brooklyn, NY</a>
 </div>
 
 <!-- FULL-SCREEN SPLIT -->
@@ -466,6 +467,7 @@ const LOCATIONS = {
       { label:'Princeton, NJ', tag:'live', left:34, top:47, url:'princeton/index.html' },
       { label:'Manhattan, NY', tag:'live', left:40, top:44, url:'manhattan/index.html' },
       { label:'Queens, NY', tag:'live', left:42, top:45, url:'queens/index.html' },
+      { label:'Brooklyn, NY', tag:'live', left:41, top:47, url:'brooklyn/index.html' },
     ]
   },
 
@@ -495,6 +497,7 @@ const LOCATIONS = {
       { label:'Princeton, NJ', tag:'live', left:34, top:47, url:'princeton/index.html' },
       { label:'Manhattan, NY', tag:'live', left:40, top:44, url:'manhattan/index.html' },
       { label:'Queens, NY', tag:'live', left:42, top:45, url:'queens/index.html' },
+      { label:'Brooklyn, NY', tag:'live', left:41, top:47, url:'brooklyn/index.html' },
     ]
   },
 
@@ -710,6 +713,7 @@ const LOCATIONS = {
     eventsLink: { href: 'new-york/index.html', text: 'New York Guide →' },
     events: [
       { mo:'AUG', dy:'23',   tag:'events', tagLabel:'Tennis',   name:'US Open',                  meta:'Aug 23 – Sep 13 · Billie Jean King NTC · Flushing Meadows, Queens', url:'queens/index.html#corona', ticket:'https://www.usopen.org' },
+      { mo:'SEP', dy:'7',    tag:'events', tagLabel:'Carnival', name:'West Indian American Day Carnival', meta:'Labor Day · Eastern Parkway, Brooklyn · from 10 AM', url:'brooklyn/index.html#prospect-heights', ticket:'https://wiadcacarnival.org' },
       { mo:'SEP', dy:'17–27',tag:'events', tagLabel:'Festival', name:'Feast of San Gennaro',     meta:'100th feast · Mulberry St, Little Italy', url:'manhattan/index.html#little-italy',      ticket:'https://sangennaronyc.org' },
       { mo:'OCT', dy:'16–18',tag:'arts',   tagLabel:'Open House',name:'Open House New York Weekend', meta:'300+ sites citywide · 24th annual',   url:'manhattan/index.html',                    ticket:'https://ohny.org/festival' },
       { mo:'OCT', dy:'31',   tag:'events', tagLabel:'Parade',   name:'Village Halloween Parade', meta:'Sixth Ave, Canal to 15th St · 7 PM',    url:'manhattan/index.html#greenwich-village',  ticket:'https://halloween-nyc.com' },
@@ -720,6 +724,7 @@ const LOCATIONS = {
     pins: [
       { label:'Manhattan', tag:'live', left:58, top:80, url:'manhattan/index.html' },
       { label:'Queens', tag:'live', left:63, top:81, url:'queens/index.html' },
+      { label:'Brooklyn', tag:'live', left:60, top:84, url:'brooklyn/index.html' },
     ]
   },
 
@@ -818,6 +823,39 @@ const LOCATIONS = {
       { label:'Forest Hills',     tag:'live', left:46, top:33, url:'queens/index.html#forest-hills' },
       { label:'Ridgewood',        tag:'live', left:24, top:40, url:'queens/index.html#ridgewood' },
       { label:'Rockaway Beach',   tag:'live', left:57, top:83, url:'queens/index.html#rockaway-beach' },
+    ]
+  },
+
+  'Brooklyn': {
+    mapSrc: 'https://maps.google.com/maps?q=Brooklyn,+New+York,+NY&output=embed&z=12',
+    mapLabel: 'Brooklyn, NY',
+    eventsLabel: 'Happening in Brooklyn',
+    eventsLink: { href: 'brooklyn/index.html', text: 'Brooklyn Guide →' },
+    events: [
+      { mo:'AUG', dy:'29',   tag:'events',  tagLabel:'Last Call', name:'Brooklyn Brewery — farewell to N 11th St', meta:'Final day at the old home · live music · 1 Wythe Ave opens this fall', url:'brooklyn/index.html#williamsburg', ticket:'https://brooklynbrewery.com' },
+      { mo:'SEP', dy:'7',    tag:'events',  tagLabel:'Carnival',  name:'West Indian American Day Carnival', meta:'Labor Day · Eastern Parkway from 10 AM · carnival week Aug 27–Sep 7', url:'brooklyn/index.html#prospect-heights', ticket:'https://wiadcacarnival.org' },
+      { mo:'SEP', dy:'1–6',  tag:'events',  tagLabel:'Baseball',  name:'Cyclones final homestand',  meta:'vs Frederick Keys · Maimonides Park, Coney Island', url:'brooklyn/index.html#coney-island', ticket:'https://www.milb.com/brooklyn' },
+      { mo:'SEP', dy:'14',   tag:'arts',    tagLabel:'Concert',   name:'Charli xcx',                meta:'Sep 14–15 · Barclays Center',        url:'brooklyn/index.html#park-slope', ticket:'https://www.barclayscenter.com/events' },
+      { mo:'SEP', dy:'19',   tag:'arts',    tagLabel:'Puppets',   name:'Buffalo herd parade — St. Ann\'s', meta:'Sep 19–20 · 50 life-size puppets through Downtown Brooklyn', url:'brooklyn/index.html#downtown-brooklyn', ticket:'https://stannswarehouse.org' },
+      { mo:'SEP', dy:'20–28',tag:'arts',    tagLabel:'Book Fest', name:'Brooklyn Book Festival',    meta:'Festival Day Sep 27 · eight stages around Borough Hall', url:'brooklyn/index.html#downtown-brooklyn', ticket:'https://brooklynbookfestival.org' },
+      { mo:'SEP', dy:'24',   tag:'arts',    tagLabel:'Concert',   name:'Phoebe Bridgers',           meta:'Sep 24–26 · w/ Alex G · Barclays Center', url:'brooklyn/index.html#park-slope', ticket:'https://www.barclayscenter.com/events' },
+      { mo:'SEP', dy:'27',   tag:'arts',    tagLabel:'Theater',   name:'Kramer/Fauci — Daniel Fish', meta:'Sep 27 – Oct 24 · St. Ann\'s Warehouse, DUMBO', url:'brooklyn/index.html#dumbo', ticket:'https://stannswarehouse.org' },
+      { mo:'OCT', dy:'3',    tag:'arts',    tagLabel:'Free Night',name:'First Saturday at Brooklyn Museum', meta:'Free 5–11 PM · select months (none in Sep)', url:'brooklyn/index.html#prospect-heights', ticket:'https://www.brooklynmuseum.org' },
+      { mo:'OCT', dy:'21',   tag:'events',  tagLabel:'Basketball',name:'Nets home opener',          meta:'vs Charlotte Hornets · 7:30 PM · Barclays Center', url:'brooklyn/index.html#park-slope', ticket:'https://www.barclayscenter.com/events' },
+      { mo:'NOV', dy:'19',   tag:'arts',    tagLabel:'Next Wave', name:'Einstein on the Beach — 50th anniversary', meta:'Nov 19–21 · Philip Glass Ensemble · BAM', url:'brooklyn/index.html#fort-greene', ticket:'https://www.bam.org' },
+      { mo:'SAT', dy:'11 AM',tag:'dining',  tagLabel:'Market',    name:'Smorgasburg Williamsburg',  meta:'Saturdays 11–6 thru October · Marsha P. Johnson SP', url:'brooklyn/index.html#williamsburg', ticket:'https://www.smorgasburg.com' },
+    ],
+    pins: [
+      { label:'Greenpoint',        tag:'live', left:46, top:11, url:'brooklyn/index.html#greenpoint' },
+      { label:'Williamsburg',      tag:'live', left:43, top:19, url:'brooklyn/index.html#williamsburg' },
+      { label:'DUMBO',             tag:'live', left:30, top:25, url:'brooklyn/index.html#dumbo' },
+      { label:'Brooklyn Heights',  tag:'live', left:28, top:29, url:'brooklyn/index.html#brooklyn-heights' },
+      { label:'Downtown Brooklyn', tag:'live', left:33, top:31, url:'brooklyn/index.html#downtown-brooklyn' },
+      { label:'Fort Greene',       tag:'live', left:37, top:32, url:'brooklyn/index.html#fort-greene' },
+      { label:'Bushwick',          tag:'live', left:61, top:27, url:'brooklyn/index.html#bushwick' },
+      { label:'Park Slope',        tag:'live', left:34, top:41, url:'brooklyn/index.html#park-slope' },
+      { label:'Prospect Heights',  tag:'live', left:41, top:42, url:'brooklyn/index.html#prospect-heights' },
+      { label:'Coney Island',      tag:'live', left:34, top:92, url:'brooklyn/index.html#coney-island' },
     ]
   },
 
