@@ -73,9 +73,10 @@ const SHARED_SEARCH_TREE = {
                 { label:'Waterside',      aliases:['waterside'],                         status:'live', url:'stamford/waterside/index.html',      children:[] },
               ]
             },
-            { label:'Greenwich', aliases:['greenwich'], status:'soon', url:null, children:[] },
-            { label:'Westport',  aliases:['westport'],  status:'soon', url:null, children:[] },
-            { label:'Norwalk',   aliases:['norwalk'],   status:'soon', url:null, children:[] },
+            { label:'Greenwich',  aliases:['greenwich','greenwich ct','old greenwich','cos cob','byram','glenville','tods point'], status:'live', url:'greenwich/index.html', children:[] },
+            { label:'New Canaan', aliases:['new canaan','new canaan ct','next station to heaven','glass house town'], status:'live', url:'new-canaan/index.html', children:[] },
+            { label:'Westport',   aliases:['westport'],  status:'soon', url:null, children:[] },
+            { label:'Norwalk',    aliases:['norwalk'],   status:'soon', url:null, children:[] },
           ]
         },
         {
@@ -196,6 +197,8 @@ function buildSearchIndex() {
   return [
     // ── Cities ──
     { label:'Stamford, CT',       sub:'Connecticut',           type:'place',  url: p+'stamford/index.html',                   keywords:['stamford','connecticut','ct'] },
+    { label:'Greenwich, CT',      sub:'Connecticut',           type:'place',  url: p+'greenwich/index.html',                  keywords:['greenwich','greenwich ct','gold coast','fairfield county','old greenwich','cos cob','byram','riverside ct'] },
+    { label:'New Canaan, CT',     sub:'Connecticut',           type:'place',  url: p+'new-canaan/index.html',                 keywords:['new canaan','new canaan ct','next station to heaven','harvard five','fairfield county'] },
     { label:'Lubbock, TX',        sub:'Texas',                 type:'place',  url: p+'lubbock/index.html',                    keywords:['lubbock','texas','tx','hub city'] },
     // ── States ──
     { label:'Connecticut',        sub:'United States',         type:'place',  url: p+'connecticut/index.html',                keywords:['connecticut','ct','new england'] },
@@ -246,6 +249,38 @@ function buildSearchIndex() {
     { label:'Depot District',     sub:'Lubbock, TX',           type:'place',  url: p+'lubbock/depot-district/index.html',     keywords:['depot district','depot','blue light','buddy holly ave'] },
     { label:'Tech District',      sub:'Lubbock, TX — Campus',  type:'place',  url: p+'lubbock/tech-district/index.html',      keywords:['tech district','the strip','university ave','texas tech campus','jones stadium'] },
     { label:'Historic District',  sub:'Lubbock, TX — Downtown',type:'place',  url: p+'lubbock/historic-district/index.html',  keywords:['historic district','downtown lubbock','buddy holly hall','courthouse'] },
+    // ── Greenwich ──
+    { label:'Bruce Museum',       sub:'Greenwich, CT',         type:'place',  url: p+'greenwich/index.html',                  keywords:['bruce museum','art museum greenwich','science museum','richter art wing','free tuesday museum'] },
+    { label:"Greenwich Point Park (Tod's Point)", sub:'Old Greenwich, CT', type:'place', url: p+'greenwich/index.html',       keywords:['tods point','greenwich point','beach greenwich','old greenwich beach','day pass greenwich'] },
+    { label:'Greenwich Avenue',   sub:'Downtown Greenwich, CT',type:'place',  url: p+'greenwich/index.html',                  keywords:['greenwich avenue','the avenue','shopping greenwich','luxury shopping ct'] },
+    { label:'Greenwich Audubon Center', sub:'Greenwich, CT',   type:'place',  url: p+'greenwich/index.html',                  keywords:['audubon greenwich','greenwich audubon','birding ct','hawk watch','riversville road'] },
+    { label:'Putnam Cottage',     sub:'Greenwich, CT',         type:'place',  url: p+'greenwich/index.html',                  keywords:['putnam cottage','knapp tavern','israel putnam','revolutionary war greenwich'] },
+    { label:"L'Escale",           sub:'Delamar · Greenwich, CT',type:'place', url: p+'greenwich/index.html',                  keywords:['lescale','l escale','french restaurant greenwich','waterfront dining greenwich','delamar'] },
+    { label:'Elm Street Oyster House', sub:'Greenwich, CT',    type:'place',  url: p+'greenwich/index.html',                  keywords:['elm street oyster house','oysters greenwich','seafood greenwich'] },
+    { label:'Polpo Restaurant & Saloon', sub:'Greenwich, CT',  type:'place',  url: p+'greenwich/index.html',                  keywords:['polpo','tuscan greenwich','italian greenwich','old post road'] },
+    { label:'The Ginger Man',     sub:'Greenwich, CT',         type:'place',  url: p+'greenwich/index.html',                  keywords:['ginger man','pub greenwich','bar greenwich avenue'] },
+    { label:'Méli-Mélo',          sub:'Greenwich, CT',         type:'place',  url: p+'greenwich/index.html',                  keywords:['meli melo','melimelo','creperie greenwich','crepes ct','juice bar greenwich'] },
+    { label:'Delamar Greenwich Harbor', sub:'Hotel · Greenwich, CT', type:'place', url: p+'greenwich/index.html',             keywords:['delamar','greenwich hotel','harbor hotel ct','boutique hotel greenwich'] },
+    { label:'J House Greenwich',  sub:'Hotel · Riverside, CT', type:'place',  url: p+'greenwich/index.html',                  keywords:['j house','jhouse','riverside hotel','boutique hotel ct'] },
+    { label:'Hyatt Regency Greenwich', sub:'Hotel · Old Greenwich, CT', type:'place', url: p+'greenwich/index.html',          keywords:['hyatt greenwich','hyatt regency','old greenwich hotel'] },
+    { label:'Hawk Watch Fest',    sub:'Sep 26 · Greenwich Audubon Center', type:'event', url: p+'greenwich/index.html',       keywords:['hawk watch','hawkwatch','audubon festival','raptor festival','bird festival ct'] },
+    { label:"Puttin' On The Dog", sub:'Sep 27 · Roger Sherman Baldwin Park · Greenwich', type:'event', url: p+'greenwich/index.html', keywords:['puttin on the dog','adopt a dog','dog festival','dog event greenwich'] },
+    { label:'Bruce Museum Outdoor Arts Festival', sub:'Oct 10–11 · Greenwich', type:'event', url: p+'greenwich/index.html',   keywords:['outdoor arts festival','bruce museum festival','art festival greenwich','craft festival ct'] },
+    { label:'Greenwich Farmers Market', sub:'Sat 9:30 AM–1 PM · Horseneck lot · thru Nov 21', type:'event', url: p+'greenwich/index.html', keywords:['greenwich farmers market','farmers market greenwich','horseneck lot','arch street market'] },
+    { label:'Greenwich Town Party', sub:'Annual · May · Roger Sherman Baldwin Park', type:'event', url: p+'greenwich/index.html', keywords:['greenwich town party','gtp','town party','memorial day concert greenwich','dave matthews greenwich'] },
+    // ── New Canaan ──
+    { label:'The Glass House',    sub:'New Canaan, CT',        type:'place',  url: p+'new-canaan/index.html',                 keywords:['glass house','philip johnson','modern architecture','harvard five','national trust'] },
+    { label:'Grace Farms',        sub:'New Canaan, CT',        type:'place',  url: p+'new-canaan/index.html',                 keywords:['grace farms','river building','sanaa','lukes wood road','architecture ct'] },
+    { label:'Waveny Park',        sub:'New Canaan, CT',        type:'place',  url: p+'new-canaan/index.html',                 keywords:['waveny','waveny park','waveny house','the castle new canaan','trails new canaan'] },
+    { label:'New Canaan Nature Center', sub:'New Canaan, CT',  type:'place',  url: p+'new-canaan/index.html',                 keywords:['nature center new canaan','oenoke ridge','trails ct'] },
+    { label:'Elm Restaurant',     sub:'New Canaan, CT',        type:'place',  url: p+'new-canaan/index.html',                 keywords:['elm restaurant','luke venner','new american new canaan','elm street new canaan'] },
+    { label:'Solé Ristorante',    sub:'New Canaan, CT',        type:'place',  url: p+'new-canaan/index.html',                 keywords:['sole','sole ristorante','italian new canaan','z hospitality'] },
+    { label:'Gates Restaurant & Bar', sub:'New Canaan, CT',    type:'place',  url: p+'new-canaan/index.html',                 keywords:['gates','gates restaurant','forest street bar','new canaan bar'] },
+    { label:'Rosie',              sub:'Bakery Café · New Canaan, CT', type:'place', url: p+'new-canaan/index.html',           keywords:['rosie','rosies','bakery new canaan','breakfast new canaan','cafe new canaan'] },
+    { label:'Roger Sherman Inn',  sub:'Inn · New Canaan, CT',  type:'place',  url: p+'new-canaan/index.html',                 keywords:['roger sherman inn','inn new canaan','country inn ct','oenoke ridge inn'] },
+    { label:'Caffeine & Carburetors', sub:'Oct 18 · Waveny Park · New Canaan', type:'event', url: p+'new-canaan/index.html',  keywords:['caffeine and carburetors','caffeine carburetors','car show','cars and coffee','car meet ct'] },
+    { label:'New Canaan Farmers Market', sub:'Sat 10 AM–2 PM · Lumber Yard Lot · thru Dec 19', type:'event', url: p+'new-canaan/index.html', keywords:['new canaan farmers market','farmers market new canaan','lumberyard lot'] },
+    { label:'New Canaan Holiday Stroll', sub:'Annual · early Dec · downtown New Canaan', type:'event', url: p+'new-canaan/index.html', keywords:['holiday stroll','new canaan holiday','christmas new canaan','tree lighting new canaan'] },
     // ── Events — Stamford ──
     { label:'Beer Wine Spirits Fest',      sub:'Aug 29 · Mill River Park · 1–4:30 PM',   type:'event',  url: p+'stamford/downtown/index.html',    keywords:['beer','wine','spirits','beer fest','stamford beer'] },
     { label:'Labyrinth in Concert',        sub:'Sep 19 · Palace Theatre · Stamford',     type:'event',  url: p+'stamford/downtown/index.html',    keywords:['labyrinth','bowie','david bowie','palace theatre','stamford show'] },
@@ -1639,9 +1674,34 @@ const PANEL_EVENTS = {
       { mo:'AUG', dy:'29', tag:'events', tagLabel:'Beer & Wine',name:'Beer, Wine & Spirits Fest',   meta:'Mill River Park · 1–4:30 PM',    url:'stamford/downtown/index.html', ticket:'https://www.beerwinespiritsfest.com/stamford' },
       { mo:'AUG', dy:'30', tag:'outdoors',tagLabel:'Festival', name:'Honey Harvest Festival',      meta:'Bartlett Arboretum · 11 AM–4 PM',url:'stamford/north-stamford/index.html', ticket:'https://www.bartlettarboretum.org/events' },
       { mo:'SEP', dy:'19', tag:'arts',   tagLabel:'Concert',   name:'Labyrinth in Concert',        meta:'Palace Theatre · Stamford, CT · 7:30 PM', url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'SEP', dy:'26', tag:'outdoors',tagLabel:'Festival', name:'Hawk Watch Fest',             meta:'Greenwich Audubon Center · 7 AM–4 PM', url:'greenwich/index.html', ticket:'https://www.audubon.org/greenwich/explore/hawk-watch-fest-greenwich-audubon-center' },
+      { mo:'SEP', dy:'27', tag:'events', tagLabel:'Festival',  name:"Puttin' On The Dog",          meta:'Roger Sherman Baldwin Park · Greenwich', url:'greenwich/index.html', ticket:'https://adopt-a-dog.org' },
       { mo:'OCT', dy:'2',  tag:'arts',   tagLabel:'Tribute',   name:"Stayin' Alive — Bee Gees Tribute", meta:'Palace Theatre · 8 PM',     url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'OCT', dy:'10', tag:'arts',   tagLabel:'Art Fest',  name:'Bruce Museum Outdoor Arts Festival', meta:'Oct 10–11 · Greenwich · $15', url:'greenwich/index.html', ticket:'https://brucemuseum.org/festivals/' },
+      { mo:'OCT', dy:'18', tag:'events', tagLabel:'Car Meet',  name:'Caffeine & Carburetors',      meta:'Waveny Park · New Canaan · 8–11 AM', url:'new-canaan/index.html', ticket:'https://caffeineandcarburetors.com/cc-events/' },
       { mo:'OCT', dy:'TBD',tag:'events', tagLabel:'Festival',  name:"That's Amore Italian Fest",   meta:'Mill River Park · 2026 dates TBA', url:'stamford/downtown/index.html', ticket:'https://thatsamorefest.com' },
       { mo:'NOV', dy:'22', tag:'events', tagLabel:'Parade',    name:'Stamford Downtown Parade Spectacular', meta:'Downtown Stamford',     url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com' },
+    ]
+  },
+  Greenwich: {
+    label: 'Greenwich Events',
+    link: { href: 'greenwich/index.html', text: 'Greenwich Guide →' },
+    events: [
+      { mo:'SEP', dy:'26', tag:'outdoors',tagLabel:'Festival',  name:'Hawk Watch Fest',            meta:'Greenwich Audubon Center · 7 AM–4 PM · advance tickets', url:'greenwich/index.html', ticket:'https://www.audubon.org/greenwich/explore/hawk-watch-fest-greenwich-audubon-center' },
+      { mo:'SEP', dy:'27', tag:'events', tagLabel:'Festival',   name:"Puttin' On The Dog — 38th",  meta:'Roger Sherman Baldwin Park · 10 AM–4:30 PM', url:'greenwich/index.html', ticket:'https://adopt-a-dog.org' },
+      { mo:'OCT', dy:'10', tag:'arts',   tagLabel:'Art Fest',   name:'Bruce Museum Outdoor Arts Festival', meta:'45th annual · Oct 10–11 · 10 AM–5 PM · $15', url:'greenwich/index.html', ticket:'https://brucemuseum.org/festivals/' },
+      { mo:'SAT', dy:'WKL',tag:'outdoors',tagLabel:'Market',    name:'Greenwich Farmers Market',   meta:'Horseneck lot, Arch St · Sat 9:30 AM–1 PM · thru Nov 21', url:'greenwich/index.html', ticket:'https://www.greenwichfarmersmarketct.com/' },
+      { mo:'MAY', dy:'ANN',tag:'arts',   tagLabel:'Music Fest', name:'Greenwich Town Party',       meta:'Roger Sherman Baldwin Park · Memorial Day weekend Sat', url:'greenwich/index.html', ticket:'https://www.greenwichtownparty.org' },
+    ]
+  },
+  'New Canaan': {
+    label: 'New Canaan Events',
+    link: { href: 'new-canaan/index.html', text: 'New Canaan Guide →' },
+    events: [
+      { mo:'OCT', dy:'18', tag:'events', tagLabel:'Car Meet',   name:'Caffeine & Carburetors',     meta:'Waveny Park · 8–11 AM · Free',        url:'new-canaan/index.html', ticket:'https://caffeineandcarburetors.com/cc-events/' },
+      { mo:'SAT', dy:'WKL',tag:'outdoors',tagLabel:'Market',    name:'New Canaan Farmers Market',  meta:'Lumber Yard Lot, 244 Elm St · Sat 10 AM–2 PM · thru Dec 19', url:'new-canaan/index.html', ticket:'https://www.newcanaanfarmersmarket.net/' },
+      { mo:'APR', dy:'–DEC',tag:'arts',  tagLabel:'Tours',      name:'The Glass House — 2026 Season', meta:'Tours Apr 16–Dec 14 · closed Tue & Wed · from 199 Elm St', url:'new-canaan/index.html', ticket:'https://theglasshouse.org/visit/' },
+      { mo:'DEC', dy:'ANN',tag:'events', tagLabel:'Holiday',    name:'Holiday Stroll',             meta:'Downtown · early December · Chamber posts details in fall', url:'new-canaan/index.html', ticket:'https://newcanaanchamber.com' },
     ]
   },
   Stamford: {

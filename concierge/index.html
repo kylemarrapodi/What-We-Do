@@ -505,15 +505,49 @@ const LOCATIONS = {
       { mo:'AUG', dy:'30', tag:'outdoors',tagLabel:'Festival', name:'Honey Harvest Festival',      meta:'Bartlett Arboretum · 11 AM–4 PM',url:'stamford/north-stamford/index.html', ticket:'https://www.bartlettarboretum.org/events' },
       { mo:'SEP', dy:'19', tag:'arts',   tagLabel:'Concert',   name:'Labyrinth in Concert',        meta:'Palace Theatre · Stamford, CT · 7:30 PM', url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
       { mo:'OCT', dy:'2',  tag:'arts',   tagLabel:'Tribute',   name:"Stayin' Alive — Bee Gees Tribute", meta:'Palace Theatre · 8 PM',     url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'SEP', dy:'26', tag:'outdoors',tagLabel:'Festival', name:'Hawk Watch Fest',             meta:'Greenwich Audubon Center · 7 AM–4 PM', url:'greenwich/index.html', ticket:'https://www.audubon.org/greenwich/explore/hawk-watch-fest-greenwich-audubon-center' },
+      { mo:'SEP', dy:'27', tag:'events', tagLabel:'Festival',  name:"Puttin' On The Dog",          meta:'Roger Sherman Baldwin Park · Greenwich', url:'greenwich/index.html', ticket:'https://adopt-a-dog.org' },
+      { mo:'OCT', dy:'10', tag:'arts',   tagLabel:'Art Fest',  name:'Bruce Museum Outdoor Arts Festival', meta:'Oct 10–11 · Greenwich · $15', url:'greenwich/index.html', ticket:'https://brucemuseum.org/festivals/' },
+      { mo:'OCT', dy:'18', tag:'events', tagLabel:'Car Meet',  name:'Caffeine & Carburetors',      meta:'Waveny Park · New Canaan · 8–11 AM', url:'new-canaan/index.html', ticket:'https://caffeineandcarburetors.com/cc-events/' },
       { mo:'OCT', dy:'TBD',tag:'events', tagLabel:'Festival',  name:"That's Amore Italian Fest",   meta:'Mill River Park · 2026 dates TBA', url:'stamford/downtown/index.html', ticket:'https://thatsamorefest.com' },
       { mo:'NOV', dy:'22', tag:'events', tagLabel:'Parade',    name:'Stamford Downtown Parade Spectacular', meta:'Downtown Stamford',     url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com' },
     ],
     pins: [
       { label:'Stamford', tag:'live', left:24, top:68, url:'stamford/index.html' },
-      { label:'Greenwich', tag:'soon', left:18, top:74, url:null },
+      { label:'Greenwich', tag:'live', left:18, top:74, url:'greenwich/index.html' },
+      { label:'New Canaan', tag:'live', left:23, top:64, url:'new-canaan/index.html' },
       { label:'Norwalk', tag:'soon', left:22, top:71, url:null },
       { label:'Westport', tag:'soon', left:26, top:67, url:null },
     ]
+  },
+
+  'Greenwich': {
+    mapSrc: 'https://maps.google.com/maps?q=Greenwich,+CT&output=embed&z=12',
+    mapLabel: 'Greenwich, CT',
+    eventsLabel: 'Happening in Greenwich',
+    eventsLink: { href: 'greenwich/index.html', text: 'Greenwich Guide →' },
+    events: [
+      { mo:'SEP', dy:'26', tag:'outdoors',tagLabel:'Festival',  name:'Hawk Watch Fest',            meta:'Greenwich Audubon Center · 7 AM–4 PM · advance tickets', url:'greenwich/index.html', ticket:'https://www.audubon.org/greenwich/explore/hawk-watch-fest-greenwich-audubon-center' },
+      { mo:'SEP', dy:'27', tag:'events',  tagLabel:'Festival',  name:"Puttin' On The Dog — 38th",  meta:'Roger Sherman Baldwin Park · 10 AM–4:30 PM', url:'greenwich/index.html', ticket:'https://adopt-a-dog.org' },
+      { mo:'OCT', dy:'10', tag:'arts',    tagLabel:'Art Fest',  name:'Bruce Museum Outdoor Arts Festival', meta:'45th annual · Oct 10–11 · 10 AM–5 PM · $15', url:'greenwich/index.html', ticket:'https://brucemuseum.org/festivals/' },
+      { mo:'SAT', dy:'WKL',tag:'outdoors',tagLabel:'Market',    name:'Greenwich Farmers Market',   meta:'Horseneck lot, Arch St · Sat 9:30 AM–1 PM · thru Nov 21', url:'greenwich/index.html', ticket:'https://www.greenwichfarmersmarketct.com/' },
+      { mo:'MAY', dy:'ANN',tag:'arts',    tagLabel:'Music Fest',name:'Greenwich Town Party',       meta:'Roger Sherman Baldwin Park · Memorial Day weekend Sat', url:'greenwich/index.html', ticket:'https://www.greenwichtownparty.org' },
+    ],
+    pins: []
+  },
+
+  'New Canaan': {
+    mapSrc: 'https://maps.google.com/maps?q=New+Canaan,+CT&output=embed&z=13',
+    mapLabel: 'New Canaan, CT',
+    eventsLabel: 'Happening in New Canaan',
+    eventsLink: { href: 'new-canaan/index.html', text: 'New Canaan Guide →' },
+    events: [
+      { mo:'OCT', dy:'18', tag:'events', tagLabel:'Car Meet',   name:'Caffeine & Carburetors',     meta:'Waveny Park · 8–11 AM · Free',        url:'new-canaan/index.html', ticket:'https://caffeineandcarburetors.com/cc-events/' },
+      { mo:'SAT', dy:'WKL',tag:'outdoors',tagLabel:'Market',    name:'New Canaan Farmers Market',  meta:'Lumber Yard Lot, 244 Elm St · Sat 10 AM–2 PM · thru Dec 19', url:'new-canaan/index.html', ticket:'https://www.newcanaanfarmersmarket.net/' },
+      { mo:'APR', dy:'–DEC',tag:'arts',  tagLabel:'Tours',      name:'The Glass House — 2026 Season', meta:'Tours Apr 16–Dec 14 · closed Tue & Wed', url:'new-canaan/index.html', ticket:'https://theglasshouse.org/visit/' },
+      { mo:'DEC', dy:'ANN',tag:'events', tagLabel:'Holiday',    name:'Holiday Stroll',             meta:'Downtown · early December',           url:'new-canaan/index.html', ticket:'https://newcanaanchamber.com' },
+    ],
+    pins: []
   },
 
   'Stamford': {
