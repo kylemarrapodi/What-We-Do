@@ -160,6 +160,21 @@ const SHARED_SEARCH_TREE = {
                 { label:'Financial District', aliases:['financial district','fidi','wall street'],          status:'live', url:'manhattan/index.html#financial-district', children:[] },
               ]
             },
+            {
+              label: 'Queens', aliases: ['queens','queens ny','queens county','the worlds borough'], status: 'live', url: 'queens/index.html',
+              children: [
+                { label:'Long Island City', aliases:['long island city','lic','hunters point','queens plaza'],     status:'live', url:'queens/index.html#long-island-city', children:[] },
+                { label:'Astoria',          aliases:['astoria','ditmars','steinway'],                              status:'live', url:'queens/index.html#astoria',          children:[] },
+                { label:'Sunnyside',        aliases:['sunnyside','sunnyside gardens','sunnyside queens'],          status:'live', url:'queens/index.html#sunnyside',        children:[] },
+                { label:'Jackson Heights',  aliases:['jackson heights','little india','diversity plaza','74th street'], status:'live', url:'queens/index.html#jackson-heights', children:[] },
+                { label:'Elmhurst',         aliases:['elmhurst','newtown','elmhurst queens'],                      status:'live', url:'queens/index.html#elmhurst',         children:[] },
+                { label:'Corona',           aliases:['corona','corona queens','flushing meadows','flushing meadows corona park'], status:'live', url:'queens/index.html#corona', children:[] },
+                { label:'Flushing',         aliases:['flushing','main street flushing','downtown flushing'],       status:'live', url:'queens/index.html#flushing',         children:[] },
+                { label:'Forest Hills',     aliases:['forest hills','forest hills gardens','austin street'],       status:'live', url:'queens/index.html#forest-hills',     children:[] },
+                { label:'Ridgewood',        aliases:['ridgewood','ridgewood queens'],                              status:'live', url:'queens/index.html#ridgewood',        children:[] },
+                { label:'Rockaway Beach',   aliases:['rockaway beach','rockaway','the rockaways','rockaways'],     status:'live', url:'queens/index.html#rockaway-beach',   children:[] },
+              ]
+            },
           ]
         },
         {
@@ -602,6 +617,67 @@ function buildSearchIndex() {
     { label:"Macy's Thanksgiving Day Parade", sub:'Nov 26 · steps off W 77th & Central Park West', type:'event', url: p+'manhattan/index.html#upper-west-side', keywords:['macys parade','thanksgiving parade','thanksgiving day parade','balloons','herald square parade','100th parade'] },
     { label:'The Chicks at Beacon Theatre', sub:'Oct 10, 12 & 13 · Upper West Side', type:'event', url: p+'manhattan/index.html#upper-west-side', keywords:['the chicks','dixie chicks','taking the long way tour','beacon concert','beacon theatre concert'] },
     { label:'Christmas Spectacular at Radio City', sub:'Nov 4 – Jan 4 · Midtown West', type:'event', url: p+'manhattan/index.html#midtown-west', keywords:['christmas spectacular','rockettes','radio city christmas','rockettes christmas show'] },
+    // ── Queens ──
+    { label:'Queens, NY',         sub:'New York',              type:'place',  url: p+'queens/index.html',                     keywords:['queens','queens ny','queens county','worlds borough','most diverse borough'] },
+    { label:'Long Island City',   sub:'Queens, NY',            type:'place',  url: p+'queens/index.html#long-island-city',    keywords:['long island city','lic','hunters point','queens plaza','gantry'] },
+    { label:'Astoria',            sub:'Queens, NY',            type:'place',  url: p+'queens/index.html#astoria',             keywords:['astoria','ditmars','steinway street','greek queens'] },
+    { label:'Sunnyside',          sub:'Queens, NY',            type:'place',  url: p+'queens/index.html#sunnyside',           keywords:['sunnyside','sunnyside gardens','sunnyside queens','skillman avenue'] },
+    { label:'Jackson Heights',    sub:'Queens, NY',            type:'place',  url: p+'queens/index.html#jackson-heights',     keywords:['jackson heights','little india','diversity plaza','74th street','roosevelt avenue'] },
+    { label:'Elmhurst',           sub:'Queens, NY',            type:'place',  url: p+'queens/index.html#elmhurst',            keywords:['elmhurst','newtown','elmhurst chinatown','little thailand'] },
+    { label:'Corona',             sub:'Queens, NY',            type:'place',  url: p+'queens/index.html#corona',              keywords:['corona','flushing meadows','flushing meadows corona park','worlds fair park'] },
+    { label:'Flushing',           sub:'Queens, NY',            type:'place',  url: p+'queens/index.html#flushing',            keywords:['flushing','main street flushing','flushing chinatown','downtown flushing'] },
+    { label:'Forest Hills',       sub:'Queens, NY',            type:'place',  url: p+'queens/index.html#forest-hills',        keywords:['forest hills','forest hills gardens','austin street','station square'] },
+    { label:'Ridgewood',          sub:'Queens, NY',            type:'place',  url: p+'queens/index.html#ridgewood',           keywords:['ridgewood','ridgewood queens','fresh pond road'] },
+    { label:'Rockaway Beach',     sub:'Queens, NY',            type:'place',  url: p+'queens/index.html#rockaway-beach',      keywords:['rockaway','rockaway beach','the rockaways','surf nyc','boardwalk queens'] },
+    { label:'MoMA PS1',           sub:'Long Island City, Queens', type:'place', url: p+'queens/index.html#long-island-city',  keywords:['moma ps1','ps1','contemporary art queens','free museum 2026'] },
+    { label:'Gantry Plaza State Park', sub:'Long Island City, Queens', type:'place', url: p+'queens/index.html#long-island-city', keywords:['gantry plaza','gantry state park','pepsi cola sign','lic waterfront'] },
+    { label:'Casa Enrique',       sub:'Long Island City, Queens', type:'place', url: p+'queens/index.html#long-island-city',  keywords:['casa enrique','michelin mexican','cosme aguilar','lic mexican'] },
+    { label:'Dutch Kills',        sub:'Cocktail Bar · Long Island City', type:'place', url: p+'queens/index.html#long-island-city', keywords:['dutch kills','dutch kills bar','cocktail bar queens','jackson avenue bar'] },
+    { label:'Culture Lab LIC',    sub:'Long Island City, Queens', type:'place', url: p+'queens/index.html#long-island-city',  keywords:['culture lab','culture lab lic','live in the lot','free concerts queens'] },
+    { label:'Ravel Hotel',        sub:'Long Island City, Queens', type:'place', url: p+'queens/index.html#long-island-city',  keywords:['ravel hotel','ravel','profundo','lic hotel','queens hotel'] },
+    { label:'Museum of the Moving Image', sub:'Astoria, Queens', type:'place', url: p+'queens/index.html#astoria',           keywords:['museum of the moving image','momi','jim henson exhibition','film museum'] },
+    { label:'Socrates Sculpture Park', sub:'Astoria, Queens',   type:'place', url: p+'queens/index.html#astoria',            keywords:['socrates sculpture park','outdoor sculpture','vernon boulevard park'] },
+    { label:'Astoria Park & Pool', sub:'Astoria, Queens',       type:'place', url: p+'queens/index.html#astoria',            keywords:['astoria park','astoria pool','largest pool nyc','hell gate bridge'] },
+    { label:'Bohemian Hall & Beer Garden', sub:'Astoria, Queens', type:'place', url: p+'queens/index.html#astoria',          keywords:['bohemian hall','beer garden astoria','oldest beer garden','czech beer garden'] },
+    { label:'Taverna Kyclades',   sub:'Astoria, Queens',        type:'place', url: p+'queens/index.html#astoria',            keywords:['taverna kyclades','kyclades','greek seafood astoria','ditmars restaurant'] },
+    { label:'Sunnyside Gardens',  sub:'Sunnyside, Queens',      type:'place', url: p+'queens/index.html#sunnyside',          keywords:['sunnyside gardens','first garden community','planned community queens'] },
+    { label:"Philomena's",        sub:'Sunnyside, Queens',      type:'place', url: p+'queens/index.html#sunnyside',          keywords:['philomenas','philomenas pizza','pizza sunnyside','queens pizza'] },
+    { label:'Bolivian Llama Party', sub:'Sunnyside, Queens',    type:'place', url: p+'queens/index.html#sunnyside',          keywords:['bolivian llama party','saltenas','bolivian food nyc'] },
+    { label:'Diversity Plaza',    sub:'Jackson Heights, Queens', type:'place', url: p+'queens/index.html#jackson-heights',   keywords:['diversity plaza','37th road plaza','jackson heights plaza'] },
+    { label:'Arepa Lady',         sub:'Jackson Heights, Queens', type:'place', url: p+'queens/index.html#jackson-heights',   keywords:['arepa lady','arepas queens','maria piedad cano','colombian street food'] },
+    { label:"Jahn's",             sub:'Jackson Heights, Queens', type:'place', url: p+'queens/index.html#jackson-heights',   keywords:['jahns','jahns ice cream','kitchen sink sundae','old diner queens'] },
+    { label:'Ayada Thai',         sub:'Elmhurst, Queens',       type:'place', url: p+'queens/index.html#elmhurst',           keywords:['ayada','ayada thai','thai elmhurst'] },
+    { label:'Zaab Zaab',          sub:'Elmhurst, Queens',       type:'place', url: p+'queens/index.html#elmhurst',           keywords:['zaab zaab','isan thai','larb queens'] },
+    { label:'Terraza 7',          sub:'Live Music · Elmhurst, Queens', type:'place', url: p+'queens/index.html#elmhurst',    keywords:['terraza 7','terraza siete','latin jazz queens','live music elmhurst'] },
+    { label:'Louis Armstrong House Museum', sub:'Corona, Queens', type:'place', url: p+'queens/index.html#corona',           keywords:['louis armstrong house','armstrong museum','satchmo','armstrong center'] },
+    { label:'Lemon Ice King of Corona', sub:'Corona, Queens',   type:'place', url: p+'queens/index.html#corona',             keywords:['lemon ice king','italian ices','king of queens corner','benfaremo'] },
+    { label:'Unisphere',          sub:'Flushing Meadows Corona Park', type:'place', url: p+'queens/index.html#corona',       keywords:['unisphere','worlds fair globe','flushing meadows globe'] },
+    { label:'Queens Museum',      sub:'Flushing Meadows Corona Park', type:'place', url: p+'queens/index.html#corona',       keywords:['queens museum','panorama of the city of new york','panorama nyc'] },
+    { label:'New York Hall of Science', sub:'Corona, Queens',   type:'place', url: p+'queens/index.html#corona',             keywords:['hall of science','nysci','science museum queens'] },
+    { label:'USTA Billie Jean King National Tennis Center', sub:'Flushing Meadows', type:'place', url: p+'queens/index.html#corona', keywords:['usta','billie jean king','arthur ashe stadium','tennis center'] },
+    { label:'New World Mall Food Court', sub:'Flushing, Queens', type:'place', url: p+'queens/index.html#flushing',          keywords:['new world mall','flushing food court','roosevelt ave mall'] },
+    { label:'Nan Xiang Xiao Long Bao', sub:'Flushing, Queens',  type:'place', url: p+'queens/index.html#flushing',           keywords:['nan xiang','xiao long bao','soup dumplings flushing'] },
+    { label:'Flushing Town Hall', sub:'Flushing, Queens',       type:'place', url: p+'queens/index.html#flushing',           keywords:['flushing town hall','jazz queens','world music queens'] },
+    { label:'Queens Botanical Garden', sub:'Flushing, Queens',  type:'place', url: p+'queens/index.html#flushing',           keywords:['queens botanical garden','qbg','garden flushing'] },
+    { label:'Friends Quaker Meeting House', sub:'Flushing, Queens', type:'place', url: p+'queens/index.html#flushing',       keywords:['quaker meeting house','friends meeting house','oldest house of worship nyc','flushing remonstrance'] },
+    { label:'Forest Hills Stadium', sub:'Forest Hills, Queens', type:'place', url: p+'queens/index.html#forest-hills',       keywords:['forest hills stadium','tennis stadium concerts','west side tennis club stadium'] },
+    { label:"Eddie's Sweet Shop", sub:'Forest Hills, Queens',   type:'place', url: p+'queens/index.html#forest-hills',       keywords:['eddies sweet shop','soda fountain queens','ice cream forest hills'] },
+    { label:'Station Square',     sub:'Forest Hills Gardens, Queens', type:'place', url: p+'queens/index.html#forest-hills', keywords:['station square','forest hills gardens','tudor square queens'] },
+    { label:'Gottscheer Hall',    sub:'Ridgewood, Queens',      type:'place', url: p+'queens/index.html#ridgewood',          keywords:['gottscheer hall','gottschee','german hall queens','ridgewood hall'] },
+    { label:'Nowadays',           sub:'Ridgewood, Queens',      type:'place', url: p+'queens/index.html#ridgewood',          keywords:['nowadays','nowadays club','dance club ridgewood','outdoor club queens'] },
+    { label:'TV Eye',             sub:'Ridgewood, Queens',      type:'place', url: p+'queens/index.html#ridgewood',          keywords:['tv eye','tv eye nyc','rock club ridgewood','venue ridgewood'] },
+    { label:"Rolo's",             sub:'Ridgewood, Queens',      type:'place', url: p+'queens/index.html#ridgewood',          keywords:['rolos','rolos ridgewood','wood fired queens','onderdonk restaurant'] },
+    { label:'Vander Ende-Onderdonk House', sub:'Ridgewood, Queens', type:'place', url: p+'queens/index.html#ridgewood',      keywords:['onderdonk house','vander ende','dutch colonial house','oldest stone house nyc'] },
+    { label:'Rockaway Beach Surf Club', sub:'Rockaway Beach, Queens', type:'place', url: p+'queens/index.html#rockaway-beach', keywords:['rockaway beach surf club','tacoway beach','fish tacos rockaway','surf club'] },
+    { label:'Rippers',            sub:'Rockaway Beach, Queens', type:'place', url: p+'queens/index.html#rockaway-beach',     keywords:['rippers','rockaway burgers','boardwalk burgers'] },
+    { label:"Connolly's",         sub:'Rockaway Beach, Queens', type:'place', url: p+'queens/index.html#rockaway-beach',     keywords:['connollys','pina colada rockaway','beach 95th bar'] },
+    { label:'US Open Tennis',     sub:'Aug 23 – Sep 13 · USTA Billie Jean King NTC', type:'event', url: p+'queens/index.html#corona', keywords:['us open','us open tennis','tennis grand slam','arthur ashe','fan week','flushing meadows tennis'] },
+    { label:'Queens Night Market', sub:'Saturdays · resumes Sep 19 – Oct 31 · NY Hall of Science', type:'event', url: p+'queens/index.html#corona', keywords:['queens night market','night market','food market queens','flushing meadows food'] },
+    { label:'Zac Brown Band at Forest Hills', sub:'Aug 27–28 · Forest Hills Stadium', type:'event', url: p+'queens/index.html#forest-hills', keywords:['zac brown band','zac brown forest hills','country queens'] },
+    { label:'Erykah Badu at Forest Hills', sub:'Sep 18 · Forest Hills Stadium', type:'event', url: p+'queens/index.html#forest-hills', keywords:['erykah badu','badu forest hills','neo soul concert'] },
+    { label:'David Byrne at Forest Hills', sub:'Sep 19 · Forest Hills Stadium', type:'event', url: p+'queens/index.html#forest-hills', keywords:['david byrne','talking heads','byrne forest hills'] },
+    { label:'Queens Jazz Trail Concert Series', sub:'Free Thursdays 7 PM thru August · parks across Queens', type:'event', url: p+'queens/index.html#flushing', keywords:['queens jazz trail','free jazz queens','armstrong jazz series'] },
+    { label:'Mets at Citi Field', sub:'Home games thru September · Willets Point', type:'sports', url: p+'queens/index.html#corona', keywords:['mets','new york mets','citi field','mets tickets','baseball queens'] },
   ];
 }
 
@@ -1578,6 +1654,76 @@ const LIVE_MUSIC = {
     series: [],
     nearest: { text: 'Palmer Square is a ten-minute walk east and has the town\'s late-night rooms.', href: 'princeton/palmer-square/index.html' }
   },
+
+  // ── Queens ─────────────────────────────────────────────────────────
+  'queens': {
+    blurb: 'Queens music runs the full register: a 13,000-seat 1923 tennis stadium booking legends all summer, Latin jazz until 4 AM on an Elmhurst side street, underground rock and marathon DJ sets in Ridgewood, free jazz Fridays on the LIC waterfront, and a global-arts hall in Flushing. This is the borough where Armstrong, Ella and Basie all lived — and it still books like it knows.',
+    venues: [
+      { name: 'Forest Hills Stadium', kind: 'Concert Stadium', addr: '1 Tennis Pl, Forest Hills',
+        nights: '2026 season runs June 6 – October 10',
+        desc: 'The 1923 tennis horseshoe where the Beatles played their first stadium shows in 1964, revived as one of the city\'s great open-air rooms. What\'s left of the 2026 season is stacked.',
+        dated: [
+          { date: 'Aug 27–28, 2026', act: 'Zac Brown Band, with Grace Potter' },
+          { date: 'Aug 29, 2026', act: 'Empire of the Sun, with Polo & Pan' },
+          { date: 'Sep 16, 2026', act: 'The Hayley Williams Show' },
+          { date: 'Sep 18, 2026', act: 'Erykah Badu' },
+          { date: 'Sep 19, 2026', act: 'An Evening with David Byrne' },
+          { date: 'Sep 29, 2026', act: 'Dermot Kennedy, with Jonah Kagen' },
+          { date: 'Oct 2–3, 2026', act: 'Geese' },
+          { date: 'Oct 10, 2026', act: 'Foster the People, with Goth Babe — season closer' },
+        ],
+        cal: { href: 'https://www.foresthillsstadium.com/', label: 'foresthillsstadium.com' },
+        link: 'queens/index.html#forest-hills' },
+
+      { name: 'Terraza 7', kind: 'Latin Jazz & World Music', addr: '40-19 Gleane St, Elmhurst',
+        nights: 'Performances almost every night around 7 PM · open daily 4 PM–4 AM',
+        desc: 'A two-level room with a suspended stage over the bar — Latin jazz, Andean, tango and experimental bookings on the Elmhurst/Jackson Heights line. One of the most distinctive small rooms in New York.',
+        cal: { href: 'https://www.terraza7.com/events', label: 'terraza7.com/events' },
+        link: 'queens/index.html#elmhurst' },
+
+      { name: 'TV Eye', kind: 'Rock Club', addr: '1647 Weirfield St, Ridgewood',
+        nights: 'Shows most nights — bar open even when the back room is quiet',
+        desc: 'Venue, bar and discotheque built by alumni of Bowery Ballroom, WFMU and Sacred Bones — where touring underground and punk bills land in Queens.',
+        cal: { href: 'https://tveyenyc.com/', label: 'tveyenyc.com' },
+        link: 'queens/index.html#ridgewood' },
+
+      { name: 'Nowadays', kind: 'Club & Listening Bar', addr: '56-06 Cooper Ave, Ridgewood',
+        nights: 'Friday and Saturday into the early morning · daytime parties outdoors in summer',
+        desc: 'Indoor-outdoor dance institution with a serious sound system and a no-photos floor — marathon DJ sets year-round, and one of the best backyards in the city.',
+        cal: { href: 'https://nowadays.nyc/', label: 'nowadays.nyc' },
+        link: 'queens/index.html#ridgewood' },
+
+      { name: 'Gottscheer Hall', kind: 'Hall & Bar · Since 1924', addr: '657 Fairview Ave, Ridgewood',
+        nights: 'Bands, DJ parties and trivia on a rotating calendar',
+        desc: 'The Gottscheer community\'s century-old hall — a wood-paneled front bar and a back ballroom that now books indie shows alongside the polka heritage.',
+        cal: { href: 'https://donyc.com/venues/gottscheer-hall', label: 'doNYC — Gottscheer Hall calendar' },
+        link: 'queens/index.html#ridgewood' },
+
+      { name: 'Culture Lab LIC', kind: 'Free Arts Campus', addr: '5-25 46th Ave, Long Island City',
+        nights: 'Culture Lab After Dark — free live jazz every Friday at 8 PM',
+        desc: 'Nonprofit gallery and performance space steps from the waterfront — free Friday-night jazz in the gallery, and the Live in The Lot outdoor stage on summer weekends.',
+        cal: { href: 'https://www.culturelablic.org/calendar', label: 'culturelablic.org/calendar' },
+        link: 'queens/index.html#long-island-city' },
+
+      { name: 'LIC Bar', kind: 'Saloon & Back Room', addr: '45-58 Vernon Blvd, Long Island City',
+        nights: 'Singer-songwriters and bands through the week',
+        desc: 'An old corner saloon with exposed brick, a garden, and a steady calendar of local songwriters — the low-key end of an LIC night.',
+        cal: { href: 'https://www.licbar.com/upcoming-events', label: 'licbar.com — upcoming events' },
+        link: 'queens/index.html#long-island-city' },
+
+      { name: 'Flushing Town Hall', kind: 'Global Arts Presenter', addr: '137-35 Northern Blvd, Flushing',
+        nights: 'Jazz, world music and exhibitions year-round · monthly all-comers jazz jams',
+        desc: 'The borough\'s global-arts anchor — its FTH Presents seasons run from jazz to music from every continent Queens speaks for, plus a monthly jazz jam open to any musician.',
+        cal: { href: 'https://www.flushingtownhall.org/events', label: 'flushingtownhall.org/events' },
+        link: 'queens/index.html#flushing' },
+    ],
+    series: [
+      { name: 'Queens Jazz Trail Concert Series', who: 'Kupferberg Center, Flushing Town Hall, Louis Armstrong House Museum & NYC Parks',
+        when: 'Free Thursdays at 7 PM, July 9 through August',
+        where: 'Parks across the borough — honoring the Queens neighborhoods where Armstrong, Ella Fitzgerald, Count Basie and Dizzy Gillespie lived',
+        cal: { href: 'https://kupferbergcenter.org/qjt/', label: 'kupferbergcenter.org/qjt' } },
+    ]
+  },
 };
 
 // Renders the live-music section on any page carrying <body data-music-key="…">
@@ -1856,6 +2002,7 @@ const PANEL_EVENTS = {
   'New York': {
     label: 'New York Events', link: { href: 'new-york/index.html', text: 'New York Guide →' },
     events: [
+      { mo:'AUG', dy:'23',   tag:'events', tagLabel:'Tennis',   name:'US Open — Fan Week & Main Draw', meta:'Aug 23 – Sep 13 · Billie Jean King NTC · Flushing Meadows', url:'queens/index.html#corona', ticket:'https://www.usopen.org' },
       { mo:'SEP', dy:'17–27',tag:'events', tagLabel:'Festival', name:'Feast of San Gennaro',     meta:'100th feast · Mulberry St, Little Italy', url:'manhattan/index.html#little-italy', ticket:'https://sangennaronyc.org' },
       { mo:'OCT', dy:'16–18',tag:'arts',   tagLabel:'Open House',name:'Open House New York Weekend', meta:'300+ sites citywide · 24th annual',  url:'manhattan/index.html', ticket:'https://ohny.org/festival' },
       { mo:'OCT', dy:'31',   tag:'events', tagLabel:'Parade',   name:'Village Halloween Parade', meta:'Sixth Ave, Canal to 15th St · 7 PM',  url:'manhattan/index.html#greenwich-village', ticket:'https://halloween-nyc.com' },
@@ -1877,6 +2024,24 @@ const PANEL_EVENTS = {
       { mo:'DEC', dy:'1',    tag:'arts',   tagLabel:'Concert',  name:'Doja Cat — Tour Ma Vie World Tour', meta:'Madison Square Garden · 7:30 PM', url:'manhattan/index.html#chelsea', ticket:'https://www.msg.com/events-tickets/doja-cat-madison-square-garden-december-2026/3B00633A23FD3029' },
       { mo:'AUG', dy:'ANN',  tag:'events', tagLabel:'Festival', name:'Harlem Week',              meta:'Annual · each August · citywide, centered on Harlem', url:'manhattan/index.html#harlem', ticket:'https://harlemweek.org' },
       { mo:'JUN', dy:'TBD',  tag:'arts',   tagLabel:'Film Fest',name:'Tribeca Festival',          meta:'Venues across Lower Manhattan',       url:'manhattan/index.html#tribeca', ticket:'https://tribecafilm.com/festival' },
+    ]
+  },
+  'Queens': {
+    label: 'Queens Events', link: { href: 'queens/index.html', text: 'Queens Guide →' },
+    events: [
+      { mo:'AUG', dy:'23',   tag:'events',  tagLabel:'Tennis',    name:'US Open — Fan Week',        meta:'Aug 23–29 · free grounds admission · Billie Jean King NTC', url:'queens/index.html#corona', ticket:'https://www.usopen.org' },
+      { mo:'AUG', dy:'30',   tag:'events',  tagLabel:'Tennis',    name:'US Open — Main Draw',       meta:'Aug 30 – Sep 13 · Arthur Ashe Stadium · Flushing Meadows', url:'queens/index.html#corona', ticket:'https://www.usopen.org' },
+      { mo:'AUG', dy:'27',   tag:'arts',    tagLabel:'Concert',   name:'Zac Brown Band',            meta:'Aug 27–28 · w/ Grace Potter · Forest Hills Stadium', url:'queens/index.html#forest-hills', ticket:'https://www.foresthillsstadium.com/' },
+      { mo:'AUG', dy:'29',   tag:'arts',    tagLabel:'Concert',   name:'Empire of the Sun',         meta:'w/ Polo & Pan · Forest Hills Stadium', url:'queens/index.html#forest-hills', ticket:'https://www.foresthillsstadium.com/' },
+      { mo:'SEP', dy:'4–6',  tag:'events',  tagLabel:'Baseball',  name:'Mets vs. Giants — Labor Day Weekend', meta:'Citi Field · Willets Point', url:'queens/index.html#corona', ticket:'https://www.mlb.com/mets/tickets' },
+      { mo:'SEP', dy:'18',   tag:'arts',    tagLabel:'Concert',   name:'Erykah Badu',               meta:'Forest Hills Stadium',                url:'queens/index.html#forest-hills', ticket:'https://www.foresthillsstadium.com/' },
+      { mo:'SEP', dy:'19',   tag:'arts',    tagLabel:'Concert',   name:'An Evening with David Byrne', meta:'Forest Hills Stadium',              url:'queens/index.html#forest-hills', ticket:'https://www.foresthillsstadium.com/' },
+      { mo:'SEP', dy:'19',   tag:'dining',  tagLabel:'Night Market', name:'Queens Night Market returns', meta:'Saturdays 4 PM–midnight thru Oct 31 · NY Hall of Science', url:'queens/index.html#corona', ticket:'https://queensnightmarket.com' },
+      { mo:'THU', dy:'7 PM', tag:'arts',    tagLabel:'Free Jazz', name:'Queens Jazz Trail Concert Series', meta:'Free Thursdays through August · parks across Queens', url:'queens/index.html#flushing', ticket:'https://kupferbergcenter.org/qjt/' },
+      { mo:'FRI', dy:'8 PM', tag:'arts',    tagLabel:'Free Jazz', name:'Culture Lab After Dark',    meta:'Free live jazz Fridays · Culture Lab LIC', url:'queens/index.html#long-island-city', ticket:'https://www.culturelablic.org/culturelabafterdark' },
+      { mo:'THRU',dy:'SEP 13',tag:'outdoors',tagLabel:'Beach',    name:'Rockaway Beach swim season',meta:'Lifeguarded through Sep 13 · boardwalk concessions in season', url:'queens/index.html#rockaway-beach', ticket:null },
+      { mo:'ALL', dy:'2026', tag:'arts',    tagLabel:'Free Museum', name:'MoMA PS1 — free admission', meta:'Free to all through 2028 · Long Island City', url:'queens/index.html#long-island-city', ticket:'https://www.momaps1.org/en/visit' },
+      { mo:'OCT', dy:'10',   tag:'arts',    tagLabel:'Concert',   name:'Foster the People — season closer', meta:'w/ Goth Babe · Forest Hills Stadium', url:'queens/index.html#forest-hills', ticket:'https://www.foresthillsstadium.com/' },
     ]
   },
   'Long Beach Island': {

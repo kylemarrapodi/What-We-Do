@@ -344,6 +344,7 @@
   <a href="lbi/index.html">Long Beach Island, NJ</a>
   <a href="princeton/index.html">Princeton, NJ</a>
   <a href="manhattan/index.html">Manhattan, NY</a>
+  <a href="queens/index.html">Queens, NY</a>
 </div>
 
 <!-- FULL-SCREEN SPLIT -->
@@ -464,6 +465,7 @@ const LOCATIONS = {
       { label:'Long Beach Island, NJ', tag:'live', left:36, top:50, url:'lbi/index.html' },
       { label:'Princeton, NJ', tag:'live', left:34, top:47, url:'princeton/index.html' },
       { label:'Manhattan, NY', tag:'live', left:40, top:44, url:'manhattan/index.html' },
+      { label:'Queens, NY', tag:'live', left:42, top:45, url:'queens/index.html' },
     ]
   },
 
@@ -492,6 +494,7 @@ const LOCATIONS = {
       { label:'Long Beach Island, NJ', tag:'live', left:36, top:50, url:'lbi/index.html' },
       { label:'Princeton, NJ', tag:'live', left:34, top:47, url:'princeton/index.html' },
       { label:'Manhattan, NY', tag:'live', left:40, top:44, url:'manhattan/index.html' },
+      { label:'Queens, NY', tag:'live', left:42, top:45, url:'queens/index.html' },
     ]
   },
 
@@ -706,6 +709,7 @@ const LOCATIONS = {
     eventsLabel: 'New York Events',
     eventsLink: { href: 'new-york/index.html', text: 'New York Guide →' },
     events: [
+      { mo:'AUG', dy:'23',   tag:'events', tagLabel:'Tennis',   name:'US Open',                  meta:'Aug 23 – Sep 13 · Billie Jean King NTC · Flushing Meadows, Queens', url:'queens/index.html#corona', ticket:'https://www.usopen.org' },
       { mo:'SEP', dy:'17–27',tag:'events', tagLabel:'Festival', name:'Feast of San Gennaro',     meta:'100th feast · Mulberry St, Little Italy', url:'manhattan/index.html#little-italy',      ticket:'https://sangennaronyc.org' },
       { mo:'OCT', dy:'16–18',tag:'arts',   tagLabel:'Open House',name:'Open House New York Weekend', meta:'300+ sites citywide · 24th annual',   url:'manhattan/index.html',                    ticket:'https://ohny.org/festival' },
       { mo:'OCT', dy:'31',   tag:'events', tagLabel:'Parade',   name:'Village Halloween Parade', meta:'Sixth Ave, Canal to 15th St · 7 PM',    url:'manhattan/index.html#greenwich-village',  ticket:'https://halloween-nyc.com' },
@@ -715,6 +719,7 @@ const LOCATIONS = {
     ],
     pins: [
       { label:'Manhattan', tag:'live', left:58, top:80, url:'manhattan/index.html' },
+      { label:'Queens', tag:'live', left:63, top:81, url:'queens/index.html' },
     ]
   },
 
@@ -779,6 +784,40 @@ const LOCATIONS = {
       { label:'Washington Heights',  tag:'live', left:45, top:4,  url:'manhattan/index.html#washington-heights' },
       { label:'Inwood',              tag:'live', left:53, top:2,  url:'manhattan/index.html#inwood' },
       { label:'Marble Hill',         tag:'live', left:61, top:1,  url:'manhattan/index.html#marble-hill' },
+    ]
+  },
+
+  'Queens': {
+    mapSrc: 'https://maps.google.com/maps?q=Queens,+New+York,+NY&output=embed&z=11',
+    mapLabel: 'Queens, NY',
+    eventsLabel: 'Happening in Queens',
+    eventsLink: { href: 'queens/index.html', text: 'Queens Guide →' },
+    events: [
+      { mo:'AUG', dy:'23',   tag:'events',  tagLabel:'Tennis',    name:'US Open — Fan Week',        meta:'Aug 23–29 · free grounds admission · Billie Jean King NTC', url:'queens/index.html#corona', ticket:'https://www.usopen.org' },
+      { mo:'AUG', dy:'30',   tag:'events',  tagLabel:'Tennis',    name:'US Open — Main Draw',       meta:'Aug 30 – Sep 13 · Arthur Ashe Stadium · Flushing Meadows', url:'queens/index.html#corona', ticket:'https://www.usopen.org' },
+      { mo:'AUG', dy:'27',   tag:'arts',    tagLabel:'Concert',   name:'Zac Brown Band',            meta:'Aug 27–28 · w/ Grace Potter · Forest Hills Stadium', url:'queens/index.html#forest-hills', ticket:'https://www.foresthillsstadium.com/' },
+      { mo:'AUG', dy:'29',   tag:'arts',    tagLabel:'Concert',   name:'Empire of the Sun',         meta:'w/ Polo & Pan · Forest Hills Stadium', url:'queens/index.html#forest-hills', ticket:'https://www.foresthillsstadium.com/' },
+      { mo:'SEP', dy:'4–6',  tag:'events',  tagLabel:'Baseball',  name:'Mets vs. Giants — Labor Day Weekend', meta:'Citi Field · Willets Point', url:'queens/index.html#corona', ticket:'https://www.mlb.com/mets/tickets' },
+      { mo:'SEP', dy:'18',   tag:'arts',    tagLabel:'Concert',   name:'Erykah Badu',               meta:'Forest Hills Stadium',                url:'queens/index.html#forest-hills', ticket:'https://www.foresthillsstadium.com/' },
+      { mo:'SEP', dy:'19',   tag:'arts',    tagLabel:'Concert',   name:'An Evening with David Byrne', meta:'Forest Hills Stadium',              url:'queens/index.html#forest-hills', ticket:'https://www.foresthillsstadium.com/' },
+      { mo:'SEP', dy:'19',   tag:'dining',  tagLabel:'Night Market', name:'Queens Night Market returns', meta:'Saturdays 4 PM–midnight thru Oct 31 · NY Hall of Science', url:'queens/index.html#corona', ticket:'https://queensnightmarket.com' },
+      { mo:'THU', dy:'7 PM', tag:'arts',    tagLabel:'Free Jazz', name:'Queens Jazz Trail Concert Series', meta:'Free Thursdays through August · parks across Queens', url:'queens/index.html#flushing', ticket:'https://kupferbergcenter.org/qjt/' },
+      { mo:'FRI', dy:'8 PM', tag:'arts',    tagLabel:'Free Jazz', name:'Culture Lab After Dark',    meta:'Free live jazz Fridays · Culture Lab LIC', url:'queens/index.html#long-island-city', ticket:'https://www.culturelablic.org/culturelabafterdark' },
+      { mo:'THRU',dy:'SEP 13',tag:'outdoors',tagLabel:'Beach',    name:'Rockaway Beach swim season',meta:'Lifeguarded through Sep 13 · boardwalk concessions in season', url:'queens/index.html#rockaway-beach', ticket:null },
+      { mo:'ALL', dy:'2026', tag:'arts',    tagLabel:'Free Museum', name:'MoMA PS1 — free admission', meta:'Free to all through 2028 · Long Island City', url:'queens/index.html#long-island-city', ticket:'https://www.momaps1.org/en/visit' },
+      { mo:'OCT', dy:'10',   tag:'arts',    tagLabel:'Concert',   name:'Foster the People — season closer', meta:'w/ Goth Babe · Forest Hills Stadium', url:'queens/index.html#forest-hills', ticket:'https://www.foresthillsstadium.com/' },
+    ],
+    pins: [
+      { label:'Long Island City', tag:'live', left:8,  top:24, url:'queens/index.html#long-island-city' },
+      { label:'Astoria',          tag:'live', left:17, top:14, url:'queens/index.html#astoria' },
+      { label:'Sunnyside',        tag:'live', left:19, top:25, url:'queens/index.html#sunnyside' },
+      { label:'Jackson Heights',  tag:'live', left:30, top:23, url:'queens/index.html#jackson-heights' },
+      { label:'Elmhurst',         tag:'live', left:33, top:25, url:'queens/index.html#elmhurst' },
+      { label:'Corona',           tag:'live', left:41, top:22, url:'queens/index.html#corona' },
+      { label:'Flushing',         tag:'live', left:52, top:19, url:'queens/index.html#flushing' },
+      { label:'Forest Hills',     tag:'live', left:46, top:33, url:'queens/index.html#forest-hills' },
+      { label:'Ridgewood',        tag:'live', left:24, top:40, url:'queens/index.html#ridgewood' },
+      { label:'Rockaway Beach',   tag:'live', left:57, top:83, url:'queens/index.html#rockaway-beach' },
     ]
   },
 
