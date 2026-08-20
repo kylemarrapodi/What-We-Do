@@ -38,7 +38,7 @@
     hint.textContent = (navigator.platform.indexOf('Mac') !== -1 ? '⌘' : 'Ctrl') + ' + scroll to zoom the map';
     hint.style.cssText =
       'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;' +
-      'background:rgba(15,22,38,0.55);color:#fff;font:600 0.85rem Inter,sans-serif;' +
+      'background:rgba(15,22,38,0.55);color:#fff;font:600 0.85rem "Source Sans 3",sans-serif;' +
       'z-index:1000;opacity:0;pointer-events:none;transition:opacity 0.15s;text-align:center;padding:1rem;';
     container.appendChild(hint);
 

@@ -52,7 +52,7 @@ closer to how it'll actually be hosted.
 
 ## Needs internet
 
-- **Google Fonts** — Playfair Display + Inter (`fonts.googleapis.com`)
+- **Google Fonts** — Lora + Source Sans 3 (`fonts.googleapis.com`)
 - **Google Maps** — embedded map iframes (`maps.google.com`)
 
 Both are external embeds; offline they degrade to system fonts and an empty map

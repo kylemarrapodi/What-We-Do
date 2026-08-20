@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Princeton, NJ — The Concierge</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../styles.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     html, body { height: 100%; overflow: hidden; }
-    .nb-label { background: rgba(255,255,255,0.92); border: none; box-shadow: 0 1px 4px rgba(0,0,0,0.2); font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600; color: var(--navy); }
+    .nb-label { background: rgba(255,255,255,0.92); border: none; box-shadow: 0 1px 4px rgba(0,0,0,0.2); font-family: 'Source Sans 3', sans-serif; font-size: 0.72rem; font-weight: 600; color: var(--navy); }
 
     /* Full-screen scrollable panel below fixed nav */
     .page-wrap {
@@ -57,7 +57,7 @@
     .highlight-card h4 { font-size: 0.74rem; color: var(--navy); margin-bottom: 0; font-weight: 600; line-height: 1.2; }
     .highlight-card p { display: none; }
     .highlight-card .big-num {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Lora', serif;
       font-size: 1.3rem;
       color: var(--gold);
       font-weight: 700;
@@ -99,7 +99,7 @@
     .event-row { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 0.85rem 1rem; display: flex; gap: 1rem; align-items: flex-start; }
     .event-date-badge { background: var(--gold); color: var(--navy); border-radius: 6px; padding: 0.3rem 0.55rem; text-align: center; flex-shrink: 0; min-width: 44px; }
     .event-date-badge .month { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1; }
-    .event-date-badge .day { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; line-height: 1.1; }
+    .event-date-badge .day { font-family: 'Lora', serif; font-size: 1.2rem; font-weight: 700; line-height: 1.1; }
     .event-info h4 { font-size: 0.88rem; color: var(--navy); margin-bottom: 0.2rem; }
     .event-info p { font-size: 0.77rem; color: var(--sub); margin: 0; line-height: 1.45; }
     .event-info a { color: var(--navy); font-weight: 600; text-decoration: none; }
