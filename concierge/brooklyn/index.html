@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brooklyn, NY — The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .nb-label { background: rgba(255,255,255,0.92); border: none; box-shadow: 0 1px 4px rgba(0,0,0,0.2); font-family: 'Source Sans 3', sans-serif; font-size: 0.72rem; font-weight: 600; color: var(--navy); }
+
+    .page-wrap {
+      position: fixed;
+      top: 68px; left: 0; right: 0; bottom: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      background: var(--white);
+    }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+
+    .city-hero { padding: 2.5rem 5% 2rem; }
+    .city-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
+    .city-hero .hero-sub { font-size: 0.9rem; margin-bottom: 1rem; }
+    .city-hero-meta { font-size: 0.8rem; gap: 1rem; }
+
+    /* Hero stat bubbles: compact vertical stack, right of the title */
+    .hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; }
+    .hero-main { flex: 1; min-width: 0; }
+    .hero-stats-stack { display: flex; flex-direction: column; gap: 0.5rem; flex-shrink: 0; width: 176px; }
+    .hero-stat-card { background: var(--white); border-radius: var(--radius); padding: 0.5rem 0.85rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); text-align: right; }
+    .hero-stat-card h4 { font-size: 0.64rem; color: var(--navy); margin: 0.12rem 0 0.08rem; }
+    .hero-stat-card p { font-size: 0.6rem; color: var(--sub); line-height: 1.25; }
+    .hero-stat-card .big-num { font-family: 'Lora', serif; font-size: 1.1rem; color: var(--gold); font-weight: 700; line-height: 1; }
+    @media (max-width: 720px) {
+      .hero-top { flex-direction: column; }
+      .hero-stats-stack { width: 100%; flex-direction: row; flex-wrap: wrap; }
+      .hero-stat-card { flex: 1; min-width: 130px; text-align: left; }
+    }
+
+    .section { padding: 2.5rem 5%; }
+    .section-sm { padding: 1.75rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+
+    /* Jump nav to neighborhood sections */
+    .jump-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .jump-nav a {
+      font-size: 0.78rem; font-weight: 600; color: var(--navy);
+      background: var(--white); border: 1px solid var(--border); border-radius: 50px;
+      padding: 0.4rem 0.9rem; text-decoration: none; transition: all 0.15s;
+    }
+    .jump-nav a:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+
+    /* Neighborhood section block */
+    .nbhood { padding: 2.25rem 5%; scroll-margin-top: 80px; }
+    .nbhood:nth-child(even) { background: var(--mist); }
+    .nbhood-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.35rem; }
+    .nbhood-head h2 { font-size: 1.5rem; }
+    .nbhood-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--gold); background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.35); border-radius: 50px; padding: 0.25rem 0.7rem; white-space: nowrap; }
+    .nbhood-desc { font-size: 0.9rem; color: var(--ink, #333); line-height: 1.7; max-width: 780px; margin-bottom: 1.25rem; }
+    .nbhood-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+
+    /* Page-level content grid: main content column + persistent sticky map
+       sidebar — same structure as the Manhattan and Queens pages. */
+    .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; padding: 0 5%; align-items: start; }
+    .content-main { min-width: 0; }
+    .map-sidebar { position: sticky; top: 68px; display: flex; flex-direction: column; gap: 1.5rem; }
+    .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border); }
+
+    @media (max-width: 900px) {
+      .two-col { grid-template-columns: 1fr; }
+      .content-grid { grid-template-columns: 1fr; }
+      .map-sidebar { position: static; }
+    }
+
+    /* Tighter listing cards now that descriptions are one short sentence */
+    .nbhood-grid .card-body { padding: 0.9rem 1rem; }
+    .nbhood-grid .card-desc { font-size: 0.82rem; line-height: 1.4; }
+    .nbhood-grid .card-meta { margin-bottom: 0.3rem; }
+  </style>
+</head>
+<body data-page-location="Brooklyn" data-music-key="brooklyn">
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../new-york/index.html'">New York</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Brooklyn</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../index.html">Home</a>
+  <a href="../new-york/index.html">New York</a>
+  <a href="../manhattan/index.html">Manhattan, NY</a>
+  <a href="../queens/index.html">Queens, NY</a>
+  <a href="index.html" class="active">Brooklyn, NY</a>
+</div>
+
+<!-- SCROLLABLE PAGE PANEL -->
+<div class="page-wrap">
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="../index.html">Home</a>
+    <span class="sep">›</span>
+    <a href="../new-york/index.html">New York</a>
+    <span class="sep">›</span>
+    <span>Brooklyn</span>
+  </div>
+
+  <!-- CITY HERO -->
+  <section class="city-hero">
+    <div class="hero-top">
+      <div class="hero-main">
+        <div class="section-label">New York</div>
+        <h1>Brooklyn, <span>NY</span></h1>
+        <p class="hero-sub">Kings County was its own city until 1898, and it never quite stopped acting like one — about 2.7 million people across 70 square miles, more than any other borough, enough that an independent Brooklyn would be the fourth-largest city in America. This guide starts with ten essential neighborhoods: the East River waterfront from Greenpoint to DUMBO, the brownstone belt from Brooklyn Heights to Park Slope, the museums on the park's flank, Bushwick's murals, and the boardwalk empire at Coney Island — with dozens more of the borough still to come.</p>
+        <div class="city-hero-meta">
+          <span>📍 Kings County, NY</span>
+          <span>🏙️ ~2.7M residents — the most populous borough</span>
+          <span>🗺️ 70 sq mi</span>
+          <span>🌉 An independent Brooklyn would be America's 4th-largest city</span>
+        </div>
+      </div>
+      <div class="hero-stats-stack">
+        <div class="hero-stat-card">
+          <div class="big-num">2.7M</div>
+          <h4>Residents</h4>
+          <p>The most populous of NYC's five boroughs</p>
+        </div>
+        <div class="hero-stat-card">
+          <div class="big-num">70</div>
+          <h4>Square Miles</h4>
+          <p>Coextensive with Kings County</p>
+        </div>
+        <div class="hero-stat-card">
+          <div class="big-num">4th</div>
+          <h4>Largest U.S. City</h4>
+          <p>If Brooklyn stood alone, only NYC, LA and Chicago would be bigger</p>
+        </div>
+        <div class="hero-stat-card">
+          <div class="big-num">10</div>
+          <h4>Neighborhoods</h4>
+          <p>A starter set — the borough holds dozens more</p>
+        </div>
+      </div>
+    </div>
+    <div class="jump-nav">
+      <a href="#williamsburg">Williamsburg</a>
+      <a href="#greenpoint">Greenpoint</a>
+      <a href="#dumbo">DUMBO</a>
+      <a href="#brooklyn-heights">Brooklyn Heights</a>
+      <a href="#downtown-brooklyn">Downtown Brooklyn</a>
+      <a href="#fort-greene">Fort Greene</a>
+      <a href="#park-slope">Park Slope</a>
+      <a href="#prospect-heights">Prospect Heights</a>
+      <a href="#bushwick">Bushwick</a>
+      <a href="#coney-island">Coney Island</a>
+    </div>
+  </section>
+
+  <div class="content-grid">
+  <div class="content-main">
+
+  <!-- ══════════════ NEIGHBORHOODS ══════════════ -->
+
+  <!-- WILLIAMSBURG -->
+  <section class="nbhood" id="williamsburg">
+    <div class="nbhood-head">
+      <h2>Williamsburg</h2>
+      <span class="nbhood-tag">Bedford Ave &amp; the Bridge</span>
+    </div>
+    <p class="nbhood-desc">
+      The neighborhood that rewrote what "Brooklyn" means to the rest of the world — a waterfront of former refineries and breweries turned into parks, food markets and venues, with the oldest steakhouse in the city still holding down Broadway under the bridge (since 1887). It's a neighborhood in visible motion right now: Brooklyn Brewery pours its last beers on North 11th Street on August 29 before moving a few blocks north, and the Music Hall of Williamsburg is playing out its final year.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag events">Food Market · Saturdays thru October</span>
+          <div class="card-title">Smorgasburg Williamsburg</div>
+          <div class="card-meta"><span>📍 Marsha P. Johnson State Park, 90 Kent Ave</span></div>
+          <p class="card-desc">The giant open-air food market on the East River — 70-plus vendors every Saturday 11 AM–6 PM, April through October, with the Manhattan skyline for a backdrop. Free to enter.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag featured">Last Pours · Aug 29</span>
+          <div class="card-title">Brooklyn Brewery</div>
+          <div class="card-meta"><span>📍 79 N 11th St</span></div>
+          <p class="card-desc">The brewery that helped launch craft beer in New York closes its longtime North 11th Street home on August 29, 2026 — a farewell party with fresh beer and live music — before reopening at 1 Wythe Ave, across the Greenpoint line, this fall.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Steakhouse · Est. 1887</span>
+          <div class="card-title">Peter Luger Steak House</div>
+          <div class="card-meta"><span>📍 178 Broadway</span></div>
+          <p class="card-desc">The wood-paneled porterhouse temple under the Williamsburg Bridge, serving since 1887 — still the standard every New York steakhouse gets measured against.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Venue · Final Year</span>
+          <div class="card-title">Music Hall of Williamsburg</div>
+          <div class="card-meta"><span>📍 66 N 6th St</span></div>
+          <p class="card-desc">The Bowery Presents club that anchored the neighborhood's indie era closes at the end of 2026 after losing its lease — but the calendar runs full through December. Catch it while you can.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Waterfront Park</span>
+          <div class="card-title">Domino Park</div>
+          <div class="card-meta"><span>📍 300 Kent Ave, at the Williamsburg Bridge</span></div>
+          <p class="card-desc">Six acres of public waterfront built on the old Domino Sugar Refinery site — a tribute to the generations of Domino workers, with salvaged refinery machinery standing along the esplanade.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">New Music</span>
+          <div class="card-title">National Sawdust</div>
+          <div class="card-meta"><span>📍 80 N 6th St</span></div>
+          <p class="card-desc">A nonprofit incubator for new and experimental music in a jewel-box room with a state-of-the-art Meyer spatial sound system — composers and premieres you won't hear anywhere else.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Indie Room · 330 Cap</span>
+          <div class="card-title">Baby's All Right</div>
+          <div class="card-meta"><span>📍 146 Broadway</span></div>
+          <p class="card-desc">The Southside's essential small stage — a 330-capacity room and bar where rising acts of every genre land almost nightly.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Park &amp; WPA Pool</span>
+          <div class="card-title">McCarren Park &amp; Pool</div>
+          <div class="card-meta"><span>📍 Pool at 776 Lorimer St</span></div>
+          <p class="card-desc">The big shared backyard on the Greenpoint line — ballfields, a track, and the huge McCarren Pool, open free each summer from late June through early September.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GREENPOINT -->
+  <section class="nbhood" id="greenpoint">
+    <div class="nbhood-head">
+      <h2>Greenpoint</h2>
+      <span class="nbhood-tag">Little Poland on the East River</span>
+    </div>
+    <p class="nbhood-desc">
+      Brooklyn's northernmost neighborhood is still the heart of Polish New York — pierogi and paczki along Manhattan Avenue, a 1914 Polish National Home that doubles as one of the city's best rock rooms — with a working-waterfront edge that has softened into parks and ferry stops. The next chapter is already arriving: Brooklyn Brewery's new home at 1 Wythe Ave, in the Greenpoint-Williamsburg industrial zone, opens this fall.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Waterfront Park</span>
+          <div class="card-title">WNYC Transmitter Park</div>
+          <div class="card-meta"><span>📍 Greenpoint Ave at the East River</span></div>
+          <p class="card-desc">Six and a half acres where WNYC's old radio towers once stood — lawns, gardens and a fishing pier pointed straight at Midtown.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Venue · Polish National Home</span>
+          <div class="card-title">Warsaw</div>
+          <div class="card-meta"><span>📍 261 Driggs Ave</span></div>
+          <p class="card-desc">The ballroom of the 1914 Polish National Home has hosted punk and indie shows since 2001 — a 1,000-capacity hall where you can eat pierogi and kielbasa while the band plays.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Polish Tavern</span>
+          <div class="card-title">Karczma</div>
+          <div class="card-meta"><span>📍 136 Greenpoint Ave</span></div>
+          <p class="card-desc">A wood-beamed country tavern that has packed them in for well over a decade — platters of kielbasa, hunter's stew and potato pancakes at gentle prices.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Donut Counter · Since 1953</span>
+          <div class="card-title">Peter Pan Donut &amp; Pastry Shop</div>
+          <div class="card-meta"><span>📍 727 Manhattan Ave</span></div>
+          <p class="card-desc">The Polish-run counter that has fried Greenpoint's donuts since the early 1950s — old booths, paper hats, and a line out the door on weekends.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag featured">Opening This Fall</span>
+          <div class="card-title">Brooklyn Brewery's Next Home</div>
+          <div class="card-meta"><span>📍 1 Wythe Ave</span></div>
+          <p class="card-desc">The brewery's new headquarters — nearly four times the size of the old one — lands on the Greenpoint side of the line, with brewery tours and guided tastings set to return when it opens this fall.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DUMBO -->
+  <section class="nbhood" id="dumbo">
+    <div class="nbhood-head">
+      <h2>DUMBO</h2>
+      <span class="nbhood-tag">Between the Bridges</span>
+    </div>
+    <p class="nbhood-desc">
+      Down Under the Manhattan Bridge Overpass: Belgian-block streets and Civil War-era warehouses wedged between the two great East River bridges, now the borough's postcard — the Washington Street view of the Manhattan Bridge arch is one of the most photographed corners in New York. The old ferry landing at Old Fulton Street holds a genuine pizza dynasty, and the warehouses hold a carousel, a food hall and one of the country's most adventurous theaters.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">The Waterfront</span>
+          <div class="card-title">Brooklyn Bridge Park — Empire Fulton Ferry</div>
+          <div class="card-meta"><span>📍 Water St between the bridges</span></div>
+          <p class="card-desc">The DUMBO stretch of the 85-acre park that runs 1.3 miles along six piers of formerly abandoned shoreline — this is the lawn-under-the-bridge section, with the skyline dead ahead.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag featured">Landmark Carousel</span>
+          <div class="card-title">Jane's Carousel</div>
+          <div class="card-meta"><span>📍 Dock St &amp; Water St, in the park</span></div>
+          <p class="card-desc">A lovingly restored antique carousel turning in a glass pavilion right on the river — summer hours Wed–Mon 11 AM–7 PM, winter Thu–Sun 11–6, closed Tuesdays.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Food Hall · Rooftop</span>
+          <div class="card-title">Time Out Market New York</div>
+          <div class="card-meta"><span>📍 55 Water St, in Empire Stores</span></div>
+          <p class="card-desc">Twenty-four thousand square feet of hand-picked New York eateries and three bars inside the Empire Stores warehouse, with a fifth-floor rooftop staring at both bridges. Open daily from 8 AM.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Theater · Fall Season</span>
+          <div class="card-title">St. Ann's Warehouse</div>
+          <div class="card-meta"><span>📍 45 Water St</span></div>
+          <p class="card-desc">The adventurous stage in an 1860s tobacco warehouse opens its fall 2026 season with Daniel Fish's Kramer/Fauci (Sep 27–Oct 24), Emma Rice's Tristan &amp; Yseult and Saigon — plus 50 life-size buffalo puppets parading through Downtown Brooklyn Sep 19–20.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Pizza · The Return</span>
+          <div class="card-title">Juliana's</div>
+          <div class="card-meta"><span>📍 19 Old Fulton St</span></div>
+          <p class="card-desc">Patsy Grimaldi came out of retirement in 2012 to reclaim his original address under the bridge, naming the new place for his mother — coal-oven pies daily, 11:30 AM on.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Pizza · The Original Name</span>
+          <div class="card-title">Grimaldi's</div>
+          <div class="card-meta"><span>📍 1 Front St</span></div>
+          <p class="card-desc">The pizzeria Patsy founded in 1990 and sold in the '90s now bakes next door at 1 Front Street — so the corner of Old Fulton holds both halves of Brooklyn's great pizza rivalry.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BROOKLYN HEIGHTS -->
+  <section class="nbhood" id="brooklyn-heights">
+    <div class="nbhood-head">
+      <h2>Brooklyn Heights</h2>
+      <span class="nbhood-tag">America's First Suburb</span>
+    </div>
+    <p class="nbhood-desc">
+      Rows of Greek Revival and brownstone streets above the harbor, commuting to Wall Street by ferry since the early 1800s — with the whole show summed up from the Promenade, the walkway cantilevered over the expressway with the Lower Manhattan skyline, the harbor and the Statue of Liberty laid out in one panorama. Montague Street is the neighborhood's main street, and the borough's own history museum lives in a landmark hall on Pierrepont.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">The View</span>
+          <div class="card-title">Brooklyn Heights Promenade</div>
+          <div class="card-meta"><span>📍 Enter at Montague, Pierrepont, Clark or Pineapple Sts</span></div>
+          <p class="card-desc">An 1,826-foot esplanade cantilevered over the BQE — the unobstructed panorama of Lower Manhattan, the bridges, the harbor and the Statue of Liberty that everyone means when they say "the view from Brooklyn."</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Museum &amp; Library · Wed–Sun</span>
+          <div class="card-title">Center for Brooklyn History</div>
+          <div class="card-meta"><span>📍 128 Pierrepont St</span></div>
+          <p class="card-desc">The borough's attic — Brooklyn Public Library's history center in the landmark former Long Island Historical Society hall, freshly renovated and open Wed–Sun 12–5.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Landmark · Est. 1847</span>
+          <div class="card-title">Plymouth Church</div>
+          <div class="card-meta"><span>📍 57 Orange St</span></div>
+          <p class="card-desc">Henry Ward Beecher's abolitionist congregation — a National Historic Landmark and Underground Railroad station, with history tours most Sundays at 12:30 after worship.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Grocer · On Atlantic Since 1948</span>
+          <div class="card-title">Sahadi's</div>
+          <div class="card-meta"><span>📍 187 Atlantic Ave</span></div>
+          <p class="card-desc">The Middle Eastern grocery that started in Manhattan in 1895 and has anchored Atlantic Avenue since 1948 — barrels of olives, roasted nuts and spices, now on the state's Historic Business Preservation Registry.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">The Main Street</span>
+          <div class="card-title">Montague Street</div>
+          <div class="card-meta"><span>📍 Montague St, Promenade to Court St</span></div>
+          <p class="card-desc">The Heights' restaurant row and shopping street, running from the Promenade's southern gate past the Gothic Revival towers of St. Ann &amp; the Holy Trinity.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Museum · In a Real Station</span>
+          <div class="card-title">New York Transit Museum</div>
+          <div class="card-meta"><span>📍 99 Schermerhorn St</span></div>
+          <p class="card-desc">Vintage subway cars lined up on real tracks in a decommissioned station — the city's transit story told underground, on the Heights' side of the Downtown line.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNTOWN BROOKLYN -->
+  <section class="nbhood" id="downtown-brooklyn">
+    <div class="nbhood-head">
+      <h2>Downtown Brooklyn</h2>
+      <span class="nbhood-tag">Fulton &amp; Flatbush</span>
+    </div>
+    <p class="nbhood-desc">
+      The borough's civic and commercial core — Borough Hall presiding over the courts and the Fulton Street shopping spine, with a food hall in the basement of a shopping tower and the original Junior's holding the corner of Flatbush and DeKalb. Two neighbors sit just over the district lines: Barclays Center at Atlantic &amp; Flatbush (listed under Park Slope, where its block actually falls) and the Brooklyn Paramount on the Fort Greene side of Flatbush Avenue Extension.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Food Hall · 40 Vendors</span>
+          <div class="card-title">Dekalb Market Hall</div>
+          <div class="card-meta"><span>📍 445 Albee Square West, below City Point</span></div>
+          <p class="card-desc">Sixty thousand square feet of New York food under one roof — about forty vendors' worth of everything, in the basement of the City Point complex.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">The Cheesecake</span>
+          <div class="card-title">Junior's</div>
+          <div class="card-meta"><span>📍 386 Flatbush Ave Ext, at DeKalb Ave</span></div>
+          <p class="card-desc">The original — the orange-boothed Brooklyn institution whose New York-style cheesecake made the corner of Flatbush and DeKalb famous.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Civic Landmark</span>
+          <div class="card-title">Brooklyn Borough Hall</div>
+          <div class="card-meta"><span>📍 209 Joralemon St</span></div>
+          <p class="card-desc">The old City of Brooklyn's city hall, still the borough's front porch — and the hub of the Brooklyn Book Festival's stages each September.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag events">Book Fest · Sep 20–28</span>
+          <div class="card-title">Brooklyn Book Festival</div>
+          <div class="card-meta"><span>📍 Festival Day Sep 27 around Borough Hall</span></div>
+          <p class="card-desc">One of the country's big free literary festivals — nine days of author events citywide, with Festival Day and its literary marketplace filling eight indoor and outdoor stages around Borough Hall on September 27.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Dine-In Cinema</span>
+          <div class="card-title">Alamo Drafthouse — City Point</div>
+          <div class="card-meta"><span>📍 445 Albee Square West, 4th &amp; 5th floors</span></div>
+          <p class="card-desc">The movie-obsessive dine-in cinema atop City Point — recliners with built-in tables, strict no-talking rules, and a repertory calendar alongside first runs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORT GREENE -->
+  <section class="nbhood" id="fort-greene">
+    <div class="nbhood-head">
+      <h2>Fort Greene</h2>
+      <span class="nbhood-tag">The Park &amp; the Academy</span>
+    </div>
+    <p class="nbhood-desc">
+      Brownstone blocks around a Revolutionary hilltop park, with the Brooklyn Academy of Music — BAM — as the neighborhood's cultural engine on Lafayette Avenue. The park's summit carries the Prison Ship Martyrs' Monument, a 149-foot Doric column over a crypt for the thousands of American prisoners who died on British ships in Wallabout Bay; the streets below carry one of the borough's best Saturday markets and its flagship independent bookstore.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Park &amp; Monument</span>
+          <div class="card-title">Fort Greene Park</div>
+          <div class="card-meta"><span>📍 Between Myrtle &amp; DeKalb Aves</span></div>
+          <p class="card-desc">The hilltop park crowned by Stanford White's 1908 Prison Ship Martyrs' Monument — a 149-foot granite column honoring the 11,500-plus patriots who died on the British prison ships anchored offshore.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Performing Arts · Next Wave</span>
+          <div class="card-title">BAM — Brooklyn Academy of Music</div>
+          <div class="card-meta"><span>📍 Peter Jay Sharp Building, 30 Lafayette Ave</span></div>
+          <p class="card-desc">America's great avant-garde house. The fall 2026 Next Wave festival builds toward DanceAfrica's 50th anniversary — and the Philip Glass Ensemble plays Einstein on the Beach 50th-anniversary concerts Nov 19–21.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Concert Palace</span>
+          <div class="card-title">Brooklyn Paramount</div>
+          <div class="card-meta"><span>📍 385 Flatbush Ave Ext</span></div>
+          <p class="card-desc">The gilded Paramount movie palace reborn as a full-time concert hall on the Fort Greene side of Flatbush Ave Extension — Peter Hook &amp; The Light (Sep 5), Lucki (Sep 8–9) and Polyphia (Oct 5) this fall.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Bookstore</span>
+          <div class="card-title">Greenlight Bookstore</div>
+          <div class="card-meta"><span>📍 686 Fulton St</span></div>
+          <p class="card-desc">Fort Greene's flagship independent — a deep events calendar of author nights, plus story time across the street at the park's Saturday Greenmarket.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Cuban · Seasonal Courtyard</span>
+          <div class="card-title">Habana Outpost</div>
+          <div class="card-meta"><span>📍 757 Fulton St</span></div>
+          <p class="card-desc">The corner Cuban courtyard party — grilled corn and frozen mojitos in season, back in the swing after its long pandemic pause.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Market · Saturdays Year-Round</span>
+          <div class="card-title">Fort Greene Park Greenmarket</div>
+          <div class="card-meta"><span>📍 Washington Park, DeKalb to Willoughby</span></div>
+          <p class="card-desc">GrowNYC's market along the park's chestnut-shaded eastern edge — farmstands, compost and clothing collection every Saturday, 8 AM–4 PM, all year.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARK SLOPE -->
+  <section class="nbhood" id="park-slope">
+    <div class="nbhood-head">
+      <h2>Park Slope</h2>
+      <span class="nbhood-tag">Brownstones to the Plaza</span>
+    </div>
+    <p class="nbhood-desc">
+      The brownstone neighborhood par excellence, sloping from the Gowanus flats up to Prospect Park West — Fifth and Seventh Avenues carry the restaurants and bars, and the city's shape for the neighborhood runs north to Atlantic Avenue and across the Grand Army Plaza oval, which is why the arena and the arch both belong to this section. The Revolutionary War's biggest early battle swept across these blocks in August 1776, and its most storied site still stands in Washington Park.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag events">Arena · At Atlantic &amp; Flatbush</span>
+          <div class="card-title">Barclays Center</div>
+          <div class="card-meta"><span>📍 620 Atlantic Ave</span></div>
+          <p class="card-desc">The borough's arena — Nets basketball (home opener Oct 21 vs. Charlotte), Liberty games, and a fall of big rooms: Robyn (Sep 4 &amp; 10), Charli xcx (Sep 14–15), Phoebe Bridgers (Sep 24–26), Weezer (Sep 30).</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Market · Saturdays Year-Round</span>
+          <div class="card-title">Grand Army Plaza Greenmarket</div>
+          <div class="card-meta"><span>📍 NW plaza entrance to Prospect Park</span></div>
+          <p class="card-desc">Greenmarket's flagship Brooklyn market since 1989 and the program's second largest — dozens of regional farmstands every Saturday 8 AM–4 PM, all year.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Monument · Restored 2025</span>
+          <div class="card-title">Soldiers' &amp; Sailors' Memorial Arch</div>
+          <div class="card-meta"><span>📍 Grand Army Plaza</span></div>
+          <p class="card-desc">Brooklyn's triumphal arch, dedicated 1892 to the Union forces with Frederick MacMonnies' bronzes on John Duncan's granite — fresh from an $8.9M restoration completed in June 2025.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Bar · Bocce · Basement Stage</span>
+          <div class="card-title">Union Hall</div>
+          <div class="card-meta"><span>📍 702 Union St</span></div>
+          <p class="card-desc">A library-with-fireplaces bar with two indoor bocce courts upstairs and a downstairs room for comedy and bands — famous for secret shows by the likes of St. Vincent and Fleet Foxes.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Venetian · Since 1998</span>
+          <div class="card-title">al di là Trattoria</div>
+          <div class="card-meta"><span>📍 248 Fifth Ave</span></div>
+          <p class="card-desc">The corner Venetian trattoria that has anchored Fifth Avenue dining since 1998 — braises, handmade pasta, and a room that has barely needed to change.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">World Music · Nightly</span>
+          <div class="card-title">Barbès</div>
+          <div class="card-meta"><span>📍 376 9th St</span></div>
+          <p class="card-desc">A little French-owned bar with live music nightly in the back room — Peruvian cumbia, Guinean jazz, Venezuelan harp, Balkan brass — one of the great listening rooms in the city.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Battle of Brooklyn · 1776</span>
+          <div class="card-title">The Old Stone House</div>
+          <div class="card-meta"><span>📍 336 3rd St, in Washington Park</span></div>
+          <p class="card-desc">A 1933 rebuilding of the 1699 Vechte-Cortelyou farmhouse where the Maryland 400 made their sacrificial stand in the Battle of Brooklyn (Aug 27, 1776) — now a small museum and community hall.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROSPECT HEIGHTS -->
+  <section class="nbhood" id="prospect-heights">
+    <div class="nbhood-head">
+      <h2>Prospect Heights</h2>
+      <span class="nbhood-tag">Museums on the Meadow</span>
+    </div>
+    <p class="nbhood-desc">
+      A compact brownstone neighborhood with an outsize cultural flank: the Brooklyn Museum, the Botanic Garden, the Central Library and Prospect Park itself all line its edges along Eastern Parkway and Flatbush — this guide draws the neighborhood and Olmsted &amp; Vaux's 526-acre park as one piece. Vanderbilt Avenue is the restaurant spine, car-free on summer Saturdays, and Carnival takes over Eastern Parkway every Labor Day.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Museum · First Saturdays</span>
+          <div class="card-title">Brooklyn Museum</div>
+          <div class="card-meta"><span>📍 200 Eastern Parkway</span></div>
+          <p class="card-desc">New York's second-largest museum — 560,000 square feet of McKim, Mead &amp; White Beaux-Arts holding half a million objects. Open Wed–Sun 11–6 (Thu to 10), with free First Saturday nights 5–11 in select months — next on Oct 3; there's no September edition.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Garden · Closed Mondays</span>
+          <div class="card-title">Brooklyn Botanic Garden</div>
+          <div class="card-meta"><span>📍 990 Washington Ave</span></div>
+          <p class="card-desc">The beloved garden beside the museum, laid out by the Olmsted Brothers' firm — $22 adults, under-12s free, with early 8 AM openings in the warm months.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">The Park · 526 Acres</span>
+          <div class="card-title">Prospect Park</div>
+          <div class="card-meta"><span>📍 Main entrance at Grand Army Plaza</span></div>
+          <p class="card-desc">Olmsted and Vaux's 526-acre landscape, with Grand Army Plaza laid out in 1867 as its grand formal entrance — the Long Meadow, the Ravine and the lake unfold from there.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Library · Landmark</span>
+          <div class="card-title">Central Library, Brooklyn Public Library</div>
+          <div class="card-meta"><span>📍 10 Grand Army Plaza</span></div>
+          <p class="card-desc">The system's Art Deco flagship — a 50-foot gilded entry portico set into a concave limestone façade that mirrors the plaza's ellipse. A city landmark since 1997.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag events">Open Street · Sat thru September</span>
+          <div class="card-title">Vanderbilt Avenue Open Street</div>
+          <div class="card-meta"><span>📍 Vanderbilt Ave, Atlantic Ave to Grand Army Plaza</span></div>
+          <p class="card-desc">The neighborhood's dining spine goes car-free every Saturday noon–10 PM through the end of September — outdoor tables, picnics and live performances down the middle of the avenue.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag events">Carnival · Labor Day Sep 7</span>
+          <div class="card-title">West Indian American Day Carnival</div>
+          <div class="card-meta"><span>📍 Eastern Parkway</span></div>
+          <p class="card-desc">Carnival week runs Aug 27–Sep 7, and the main parade rolls down Eastern Parkway on Labor Day from 10 AM — mas bands, steel pan and millions of spectators, with J'Ouvert before dawn.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUSHWICK -->
+  <section class="nbhood" id="bushwick">
+    <div class="nbhood-head">
+      <h2>Bushwick</h2>
+      <span class="nbhood-tag">Murals After Midnight</span>
+    </div>
+    <p class="nbhood-desc">
+      The old German brewing district reinvented itself twice — first as a Latin American neighborhood anchored by Maria Hernandez Park, then as the city's open-air gallery, with block after block of commissioned murals around Troutman Street. After dark it runs on warehouse stages and taprooms; by day the murals do the talking.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Street Art · Free · Always On</span>
+          <div class="card-title">The Bushwick Collective</div>
+          <div class="card-meta"><span>📍 Troutman St around St Nicholas Ave</span></div>
+          <p class="card-desc">Lifelong resident Joe Ficalora turned his blocks into a rotating outdoor gallery for local and international muralists — start at Troutman and St Nicholas and just keep walking.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Circus Nightclub</span>
+          <div class="card-title">House of Yes</div>
+          <div class="card-meta"><span>📍 2 Wyckoff Ave</span></div>
+          <p class="card-desc">The costume-forward performance nightclub where aerialists share the room with the DJ — theme nights, cabaret and dance parties on a packed 2026 calendar.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">The Neighborhood Park</span>
+          <div class="card-title">Maria Hernandez Park</div>
+          <div class="card-meta"><span>📍 Knickerbocker Ave &amp; Starr St</span></div>
+          <p class="card-desc">Bushwick's living room — the 1890s park (once P.T. Barnum's circus lot) renamed in 1989 for the anti-drug community activist murdered that year in her Starr Street home.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Brewery Taproom</span>
+          <div class="card-title">Kings County Brewers Collective</div>
+          <div class="card-meta"><span>📍 381 Troutman St</span></div>
+          <p class="card-desc">Bushwick's first brewery in over forty years — hazy IPAs and tart sours from three brewers, poured in a taproom as muraled as the street outside.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Next Door · Moore St</span>
+          <div class="card-title">Roberta's</div>
+          <div class="card-meta"><span>📍 261 Moore St, across the East Williamsburg line</span></div>
+          <p class="card-desc">The wood-fired pizza compound that put this corner of Brooklyn on the world's food map — technically a few blocks over the city's East Williamsburg line, and inseparable from the Bushwick scene it seeded.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONEY ISLAND -->
+  <section class="nbhood" id="coney-island">
+    <div class="nbhood-head">
+      <h2>Coney Island</h2>
+      <span class="nbhood-tag">The People's Playground</span>
+    </div>
+    <p class="nbhood-desc">
+      America's original seaside amusement capital, still running on hot dogs, wooden coasters and ocean air at the end of the subway line. The 2026 season opened in March with the traditional egg-cream christening of the Cyclone — which turns 100 next year — and the baseball season ends right here: the Brooklyn Cyclones close the year with a Sep 1–6 homestand beside the boardwalk.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag events">Amusement Park · 2026 Season</span>
+          <div class="card-title">Luna Park</div>
+          <div class="card-meta"><span>📍 1000 Surf Ave</span></div>
+          <p class="card-desc">The modern amusement park at the heart of the old playground — open daily in summer, typically 11 AM to 10 PM, with the season running from late March into the fall.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag featured">Coaster · 100 in 2027</span>
+          <div class="card-title">The Cyclone</div>
+          <div class="card-meta"><span>📍 Surf Ave &amp; W 10th St</span></div>
+          <p class="card-desc">The legendary 1927 wooden coaster celebrated its 99th birthday this June — every season still opens with the egg-cream christening of its front car, and the 100th-anniversary countdown is on.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag featured">Wheel · Since 1920</span>
+          <div class="card-title">Deno's Wonder Wheel</div>
+          <div class="card-meta"><span>📍 3059 W 12th St</span></div>
+          <p class="card-desc">The 150-foot eccentric wheel — its swinging cars have slid on their tracks since 1920 — a city landmark that opened its 106th season with the 71st annual Blessing of the Rides.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Hot Dogs · Since 1916</span>
+          <div class="card-title">Nathan's Famous — The Original</div>
+          <div class="card-meta"><span>📍 Surf &amp; Stillwell Aves</span></div>
+          <p class="card-desc">The nickel hot-dog stand that made the frankfurter a national food — open every day since 1916 on the same corner, now co-named for its founders.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Aquarium</span>
+          <div class="card-title">New York Aquarium</div>
+          <div class="card-meta"><span>📍 602 Surf Ave at W 8th St</span></div>
+          <p class="card-desc">The Wildlife Conservation Society's seaside aquarium on the boardwalk — sharks, sea lions and ocean conservation with the Atlantic right outside.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag events">Baseball · Final Homestand Sep 1–6</span>
+          <div class="card-title">Brooklyn Cyclones at Maimonides Park</div>
+          <div class="card-meta"><span>📍 1904 Surf Ave</span></div>
+          <p class="card-desc">The Mets' High-A club plays beside the boardwalk — and for the first time since 2024 the season ends at home: a final six-game set vs. the Frederick Keys, September 1–6.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">The Boardwalk</span>
+          <div class="card-title">Riegelmann Boardwalk</div>
+          <div class="card-meta"><span>📍 Along the beach, Sea Gate to Brighton Beach</span></div>
+          <p class="card-desc">The wooden spine of the whole show — beach on one side, rides and concessions on the other, running the length of the peninsula toward Brighton Beach.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE MUSIC (rendered by initLiveMusic in script.js) -->
+  <section class="section cat-section" data-cat="music" id="live-music" style="background:var(--mist);"></section>
+
+  </div><!-- /.content-main -->
+
+  <!-- MAP SIDEBAR — persistent right column, sticky, same structure as the
+       Manhattan and Queens pages. Click a neighborhood shape to jump to its section. -->
+  <div class="map-sidebar">
+    <div class="map-embed-wrap">
+      <div id="brooklyn-map" style="height:420px;"></div>
+    </div>
+    <p style="font-size:0.7rem;color:var(--sub);">
+      Hover a neighborhood to preview, click to jump to its section. These are ten starter neighborhoods, not the whole borough — Brooklyn holds dozens more. As in Queens, these neighborhoods exist in OpenStreetMap only as point markers, not boundary relations (checked per-neighborhood via Overpass for this build), so official city shapes are used throughout: eight are NYC Dept of City Planning 2020 Neighborhood Tabulation Areas, with honest composites — Williamsburg is the Williamsburg + South Williamsburg NTAs; Prospect Heights is Prospect Heights + Prospect Park, so the Brooklyn Museum, Botanic Garden and Long Meadow fall correctly inside it; Bushwick is its West + East NTAs. DUMBO has no NTA of its own (the city lumps it with Downtown Brooklyn and Boerum Hill), so it is drawn from the only official DUMBO boundaries the city publishes: the LPC DUMBO (2007) and Fulton Ferry (1977) historic districts, and Downtown Brooklyn is the remainder of that combined NTA — which still takes in Boerum Hill. Placements follow point-in-polygon truth, not habit: Barclays Center's block, the Soldiers' &amp; Sailors' Arch and the Grand Army Plaza Greenmarket all test into the Park Slope NTA and are listed there; the Brooklyn Paramount tests into Fort Greene, the Transit Museum into Brooklyn Heights, McCarren Pool into the Williamsburg shape, and Brooklyn Brewery's new 1 Wythe Ave home into Greenpoint. Roberta's tests just outside all ten (East Williamsburg) and is listed as an adjacency, not a placement. Every listing on this page was point-in-polygon tested against these shapes. See <a href="../data/brooklyn-neighborhoods.geojson" target="_blank" rel="noopener" style="color:var(--sub);text-decoration:underline;">data source</a>. Map data &copy; OpenStreetMap contributors; neighborhood shapes NYC Dept of City Planning (NTA2020) and NYC Landmarks Preservation Commission via NYC Open Data.
+    </p>
+  </div>
+
+  </div><!-- /.content-grid -->
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p class="footer-tagline">Your local intelligence platform. Curated, verified, always up to date.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Brooklyn</h5>
+        <ul>
+          <li><a href="#williamsburg">Williamsburg</a></li>
+          <li><a href="#greenpoint">Greenpoint</a></li>
+          <li><a href="#dumbo">DUMBO</a></li>
+          <li><a href="#brooklyn-heights">Brooklyn Heights</a></li>
+          <li><a href="#downtown-brooklyn">Downtown Brooklyn</a></li>
+          <li><a href="#fort-greene">Fort Greene</a></li>
+          <li><a href="#park-slope">Park Slope</a></li>
+          <li><a href="#prospect-heights">Prospect Heights</a></li>
+          <li><a href="#bushwick">Bushwick</a></li>
+          <li><a href="#coney-island">Coney Island</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../new-york/index.html">New York</a></li>
+          <li><a href="../manhattan/index.html">Manhattan</a></li>
+          <li><a href="../queens/index.html">Queens</a></li>
+          <li><a href="../connecticut/index.html">Connecticut</a></li>
+          <li><a href="../texas/index.html">Texas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>The Concierge</h5>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#suggest">Suggest a Place</a></li>
+          <li><a href="#">Advertise</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 The Concierge · All rights reserved.</span>
+      <span>Brooklyn, NY</span>
+    </div>
+  </footer>
+
+</div><!-- /.page-wrap -->
+
+<script src="../script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../interactive-map.js"></script>
+<script>
+initCityBoundaryMap('brooklyn-map', {
+  center: [40.66, -73.96],
+  zoom: 11,
+  boundaryUrl: '../data/brooklyn-neighborhoods.geojson',
+  onClick: function (f) {
+    const el = document.querySelector(f.properties.url);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  },
+});
+</script>
+</body>
+</html>
