@@ -7,18 +7,154 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&family=Kaushan+Script&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 <style>
-/* ── OVERRIDE: page now has a footer below the hero, so let it scroll
-   normally instead of being clipped by the site-wide fixed-height shell
-   (nav stays fixed via position:fixed, unaffected by this). ── */
+/* ── This page scrolls normally (nav stays fixed) ── */
 html, body {
 height: auto;
 min-height: 100%;
 overflow-x: hidden;
 overflow-y: auto;
 }
-.home-split {
-height: auto;
+
+/* ── HERO: logo front and center, fills the first screen ── */
+.hero {
 min-height: calc(100vh - var(--nav-h));
+margin-top: var(--nav-h);
+background: linear-gradient(160deg, var(--navy) 0%, #1e4a72 55%, #2a6a9a 100%);
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+padding: 3rem 6% 4.5rem;
+position: relative;
+}
+.hero-logo {
+width: clamp(300px, 55vw, 620px);
+filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
+margin-bottom: 1.5rem;
+}
+.hero .home-rating { margin-bottom: 2rem; }
+.hero-tagline {
+font-family: 'Playfair Display', serif;
+font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+color: rgba(255,255,255,0.92);
+letter-spacing: 0.14em;
+text-transform: uppercase;
+margin-bottom: 1rem;
+}
+.hero-desc {
+max-width: 560px;
+color: rgba(255,255,255,0.75);
+font-size: 0.95rem;
+line-height: 1.7;
+margin-bottom: 2rem;
+}
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.hero-scroll {
+position: absolute;
+bottom: 1.2rem;
+left: 50%;
+transform: translateX(-50%);
+color: rgba(255,255,255,0.55);
+font-size: 0.75rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+text-decoration: none;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 0.2rem;
+}
+.hero-scroll span:last-child { font-size: 1.1rem; animation: bob 1.6s ease-in-out infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+/* ── INFO STRIP ── */
+.info-strip {
+background: var(--sand);
+padding: 2.5rem 6%;
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 1.25rem;
+}
+.info-card {
+background: var(--white);
+border-radius: 10px;
+padding: 1.1rem 1.25rem;
+box-shadow: 0 2px 10px rgba(26,58,92,0.08);
+display: flex;
+gap: 0.8rem;
+align-items: flex-start;
+}
+.info-card .ic { font-size: 1.4rem; flex-shrink: 0; }
+.info-card strong { display: block; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ocean); margin-bottom: 0.25rem; }
+.info-card p, .info-card a { font-size: 0.85rem; color: var(--dark); margin: 0; text-decoration: none; line-height: 1.5; }
+
+/* ── SHARED SECTION SHELL ── */
+.home-section { padding: 3.5rem 6%; }
+.home-section.alt { background: var(--sky); }
+.home-section-head { text-align: center; max-width: 640px; margin: 0 auto 2.25rem; }
+.home-section-head .section-label { color: var(--ocean); }
+.home-section-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2.1rem); color: var(--navy); margin: 0.3rem 0 0.6rem; }
+.home-section-head p { color: var(--gray); font-size: 0.92rem; line-height: 1.65; }
+
+/* ── ROOM TEASERS ── */
+.room-teasers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
+.room-teaser {
+background: var(--white);
+border-radius: 10px;
+overflow: hidden;
+box-shadow: 0 2px 12px rgba(26,58,92,0.10);
+text-decoration: none;
+display: block;
+transition: transform 0.2s, box-shadow 0.2s;
+}
+.room-teaser:hover { transform: translateY(-4px); box-shadow: 0 6px 18px rgba(26,58,92,0.16); }
+.room-teaser img { width: 100%; aspect-ratio: 3/2; object-fit: cover; display: block; }
+.room-teaser-body { padding: 1rem 1.2rem 1.2rem; }
+.room-teaser-body h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--navy); margin-bottom: 0.25rem; }
+.room-teaser-body p { font-size: 0.82rem; color: var(--gray); margin-bottom: 0.5rem; }
+.room-teaser-price { font-size: 0.85rem; color: var(--coral); font-weight: 600; }
+.center-link { text-align: center; margin-top: 2rem; }
+
+/* ── GALLERY STRIP ── */
+.gallery-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; max-width: 1100px; margin: 0 auto; }
+.gallery-strip a { border-radius: 8px; overflow: hidden; display: block; }
+.gallery-strip img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; transition: transform 0.25s; }
+.gallery-strip a:hover img { transform: scale(1.05); }
+
+/* ── LBI GUIDE BANNER ── */
+.lbi-banner {
+background: linear-gradient(120deg, var(--navy), #1e4a72);
+color: white;
+padding: 2.75rem 6%;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 2.5rem;
+flex-wrap: wrap;
+text-align: center;
+}
+.lbi-banner h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; margin-bottom: 0.35rem; }
+.lbi-banner p { color: rgba(255,255,255,0.75); font-size: 0.9rem; margin: 0; }
+
+/* ── LOCATION / MAP (smaller, below the fold) ── */
+.map-wrap {
+max-width: 1000px;
+margin: 0 auto;
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 4px 16px rgba(26,58,92,0.15);
+}
+.map-wrap iframe { width: 100%; height: 400px; border: none; display: block; }
+
+@media (max-width: 900px) {
+.info-strip { grid-template-columns: 1fr 1fr; }
+.room-teasers { grid-template-columns: 1fr; max-width: 460px; }
+.gallery-strip { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+.info-strip { grid-template-columns: 1fr; }
+.map-wrap iframe { height: 320px; }
 }
 </style>
 </head>
@@ -45,54 +181,111 @@ min-height: calc(100vh - var(--nav-h));
 <a href="lbi-guide.html">LBI Guide</a>
 <a href="contact.html" class="mobile-book">Book Now</a>
 </div>
-<!-- HOME SPLIT -->
-<div class="home-split">
-<!-- LEFT: Info -->
-<div class="home-left">
+
+<!-- HERO — logo front and center -->
+<section class="hero">
+<img src="seaspraylogo.svg" alt="Sea Spray Motel" class="hero-logo" />
+<p class="hero-tagline">Your home on the Jersey Shore</p>
 <div class="home-rating">
 <span class="star">★★★★★</span>
 9.2 / 10 &nbsp;·&nbsp; Excellent &nbsp;·&nbsp; Booking.com
 </div>
-<img src="seaspraylogo.svg" alt="Sea Spray Motel" class="home-logo" />
-<p class="home-tagline">Your home on the Jersey Shore</p>
-<p class="home-desc">Wake up steps from the beach. Family-owned and loved for decades, Sea Spray Motel is where LBI memories are made — 52 rooms, a heated pool, and free parking right on the bay.</p>
-<div class="home-btns">
+<p class="hero-desc">Wake up steps from the beach. Family-owned and loved for decades, Sea Spray Motel is where LBI memories are made — 52 rooms, a heated pool, and free parking right on the bay.</p>
+<div class="hero-btns">
 <a href="contact.html" class="btn-primary">Book Your Stay</a>
 <a href="rooms.html" class="btn-outline">View Rooms</a>
 </div>
-<div class="home-info-grid">
-<div class="home-info-item">
-<span class="home-info-icon">📍</span>
-<div class="home-info-text">
-<strong>Address</strong>
-2600 S. Bay Ave, Beach Haven, NJ 08008
+<a href="#info" class="hero-scroll"><span>Explore</span><span>▾</span></a>
+</section>
+
+<!-- INFO STRIP -->
+<section class="info-strip" id="info">
+<div class="info-card">
+<span class="ic">📍</span>
+<div><strong>Address</strong><p>2600 S. Bay Ave, Beach Haven, NJ 08008</p></div>
 </div>
+<div class="info-card">
+<span class="ic">📞</span>
+<div><strong>Phone</strong><p><a href="tel:16094924944">(609) 492-4944</a></p></div>
 </div>
-<div class="home-info-item">
-<span class="home-info-icon">📞</span>
-<div class="home-info-text">
-<strong>Phone</strong>
-<a href="tel:16094924944" style="color:rgba(255,255,255,0.8);text-decoration:none;">(609) 492-4944</a>
+<div class="info-card">
+<span class="ic">🕒</span>
+<div><strong>Check-in / Check-out</strong><p>3:00 PM – 10:00 PM &nbsp;/&nbsp; 11:00 AM</p></div>
 </div>
+<div class="info-card">
+<span class="ic">🏊</span>
+<div><strong>Amenities</strong><p>Heated Pool · Free Parking · Free WiFi</p></div>
 </div>
-<div class="home-info-item">
-<span class="home-info-icon">🕒</span>
-<div class="home-info-text">
-<strong>Check-in / Check-out</strong>
-3:00 PM – 10:00 PM &nbsp;/&nbsp; 11:00 AM
+</section>
+
+<!-- ROOMS TEASER -->
+<section class="home-section">
+<div class="home-section-head">
+<div class="section-label">Accommodations</div>
+<h2>Find Your Room</h2>
+<p>From cozy queen rooms to full suites for the whole family — every room is steps from the pool and a short walk to the beach.</p>
 </div>
+<div class="room-teasers">
+<a class="room-teaser" href="rooms.html">
+<img src="photos/room-single1.jpg" alt="Standard Queen Room" />
+<div class="room-teaser-body">
+<h3>Standard Queen Room</h3>
+<p>All the essentials for a great beach stay.</p>
+<span class="room-teaser-price">From $176 / night</span>
 </div>
-<div class="home-info-item">
-<span class="home-info-icon">🏊</span>
-<div class="home-info-text">
-<strong>Amenities</strong>
-Heated Pool · Free Parking · Free WiFi
+</a>
+<a class="room-teaser" href="rooms.html">
+<img src="photos/room-king1.jpg" alt="King Bed Room" />
+<div class="room-teaser-body">
+<h3>King Bed Room</h3>
+<p>Spacious king-size comfort for couples.</p>
+<span class="room-teaser-price">From $201 / night</span>
 </div>
+</a>
+<a class="room-teaser" href="rooms.html">
+<img src="photos/living2.jpg" alt="Suites and efficiencies" />
+<div class="room-teaser-body">
+<h3>Suites &amp; Efficiencies</h3>
+<p>Full kitchens and space for up to 8 guests.</p>
+<span class="room-teaser-price">From $287 / night</span>
 </div>
+</a>
 </div>
+<div class="center-link"><a href="rooms.html" class="btn-outline" style="color:var(--navy);border-color:var(--navy);">See All Rooms &amp; Rates</a></div>
+</section>
+
+<!-- GALLERY STRIP -->
+<section class="home-section alt">
+<div class="home-section-head">
+<div class="section-label">Photo Gallery</div>
+<h2>See Sea Spray</h2>
 </div>
-<!-- RIGHT: Google Maps -->
-<div class="home-right">
+<div class="gallery-strip">
+<a href="gallery.html"><img src="photos/beach-aerial.jpg" alt="Aerial view of the motel and beach" /></a>
+<a href="gallery.html"><img src="photos/pool2.jpg" alt="Heated pool" /></a>
+<a href="gallery.html"><img src="photos/exterior3.jpg" alt="Motel exterior" /></a>
+<a href="gallery.html"><img src="photos/beach1.jpg" alt="The Atlantic beach" /></a>
+</div>
+<div class="center-link"><a href="gallery.html" class="btn-outline" style="color:var(--navy);border-color:var(--navy);">View Full Gallery</a></div>
+</section>
+
+<!-- LBI GUIDE BANNER -->
+<section class="lbi-banner">
+<div>
+<h3>Exploring Long Beach Island?</h3>
+<p>Our local guide covers the best restaurants, events, and beaches — all without leaving the site.</p>
+</div>
+<a href="lbi-guide.html" class="btn-primary">Open the LBI Guide</a>
+</section>
+
+<!-- LOCATION / MAP -->
+<section class="home-section">
+<div class="home-section-head">
+<div class="section-label">Location</div>
+<h2>Find Us</h2>
+<p>Right on the bay at 2600 S. Bay Ave, Beach Haven — the ocean beach is a two-minute walk across Long Beach Blvd.</p>
+</div>
+<div class="map-wrap">
 <iframe
 title="Sea Spray Motel location"
 src="https://maps.google.com/maps?q=2600+S+Bay+Ave,+Beach+Haven,+NJ+08008&output=embed&z=15"
@@ -101,7 +294,8 @@ loading="lazy"
 referrerpolicy="no-referrer-when-downgrade">
 </iframe>
 </div>
-</div>
+</section>
+
 <!-- FOOTER -->
 <footer>
 <div class="footer-inner">
