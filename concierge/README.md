@@ -9,7 +9,7 @@ panels, and per-neighborhood pages covering food, nightlife, and things to do.
 
 ## Files
 
-31 files, all static — no build step, no dependencies.
+57 files, all static — no build step, no dependencies.
 
 ```
 index.html                  home (split view: search + events rail | map)
@@ -18,8 +18,10 @@ script.js                   shared search tree, nav search, side panel,
                             events data, live-music data
 
 new-jersey/index.html       state
-lbi/index.html              Long Beach Island + 6 towns:
-  lbi/{holgate,beach-haven,ship-bottom,surf-city,harvey-cedars,barnegat-light}/
+lbi/index.html              Long Beach Island + 9 areas (5 boroughs + Holgate
+                            and 3 more Long Beach Township groupings):
+  lbi/{holgate,beach-haven,spray-beach,brant-beach,ship-bottom,surf-city,
+       harvey-cedars,loveladies,barnegat-light}/
 princeton/index.html        Princeton + 4 neighborhoods:
   princeton/{palmer-square,witherspoon-jackson,university,western-section}/
 
@@ -166,7 +168,10 @@ link, and only publish a date you can see on the venue's own listing.
 Two errors caught on a second pass, both worth knowing about as a pattern:
 Nardi's Tavern was placed in Harvey Cedars on the strength of a roundup article
 that listed it next to Harvey Cedars venues — it's actually at 11801 Long Beach
-Blvd in North Beach Haven, and now sits on the Beach Haven page. And the Surf
+Blvd, which point-in-polygon tests into Haven Beach (OSM relation 15790380), so
+it now anchors the Brant Beach & Mid-Island page (roundups and even its own
+Facebook say "North Beach Haven", which is a different community — coordinates
+beat labels). And the Surf
 City Hotel's site is surfcityhotel.com, not the surfcityhotelnj.com that got
 guessed at from the venue name. Roundup articles are fine for finding rooms and
 bad for pinning down where they are; domains should come from a search result,

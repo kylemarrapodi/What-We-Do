@@ -84,11 +84,14 @@ const SHARED_SEARCH_TREE = {
             {
               label: 'Long Beach Island', aliases: ['long beach island','lbi'], status: 'live', url: 'lbi/index.html',
               children: [
-                { label:'Holgate',        aliases:['holgate'],              status:'live', url:'lbi/holgate/index.html',        children:[] },
+                { label:'Holgate',        aliases:['holgate','beach haven inlet','beach haven heights'], status:'live', url:'lbi/holgate/index.html', children:[] },
                 { label:'Beach Haven',    aliases:['beach haven'],          status:'live', url:'lbi/beach-haven/index.html',    children:[] },
+                { label:'Spray Beach',    aliases:['spray beach','beach haven terrace','beach haven gardens','bay vista','north beach haven'], status:'live', url:'lbi/spray-beach/index.html', children:[] },
+                { label:'Brant Beach',    aliases:['brant beach','beach haven crest','brighton beach lbi','peahala park','beach haven park','haven beach','the dunes'], status:'live', url:'lbi/brant-beach/index.html', children:[] },
                 { label:'Ship Bottom',    aliases:['ship bottom'],          status:'live', url:'lbi/ship-bottom/index.html',    children:[] },
                 { label:'Surf City',      aliases:['surf city'],            status:'live', url:'lbi/surf-city/index.html',      children:[] },
                 { label:'Harvey Cedars',  aliases:['harvey cedars'],        status:'live', url:'lbi/harvey-cedars/index.html',  children:[] },
+                { label:'Loveladies',     aliases:['loveladies','north beach lbi','high bar harbor'], status:'live', url:'lbi/loveladies/index.html', children:[] },
                 { label:'Barnegat Light', aliases:['barnegat light','old barney'], status:'live', url:'lbi/barnegat-light/index.html', children:[] },
               ]
             },
@@ -206,11 +209,14 @@ function buildSearchIndex() {
     { label:'Surf City',         sub:'Long Beach Island, NJ',  type:'place',  url: p+'lbi/surf-city/index.html',              keywords:['surf city','surf city hotel','scojos','farmers market lbi','bay beach'] },
     { label:'Harvey Cedars',     sub:'Long Beach Island, NJ',  type:'place',  url: p+'lbi/harvey-cedars/index.html',          keywords:['harvey cedars','black eyed susans','harvey cedars shellfish','marigold coffee','birdys'] },
     { label:'Barnegat Light',    sub:'Long Beach Island, NJ',  type:'place',  url: p+'lbi/barnegat-light/index.html',         keywords:['barnegat light','old barney','lighthouse','viking village','kubels','wallys','daymark'] },
+    { label:'Brant Beach',       sub:'Long Beach Township, LBI', type:'place', url: p+'lbi/brant-beach/index.html',           keywords:['brant beach','beach haven crest','brighton beach','peahala park','beach haven park','haven beach','the dunes','bayview park','68th street'] },
+    { label:'Spray Beach',       sub:'Long Beach Township, LBI', type:'place', url: p+'lbi/spray-beach/index.html',           keywords:['spray beach','beach haven terrace','beach haven gardens','bay vista','north beach haven','terrace tavern'] },
+    { label:'Loveladies & North Beach', sub:'Long Beach Township, LBI', type:'place', url: p+'lbi/loveladies/index.html',     keywords:['loveladies','north beach','high bar harbor','lbi foundation','lbif','modernist beach houses'] },
     // ── Events — LBI ──
     { label:'Chowderfest',       sub:'Oct 3–4 · Taylor Ave · Beach Haven',     type:'event',  url: p+'lbi/beach-haven/index.html',  keywords:['chowderfest','chowder','chowder cook-off','lbi festival','beach haven festival'] },
     { label:'HopSauce Festival', sub:'Jun (annual) · Taylor Ave · Beach Haven',type:'event',  url: p+'lbi/beach-haven/index.html',  keywords:['hopsauce','hop sauce','craft beer','hot sauce','beach haven beer'] },
     { label:'Lighthouse International Film Festival', sub:'Jun (annual) · island-wide · LBI', type:'event', url: p+'lbi/beach-haven/index.html', keywords:['lighthouse film festival','lbi film festival','film festival','indie film'] },
-    { label:'Coquina Jam',       sub:'Jul (annual) · Brant Beach · LBI',       type:'event',  url: p+'lbi/beach-haven/index.html',  keywords:['coquina jam','surf competition','lbi surf','surfing competition','jetty'] },
+    { label:'Coquina Jam',       sub:'Jul (annual) · 68th St, Brant Beach',    type:'event',  url: p+'lbi/brant-beach/index.html',  keywords:['coquina jam','surf competition','lbi surf','surfing competition','jetty'] },
     { label:'LBI FLY Kite Festival', sub:'Oct 9–10 · Ship Bottom Beach',       type:'event',  url: p+'lbi/ship-bottom/index.html',  keywords:['kite festival','lbi kite','lbi fly','ship bottom kite','kite flying'] },
     { label:'LBI 18 Mile Run & 12K', sub:'Oct 11 · starts Holgate · 52nd annual', type:'event', url: p+'lbi/holgate/index.html',   keywords:['18 mile run','lbi run','12k','race lbi','commemorative run'] },
     { label:'Concerts on the Green', sub:'Jul–Aug Wednesdays · Beach Haven',  type:'event',  url: p+'lbi/beach-haven/index.html',  keywords:['concerts on the green','free concert','beach haven concert','lbi music'] },
@@ -222,6 +228,11 @@ function buildSearchIndex() {
     { label:'Viking Village',    sub:'Barnegat Light, LBI',                    type:'place',  url: p+'lbi/barnegat-light/index.html',keywords:['viking village','fishing fleet','fishing village','barnegat light fishing'] },
     { label:'Barnegat Lighthouse', sub:'Barnegat Light, LBI',                 type:'place',  url: p+'lbi/barnegat-light/index.html',keywords:['barnegat lighthouse','old barney','lighthouse climb','state park'] },
     { label:'Ship Bottom Brewery',sub:'Ship Bottom, LBI',                      type:'place',  url: p+'lbi/ship-bottom/index.html',  keywords:['ship bottom brewery','lbi brewery','craft beer lbi','brewery lbi'] },
+    { label:"Nardi's Tavern",    sub:'Haven Beach, LBI — music nightly',       type:'place',  url: p+'lbi/brant-beach/index.html',  keywords:['nardis','nardis tavern','pink bus','live music lbi','nightclub lbi'] },
+    { label:'Terrace Tavern',    sub:'Beach Haven Terrace, LBI',               type:'place',  url: p+'lbi/spray-beach/index.html',  keywords:['terrace tavern','beach haven terrace bar','lbi tavern'] },
+    { label:'Daddy O',           sub:'Brant Beach, LBI — hotel & restaurant',  type:'place',  url: p+'lbi/brant-beach/index.html',  keywords:['daddy o','daddyo','rooftop bar lbi','boutique hotel lbi'] },
+    { label:'Bayview Park',      sub:'68th St, Brant Beach, LBI',              type:'place',  url: p+'lbi/brant-beach/index.html',  keywords:['bayview park','68th street beach','kayak lbi','paddleboard lbi','playground lbi'] },
+    { label:'LBI Foundation of the Arts & Sciences', sub:'Loveladies, LBI',    type:'place',  url: p+'lbi/loveladies/index.html',   keywords:['lbi foundation','lbif','works on paper','art classes lbi','loveladies art'] },
     // ── Stamford neighborhoods ──
     { label:'Downtown Stamford',  sub:'Stamford, CT',          type:'place',  url: p+'stamford/downtown/index.html',          keywords:['downtown stamford','palace theatre','mill river'] },
     { label:'Harbor Point',       sub:'Stamford, CT',          type:'place',  url: p+'stamford/harbor-point/index.html',      keywords:['harbor point','waterfront','marina'] },
@@ -953,8 +964,8 @@ const LIVE_MUSIC = {
         desc: 'The Island\'s longest-running shore bar, right at the causeway.', link: 'lbi/ship-bottom/index.html' },
       { name: 'Surf City Hotel', kind: 'Hotel Bar & Beach Club', where: 'Surf City', nights: 'Six days a week across two rooms',
         desc: 'The nightlife hub of the north end for over a century.', link: 'lbi/surf-city/index.html' },
-      { name: "Nardi's Tavern", kind: 'Tavern', where: 'North Beach Haven', nights: 'Every night of the week',
-        desc: 'Music seven nights — and the pink party bus that runs the Boulevard.', link: 'lbi/beach-haven/index.html' },
+      { name: "Nardi's Tavern", kind: 'Tavern', where: 'Haven Beach', nights: 'Every night of the week',
+        desc: 'Music seven nights — and the pink party bus that runs the Boulevard.', link: 'lbi/brant-beach/index.html' },
     ],
     series: []
   },
@@ -990,11 +1001,6 @@ const LIVE_MUSIC = {
         desc: 'One of the few Beach Haven rooms that keeps booking music straight through the off-season, when most of the Boulevard is shuttered.',
         cal: { href: 'https://www.blackwhalebar.com/', label: 'blackwhalebar.com' } },
 
-      { name: "Nardi's Tavern", kind: 'Tavern & Nightclub', addr: '11801 Long Beach Blvd, North Beach Haven', phone: '(609) 492-9538',
-        nights: 'Music every night · Sun–Thu at 9:30 PM, Fri & Sat at 10 PM · acoustic sets Fri & Sat from 5 PM · Dave Christopher Band Sundays at 5 PM',
-        acts: ['Green Knuckle Material (Tuesdays)', 'The Pickles', 'Big Bang Baby', 'Friend Zone', 'Mike Byrne', 'Matt Pietrucha'],
-        desc: 'Tavern by day, nightclub by night, and the only room on the Island with music seven nights a week — plus the pink Nardi\'s party bus running the Boulevard, which is a Long Beach Island landmark in its own right. Just north of Beach Haven proper.',
-        cal: { href: 'http://www.nardistavern.com/band-schedule', label: 'nardistavern.com — band schedule' } },
     ],
     series: [
       { name: 'Concerts on the Green', who: 'Beach Haven Community Arts Program',
@@ -1003,7 +1009,44 @@ const LIVE_MUSIC = {
         acts: ['The Pickles', 'Jimmy and the Parrots', 'Rave-Ons', 'Diablo Sandwich Band', 'McLean Avenue Band', 'The Kootz', 'Carnaby Street Band', 'Suyat Band', 'Gypsy Moon'],
         note: 'Those are acts from recent seasons — the Borough posts the current lineup each spring.',
         cal: { href: 'https://beachhavencap.org/summer-concerts/', label: 'beachhavencap.org/summer-concerts' } },
+    ],
+    nearest: { text: 'Nardi\'s Tavern — the only room on the Island with music seven nights a week — is two miles north in Haven Beach.', href: 'lbi/brant-beach/index.html' }
+  },
+
+  'brant-beach': {
+    blurb: 'The mid-island runs on two speeds: free township concerts and fire pits at the 68th Street beach, and the Island\'s only seven-nights-a-week band room a little further down the Boulevard.',
+    venues: [
+      { name: "Nardi's Tavern", kind: 'Tavern & Nightclub', addr: '11801 Long Beach Blvd, Haven Beach', phone: '(609) 492-9538',
+        nights: 'Music every night · Sun–Thu at 9:30 PM, Fri & Sat at 10 PM · acoustic sets Fri & Sat from 5 PM · Dave Christopher Band Sundays at 5 PM',
+        acts: ['Green Knuckle Material (Tuesdays)', 'The Pickles', 'Big Bang Baby', 'Friend Zone', 'Mike Byrne', 'Matt Pietrucha'],
+        desc: 'Tavern by day, nightclub by night, and the only room on the Island with music seven nights a week — plus the pink Nardi\'s party bus running the Boulevard, which is a Long Beach Island landmark in its own right.',
+        cal: { href: 'http://www.nardistavern.com/band-schedule', label: 'nardistavern.com — band schedule' } },
+    ],
+    series: [
+      { name: 'Sunday Concerts at 68th Street', who: 'Long Beach Township Recreation',
+        when: 'Sundays 12–2 PM through the summer · free',
+        where: 'By Bayview Park, 68th Street in Brant Beach — with Fire Pit Friday Nights on the 68th Street ocean beach, 7–9 PM',
+        cal: { href: 'https://www.longbeachtownship.com/recreation/', label: 'longbeachtownship.com/recreation' } },
     ]
+  },
+
+  'spray-beach': {
+    blurb: 'One genuine music room on this stretch — an early-evening set at the Terrace — with Beach Haven\'s full circuit starting five minutes south.',
+    venues: [
+      { name: 'The Terrace Tavern', kind: 'Tavern', addr: '13201 Long Beach Blvd, Beach Haven Terrace', phone: '(609) 492-9751',
+        nights: 'Live music from 5 PM in season · happy hour Sunday–Thursday 3–5 PM',
+        desc: 'The Terrace\'s corner tavern — 20 taps, local seafood, and an early set that fills the gap between the beach and the late rooms in Beach Haven.',
+        cal: { href: 'https://terracetavernlbi.com/', label: 'terracetavernlbi.com' } },
+    ],
+    series: [],
+    nearest: { text: 'Beach Haven\'s stages — Bird & Betty\'s, the Sea Shell, the Marlin — start five minutes south.', href: 'lbi/beach-haven/index.html' }
+  },
+
+  'loveladies': {
+    blurb: 'Loveladies and North Beach keep it quiet on purpose — no bars, no stages. The LBI Foundation runs lectures and events rather than bands; for live music, head a few minutes south.',
+    venues: [],
+    series: [],
+    nearest: { text: 'The Surf City Hotel books bands six days a week, and Harvey Cedars runs free bayfront concerts at Sunset Park.', href: 'lbi/surf-city/index.html' }
   },
 
   'ship-bottom': {
@@ -1826,6 +1869,31 @@ const PANEL_EVENTS = {
     events: [
       { mo:'DAI', dy:'LY',  tag:'outdoors',tagLabel:'Landmark', name:'Barnegat Lighthouse',     meta:'217 steps · Panoramic inlet views',   url:'lbi/barnegat-light/index.html', ticket:null },
       { mo:'DAI', dy:'LY',  tag:'outdoors',tagLabel:'Market',   name:'Viking Village Fish Market',meta:'Fresh catch off the boats',         url:'lbi/barnegat-light/index.html', ticket:null },
+    ]
+  },
+  'Brant Beach': {
+    label: 'Brant Beach Events', link: { href: 'lbi/brant-beach/index.html', text: 'Brant Beach Guide →' },
+    events: [
+      { mo:'SUN', dy:'WKL', tag:'arts',    tagLabel:'Free Music', name:'Sunday Concerts at 68th St', meta:'By Bayview Park · 12–2 PM in season', url:'lbi/brant-beach/index.html', ticket:'https://www.longbeachtownship.com/recreation/' },
+      { mo:'FRI', dy:'WKL', tag:'outdoors',tagLabel:'Beach Night',name:'Fire Pit Friday Nights',     meta:'68th St ocean beach · 7–9 PM in season', url:'lbi/brant-beach/index.html', ticket:null },
+      { mo:'JUL', dy:'ANN', tag:'outdoors',tagLabel:'Surf Contest',name:'Jetty Coquina Jam',         meta:'68th St beach · all-women team contest · 18th annual ran Jul 19', url:'lbi/brant-beach/index.html', ticket:'https://jettyrockfoundation.org/pages/coquina-jam' },
+      { mo:'OCT', dy:'11',  tag:'outdoors',tagLabel:'Race',       name:'LBI 18 Mile Run & 12K',      meta:'Benefits St. Francis Center, Brant Beach · 10 AM', url:'lbi/holgate/index.html', ticket:null },
+    ]
+  },
+  'Spray Beach': {
+    label: 'Spray Beach Notes', link: { href: 'lbi/spray-beach/index.html', text: 'Spray Beach Guide →' },
+    events: [
+      { mo:'DAI', dy:'5 PM',tag:'arts',    tagLabel:'Live Music', name:'Music at the Terrace Tavern', meta:'13201 Long Beach Blvd · from 5 PM in season', url:'lbi/spray-beach/index.html', ticket:'https://terracetavernlbi.com/' },
+      { mo:'WED', dy:'WKL', tag:'arts',    tagLabel:'Free Music', name:'Concerts on the Green',       meta:'Veterans Bicentennial Park · Beach Haven, 5 min south', url:'lbi/beach-haven/index.html', ticket:null },
+      { mo:'OCT', dy:'3–4', tag:'dining',  tagLabel:'Food Fest',  name:'Chowderfest — Chowder Cook-Off', meta:'Taylor Ave Waterfront · Beach Haven',  url:'lbi/beach-haven/index.html', ticket:'https://chowderfest.com' },
+    ]
+  },
+  Loveladies: {
+    label: 'Loveladies & North Beach', link: { href: 'lbi/loveladies/index.html', text: 'Loveladies Guide →' },
+    events: [
+      { mo:'DAI', dy:'LY',  tag:'arts',    tagLabel:'Galleries',  name:'LBI Foundation of the Arts & Sciences', meta:'120 Long Beach Blvd · exhibitions, classes & lectures', url:'lbi/loveladies/index.html', ticket:'https://lbifoundation.org/' },
+      { mo:'ANN', dy:'—',   tag:'arts',    tagLabel:'Juried Show',name:'Works on Paper — 28th Annual',  meta:'National juried exhibition at LBIF',   url:'lbi/loveladies/index.html', ticket:'https://lbifoundation.org/' },
+      { mo:'WED', dy:'WKL', tag:'arts',    tagLabel:'Free Music', name:'Sunset Park Concerts',          meta:'Harvey Cedars bayfront · Wed evenings in summer', url:'lbi/harvey-cedars/index.html', ticket:null },
     ]
   },
 };
