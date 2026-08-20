@@ -173,12 +173,14 @@ function buildSearchIndex() {
     { label:'Harvey Cedars',     sub:'Long Beach Island, NJ',  type:'place',  url: p+'lbi/harvey-cedars/index.html',          keywords:['harvey cedars','black eyed susans','harvey cedars shellfish','marigold coffee','birdys'] },
     { label:'Barnegat Light',    sub:'Long Beach Island, NJ',  type:'place',  url: p+'lbi/barnegat-light/index.html',         keywords:['barnegat light','old barney','lighthouse','viking village','kubels','wallys','daymark'] },
     // ── Events — LBI ──
-    { label:'Chowderfest',       sub:'Oct · Taylor Ave · Beach Haven',         type:'event',  url: p+'lbi/beach-haven/index.html',  keywords:['chowderfest','chowder','lbi festival','beach haven festival'] },
-    { label:'HopSauce Festival', sub:'Jun · Taylor Ave · Beach Haven',         type:'event',  url: p+'lbi/beach-haven/index.html',  keywords:['hopsauce','hop sauce','craft beer','hot sauce','beach haven beer'] },
-    { label:'LBI Film Festival', sub:'Sep · Beach Haven',                      type:'event',  url: p+'lbi/beach-haven/index.html',  keywords:['lbi film festival','film festival','indie film','beach haven film'] },
-    { label:'Coquina Jam',       sub:'Aug · Beach Haven Ocean Beach',          type:'event',  url: p+'lbi/beach-haven/index.html',  keywords:['coquina jam','surf competition','lbi surf','surfing competition'] },
-    { label:'LBI Kite Festival', sub:'Oct · Ship Bottom Beach',                type:'event',  url: p+'lbi/ship-bottom/index.html',  keywords:['kite festival','lbi kite','ship bottom kite','kite flying'] },
+    { label:'Chowderfest',       sub:'Oct 3–4 · Taylor Ave · Beach Haven',     type:'event',  url: p+'lbi/beach-haven/index.html',  keywords:['chowderfest','chowder','chowder cook-off','lbi festival','beach haven festival'] },
+    { label:'HopSauce Festival', sub:'Jun (annual) · Taylor Ave · Beach Haven',type:'event',  url: p+'lbi/beach-haven/index.html',  keywords:['hopsauce','hop sauce','craft beer','hot sauce','beach haven beer'] },
+    { label:'Lighthouse International Film Festival', sub:'Jun (annual) · island-wide · LBI', type:'event', url: p+'lbi/beach-haven/index.html', keywords:['lighthouse film festival','lbi film festival','film festival','indie film'] },
+    { label:'Coquina Jam',       sub:'Jul (annual) · Brant Beach · LBI',       type:'event',  url: p+'lbi/beach-haven/index.html',  keywords:['coquina jam','surf competition','lbi surf','surfing competition','jetty'] },
+    { label:'LBI FLY Kite Festival', sub:'Oct 9–10 · Ship Bottom Beach',       type:'event',  url: p+'lbi/ship-bottom/index.html',  keywords:['kite festival','lbi kite','lbi fly','ship bottom kite','kite flying'] },
+    { label:'LBI 18 Mile Run & 12K', sub:'Oct 11 · starts Holgate · 52nd annual', type:'event', url: p+'lbi/holgate/index.html',   keywords:['18 mile run','lbi run','12k','race lbi','commemorative run'] },
     { label:'Concerts on the Green', sub:'Jul–Aug Wednesdays · Beach Haven',  type:'event',  url: p+'lbi/beach-haven/index.html',  keywords:['concerts on the green','free concert','beach haven concert','lbi music'] },
+    { label:'Ghost: The Musical at Surflight', sub:'Sep 1–20 · Surflight Theatre · Beach Haven', type:'event', url: p+'lbi/beach-haven/index.html', keywords:['ghost the musical','surflight show','beach haven theatre','lbi theatre'] },
     // ── Venues — LBI ──
     { label:'Fantasy Island',    sub:'Beach Haven, LBI',                       type:'place',  url: p+'lbi/beach-haven/index.html',  keywords:['fantasy island','amusement park','lbi amusement','rides lbi'] },
     { label:'Thundering Surf Waterpark', sub:'Beach Haven, LBI',              type:'place',  url: p+'lbi/beach-haven/index.html',  keywords:['thundering surf','waterpark','flowrider','lbi waterpark'] },
@@ -200,13 +202,14 @@ function buildSearchIndex() {
     { label:'Tech District',      sub:'Lubbock, TX — Campus',  type:'place',  url: p+'lubbock/tech-district/index.html',      keywords:['tech district','the strip','university ave','texas tech campus','jones stadium'] },
     { label:'Historic District',  sub:'Lubbock, TX — Downtown',type:'place',  url: p+'lubbock/historic-district/index.html',  keywords:['historic district','downtown lubbock','buddy holly hall','courthouse'] },
     // ── Events — Stamford ──
-    { label:'Ja Rule & Ashanti',           sub:'Jul 30 · Mill River Park · Stamford',    type:'event',  url: p+'stamford/index.html',             keywords:['ja rule','ashanti','r&b','concert','stamford concert'] },
-    { label:'Hey Stamford! Food Festival', sub:'Aug 1–2 · Mill River Park',              type:'event',  url: p+'stamford/downtown/index.html',    keywords:['hey stamford','food festival','food fest','stamford food'] },
-    { label:'Beer Wine Spirits Fest',      sub:'Aug 29 · Mill River Park',               type:'event',  url: p+'stamford/downtown/index.html',    keywords:['beer','wine','spirits','beer fest','stamford beer'] },
-    { label:'Summer St Block Party',       sub:'Aug 13 · Downtown Stamford',             type:'event',  url: p+'stamford/downtown/index.html',    keywords:['block party','summer street','stamford block'] },
+    { label:'Beer Wine Spirits Fest',      sub:'Aug 29 · Mill River Park · 1–4:30 PM',   type:'event',  url: p+'stamford/downtown/index.html',    keywords:['beer','wine','spirits','beer fest','stamford beer'] },
     { label:'Labyrinth in Concert',        sub:'Sep 19 · Palace Theatre · Stamford',     type:'event',  url: p+'stamford/downtown/index.html',    keywords:['labyrinth','bowie','david bowie','palace theatre','stamford show'] },
-    { label:"That's Amore Italian Festival",sub:'Oct 11–12 · Columbus Park',             type:'event',  url: p+'stamford/index.html',             keywords:['italian festival','italian','that\'s amore','columbus park'] },
-    { label:'Downtown Farmers Market',     sub:'Every Saturday · Veterans Memorial Park',type:'event',  url: p+'stamford/downtown/index.html',    keywords:['farmers market','market','stamford market','saturday market'] },
+    { label:'Jesse McCartney at the Palace',sub:'Sep 4 · Palace Theatre · Stamford',     type:'event',  url: p+'stamford/downtown/index.html',    keywords:['jesse mccartney','weightless tour','palace concert','stamford concert'] },
+    { label:"Stayin' Alive — Bee Gees Tribute", sub:'Oct 2 · Palace Theatre · Stamford', type:'event',  url: p+'stamford/downtown/index.html',    keywords:['stayin alive','bee gees','tribute','palace theatre'] },
+    { label:'America — The Happy Trails Tour', sub:'Oct 30 · Palace Theatre · Stamford', type:'event',  url: p+'stamford/downtown/index.html',    keywords:['america band','horse with no name','happy trails','palace theatre'] },
+    { label:"That's Amore Italian Festival",sub:'Oct (2026 dates TBA) · Mill River Park',type:'event',  url: p+'stamford/index.html',             keywords:['italian festival','italian','that\'s amore','mill river park'] },
+    { label:'Stamford Downtown Parade Spectacular', sub:'Nov 22 · Downtown Stamford',    type:'event',  url: p+'stamford/downtown/index.html',    keywords:['parade spectacular','thanksgiving parade','balloon parade','stamford parade'] },
+    { label:'Downtown Farmers Market',     sub:'Saturdays 9 AM–1 PM · Veterans Memorial Park', type:'event', url: p+'stamford/downtown/index.html', keywords:['farmers market','market','stamford market','saturday market'] },
     { label:'Honey Harvest Festival',      sub:'Aug 30 · Bartlett Arboretum',            type:'event',  url: p+'stamford/north-stamford/index.html',keywords:['honey harvest','bartlett','arboretum','honey'] },
     // ── Events — Lubbock ──
     { label:'TTU Football Season Opener',  sub:'Sep 5 · vs Abilene Christian · Jones AT&T Stadium', type:'sports', url: p+'lubbock/tech-district/index.html', keywords:['texas tech football','ttu football','red raiders football','football game','football','jones stadium','lubbock football','abilene christian','season opener'] },
@@ -248,7 +251,9 @@ function buildSearchIndex() {
     { label:"Jake's Backroom",    sub:'Depot District · Lubbock, TX',        type:'place', url: p+'lubbock/depot-district/index.html',keywords:['jakes backroom','jakes','rock club lubbock','metal lubbock'] },
     { label:"Cook's Garage",      sub:'Lubbock, TX',                         type:'place', url: p+'lubbock/depot-district/index.html',keywords:['cooks garage','outdoor venue lubbock','beer hall lubbock'] },
     { label:'The Alchemist & Barrister', sub:'Palmer Square · Princeton',    type:'place', url: p+'princeton/palmer-square/index.html',keywords:['alchemist and barrister','alchemist','barrister','witherspoon street','cheers of princeton','princeton bands'] },
-    { label:'Triumph Brewing Company', sub:'Nassau St · Princeton',          type:'place', url: p+'princeton/palmer-square/index.html',keywords:['triumph brewing','triumph','brewpub princeton','nassau street bar'] },
+    { label:'Triumph Brewing Company', sub:'20 Palmer Square E · Princeton', type:'place', url: p+'princeton/palmer-square/index.html',keywords:['triumph brewing','triumph','brewpub princeton','palmer square bar'] },
+    { label:'Princeton Farmers Market', sub:'Thursdays 10 AM–3 PM · Hinds Plaza', type:'event', url: p+'princeton/palmer-square/index.html', keywords:['princeton farmers market','hinds plaza','farmers market princeton','thursday market'] },
+    { label:'Palmer Square Fall Music Series', sub:'Saturdays 1–3 PM thru Oct 3 · Palmer Square', type:'event', url: p+'princeton/palmer-square/index.html', keywords:['palmer square music','fall music series','free music princeton','green concerts'] },
     { label:'Ivy Inn',            sub:'Princeton, NJ',                       type:'place', url: p+'princeton/palmer-square/index.html',keywords:['ivy inn','dive bar princeton','pool tables princeton'] },
     { label:'Richardson Auditorium', sub:'Princeton University',             type:'place', url: p+'princeton/university/index.html', keywords:['richardson auditorium','alexander hall','princeton university concerts','chamber music','new jersey symphony'] },
     { label:'McCarter Theatre Center', sub:'Princeton, NJ',                  type:'place', url: p+'princeton/university/index.html', keywords:['mccarter','mccarter theatre','princeton theatre','princeton ballet'] },
@@ -286,7 +291,8 @@ function buildSearchIndex() {
     { label:'The Lobster House',  sub:'Cape May, NJ',          type:'place',  url: p+'cape-may/index.html',                   keywords:['lobster house','fishermans wharf cape may','seafood cape may'] },
     { label:'Rusty Nail',         sub:'Cape May, NJ',          type:'place',  url: p+'cape-may/index.html',                   keywords:['rusty nail','beach shack cape may','surfer bar cape may'] },
     { label:'Cape May Music Festival', sub:'May–Jun · Cape May', type:'event', url: p+'cape-may/index.html',                  keywords:['cape may music festival','cape may mac','classical music festival'] },
-    { label:'Exit Zero Jazz Festival', sub:'May & Oct · Cape May', type:'event', url: p+'cape-may/index.html',                keywords:['exit zero jazz festival','jazz festival cape may','exit 0'] },
+    { label:'Exit Zero Jazz Festival', sub:'Fall edition Oct 22–25 · Cape May', type:'event', url: p+'cape-may/index.html',    keywords:['exit zero jazz festival','jazz festival cape may','exit 0'] },
+    { label:'Victorian Weekend',       sub:'Oct 9–12 · Cape May MAC',           type:'event', url: p+'cape-may/index.html',    keywords:['victorian weekend','house tours cape may','cape may mac','victorian festival'] },
     { label:'Cape May Food & Wine Celebration', sub:'Sep · Cape May', type:'event', url: p+'cape-may/index.html',            keywords:['cape may food and wine','food wine celebration','wine festival cape may'] },
     { label:'Christmas in Cape May', sub:'Nov–Jan · Cape May',  type:'event', url: p+'cape-may/index.html',                  keywords:['christmas in cape may','holiday lights cape may','victorian christmas'] },
     // ── New York ──
@@ -804,8 +810,9 @@ const LIVE_MUSIC = {
     blurb: 'Harvey Cedars keeps its music outdoors and free — bayfront concerts at Sunset Park, with the booked rooms a short drive in either direction.',
     venues: [
       { name: 'Sunset Park', kind: 'Bayfront Concerts', where: 'Harvey Cedars',
-        nights: 'Summer evenings',
-        desc: 'Free bayfront concerts with the sunset doing most of the production work. Bring a chair.' },
+        nights: 'Wednesday evenings in July and early August · 6:30–8:30 PM · free',
+        desc: 'Free bayfront concerts with the sunset doing most of the production work. Bring a chair. The borough posts each summer\'s lineup in the spring.',
+        cal: { href: 'https://www.harveycedars.org/', label: 'harveycedars.org' } },
     ],
     series: [],
     nearest: { text: 'The Surf City Hotel is a few minutes south, and Nardi\'s runs music seven nights a week down in North Beach Haven.', href: 'lbi/surf-city/index.html' }
@@ -1140,9 +1147,9 @@ const LIVE_MUSIC = {
         nights: 'Live local bands Wednesday, Thursday & Sunday',
         desc: 'The "Cheers of Princeton" — a landmark in a historic building off Palmer Square, and the most consistent place in town to catch a local band.',
         link: 'princeton/palmer-square/index.html' },
-      { name: 'Triumph Brewing Company', kind: 'Brewpub', where: 'Nassau Street',
+      { name: 'Triumph Brewing Company', kind: 'Brewpub', where: '20 Palmer Square E',
         nights: 'Rotating calendar through the week',
-        desc: 'Nassau Street brewpub with a busy bar and a rotating live-music calendar.',
+        desc: 'Palmer Square brewpub with a busy bar and a rotating live-music calendar.',
         link: 'princeton/palmer-square/index.html' },
       { name: 'Ivy Inn', kind: 'Dive Bar', where: 'Princeton',
         nights: 'Occasional — open until 2 AM',
@@ -1165,9 +1172,9 @@ const LIVE_MUSIC = {
         desc: 'Known around town as the "Cheers of Princeton" — a landmark tavern in a historic building at the heart of downtown, open since 1974, with a dependable midweek run of local bands. One of the handful of Princeton bars that can stay open until 2 AM.',
         cal: { href: 'http://www.theaandb.com/local-events.html', label: 'theaandb.com — local events' } },
 
-      { name: 'Triumph Brewing Company', kind: 'Brewpub', addr: '138 Nassau St',
+      { name: 'Triumph Brewing Company', kind: 'Brewpub', addr: '20 Palmer Square E',
         nights: 'Rotating live-music calendar through the week',
-        desc: 'A Nassau Street microbrewery with a genuinely busy bar — students, locals and the corporate crowd in the same room — and music spread through the week rather than parked on the weekend. Also open until 2 AM.',
+        desc: 'A Palmer Square microbrewery with a genuinely busy bar — students, locals and the corporate crowd in the same room — and music spread through the week rather than parked on the weekend. Also open until 2 AM.',
         cal: { href: 'https://www.triumphbrewing.com/princeton/', label: 'triumphbrewing.com/princeton' } },
 
       { name: 'Ivy Inn', kind: 'Dive Bar', where: 'Princeton',
@@ -1287,12 +1294,12 @@ const PANEL_EVENTS = {
     label: 'Happening Now',
     link: null,
     events: [
-      { mo:'JUL', dy:'30', tag:'events',   tagLabel:'Concert',    name:'Ja Rule & Ashanti',           meta:'Mill River Park · Stamford, CT',       url:'stamford/downtown/index.html',         ticket:'https://palacestamford.org' },
-      { mo:'AUG', dy:'1',  tag:'events',   tagLabel:'Food Fest',  name:'Hey Stamford! Food Festival', meta:'Mill River Park · Stamford, CT',       url:'stamford/downtown/index.html',         ticket:'https://heystamford.com' },
+      { mo:'AUG', dy:'29', tag:'events',   tagLabel:'Beer & Wine',name:'Beer, Wine & Spirits Fest',   meta:'Mill River Park · Stamford, CT · 1–4:30 PM', url:'stamford/downtown/index.html',   ticket:'https://www.beerwinespiritsfest.com/stamford' },
+      { mo:'NOV', dy:'22', tag:'events',   tagLabel:'Parade',     name:'Stamford Downtown Parade Spectacular', meta:'Downtown Stamford · giant balloons', url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com' },
       { mo:'SEP', dy:'5',  tag:'events',   tagLabel:'Football',   name:'TTU Football Season Opener',  meta:'vs Abilene Christian · Jones AT&T Stadium · Lubbock, TX', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football/schedule/2026' },
       { mo:'SEP', dy:'7',  tag:'arts',     tagLabel:'Free Event', name:'Buddy Holly 90th Birthday Bash', meta:'Buddy Holly Center · Lubbock, TX',  url:'lubbock/depot-district/index.html',    ticket:'https://buddyhollycenter.org' },
       { mo:'SEP', dy:'19', tag:'arts',     tagLabel:'Concert',    name:'Labyrinth in Concert',        meta:'Palace Theatre · Stamford, CT',        url:'stamford/downtown/index.html',         ticket:'https://palacestamford.org' },
-      { mo:'OCT', dy:'11', tag:'events',   tagLabel:'Festival',   name:"That's Amore Italian Fest",   meta:'Columbus Park · Stamford, CT',         url:'stamford/downtown/index.html',         ticket:'https://stamford-downtown.com' },
+      { mo:'OCT', dy:'TBD',tag:'events',   tagLabel:'Festival',   name:"That's Amore Italian Fest",   meta:'Mill River Park · Stamford, CT · 2026 dates TBA', url:'stamford/downtown/index.html', ticket:'https://thatsamorefest.com' },
       { mo:'OCT', dy:'17', tag:'events',   tagLabel:'Homecoming', name:'Texas Tech Homecoming',       meta:'vs Arizona State · Jones AT&T Stadium · Lubbock', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football/schedule/2026' },
       { mo:'NOV', dy:'2',  tag:'events',   tagLabel:'Basketball', name:'TTU Basketball Opener',       meta:'vs Jackson State · United Supermarkets Arena · Lubbock', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/mens-basketball/schedule' },
       { mo:'NOV', dy:'26', tag:'events',   tagLabel:'Football',   name:'TTU vs. TCU — Thanksgiving',  meta:'Jones AT&T Stadium · Lubbock, TX · 8 PM', url:'lubbock/tech-district/index.html',  ticket:'https://texastech.com/sports/football/schedule/2026' },
@@ -1303,47 +1310,52 @@ const PANEL_EVENTS = {
     label: 'Connecticut Events',
     link: { href: 'connecticut/index.html', text: 'Connecticut Guide →' },
     events: [
-      { mo:'JUL', dy:'30', tag:'events', tagLabel:'Concert',   name:'Ja Rule & Ashanti',          meta:'Mill River Park · Stamford, CT', url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
-      { mo:'AUG', dy:'1',  tag:'events', tagLabel:'Food Fest', name:'Hey Stamford! Food Festival', meta:'Mill River Park · Aug 1–2',      url:'stamford/downtown/index.html', ticket:'https://heystamford.com' },
-      { mo:'SEP', dy:'19', tag:'arts',   tagLabel:'Concert',   name:'Labyrinth in Concert',        meta:'Palace Theatre · Stamford, CT',  url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
-      { mo:'OCT', dy:'11', tag:'events', tagLabel:'Festival',  name:"That's Amore Italian Fest",   meta:'Columbus Park · Oct 11–12',      url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com' },
+      { mo:'AUG', dy:'29', tag:'events', tagLabel:'Beer & Wine',name:'Beer, Wine & Spirits Fest',   meta:'Mill River Park · 1–4:30 PM',    url:'stamford/downtown/index.html', ticket:'https://www.beerwinespiritsfest.com/stamford' },
+      { mo:'AUG', dy:'30', tag:'outdoors',tagLabel:'Festival', name:'Honey Harvest Festival',      meta:'Bartlett Arboretum · 11 AM–4 PM',url:'stamford/north-stamford/index.html', ticket:'https://www.bartlettarboretum.org/events' },
+      { mo:'SEP', dy:'19', tag:'arts',   tagLabel:'Concert',   name:'Labyrinth in Concert',        meta:'Palace Theatre · Stamford, CT · 7:30 PM', url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'OCT', dy:'2',  tag:'arts',   tagLabel:'Tribute',   name:"Stayin' Alive — Bee Gees Tribute", meta:'Palace Theatre · 8 PM',     url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'OCT', dy:'TBD',tag:'events', tagLabel:'Festival',  name:"That's Amore Italian Fest",   meta:'Mill River Park · 2026 dates TBA', url:'stamford/downtown/index.html', ticket:'https://thatsamorefest.com' },
+      { mo:'NOV', dy:'22', tag:'events', tagLabel:'Parade',    name:'Stamford Downtown Parade Spectacular', meta:'Downtown Stamford',     url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com' },
     ]
   },
   Stamford: {
     label: 'Stamford Events',
     link: { href: 'stamford/index.html', text: 'Full Stamford Guide →' },
     events: [
-      { mo:'JUL', dy:'30', tag:'events',  tagLabel:'Concert',    name:'Ja Rule & Ashanti',          meta:'Mill River Park · 5 PM',             url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
-      { mo:'AUG', dy:'1',  tag:'events',  tagLabel:'Food Fest',  name:'Hey Stamford! Food Festival', meta:'Mill River Park · Aug 1–2',          url:'stamford/downtown/index.html', ticket:'https://heystamford.com' },
-      { mo:'AUG', dy:'13', tag:'events',  tagLabel:'Block Party',name:'Summer St Block Party',      meta:'Summer St · Downtown · 5 PM',        url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com' },
-      { mo:'AUG', dy:'29', tag:'events',  tagLabel:'Beer & Wine',name:'Beer, Wine & Spirits Fest',  meta:'Mill River Park · 1:30 PM',          url:'stamford/downtown/index.html', ticket:'https://stamfordbeerwinespirits.com' },
-      { mo:'SEP', dy:'19', tag:'arts',    tagLabel:'Concert',    name:'Labyrinth in Concert',        meta:'Palace Theatre · 8 PM',             url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
-      { mo:'OCT', dy:'11', tag:'events',  tagLabel:'Festival',   name:"That's Amore Italian Fest",   meta:'Columbus Park · Oct 11–12',         url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com' },
-      { mo:'SAT', dy:'WKL',tag:'outdoors',tagLabel:'Market',     name:'Downtown Farmers Market',     meta:'Veterans Memorial Park · Sat AM',   url:'stamford/index.html', ticket:'https://stamford-downtown.com/markets' },
+      { mo:'AUG', dy:'29', tag:'events',  tagLabel:'Beer & Wine',name:'Beer, Wine & Spirits Fest',  meta:'Mill River Park · 1–4:30 PM',        url:'stamford/downtown/index.html', ticket:'https://www.beerwinespiritsfest.com/stamford' },
+      { mo:'AUG', dy:'30', tag:'outdoors',tagLabel:'Festival',   name:'Honey Harvest Festival',      meta:'Bartlett Arboretum · 11 AM–4 PM',   url:'stamford/north-stamford/index.html', ticket:'https://www.bartlettarboretum.org/events' },
+      { mo:'SEP', dy:'4',  tag:'arts',    tagLabel:'Concert',    name:'Jesse McCartney — Weightless Tour', meta:'Palace Theatre',              url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'SEP', dy:'19', tag:'arts',    tagLabel:'Concert',    name:'Labyrinth in Concert',        meta:'Palace Theatre · 7:30 PM',          url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'OCT', dy:'2',  tag:'arts',    tagLabel:'Tribute',    name:"Stayin' Alive — Bee Gees Tribute", meta:'Palace Theatre · 8 PM',        url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'OCT', dy:'TBD',tag:'events',  tagLabel:'Festival',   name:"That's Amore Italian Fest",   meta:'Mill River Park · 2026 dates TBA',  url:'stamford/downtown/index.html', ticket:'https://thatsamorefest.com' },
+      { mo:'NOV', dy:'22', tag:'events',  tagLabel:'Parade',     name:'Stamford Downtown Parade Spectacular', meta:'Downtown · Sun before Thanksgiving', url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com' },
+      { mo:'SAT', dy:'WKL',tag:'outdoors',tagLabel:'Market',     name:'Downtown Farmers Market',     meta:'Veterans Memorial Park · 9 AM–1 PM · thru Oct 10', url:'stamford/index.html', ticket:'https://stamford-downtown.com/markets' },
     ]
   },
   Downtown: {
     label: 'Downtown Stamford Events',
     link: { href: 'stamford/downtown/index.html', text: 'Full Downtown Guide →' },
     events: [
-      { mo:'AUG', dy:'1',  tag:'events',  tagLabel:'Food Fest',  name:'Hey Stamford! Food Festival', meta:'Mill River Park · Noon–8 PM',  url:'stamford/downtown/index.html', ticket:'https://heystamford.com' },
-      { mo:'AUG', dy:'13', tag:'events',  tagLabel:'Block Party',name:'Summer St Block Party',       meta:'Summer St · 5 PM–9 PM',        url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com' },
-      { mo:'SEP', dy:'19', tag:'arts',    tagLabel:'Concert',    name:'Labyrinth in Concert',        meta:'Palace Theatre · 8 PM',        url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
-      { mo:'OCT', dy:'11', tag:'events',  tagLabel:'Festival',   name:'Italian Festival',            meta:'Columbus Park · Noon–9 PM',    url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com' },
-      { mo:'SAT', dy:'WKL',tag:'outdoors',tagLabel:'Market',     name:'Downtown Farmers Market',     meta:'Columbus Park · 9 AM–1 PM',    url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com/markets' },
+      { mo:'AUG', dy:'29', tag:'events',  tagLabel:'Beer & Wine',name:'Beer, Wine & Spirits Fest',   meta:'Mill River Park · 1–4:30 PM',  url:'stamford/downtown/index.html', ticket:'https://www.beerwinespiritsfest.com/stamford' },
+      { mo:'SEP', dy:'19', tag:'arts',    tagLabel:'Concert',    name:'Labyrinth in Concert',        meta:'Palace Theatre · 7:30 PM',     url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'OCT', dy:'2',  tag:'arts',    tagLabel:'Tribute',    name:"Stayin' Alive — Bee Gees Tribute", meta:'Palace Theatre · 8 PM',   url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'OCT', dy:'30', tag:'arts',    tagLabel:'Concert',    name:'America — The Happy Trails Tour', meta:'Palace Theatre · 7 PM',    url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'OCT', dy:'TBD',tag:'events',  tagLabel:'Festival',   name:"That's Amore Italian Fest",   meta:'Mill River Park · 2026 dates TBA', url:'stamford/downtown/index.html', ticket:'https://thatsamorefest.com' },
+      { mo:'NOV', dy:'22', tag:'events',  tagLabel:'Parade',     name:'Stamford Downtown Parade Spectacular', meta:'Downtown · Sun before Thanksgiving', url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com' },
+      { mo:'SAT', dy:'WKL',tag:'outdoors',tagLabel:'Market',     name:'Downtown Farmers Market',     meta:'Veterans Memorial Park · 9 AM–1 PM · thru Oct 10', url:'stamford/downtown/index.html', ticket:'https://stamford-downtown.com/markets' },
     ]
   },
   'Harbor Point': {
     label: 'Harbor Point Events', link: { href: 'stamford/harbor-point/index.html', text: 'Harbor Point Guide →' },
     events: [
-      { mo:'AUG', dy:'1',  tag:'events', tagLabel:'Food Fest',  name:'Hey Stamford! Food Festival', meta:'Mill River Park · Aug 1–2', url:'stamford/downtown/index.html', ticket:'https://heystamford.com' },
-      { mo:'SEP', dy:'19', tag:'arts',   tagLabel:'Concert',    name:'Labyrinth in Concert',        meta:'Palace Theatre · 8 PM',    url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
+      { mo:'SEP', dy:'12', tag:'events', tagLabel:'Wellness',   name:'Health Wellness & Lifestyle Expo', meta:'Harbor Point Boardwalk · 10 AM–5 PM', url:'stamford/harbor-point/index.html', ticket:'https://www.hwl-expos.com/' },
+      { mo:'SEP', dy:'19', tag:'arts',   tagLabel:'Concert',    name:'Labyrinth in Concert',        meta:'Palace Theatre · 7:30 PM', url:'stamford/downtown/index.html', ticket:'https://palacestamford.org' },
     ]
   },
   'North Stamford': {
     label: 'North Stamford Events', link: { href: 'stamford/north-stamford/index.html', text: 'North Stamford Guide →' },
     events: [
-      { mo:'AUG', dy:'30', tag:'outdoors', tagLabel:'Festival', name:'Honey Harvest Festival', meta:'Bartlett Arboretum · North Stamford', url:'stamford/north-stamford/index.html', ticket:'https://bartlettarboretum.org' },
+      { mo:'AUG', dy:'30', tag:'outdoors', tagLabel:'Festival', name:'Honey Harvest Festival', meta:'Bartlett Arboretum · 11 AM–4 PM · Free', url:'stamford/north-stamford/index.html', ticket:'https://www.bartlettarboretum.org/events' },
     ]
   },
   Texas: {
@@ -1394,8 +1406,10 @@ const PANEL_EVENTS = {
     label: 'Princeton Live Music',
     link: { href: 'princeton/index.html', text: 'Princeton Guide →' },
     events: [
+      { mo:'THU', dy:'WKLY', tag:'outdoors',  tagLabel:'Market',     name:'Princeton Farmers Market',           meta:'Hinds Plaza · Thursdays 10 AM–3 PM',   url:'princeton/palmer-square/index.html', ticket:'https://www.princetonfarmersmarket.com/' },
+      { mo:'SAT', dy:'1 PM', tag:'arts',      tagLabel:'Free Music', name:'Palmer Square Fall Music Series',    meta:'On the Green · Sat 1–3 PM thru Oct 3', url:'princeton/palmer-square/index.html', ticket:'https://palmersquare.com/events/' },
       { mo:'WED', dy:'WKLY', tag:'arts',      tagLabel:'Live Band',  name:'Bands at the Alchemist & Barrister', meta:'28 Witherspoon St · Wed, Thu & Sun',   url:'princeton/palmer-square/index.html' },
-      { mo:'THU', dy:'WKLY', tag:'nightlife', tagLabel:'Brewpub',    name:'Live Music at Triumph Brewing',      meta:'Nassau St · rotating weekly calendar', url:'princeton/palmer-square/index.html' },
+      { mo:'THU', dy:'WKLY', tag:'nightlife', tagLabel:'Brewpub',    name:'Live Music at Triumph Brewing',      meta:'20 Palmer Square E · rotating calendar', url:'princeton/palmer-square/index.html' },
       { mo:'SEP', dy:'–MAY', tag:'arts',      tagLabel:'Concerts',   name:'Princeton University Concerts',      meta:'Richardson Auditorium · 2026–27 season',url:'princeton/university/index.html',      ticket:'https://concerts.princeton.edu' },
       { mo:'ALL', dy:'YEAR', tag:'arts',      tagLabel:'Theatre',    name:'McCarter Theatre Center',            meta:'University Place · year-round',        url:'princeton/university/index.html' },
       { mo:'WED', dy:'–SUN', tag:'arts',      tagLabel:'Museum',     name:'Morven Museum & Garden',             meta:'Stockton St · 10 AM–4 PM',             url:'princeton/western-section/index.html' },
@@ -1404,11 +1418,13 @@ const PANEL_EVENTS = {
   'New Jersey': {
     label: 'New Jersey', link: { href: 'new-jersey/index.html', text: 'New Jersey Guide →' },
     events: [
-      { mo:'JUN', dy:'14',  tag:'events',  tagLabel:'Food Fest',  name:'HopSauce Festival',    meta:'Taylor Ave Waterfront · Beach Haven', url:'lbi/beach-haven/index.html', ticket:null },
-      { mo:'AUG', dy:'TBD', tag:'outdoors',tagLabel:'Surf Comp',  name:'Coquina Jam',           meta:'Beach Haven Ocean Beach · LBI',       url:'lbi/beach-haven/index.html', ticket:null },
+      { mo:'SEP', dy:'1–20',tag:'arts',    tagLabel:'Theatre',    name:'Ghost: The Musical',    meta:'Surflight Theatre · Beach Haven',     url:'lbi/beach-haven/index.html', ticket:'https://surflight.org' },
       { mo:'SEP', dy:'TBD', tag:'events',  tagLabel:'Festival',   name:'Sea Bright Fall Festival', meta:'Municipal Complex · Sea Bright',   url:'sea-bright/index.html', ticket:null },
-      { mo:'OCT', dy:'TBD', tag:'dining',  tagLabel:'Food Fest',  name:'Chowderfest',           meta:'Taylor Ave Waterfront · Beach Haven', url:'lbi/beach-haven/index.html', ticket:null },
-      { mo:'OCT', dy:'TBD', tag:'outdoors',tagLabel:'Kite Fest',  name:'LBI Kite Festival',     meta:'Ship Bottom Beach · LBI',             url:'lbi/ship-bottom/index.html', ticket:null },
+      { mo:'OCT', dy:'3–4', tag:'dining',  tagLabel:'Food Fest',  name:'Chowderfest — Chowder Cook-Off', meta:'Taylor Ave Waterfront · Beach Haven', url:'lbi/beach-haven/index.html', ticket:'https://chowderfest.com' },
+      { mo:'OCT', dy:'9–10',tag:'outdoors',tagLabel:'Kite Fest',  name:'LBI FLY Kite Festival', meta:'Ship Bottom Beaches · 18th–27th St',  url:'lbi/ship-bottom/index.html', ticket:'https://lbifly.com' },
+      { mo:'OCT', dy:'11',  tag:'outdoors',tagLabel:'Race',       name:'LBI 18 Mile Run & 12K', meta:'52nd annual · starts Holgate · 10 AM',url:'lbi/holgate/index.html', ticket:null },
+      { mo:'OCT', dy:'9–12',tag:'events',  tagLabel:'Festival',   name:'Victorian Weekend',     meta:'Cape May MAC · house tours & trolleys', url:'cape-may/index.html', ticket:'https://capemaymac.org/victorian-weekend/' },
+      { mo:'OCT', dy:'22–25',tag:'arts',   tagLabel:'Jazz Fest',  name:'Exit Zero Jazz Festival (Fall)', meta:'Cape May · venues citywide',  url:'cape-may/index.html', ticket:'https://www.exitzerojazzfestival.com/' },
       { mo:'SAT', dy:'WKLY',tag:'outdoors',tagLabel:'Market',     name:'Montgomery Farmers\' Market', meta:'Municipal Complex · Montgomery Twp', url:'montgomery/index.html', ticket:null },
       { mo:'SEP', dy:'TBD', tag:'dining',  tagLabel:'Food Fest',  name:'Cape May Food & Wine Celebration', meta:'Restaurants & inns citywide · Cape May', url:'cape-may/index.html', ticket:null },
     ]
@@ -1425,17 +1441,18 @@ const PANEL_EVENTS = {
     label: 'Montgomery Township Events', link: { href: 'montgomery/index.html', text: 'Montgomery Guide →' },
     events: [
       { mo:'SAT', dy:'WKLY', tag:'outdoors', tagLabel:'Market',   name:'Montgomery Farmers\' Market', meta:'Municipal Complex · Sat 10 AM–1 PM', url:'montgomery/index.html', ticket:null },
-      { mo:'SUN', dy:'TBD',  tag:'events',   tagLabel:'Festival', name:'Montgomery FunFest',           meta:'Rotary Club & Business Assoc.',      url:'montgomery/index.html', ticket:null },
+      { mo:'TBA', dy:'—',    tag:'events',   tagLabel:'Festival', name:'Montgomery FunFest',           meta:'Annual · Rotary Club & Business Assoc. · date TBA', url:'montgomery/index.html', ticket:null },
       { mo:'DEC', dy:'TBD',  tag:'events',   tagLabel:'Holiday',  name:'Holiday Tree Lighting',         meta:'Municipal Center, Skillman',         url:'montgomery/index.html', ticket:null },
     ]
   },
   'Cape May': {
     label: 'Cape May Events', link: { href: 'cape-may/index.html', text: 'Cape May Guide →' },
     events: [
-      { mo:'MAY', dy:'–JUN', tag:'arts',    tagLabel:'Music Fest', name:'Cape May Music Festival',          meta:'Venues citywide · Cape May MAC',      url:'cape-may/index.html', ticket:'https://capemaymac.org/cape-may-music-festival/' },
-      { mo:'MAY', dy:'&OCT', tag:'arts',    tagLabel:'Jazz Fest',  name:'Exit Zero Jazz Festival',          meta:'Venues citywide · Spring & Fall',     url:'cape-may/index.html', ticket:'https://www.exitzerojazzfestival.com/' },
-      { mo:'SEP', dy:'TBD',  tag:'dining',  tagLabel:'Food Fest',  name:'Cape May Food & Wine Celebration', meta:'Restaurants & inns citywide',         url:'cape-may/index.html', ticket:null },
-      { mo:'NOV', dy:'–JAN', tag:'events',  tagLabel:'Holiday',    name:'Christmas in Cape May',             meta:'Physick Estate & citywide',           url:'cape-may/index.html', ticket:null },
+      { mo:'SEP', dy:'TBD',  tag:'dining',  tagLabel:'Food Fest',  name:'Cape May Food & Wine Celebration', meta:'Restaurants & inns citywide · Cape May MAC', url:'cape-may/index.html', ticket:'https://capemaymac.org/' },
+      { mo:'OCT', dy:'9–12', tag:'events',  tagLabel:'Festival',   name:'Victorian Weekend',                meta:'45th annual · house tours & trolleys', url:'cape-may/index.html', ticket:'https://capemaymac.org/victorian-weekend/' },
+      { mo:'OCT', dy:'22–25',tag:'arts',    tagLabel:'Jazz Fest',  name:'Exit Zero Jazz Festival (Fall)',   meta:'Convention Hall & venues citywide',   url:'cape-may/index.html', ticket:'https://www.exitzerojazzfestival.com/' },
+      { mo:'NOV', dy:'21',   tag:'events',  tagLabel:'Holiday',    name:'Christmas in Cape May',             meta:'Nov 21 – Dec 31 · Physick Estate & citywide', url:'cape-may/index.html', ticket:'https://capemaymac.org/' },
+      { mo:'MAY', dy:'–JUN', tag:'arts',    tagLabel:'Music Fest', name:'Cape May Music Festival',          meta:'Annual each spring · Cape May MAC',   url:'cape-may/index.html', ticket:'https://capemaymac.org/cape-may-music-festival/' },
     ]
   },
   'New York': {
@@ -1459,48 +1476,46 @@ const PANEL_EVENTS = {
   'Long Beach Island': {
     label: 'LBI Events', link: { href: 'lbi/index.html', text: 'Full LBI Guide →' },
     events: [
-      { mo:'JUN', dy:'14',  tag:'events',  tagLabel:'Food Fest',  name:'HopSauce Festival',    meta:'Taylor Ave Waterfront · Beach Haven', url:'lbi/beach-haven/index.html', ticket:null },
-      { mo:'JUL', dy:'WKL', tag:'arts',    tagLabel:'Free Music', name:'Concerts on the Green', meta:'Centre St · Beach Haven · Wednesdays',url:'lbi/beach-haven/index.html', ticket:null },
-      { mo:'AUG', dy:'TBD', tag:'outdoors',tagLabel:'Surf Comp',  name:'Coquina Jam',           meta:'Beach Haven Ocean Beach · LBI',       url:'lbi/beach-haven/index.html', ticket:null },
-      { mo:'SEP', dy:'TBD', tag:'arts',    tagLabel:'Film Fest',  name:'LBI Film Festival',     meta:'Beach Haven venues · LBI',            url:'lbi/beach-haven/index.html', ticket:null },
-      { mo:'OCT', dy:'TBD', tag:'dining',  tagLabel:'Food Fest',  name:'Chowderfest',           meta:'Taylor Ave Waterfront · Beach Haven', url:'lbi/beach-haven/index.html', ticket:null },
-      { mo:'OCT', dy:'TBD', tag:'outdoors',tagLabel:'Kite Fest',  name:'LBI Kite Festival',     meta:'Ship Bottom Beach · LBI',             url:'lbi/ship-bottom/index.html', ticket:null },
+      { mo:'WED', dy:'WKL', tag:'arts',    tagLabel:'Free Music', name:'Concerts on the Green', meta:'Veterans Bicentennial Park · Beach Haven · 7:30 PM', url:'lbi/beach-haven/index.html', ticket:null },
+      { mo:'SEP', dy:'1–20',tag:'arts',    tagLabel:'Theatre',    name:'Ghost: The Musical',    meta:'Surflight Theatre · Beach Haven',     url:'lbi/beach-haven/index.html', ticket:'https://surflight.org' },
+      { mo:'OCT', dy:'3–4', tag:'dining',  tagLabel:'Food Fest',  name:'Chowderfest — Chowder Cook-Off', meta:'Taylor Ave Waterfront · Beach Haven', url:'lbi/beach-haven/index.html', ticket:'https://chowderfest.com' },
+      { mo:'OCT', dy:'9–10',tag:'outdoors',tagLabel:'Kite Fest',  name:'LBI FLY Kite Festival', meta:'Ship Bottom Beaches · 18th–27th St',  url:'lbi/ship-bottom/index.html', ticket:'https://lbifly.com' },
+      { mo:'OCT', dy:'11',  tag:'outdoors',tagLabel:'Race',       name:'LBI 18 Mile Run & 12K', meta:'52nd annual · starts Holgate · 10 AM',url:'lbi/holgate/index.html', ticket:null },
     ]
   },
   Holgate: {
     label: 'Holgate Notes', link: { href: 'lbi/holgate/index.html', text: 'Holgate Guide →' },
     events: [
-      { mo:'SEP', dy:'1',   tag:'outdoors',tagLabel:'Season Opens', name:'Beach Driving Opens',  meta:'Holgate · 4WD permitted berm crest',  url:'lbi/holgate/index.html', ticket:null },
-      { mo:'SEP', dy:'1',   tag:'outdoors',tagLabel:'Clamming',     name:'Clamming Trail Opens', meta:'Bay side · Sep 1–Mar 15',             url:'lbi/holgate/index.html', ticket:null },
+      { mo:'SEP', dy:'1',   tag:'outdoors',tagLabel:'Season Opens', name:'Holgate Wilderness Area Reopens', meta:'Walking & 4WD below berm crest · Sep 1–Mar 31 · LBT buggy permit', url:'lbi/holgate/index.html', ticket:null },
+      { mo:'OCT', dy:'11',  tag:'outdoors',tagLabel:'Race',         name:'LBI 18 Mile Run & 12K',meta:'52nd annual · starts in Holgate · 10 AM', url:'lbi/holgate/index.html', ticket:null },
       { mo:'OCT', dy:'TBD', tag:'outdoors',tagLabel:'Fishing',      name:'Striped Bass Season',  meta:'Holgate tip · Peak fall run',         url:'lbi/holgate/index.html', ticket:null },
     ]
   },
   'Beach Haven': {
     label: 'Beach Haven Events', link: { href: 'lbi/beach-haven/index.html', text: 'Beach Haven Guide →' },
     events: [
-      { mo:'JUN', dy:'14',  tag:'events',  tagLabel:'Food Fest',  name:'HopSauce Festival',       meta:'Taylor Ave Waterfront',               url:'lbi/beach-haven/index.html', ticket:null },
-      { mo:'JUL', dy:'WKL', tag:'arts',    tagLabel:'Free Music', name:'Concerts on the Green',   meta:'Centre St · Wednesdays in July',      url:'lbi/beach-haven/index.html', ticket:null },
-      { mo:'AUG', dy:'TBD', tag:'outdoors',tagLabel:'Surf Comp',  name:'Coquina Jam Surf Comp',   meta:'Beach Haven Ocean Beach',             url:'lbi/beach-haven/index.html', ticket:null },
-      { mo:'SEP', dy:'TBD', tag:'arts',    tagLabel:'Film Fest',  name:'LBI Film Festival',        meta:'Multiple Beach Haven venues',         url:'lbi/beach-haven/index.html', ticket:null },
-      { mo:'OCT', dy:'TBD', tag:'dining',  tagLabel:'Food Fest',  name:'Chowderfest',              meta:'Taylor Ave Waterfront · Oct',         url:'lbi/beach-haven/index.html', ticket:null },
+      { mo:'AUG', dy:'–30', tag:'arts',    tagLabel:'Theatre',    name:'1776: The Musical',       meta:'Surflight Theatre · through Aug 30',  url:'lbi/beach-haven/index.html', ticket:'https://surflight.org' },
+      { mo:'WED', dy:'WKL', tag:'arts',    tagLabel:'Free Music', name:'Concerts on the Green',   meta:'Veterans Bicentennial Park · Wed 7:30 PM', url:'lbi/beach-haven/index.html', ticket:null },
+      { mo:'SEP', dy:'1–20',tag:'arts',    tagLabel:'Theatre',    name:'Ghost: The Musical',      meta:'Surflight Theatre',                   url:'lbi/beach-haven/index.html', ticket:'https://surflight.org' },
+      { mo:'OCT', dy:'3–4', tag:'dining',  tagLabel:'Food Fest',  name:'Chowderfest — Chowder Cook-Off', meta:'Taylor Ave Waterfront · Oct 3–4', url:'lbi/beach-haven/index.html', ticket:'https://chowderfest.com' },
     ]
   },
   'Ship Bottom': {
     label: 'Ship Bottom Events', link: { href: 'lbi/ship-bottom/index.html', text: 'Ship Bottom Guide →' },
     events: [
-      { mo:'OCT', dy:'TBD', tag:'outdoors',tagLabel:'Kite Fest',  name:'LBI Kite Festival',    meta:'Ship Bottom Beach · LBI',             url:'lbi/ship-bottom/index.html', ticket:null },
+      { mo:'OCT', dy:'9–10',tag:'outdoors',tagLabel:'Kite Fest',  name:'LBI FLY Kite Festival',meta:'Ship Bottom Beaches 18th–27th St · Night Fly Sat', url:'lbi/ship-bottom/index.html', ticket:'https://lbifly.com' },
     ]
   },
   'Surf City': {
     label: 'Surf City Events', link: { href: 'lbi/surf-city/index.html', text: 'Surf City Guide →' },
     events: [
-      { mo:'SAT', dy:'WKL', tag:'outdoors',tagLabel:'Market',    name:'Saturday Farmers Market', meta:'Municipal Complex · 8am–1pm',         url:'lbi/surf-city/index.html', ticket:null },
+      { mo:'MON', dy:'WKL', tag:'outdoors',tagLabel:'Market',    name:'Surf City Farmers Market', meta:'Surf City Firehouse · 713 Long Beach Blvd · Mon 8 AM–noon · Jun–Sep', url:'lbi/surf-city/index.html', ticket:null },
     ]
   },
   'Harvey Cedars': {
     label: 'Harvey Cedars Events', link: { href: 'lbi/harvey-cedars/index.html', text: 'Harvey Cedars Guide →' },
     events: [
-      { mo:'FRI', dy:'WKL', tag:'outdoors',tagLabel:'Market',    name:'Friday Farmers Market',  meta:'Veterans Memorial Park · Jun–Sep',    url:'lbi/harvey-cedars/index.html', ticket:null },
+      { mo:'FRI', dy:'WKL', tag:'outdoors',tagLabel:'Market',    name:'Black Eyed Susans Farmers Market', meta:'Harvey Cedars · Fridays 9–11 AM in season', url:'lbi/harvey-cedars/index.html', ticket:null },
     ]
   },
   'Barnegat Light': {
