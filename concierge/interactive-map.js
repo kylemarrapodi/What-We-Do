@@ -49,7 +49,10 @@
         if (e.ctrlKey || e.metaKey) {
           e.preventDefault();
           const delta = e.deltaY < 0 ? 1 : -1;
-          map.setZoom(map.getZoom() + delta, { animate: true });
+          // Zoom toward the cursor (like Google Maps), not the map center:
+          // keep the point under the mouse fixed while zooming around it.
+          const cursorPoint = map.mouseEventToContainerPoint(e);
+          map.setZoomAround(cursorPoint, map.getZoom() + delta, { animate: true });
         } else {
           hint.style.opacity = '1';
           clearTimeout(hintTimer);
