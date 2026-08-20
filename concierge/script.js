@@ -117,6 +117,7 @@ const SHARED_SEARCH_TREE = {
                 { label:'Tribeca',            aliases:['tribeca'],                                          status:'live', url:'manhattan/index.html#tribeca',            children:[] },
                 { label:'SoHo',               aliases:['soho','south of houston'],                          status:'live', url:'manhattan/index.html#soho',               children:[] },
                 { label:'Greenwich Village',  aliases:['greenwich village','the village','stonewall'],      status:'live', url:'manhattan/index.html#greenwich-village',  children:[] },
+                { label:'Meatpacking District', aliases:['meatpacking','meatpacking district','gansevoort'], status:'live', url:'manhattan/index.html#meatpacking-district', children:[] },
                 { label:'Chinatown',          aliases:['chinatown','mott street','doyers street'],          status:'live', url:'manhattan/index.html#chinatown',          children:[] },
                 { label:'Little Italy',       aliases:['little italy','mulberry street','san gennaro'],     status:'live', url:'manhattan/index.html#little-italy',       children:[] },
                 { label:'Nolita',             aliases:['nolita','north of little italy'],                   status:'live', url:'manhattan/index.html#nolita',             children:[] },
@@ -129,6 +130,11 @@ const SHARED_SEARCH_TREE = {
                 { label:'Kips Bay',           aliases:['kips bay','curry hill'],                            status:'live', url:'manhattan/index.html#kips-bay',           children:[] },
                 { label:'Murray Hill',        aliases:['murray hill','sniffen court','morgan library'],     status:'live', url:'manhattan/index.html#murray-hill',        children:[] },
                 { label:'Chelsea',            aliases:['chelsea','high line','chelsea market'],             status:'live', url:'manhattan/index.html#chelsea',            children:[] },
+                { label:'Garment District',   aliases:['garment district','fashion district','fashion avenue'], status:'live', url:'manhattan/index.html#garment-district', children:[] },
+                { label:'Hudson Yards',       aliases:['hudson yards','the vessel','edge nyc'],             status:'live', url:'manhattan/index.html#hudson-yards',       children:[] },
+                { label:"Hell's Kitchen",     aliases:['hells kitchen',"hell's kitchen",'clinton','restaurant row'], status:'live', url:'manhattan/index.html#hells-kitchen', children:[] },
+                { label:'Midtown West',       aliases:['midtown west','times square','theater district','broadway'], status:'live', url:'manhattan/index.html#midtown-west', children:[] },
+                { label:'Midtown East',       aliases:['midtown east','grand central','terminal city'],     status:'live', url:'manhattan/index.html#midtown-east',       children:[] },
                 { label:'Upper West Side',    aliases:['upper west side','uws','lincoln center'],           status:'live', url:'manhattan/index.html#upper-west-side',    children:[] },
                 { label:'Harlem',             aliases:['harlem','apollo theater'],                          status:'live', url:'manhattan/index.html#harlem',             children:[] },
                 { label:'Financial District', aliases:['financial district','fidi','wall street'],          status:'live', url:'manhattan/index.html#financial-district', children:[] },
@@ -337,6 +343,12 @@ function buildSearchIndex() {
     { label:'NoMad',              sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#nomad',            keywords:['nomad','north of madison square','broadway hotels'] },
     { label:'Kips Bay',           sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#kips-bay',         keywords:['kips bay','curry hill','lexington avenue spices'] },
     { label:'Murray Hill',        sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#murray-hill',      keywords:['murray hill','east 30s','sniffen court'] },
+    { label:'Meatpacking District', sub:'Manhattan, NY',       type:'place',  url: p+'manhattan/index.html#meatpacking-district', keywords:['meatpacking','meatpacking district','gansevoort market','gansevoort street'] },
+    { label:'Garment District',   sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#garment-district', keywords:['garment district','fashion district','fashion avenue','herald square'] },
+    { label:'Hudson Yards',       sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#hudson-yards',     keywords:['hudson yards','far west side','west side yards'] },
+    { label:"Hell's Kitchen",     sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#hells-kitchen',    keywords:['hells kitchen',"hell's kitchen",'clinton','ninth avenue','restaurant row'] },
+    { label:'Midtown West',       sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#midtown-west',     keywords:['midtown west','times square','theater district','broadway theaters'] },
+    { label:'Midtown East',       sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#midtown-east',     keywords:['midtown east','grand central','terminal city','fifth avenue'] },
     { label:'The Odeon',          sub:'Tribeca, Manhattan',    type:'place',  url: p+'manhattan/index.html#tribeca',          keywords:['the odeon','odeon','tribeca brasserie'] },
     { label:"Bubby's",            sub:'Tribeca, Manhattan',    type:'place',  url: p+'manhattan/index.html#tribeca',          keywords:['bubbys','bubby','tribeca breakfast'] },
     { label:'Balthazar',          sub:'SoHo, Manhattan',       type:'place',  url: p+'manhattan/index.html#soho',             keywords:['balthazar','soho brasserie','french restaurant soho'] },
@@ -391,6 +403,34 @@ function buildSearchIndex() {
     { label:'Scandinavia House',  sub:'Murray Hill, Manhattan', type:'place', url: p+'manhattan/index.html#murray-hill',      keywords:['scandinavia house','nordic center','park avenue gallery'] },
     { label:"Sarge's Delicatessen", sub:'Murray Hill, Manhattan', type:'place', url: p+'manhattan/index.html#murray-hill',    keywords:['sarges deli','murray hill deli','pastrami third avenue'] },
     { label:'Sniffen Court',      sub:'Murray Hill, Manhattan', type:'place', url: p+'manhattan/index.html#murray-hill',      keywords:['sniffen court','historic mews','strange days doors cover'] },
+    { label:'Whitney Museum of American Art', sub:'Meatpacking District, Manhattan', type:'place', url: p+'manhattan/index.html#meatpacking-district', keywords:['whitney','whitney museum','american art museum','gansevoort museum'] },
+    { label:'Little Island',      sub:'Meatpacking District, Manhattan', type:'place', url: p+'manhattan/index.html#meatpacking-district', keywords:['little island','pier 55','floating park','heatherwick park'] },
+    { label:'RH Rooftop Restaurant', sub:'Meatpacking District, Manhattan', type:'place', url: p+'manhattan/index.html#meatpacking-district', keywords:['rh rooftop','rh new york','restoration hardware restaurant'] },
+    { label:'The Standard, High Line', sub:'Meatpacking District, Manhattan', type:'place', url: p+'manhattan/index.html#meatpacking-district', keywords:['standard high line','le bain','standard hotel meatpacking'] },
+    { label:"Macy's Herald Square", sub:'Garment District, Manhattan', type:'place', url: p+'manhattan/index.html#garment-district', keywords:['macys','macy','herald square','wooden escalators','department store'] },
+    { label:'Mood Designer Fabrics', sub:'Garment District, Manhattan', type:'place', url: p+'manhattan/index.html#garment-district', keywords:['mood fabrics','project runway store','fabric store nyc'] },
+    { label:'The Skylark',        sub:'Garment District, Manhattan', type:'place', url: p+'manhattan/index.html#garment-district', keywords:['skylark','rooftop bar garment district','west 39th rooftop'] },
+    { label:'Edge',               sub:'Hudson Yards, Manhattan', type:'place', url: p+'manhattan/index.html#hudson-yards',    keywords:['edge nyc','edge observation deck','city climb','30 hudson yards'] },
+    { label:'Vessel',             sub:'Hudson Yards, Manhattan', type:'place', url: p+'manhattan/index.html#hudson-yards',    keywords:['vessel','the vessel','hudson yards staircase','heatherwick vessel'] },
+    { label:'The Shed',           sub:'Hudson Yards, Manhattan', type:'place', url: p+'manhattan/index.html#hudson-yards',    keywords:['the shed','shed arts center','bloomberg building'] },
+    { label:'Mercado Little Spain', sub:'Hudson Yards, Manhattan', type:'place', url: p+'manhattan/index.html#hudson-yards',  keywords:['mercado little spain','jose andres','spanish food hall'] },
+    { label:'Intrepid Museum',    sub:"Hell's Kitchen, Manhattan", type:'place', url: p+'manhattan/index.html#hells-kitchen', keywords:['intrepid','intrepid museum','aircraft carrier museum','space shuttle enterprise','pier 86'] },
+    { label:'Birdland',           sub:"Hell's Kitchen, Manhattan", type:'place', url: p+'manhattan/index.html#hells-kitchen', keywords:['birdland','birdland jazz club','jazz corner of the world','charlie parker club'] },
+    { label:"Rudy's Bar & Grill", sub:"Hell's Kitchen, Manhattan", type:'place', url: p+'manhattan/index.html#hells-kitchen', keywords:['rudys','rudys bar','free hot dogs bar','hells kitchen dive'] },
+    { label:'Restaurant Row',     sub:"Hell's Kitchen, Manhattan", type:'place', url: p+'manhattan/index.html#hells-kitchen', keywords:['restaurant row','west 46th street restaurants','becco','pre theater dining'] },
+    { label:'Times Square',       sub:'Midtown West, Manhattan', type:'place', url: p+'manhattan/index.html#midtown-west',    keywords:['times square','tkts','duffy square','crossroads of the world'] },
+    { label:'Radio City Music Hall', sub:'Midtown West, Manhattan', type:'place', url: p+'manhattan/index.html#midtown-west', keywords:['radio city','rockettes','christmas spectacular','showplace of the nation'] },
+    { label:'Rockefeller Center', sub:'Midtown West, Manhattan', type:'place', url: p+'manhattan/index.html#midtown-west',    keywords:['rockefeller center','top of the rock','30 rock','skylift','the beam'] },
+    { label:'Museum of Modern Art', sub:'Midtown West, Manhattan', type:'place', url: p+'manhattan/index.html#midtown-west',  keywords:['moma','museum of modern art','starry night museum'] },
+    { label:'Carnegie Hall',      sub:'Midtown West, Manhattan', type:'place', url: p+'manhattan/index.html#midtown-west',    keywords:['carnegie hall','57th street concert hall','berliner philharmoniker'] },
+    { label:'Grand Central Terminal', sub:'Midtown East, Manhattan', type:'place', url: p+'manhattan/index.html#midtown-east', keywords:['grand central','grand central terminal','whispering gallery','zodiac ceiling'] },
+    { label:'The Campbell',       sub:'Midtown East, Manhattan', type:'place', url: p+'manhattan/index.html#midtown-east',    keywords:['the campbell','campbell apartment','grand central bar','hidden bar'] },
+    { label:'Grand Central Oyster Bar', sub:'Midtown East, Manhattan', type:'place', url: p+'manhattan/index.html#midtown-east', keywords:['oyster bar','grand central oyster bar','guastavino tiles'] },
+    { label:'Summit One Vanderbilt', sub:'Midtown East, Manhattan', type:'place', url: p+'manhattan/index.html#midtown-east', keywords:['summit','one vanderbilt','summit one vanderbilt','mirror observation deck'] },
+    { label:'Chrysler Building',  sub:'Midtown East, Manhattan', type:'place', url: p+'manhattan/index.html#midtown-east',    keywords:['chrysler building','art deco skyscraper','lexington avenue landmark'] },
+    { label:"St. Patrick's Cathedral", sub:'Midtown East, Manhattan', type:'place', url: p+'manhattan/index.html#midtown-east', keywords:['st patricks cathedral','saint patricks','fifth avenue cathedral'] },
+    { label:"P.J. Clarke's",      sub:'Midtown East, Manhattan', type:'place', url: p+'manhattan/index.html#midtown-east',    keywords:['pj clarkes','pj clarke','third avenue saloon','1884 bar'] },
+    { label:'Old Homestead Steakhouse', sub:'Chelsea, Manhattan', type:'place', url: p+'manhattan/index.html#chelsea',        keywords:['old homestead','oldest steakhouse','ninth avenue steakhouse'] },
     { label:'Feast of San Gennaro', sub:'Sep 17–27 · Little Italy', type:'event', url: p+'manhattan/index.html#little-italy',  keywords:['san gennaro','feast of san gennaro','little italy festival','mulberry street festival'] },
     { label:'Tribeca Festival',   sub:'Jun · Tribeca',         type:'event',  url: p+'manhattan/index.html#tribeca',          keywords:['tribeca festival','tribeca film festival','robert de niro film festival'] },
     { label:'Village Halloween Parade', sub:'Oct 31 · Greenwich Village', type:'event', url: p+'manhattan/index.html#greenwich-village', keywords:['village halloween parade','halloween parade nyc','sixth avenue parade'] },
@@ -401,6 +441,7 @@ function buildSearchIndex() {
     { label:'TCS New York City Marathon', sub:'Nov 1 · 50th five-borough running', type:'event', url: p+'manhattan/index.html', keywords:['nyc marathon','new york city marathon','tcs marathon','marathon sunday','central park finish'] },
     { label:"Macy's Thanksgiving Day Parade", sub:'Nov 26 · steps off W 77th & Central Park West', type:'event', url: p+'manhattan/index.html#upper-west-side', keywords:['macys parade','thanksgiving parade','thanksgiving day parade','balloons','herald square parade','100th parade'] },
     { label:'The Chicks at Beacon Theatre', sub:'Oct 10, 12 & 13 · Upper West Side', type:'event', url: p+'manhattan/index.html#upper-west-side', keywords:['the chicks','dixie chicks','taking the long way tour','beacon concert','beacon theatre concert'] },
+    { label:'Christmas Spectacular at Radio City', sub:'Nov 4 – Jan 4 · Midtown West', type:'event', url: p+'manhattan/index.html#midtown-west', keywords:['christmas spectacular','rockettes','radio city christmas','rockettes christmas show'] },
   ];
 }
 
@@ -954,12 +995,12 @@ const LIVE_MUSIC = {
   // Verified Aug 2026 against each venue's own site plus a second source
   // (Yelp, Ticketmaster, Live Nation, or press coverage) where noted below.
   // Columbia University's Miller Theatre (Morningside Heights) turned up in
-  // research but sits outside the 20 neighborhoods this page currently
+  // research but sits outside the 26 neighborhoods this page currently
   // covers — noted here rather than added as a linked entry. Irving Plaza
   // (17 Irving Pl) was also researched but falls inside OSM's Union Square
-  // boundary, outside all 20 covered polygons, so it isn't listed.
+  // boundary, outside all 26 covered polygons, so it isn't listed.
   'manhattan': {
-    blurb: 'Manhattan\'s music rooms are spread across the neighborhoods covered here — a Bleecker Street rock bar with a band on stage seven nights a week, a basement jazz club that\'s been open since 1935, an upscale room that helped revive New York jazz in the \'80s, a university performing-arts hall, a big-room concert venue in the East Village, the arena that hosts the Knicks, Rangers and the city\'s biggest touring concerts, a Beaux-Arts theatre on the Upper West Side, a famously good-sounding 575-cap room on the Lower East Side, a 184-seat supper club inside the Public Theater, an Irish session bar in Kips Bay with music every night, and the amateur-talent stage that launched Ella Fitzgerald. (Columbia University\'s Miller Theatre, in Morningside Heights, is a real public concert venue too, but it\'s outside the 20 neighborhoods covered on this page.)',
+    blurb: 'Manhattan\'s music rooms are spread across the neighborhoods covered here — a Bleecker Street rock bar with a band on stage seven nights a week, a basement jazz club that\'s been open since 1935, an upscale room that helped revive New York jazz in the \'80s, a university performing-arts hall, a big-room concert venue in the East Village, the arena that hosts the Knicks, Rangers and the city\'s biggest touring concerts, a Beaux-Arts theatre on the Upper West Side, a famously good-sounding 575-cap room on the Lower East Side, a 184-seat supper club inside the Public Theater, an Irish session bar in Kips Bay with music every night, the Hell\'s Kitchen jazz room named for Charlie Parker, and the amateur-talent stage that launched Ella Fitzgerald. (Columbia University\'s Miller Theatre, in Morningside Heights, is a real public concert venue too, but it\'s outside the 26 neighborhoods covered on this page.)',
     venues: [
       { name: 'The Red Lion', kind: 'Live Music Bar', addr: '151 Bleecker St, Greenwich Village', phone: '(212) 260-9797',
         nights: 'Live music every night, 7 PM–4 AM · cover charge Friday, Saturday and holidays only',
@@ -1015,6 +1056,11 @@ const LIVE_MUSIC = {
         desc: 'The Public Theater\'s 184-seat cabaret room, named for founder Joe Papp and open since 1998 — rock, jazz, cabaret, comedy and world music, with dinner and drink service through every show.',
         cal: { href: 'https://publictheater.org/', label: 'publictheater.org' },
         link: 'manhattan/index.html#noho' },
+      { name: 'Birdland', kind: 'Jazz Club', addr: "315 W 44th St, Hell's Kitchen", phone: '(212) 581-3080',
+        nights: 'Sets nightly from 4:30 PM · Birdland Big Band on the calendar most weeks',
+        desc: 'Founded in 1949 and named for Charlie "Bird" Parker — "The Jazz Corner of the World" now runs two rooms (the main club and the downstairs Birdland Theater) on West 44th Street, with well over a hundred dated shows on the 2026 calendar.',
+        cal: { href: 'https://www.birdlandjazz.com/calendar/', label: 'birdlandjazz.com/calendar' },
+        link: 'manhattan/index.html#hells-kitchen' },
       { name: "Paddy Reilly's Music Bar", kind: 'Irish Music Bar', addr: '519 Second Ave at 29th St, Kips Bay',
         nights: 'Live music every night — sessions, singers and open mic',
         desc: 'A beloved Irish session bar known for its Guinness and nightly live music — briefly closed after 36 years, then reopened by new leaseholders who kept the name and the room exactly as they were.',
