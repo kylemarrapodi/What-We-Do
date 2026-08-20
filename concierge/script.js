@@ -222,6 +222,12 @@ function buildSearchIndex() {
     { label:"Mo's Sunset Market",          sub:'Saturdays 6–9 PM · 1712 Buddy Holly Ave', type:'event', url: p+'lubbock/depot-district/index.html', keywords:['mos sunset market','sunset market','depot district market','lubbock market','night market'] },
     { label:'Live Music at Blue Light',    sub:'Every Fri & Sat · Depot District',      type:'event',  url: p+'lubbock/depot-district/index.html', keywords:['blue light','blue light live','live music lubbock','red dirt','country music','texas music'] },
     { label:'Game Day on The Strip',       sub:'Home game Saturdays · University Ave',  type:'sports', url: p+'lubbock/tech-district/index.html', keywords:['game day','the strip','university ave','lubbock game day','football saturday'] },
+    { label:'First Friday Art Trail',      sub:'1st Fri monthly 6–9 PM · Cultural District · Lubbock', type:'event', url: p+'lubbock/historic-district/index.html', keywords:['first friday','art trail','ffat','lhuca','lubbock art','gallery night','cultural district'] },
+    { label:'Panhandle South Plains Fair', sub:'Sep 25 – Oct 3 · South Plains Fairgrounds · Lubbock', type:'event', url: p+'lubbock/index.html', keywords:['south plains fair','panhandle fair','lubbock fair','fairgrounds','carnival lubbock','rides'] },
+    { label:'Randy Rogers Band at Buddy Holly Hall', sub:'Sep 19 · Buddy Holly Hall · Lubbock', type:'event', url: p+'lubbock/historic-district/index.html', keywords:['randy rogers','randy rogers band','texas country concert','buddy holly hall concert','hank weaver'] },
+    { label:'Elevation Nights',            sub:'Oct 14 · United Supermarkets Arena · Lubbock', type:'event', url: p+'lubbock/tech-district/index.html', keywords:['elevation worship','elevation nights','steven furtick','worship concert','usa arena concert'] },
+    { label:'Carol of Lights',             sub:'Dec 6 · Texas Tech Campus · 68th annual', type:'event', url: p+'lubbock/tech-district/index.html', keywords:['carol of lights','texas tech christmas','holiday lights lubbock','ttu tradition','memorial circle lights'] },
+    { label:'Waitress — Broadway at Buddy Holly Hall', sub:'Nov 20–22 · Buddy Holly Hall · Lubbock', type:'event', url: p+'lubbock/historic-district/index.html', keywords:['waitress','broadway lubbock','broadway at buddy holly hall','american theatre guild','touring broadway'] },
     // ── Venues ──
     { label:'Jones AT&T Stadium',          sub:'Texas Tech · Lubbock',                  type:'place',  url: p+'lubbock/tech-district/index.html', keywords:['jones','jones stadium','ttu stadium','football stadium','lubbock stadium'] },
     { label:'United Supermarkets Arena',   sub:'Texas Tech · Lubbock',                  type:'place',  url: p+'lubbock/tech-district/index.html', keywords:['united supermarkets arena','usa arena','lubbock arena','ttu arena'] },
@@ -333,6 +339,10 @@ function buildSearchIndex() {
     { label:'Harlem Week',        sub:'Aug 1–16 · Harlem',     type:'event',  url: p+'manhattan/index.html#harlem',           keywords:['harlem week','harlem day','a great day in harlem'] },
     { label:'Gorillaz at Madison Square Garden', sub:'Sep 29 · Chelsea', type:'event', url: p+'manhattan/index.html#chelsea', keywords:['gorillaz','the mountain tour','msg concert','madison square garden concert'] },
     { label:'Doja Cat at Madison Square Garden', sub:'Dec 1 · Chelsea',  type:'event', url: p+'manhattan/index.html#chelsea', keywords:['doja cat','tour ma vie','msg concert','madison square garden concert'] },
+    { label:'Open House New York Weekend', sub:'Oct 16–18 · 300+ sites citywide', type:'event', url: p+'manhattan/index.html', keywords:['open house new york','ohny','ohny weekend','architecture tours','behind the scenes nyc'] },
+    { label:'TCS New York City Marathon', sub:'Nov 1 · 50th five-borough running', type:'event', url: p+'manhattan/index.html', keywords:['nyc marathon','new york city marathon','tcs marathon','marathon sunday','central park finish'] },
+    { label:"Macy's Thanksgiving Day Parade", sub:'Nov 26 · steps off W 77th & Central Park West', type:'event', url: p+'manhattan/index.html#upper-west-side', keywords:['macys parade','thanksgiving parade','thanksgiving day parade','balloons','herald square parade','100th parade'] },
+    { label:'The Chicks at Beacon Theatre', sub:'Oct 10, 12 & 13 · Upper West Side', type:'event', url: p+'manhattan/index.html#upper-west-side', keywords:['the chicks','dixie chicks','taking the long way tour','beacon concert','beacon theatre concert'] },
   ];
 }
 
@@ -929,11 +939,15 @@ const LIVE_MUSIC = {
       { name: 'Beacon Theatre', kind: 'Theatre', addr: '2124 Broadway, Upper West Side',
         nights: 'Touring concerts several nights most weeks, year-round',
         desc: 'A 2,894-seat Beaux-Arts movie palace from 1929, now a National Historic Landmark and one of the city\'s best-loved mid-size concert rooms — operated by the same company that runs Madison Square Garden.',
+        dated: [
+          { date: 'Sep 29–30, 2026', act: 'Tom Jones — Come Gather Round Tour' },
+          { date: 'Oct 10, 12 & 13, 2026', act: 'The Chicks — Taking the Long Way 20th Anniversary Tour' },
+        ],
         cal: { href: 'https://www.msg.com/beacon-theatre', label: 'msg.com/beacon-theatre' },
         link: 'manhattan/index.html#upper-west-side' },
       { name: 'Apollo Theater', kind: 'Historic Theater', addr: '253 W 125th St, Harlem',
-        nights: 'Amateur Night every Wednesday, plus a year-round concert calendar',
-        desc: 'Opened in 1934; Amateur Night has launched acts from Ella Fitzgerald to Lauryn Hill. Still the marquee room in Harlem for both new talent and touring headliners.',
+        nights: 'Historic theater closed for renovation · programming continues at the Apollo Stages at the Victoria, 233 W 125th St',
+        desc: 'Opened in 1934; Amateur Night has launched acts from Ella Fitzgerald to Lauryn Hill. The historic theater is mid-renovation and Amateur Night is paused until it reopens — in the meantime the Apollo runs shows and events at its Apollo Stages at the Victoria, a block down 125th Street.',
         cal: { href: 'https://www.apollotheater.org/calendar/', label: 'apollotheater.org/calendar' },
         link: 'manhattan/index.html#harlem' },
     ],
@@ -1110,7 +1124,7 @@ const LIVE_MUSIC = {
         desc: 'Vintage garage, beer hall and outdoor stage — the room that gets the bigger country bills that will not fit in a Depot District bar.',
         dated: [
           { date: 'Aug 20, 2026', act: 'McCoy Moore' },
-          { date: 'Aug 28, 2026', act: 'Charles Wesley Godwin' },
+          { date: 'Aug 28, 2026', act: 'Charles Wesley Godwin, with Dylan Gossett' },
         ],
         cal: { href: 'https://concertfix.com/concerts/lubbock-tx+cooks-garage', label: "concertfix.com — Cook's Garage" } },
     ],
@@ -1132,7 +1146,11 @@ const LIVE_MUSIC = {
     blurb: 'Downtown Lubbock\'s music is anchored by one very serious building.',
     venues: [
       { name: 'The Buddy Holly Hall of Performing Arts and Sciences', kind: 'Performing Arts Hall', where: 'Downtown Lubbock',
-        desc: 'The city\'s flagship performing arts complex, opened in 2020 and named for Lubbock\'s most famous son. Touring concerts, comedy, Broadway and community programming across two halls.',
+        desc: 'The city\'s flagship performing arts complex, opened in 2021 and named for Lubbock\'s most famous son. Touring concerts, comedy, Broadway and community programming across two halls.',
+        dated: [
+          { date: 'Sep 19, 2026', act: 'Randy Rogers Band, with Hank Weaver' },
+          { date: 'Nov 20–22, 2026', act: 'Waitress — Broadway at Buddy Holly Hall season opener' },
+        ],
         cal: { href: 'https://buddyhollyhall.org/events-tickets/', label: 'buddyhollyhall.org — events & tickets' } },
     ],
     series: [],
@@ -1301,6 +1319,8 @@ const PANEL_EVENTS = {
       { mo:'SEP', dy:'19', tag:'arts',     tagLabel:'Concert',    name:'Labyrinth in Concert',        meta:'Palace Theatre · Stamford, CT',        url:'stamford/downtown/index.html',         ticket:'https://palacestamford.org' },
       { mo:'OCT', dy:'TBD',tag:'events',   tagLabel:'Festival',   name:"That's Amore Italian Fest",   meta:'Mill River Park · Stamford, CT · 2026 dates TBA', url:'stamford/downtown/index.html', ticket:'https://thatsamorefest.com' },
       { mo:'OCT', dy:'17', tag:'events',   tagLabel:'Homecoming', name:'Texas Tech Homecoming',       meta:'vs Arizona State · Jones AT&T Stadium · Lubbock', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football/schedule/2026' },
+      { mo:'OCT', dy:'31', tag:'events',   tagLabel:'Parade',     name:'Village Halloween Parade',    meta:'Sixth Ave · Greenwich Village, NYC · 7 PM', url:'manhattan/index.html#greenwich-village', ticket:'https://halloween-nyc.com' },
+      { mo:'NOV', dy:'1',  tag:'outdoors', tagLabel:'Race',       name:'TCS New York City Marathon',  meta:'50th five-borough running · NYC',      url:'manhattan/index.html',                 ticket:'https://www.nyrr.org' },
       { mo:'NOV', dy:'2',  tag:'events',   tagLabel:'Basketball', name:'TTU Basketball Opener',       meta:'vs Jackson State · United Supermarkets Arena · Lubbock', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/mens-basketball/schedule' },
       { mo:'NOV', dy:'26', tag:'events',   tagLabel:'Football',   name:'TTU vs. TCU — Thanksgiving',  meta:'Jones AT&T Stadium · Lubbock, TX · 8 PM', url:'lubbock/tech-district/index.html',  ticket:'https://texastech.com/sports/football/schedule/2026' },
       { mo:'SAT', dy:'WKL',tag:'outdoors', tagLabel:'Market',     name:'Downtown Farmers Market',     meta:'Veterans Memorial Park · Stamford, CT',url:'stamford/index.html',                  ticket:'https://stamford-downtown.com/markets' },
@@ -1364,6 +1384,7 @@ const PANEL_EVENTS = {
       { mo:'SEP', dy:'5',  tag:'events', tagLabel:'Football',   name:'TTU Football Season Opener',  meta:'vs Abilene Christian · Jones AT&T Stadium · 7 PM', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football/schedule/2026' },
       { mo:'SEP', dy:'7',  tag:'arts',   tagLabel:'Free Event', name:'Buddy Holly 90th Birthday Bash', meta:'Buddy Holly Center · Lubbock',      url:'lubbock/index.html',                   ticket:'https://buddyhollycenter.org' },
       { mo:'SEP', dy:'18', tag:'events', tagLabel:'Football',   name:'TTU vs. Houston',             meta:'Big 12 home opener · Jones AT&T Stadium · 8 PM', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football/schedule/2026' },
+      { mo:'SEP', dy:'25', tag:'events', tagLabel:'Fair',       name:'Panhandle South Plains Fair', meta:'Sep 25 – Oct 3 · South Plains Fairgrounds · Lubbock', url:'lubbock/index.html',   ticket:'https://www.southplainsfair.com' },
       { mo:'NOV', dy:'2',  tag:'events', tagLabel:'Basketball', name:'TTU Basketball Opener',       meta:'vs Jackson State · United Supermarkets Arena', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/mens-basketball/schedule' },
     ]
   },
@@ -1373,9 +1394,14 @@ const PANEL_EVENTS = {
       { mo:'SEP', dy:'5',  tag:'events', tagLabel:'Football',   name:'TTU Football Season Opener',   meta:'vs Abilene Christian · Jones AT&T Stadium · 7 PM', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football/schedule/2026' },
       { mo:'SEP', dy:'7',  tag:'arts',   tagLabel:'Free Event', name:'Buddy Holly 90th Birthday Bash', meta:'Buddy Holly Center · 10 AM–5 PM · Free', url:'lubbock/index.html',              ticket:'https://buddyhollycenter.org' },
       { mo:'SEP', dy:'18', tag:'events', tagLabel:'Football',   name:'TTU vs. Houston',              meta:'Big 12 home opener · Jones AT&T Stadium · 8 PM', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football/schedule/2026' },
+      { mo:'SEP', dy:'19', tag:'arts',   tagLabel:'Concert',    name:'Randy Rogers Band',            meta:'Buddy Holly Hall · 7:30 PM · w/ Hank Weaver', url:'lubbock/historic-district/index.html', ticket:'https://buddyhollyhall.com' },
+      { mo:'SEP', dy:'25', tag:'events', tagLabel:'Fair',       name:'Panhandle South Plains Fair',  meta:'Sep 25 – Oct 3 · South Plains Fairgrounds', url:'lubbock/index.html',              ticket:'https://www.southplainsfair.com' },
+      { mo:'OCT', dy:'14', tag:'arts',   tagLabel:'Concert',    name:'Elevation Nights',             meta:'Elevation Worship & Steven Furtick · USA · 7 PM', url:'lubbock/tech-district/index.html', ticket:'https://www.depts.ttu.edu/unitedsupermarketsarena/events/special/2026-Elevation_Worship.php' },
       { mo:'OCT', dy:'17', tag:'events', tagLabel:'Homecoming', name:'Texas Tech Homecoming Game',   meta:'vs Arizona State · Jones AT&T Stadium', url:'lubbock/tech-district/index.html',    ticket:'https://texastech.com/sports/football/schedule/2026' },
       { mo:'NOV', dy:'2',  tag:'events', tagLabel:'Basketball', name:'TTU Basketball Opener',        meta:'vs Jackson State · United Supermarkets Arena', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/mens-basketball/schedule' },
       { mo:'NOV', dy:'26', tag:'events', tagLabel:'Football',   name:'TTU vs. TCU — Thanksgiving',   meta:'Jones AT&T Stadium · 8 PM',            url:'lubbock/tech-district/index.html',     ticket:'https://texastech.com/sports/football/schedule/2026' },
+      { mo:'DEC', dy:'6',  tag:'events', tagLabel:'Holiday',    name:'Carol of Lights — 68th Annual',meta:'Science Quadrangle · TTU Campus · 7 PM · Free', url:'lubbock/tech-district/index.html', ticket:'https://www.ttu.edu/campus-events/carol-of-lights/' },
+      { mo:'FRI', dy:'1st',tag:'arts',   tagLabel:'Art Walk',   name:'First Friday Art Trail',       meta:'Cultural District · 6–9 PM · Free · monthly', url:'lubbock/historic-district/index.html', ticket:'https://lhuca.org/ffat/' },
       { mo:'SAT', dy:'WKL',tag:'outdoors',tagLabel:'Market',    name:"Mo's Sunset Market",           meta:'1712 Buddy Holly Ave · Sat 6–9 PM',    url:'lubbock/depot-district/index.html',    ticket:'https://lubbockculturaldistrict.org' },
     ]
   },
@@ -1392,14 +1418,20 @@ const PANEL_EVENTS = {
     events: [
       { mo:'SEP', dy:'5',  tag:'events', tagLabel:'Football',  name:'TTU Football Season Opener', meta:'vs Abilene Christian · Jones AT&T Stadium · 7 PM', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football/schedule/2026' },
       { mo:'SAT', dy:'WKL',tag:'events', tagLabel:'Game Day',  name:'Game Day on The Strip',      meta:'University Ave · Home game Sat',  url:'lubbock/tech-district/index.html', ticket:'https://texastech.com' },
+      { mo:'OCT', dy:'14', tag:'arts',   tagLabel:'Concert',   name:'Elevation Nights',           meta:'Elevation Worship & Steven Furtick · USA · 7 PM', url:'lubbock/tech-district/index.html', ticket:'https://www.depts.ttu.edu/unitedsupermarketsarena/events/special/2026-Elevation_Worship.php' },
       { mo:'NOV', dy:'2',  tag:'events', tagLabel:'Basketball',name:'TTU Basketball Opener',      meta:'vs Jackson State · United Supermarkets Arena', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/mens-basketball/schedule' },
+      { mo:'DEC', dy:'6',  tag:'events', tagLabel:'Holiday',   name:'Carol of Lights — 68th Annual', meta:'Science Quadrangle · 7 PM · Free', url:'lubbock/tech-district/index.html', ticket:'https://www.ttu.edu/campus-events/carol-of-lights/' },
     ]
   },
   'Historic District': {
     label: 'Historic District Events', link: { href: 'lubbock/historic-district/index.html', text: 'Historic District Guide →' },
     events: [
       { mo:'SEP', dy:'7',  tag:'arts',   tagLabel:'Free Event', name:'Buddy Holly 90th Birthday Bash', meta:'Buddy Holly Center · 10 AM–5 PM · Free', url:'lubbock/depot-district/index.html', ticket:'https://buddyhollycenter.org' },
+      { mo:'SEP', dy:'19', tag:'arts',   tagLabel:'Concert',    name:'Randy Rogers Band',              meta:'Buddy Holly Hall · 7:30 PM · w/ Hank Weaver', url:'lubbock/historic-district/index.html', ticket:'https://buddyhollyhall.com' },
+      { mo:'NOV', dy:'20', tag:'arts',   tagLabel:'Broadway',   name:'Waitress — Broadway at BHH',     meta:'Buddy Holly Hall · Nov 20–22',           url:'lubbock/historic-district/index.html', ticket:'https://www.americantheatreguild.com/lubbock' },
       { mo:'NOV', dy:'26', tag:'events', tagLabel:'Football',   name:'TTU vs. TCU — Thanksgiving',     meta:'Jones AT&T Stadium · 8 PM',              url:'lubbock/tech-district/index.html',  ticket:'https://texastech.com/sports/football/schedule/2026' },
+      { mo:'FRI', dy:'1st',tag:'arts',   tagLabel:'Art Walk',   name:'First Friday Art Trail',         meta:'Cultural District · 6–9 PM · Free · monthly', url:'lubbock/historic-district/index.html', ticket:'https://lhuca.org/ffat/' },
+      { mo:'SAT', dy:'WKL',tag:'outdoors',tagLabel:'Market',    name:'Lubbock Downtown Farmers Market',meta:'LHUCA Plaza · 5th & Ave J · Sat 9 AM–1 PM thru Oct 24', url:'lubbock/historic-district/index.html', ticket:'https://lubbockdowntownfarmersmarket.com' },
     ]
   },
   Princeton: {
@@ -1458,8 +1490,10 @@ const PANEL_EVENTS = {
   'New York': {
     label: 'New York Events', link: { href: 'new-york/index.html', text: 'New York Guide →' },
     events: [
-      { mo:'AUG', dy:'1–16', tag:'events', tagLabel:'Festival', name:'Harlem Week',              meta:'Citywide · Harlem',                  url:'manhattan/index.html#harlem', ticket:'https://harlemweek.org' },
-      { mo:'OCT', dy:'31',   tag:'events', tagLabel:'Parade',   name:'Village Halloween Parade', meta:'Sixth Ave · Greenwich Village · 7 PM',url:'manhattan/index.html#greenwich-village', ticket:'https://halloween-nyc.com' },
+      { mo:'OCT', dy:'16–18',tag:'arts',   tagLabel:'Open House',name:'Open House New York Weekend', meta:'300+ sites citywide · 24th annual',  url:'manhattan/index.html', ticket:'https://ohny.org/festival' },
+      { mo:'OCT', dy:'31',   tag:'events', tagLabel:'Parade',   name:'Village Halloween Parade', meta:'Sixth Ave, Canal to 15th St · 7 PM',  url:'manhattan/index.html#greenwich-village', ticket:'https://halloween-nyc.com' },
+      { mo:'NOV', dy:'1',    tag:'outdoors',tagLabel:'Race',    name:'TCS New York City Marathon',meta:'50th five-borough running · finishes Central Park', url:'manhattan/index.html', ticket:'https://www.nyrr.org' },
+      { mo:'AUG', dy:'ANN',  tag:'events', tagLabel:'Festival', name:'Harlem Week',              meta:'Annual · each August · citywide, centered on Harlem', url:'manhattan/index.html#harlem', ticket:'https://harlemweek.org' },
       { mo:'JUN', dy:'TBD',  tag:'arts',   tagLabel:'Film Fest',name:'Tribeca Festival',          meta:'Venues across Lower Manhattan',       url:'manhattan/index.html#tribeca', ticket:'https://tribecafilm.com/festival' },
     ]
   },
@@ -1467,9 +1501,13 @@ const PANEL_EVENTS = {
     label: 'Manhattan Events', link: { href: 'manhattan/index.html', text: 'Manhattan Guide →' },
     events: [
       { mo:'SEP', dy:'29',   tag:'arts',   tagLabel:'Concert',  name:'Gorillaz — The Mountain Tour', meta:'Madison Square Garden · 8 PM',        url:'manhattan/index.html#chelsea', ticket:'https://www.msg.com/events-tickets/gorillaz-little-simz-deltron-3030-madison-square-garden-september-2026/3B0064599DDAA6E6' },
-      { mo:'AUG', dy:'1–16', tag:'events', tagLabel:'Festival', name:'Harlem Week',              meta:'Citywide · Harlem',                  url:'manhattan/index.html#harlem', ticket:'https://harlemweek.org' },
-      { mo:'OCT', dy:'31',   tag:'events', tagLabel:'Parade',   name:'Village Halloween Parade', meta:'Sixth Ave · Greenwich Village · 7 PM',url:'manhattan/index.html#greenwich-village', ticket:'https://halloween-nyc.com' },
+      { mo:'OCT', dy:'10',   tag:'arts',   tagLabel:'Concert',  name:'The Chicks at the Beacon', meta:'Beacon Theatre · Oct 10, 12 & 13 · 8 PM', url:'manhattan/index.html#upper-west-side', ticket:'https://www.msg.com/beacon-theatre' },
+      { mo:'OCT', dy:'16–18',tag:'arts',   tagLabel:'Open House',name:'Open House New York Weekend', meta:'300+ sites citywide · 24th annual',  url:'manhattan/index.html', ticket:'https://ohny.org/festival' },
+      { mo:'OCT', dy:'31',   tag:'events', tagLabel:'Parade',   name:'Village Halloween Parade', meta:'Sixth Ave, Canal to 15th St · 7 PM',  url:'manhattan/index.html#greenwich-village', ticket:'https://halloween-nyc.com' },
+      { mo:'NOV', dy:'1',    tag:'outdoors',tagLabel:'Race',    name:'TCS New York City Marathon',meta:'50th five-borough running · finishes Central Park', url:'manhattan/index.html', ticket:'https://www.nyrr.org' },
+      { mo:'NOV', dy:'26',   tag:'events', tagLabel:'Parade',   name:"Macy's Thanksgiving Day Parade", meta:'100th parade · steps off W 77th & CPW · 8:30 AM', url:'manhattan/index.html#upper-west-side', ticket:'https://www.macys.com/s/parade/' },
       { mo:'DEC', dy:'1',    tag:'arts',   tagLabel:'Concert',  name:'Doja Cat — Tour Ma Vie World Tour', meta:'Madison Square Garden · 7:30 PM', url:'manhattan/index.html#chelsea', ticket:'https://www.msg.com/events-tickets/doja-cat-madison-square-garden-december-2026/3B00633A23FD3029' },
+      { mo:'AUG', dy:'ANN',  tag:'events', tagLabel:'Festival', name:'Harlem Week',              meta:'Annual · each August · citywide, centered on Harlem', url:'manhattan/index.html#harlem', ticket:'https://harlemweek.org' },
       { mo:'JUN', dy:'TBD',  tag:'arts',   tagLabel:'Film Fest',name:'Tribeca Festival',          meta:'Venues across Lower Manhattan',       url:'manhattan/index.html#tribeca', ticket:'https://tribecafilm.com/festival' },
     ]
   },
