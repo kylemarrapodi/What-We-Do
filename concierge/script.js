@@ -1090,14 +1090,18 @@ const LIVE_MUSIC = {
 
   // ── Lubbock ────────────────────────────────────────────────────────
   'lubbock': {
-    blurb: 'Buddy Holly\'s hometown still books like it. The Depot District is the center of gravity — songwriter rooms, a metal-and-rock backroom and an outdoor stage — with the arena and the performing arts hall handling the big touring nights.',
+    blurb: 'Buddy Holly\'s hometown still books like it. The Depot District is the center of gravity — songwriter rooms, a restored 1938 theater and an outdoor stage — with a rock club on 50th Street, an outdoor amphitheatre on the south side, and the arena and the performing arts hall handling the big touring nights.',
     venues: [
       { name: 'The Blue Light Live', kind: 'Listening Room', addr: '1806 Buddy Holly Ave',
         acts: ['The Droptines', 'Parker Ryan', 'Scott Allison'],
         desc: 'The heart of the Texas country and red dirt scene in Lubbock.', link: 'lubbock/depot-district/index.html' },
-      { name: "Jake's Backroom", kind: 'Rock Club', where: 'Depot District',
+      { name: 'Cactus Theater', kind: 'Historic Theater', addr: '1812 Buddy Holly Ave',
+        desc: 'Restored 1938 movie house across from Blue Light — live music, tribute shows and classic cinema.', link: 'lubbock/depot-district/index.html' },
+      { name: 'The Garden', kind: 'Outdoor Venue', addr: '1801 Buddy Holly Ave',
+        desc: 'String-lit outdoor bar with live music on weekends and rotating food trucks.', link: 'lubbock/depot-district/index.html' },
+      { name: "Jake's Backroom", kind: 'Rock Club', addr: '5025 50th St',
         acts: ['Mirrorcell', 'What Lies Below', 'What The Dance'],
-        desc: 'The loud end of town — rock, metal and touring package shows.', link: 'lubbock/depot-district/index.html' },
+        desc: 'The loud end of town — rock, metal and touring package shows, out on 50th Street.', link: 'lubbock/index.html' },
       { name: "Cook's Garage", kind: 'Outdoor Venue', where: 'Lubbock',
         desc: 'Part garage, part beer hall, part outdoor amphitheatre.', link: 'lubbock/depot-district/index.html' },
       { name: 'The Buddy Holly Hall of Performing Arts and Sciences', kind: 'Performing Arts Hall', where: 'Historic District',
@@ -1115,18 +1119,28 @@ const LIVE_MUSIC = {
         desc: 'A legendary West Texas listening room and honky-tonk anchoring the Depot District — red dirt, Texas country, and a long history of acts playing here on the way up. If you only get one Depot District night, spend it here.',
         cal: { href: 'https://www.bandsintown.com/v/10003090-the-bluelight-live', label: 'bandsintown.com — The Bluelight Live' } },
 
-      { name: "Jake's Backroom", kind: 'Rock Club', where: 'Depot District',
+      { name: 'Cactus Theater', kind: 'Historic Theater', addr: '1812 Buddy Holly Ave', phone: '(806) 762-3233',
+        nights: 'Live music, tribute shows, musicals and a classic cinema series year-round',
+        desc: 'A restored 1938 movie house directly across Buddy Holly Avenue from Blue Light — the seated, all-ages end of a Depot District night.',
+        cal: { href: 'https://www.cactustheater.com', label: 'cactustheater.com' } },
+
+      { name: 'The Garden', kind: 'Outdoor Venue', addr: '1801 Buddy Holly Ave', phone: '(806) 407-3636',
+        nights: 'Live music Friday and Saturday nights',
+        desc: 'String-lit outdoor bar and stage with yard games, rotating food trucks and a pet-friendly patio — the open-air room of the Depot District.' },
+
+      { name: "Jake's Backroom", kind: 'Rock Club', addr: '5025 50th St, Lubbock',
         acts: ['Mirrorcell', 'What Lies Below', 'What The Dance'],
-        desc: 'Sports cafe out front, live room in back. Where the rock, metal and hardcore touring packages land when they come through West Texas.',
+        desc: 'Sports cafe out front, live room in back, out on 50th Street rather than in the Depot itself. Where the rock, metal and hardcore touring packages land when they come through West Texas.',
         cal: { href: "https://www.bandsintown.com/v/10034987-jake's-backroom", label: "bandsintown.com — Jake's Backroom" } },
 
-      { name: "Cook's Garage", kind: 'Outdoor Venue', where: 'Lubbock',
-        desc: 'Vintage garage, beer hall and outdoor stage — the room that gets the bigger country bills that will not fit in a Depot District bar.',
+      { name: "Cook's Garage", kind: 'Outdoor Venue', addr: '11002 US-87, Lubbock',
+        desc: 'Vintage garage, beer hall and outdoor stage south of the city — the room that gets the bigger country bills that will not fit in a Depot District bar.',
         dated: [
-          { date: 'Aug 20, 2026', act: 'McCoy Moore' },
-          { date: 'Aug 28, 2026', act: 'Charles Wesley Godwin, with Dylan Gossett' },
+          { date: 'Sep 10, 2026', act: 'Kaitlin Butts' },
+          { date: 'Sep 25, 2026', act: 'Pat Green, with The Castellows' },
+          { date: 'Oct 30, 2026', act: 'Koe Wetzel' },
         ],
-        cal: { href: 'https://concertfix.com/concerts/lubbock-tx+cooks-garage', label: "concertfix.com — Cook's Garage" } },
+        cal: { href: 'https://www.cooksgarage.com/calendar', label: "cooksgarage.com — calendar" } },
     ],
     series: []
   },
