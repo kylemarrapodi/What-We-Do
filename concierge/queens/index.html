@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Queens, NY — The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .nb-label { background: rgba(255,255,255,0.92); border: none; box-shadow: 0 1px 4px rgba(0,0,0,0.2); font-family: 'Source Sans 3', sans-serif; font-size: 0.72rem; font-weight: 600; color: var(--navy); }
+
+    .page-wrap {
+      position: fixed;
+      top: 68px; left: 0; right: 0; bottom: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      background: var(--white);
+    }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+
+    .city-hero { padding: 2.5rem 5% 2rem; }
+    .city-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
+    .city-hero .hero-sub { font-size: 0.9rem; margin-bottom: 1rem; }
+    .city-hero-meta { font-size: 0.8rem; gap: 1rem; }
+
+    /* Hero stat bubbles: compact vertical stack, right of the title */
+    .hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; }
+    .hero-main { flex: 1; min-width: 0; }
+    .hero-stats-stack { display: flex; flex-direction: column; gap: 0.5rem; flex-shrink: 0; width: 176px; }
+    .hero-stat-card { background: var(--white); border-radius: var(--radius); padding: 0.5rem 0.85rem; box-shadow: var(--shadow); border-left: 4px solid var(--gold); text-align: right; }
+    .hero-stat-card h4 { font-size: 0.64rem; color: var(--navy); margin: 0.12rem 0 0.08rem; }
+    .hero-stat-card p { font-size: 0.6rem; color: var(--sub); line-height: 1.25; }
+    .hero-stat-card .big-num { font-family: 'Lora', serif; font-size: 1.1rem; color: var(--gold); font-weight: 700; line-height: 1; }
+    @media (max-width: 720px) {
+      .hero-top { flex-direction: column; }
+      .hero-stats-stack { width: 100%; flex-direction: row; flex-wrap: wrap; }
+      .hero-stat-card { flex: 1; min-width: 130px; text-align: left; }
+    }
+
+    .section { padding: 2.5rem 5%; }
+    .section-sm { padding: 1.75rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+
+    /* Jump nav to neighborhood sections */
+    .jump-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .jump-nav a {
+      font-size: 0.78rem; font-weight: 600; color: var(--navy);
+      background: var(--white); border: 1px solid var(--border); border-radius: 50px;
+      padding: 0.4rem 0.9rem; text-decoration: none; transition: all 0.15s;
+    }
+    .jump-nav a:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+
+    /* Neighborhood section block */
+    .nbhood { padding: 2.25rem 5%; scroll-margin-top: 80px; }
+    .nbhood:nth-child(even) { background: var(--mist); }
+    .nbhood-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.35rem; }
+    .nbhood-head h2 { font-size: 1.5rem; }
+    .nbhood-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--gold); background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.35); border-radius: 50px; padding: 0.25rem 0.7rem; white-space: nowrap; }
+    .nbhood-desc { font-size: 0.9rem; color: var(--ink, #333); line-height: 1.7; max-width: 780px; margin-bottom: 1.25rem; }
+    .nbhood-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+
+    /* Page-level content grid: main content column + persistent sticky map
+       sidebar — same structure as the Manhattan page. */
+    .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; padding: 0 5%; align-items: start; }
+    .content-main { min-width: 0; }
+    .map-sidebar { position: sticky; top: 68px; display: flex; flex-direction: column; gap: 1.5rem; }
+    .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border); }
+
+    @media (max-width: 900px) {
+      .two-col { grid-template-columns: 1fr; }
+      .content-grid { grid-template-columns: 1fr; }
+      .map-sidebar { position: static; }
+    }
+
+    /* Tighter listing cards now that descriptions are one short sentence */
+    .nbhood-grid .card-body { padding: 0.9rem 1rem; }
+    .nbhood-grid .card-desc { font-size: 0.82rem; line-height: 1.4; }
+    .nbhood-grid .card-meta { margin-bottom: 0.3rem; }
+  </style>
+</head>
+<body data-page-location="Queens" data-music-key="queens">
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../new-york/index.html'">New York</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Queens</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../index.html">Home</a>
+  <a href="../new-york/index.html">New York</a>
+  <a href="../manhattan/index.html">Manhattan, NY</a>
+  <a href="index.html" class="active">Queens, NY</a>
+</div>
+
+<!-- SCROLLABLE PAGE PANEL -->
+<div class="page-wrap">
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="../index.html">Home</a>
+    <span class="sep">›</span>
+    <a href="../new-york/index.html">New York</a>
+    <span class="sep">›</span>
+    <span>Queens</span>
+  </div>
+
+  <!-- CITY HERO -->
+  <section class="city-hero">
+    <div class="hero-top">
+      <div class="hero-main">
+        <div class="section-label">New York</div>
+        <h1>Queens, <span>NY</span></h1>
+        <p class="hero-sub">From the Unisphere to the surf breaks off Beach 87th Street — Queens is New York's biggest borough by land and its most global by any measure: about 2.4 million people speaking some 150 languages across 109 square miles, the most linguistically diverse urban area on Earth. This guide starts with ten essential neighborhoods — the East River art towns, the Roosevelt Avenue food corridor, the World's Fair park where the US Open is played, and the city's own surf beach — with dozens more of the borough still to come.</p>
+        <div class="city-hero-meta">
+          <span>📍 Queens County, NY</span>
+          <span>🏙️ ~2.4M residents</span>
+          <span>🗺️ 109 sq mi — the biggest borough</span>
+          <span>🌐 ~150 languages spoken</span>
+        </div>
+      </div>
+      <div class="hero-stats-stack">
+        <div class="hero-stat-card">
+          <div class="big-num">2.4M</div>
+          <h4>Residents</h4>
+          <p>Second most populous of NYC's five boroughs</p>
+        </div>
+        <div class="hero-stat-card">
+          <div class="big-num">109</div>
+          <h4>Square Miles</h4>
+          <p>More land than any other borough</p>
+        </div>
+        <div class="hero-stat-card">
+          <div class="big-num">150+</div>
+          <h4>Languages</h4>
+          <p>Most linguistically diverse urban area on Earth</p>
+        </div>
+        <div class="hero-stat-card">
+          <div class="big-num">10</div>
+          <h4>Neighborhoods</h4>
+          <p>A starter set — the borough holds dozens more</p>
+        </div>
+      </div>
+    </div>
+    <div class="jump-nav">
+      <a href="#long-island-city">Long Island City</a>
+      <a href="#astoria">Astoria</a>
+      <a href="#sunnyside">Sunnyside</a>
+      <a href="#jackson-heights">Jackson Heights</a>
+      <a href="#elmhurst">Elmhurst</a>
+      <a href="#corona">Corona</a>
+      <a href="#flushing">Flushing</a>
+      <a href="#forest-hills">Forest Hills</a>
+      <a href="#ridgewood">Ridgewood</a>
+      <a href="#rockaway-beach">Rockaway Beach</a>
+    </div>
+  </section>
+
+  <div class="content-grid">
+  <div class="content-main">
+
+  <!-- ══════════════ NEIGHBORHOODS ══════════════ -->
+
+  <!-- LONG ISLAND CITY -->
+  <section class="nbhood" id="long-island-city">
+    <div class="nbhood-head">
+      <h2>Long Island City</h2>
+      <span class="nbhood-tag">Art on the Waterfront</span>
+    </div>
+    <p class="nbhood-desc">
+      Queens' East River gateway — a century of pure industry that has flipped, tower by tower, into the fastest-changing skyline in the city, with Midtown Manhattan one subway stop away. The art came first: P.S. 1 opened its contemporary art center inside a shuttered Romanesque public school in the 1970s, long before the glass condos, and the waterfront's restored rail gantries and 1940 Pepsi-Cola sign (landmarked in 2016) now preside over a chain of riverfront parks instead of barge terminals.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Museum · Free Through 2028</span>
+          <div class="card-title">MoMA PS1</div>
+          <div class="card-meta"><span>📍 22-25 Jackson Ave</span></div>
+          <p class="card-desc">The contemporary art center in a former public school became one of New York's largest free museums in January 2026 — admission is free to all for three years. Open Thu, Fri, Sun &amp; Mon 12–6, Sat 10–6.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">State Park</span>
+          <div class="card-title">Gantry Plaza State Park</div>
+          <div class="card-meta"><span>📍 Center Blvd, on the East River</span></div>
+          <p class="card-desc">Riverfront piers built around the preserved rail-barge gantries, with the landmarked 1940 Pepsi-Cola sign at the north end and a dead-on Midtown skyline view.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Waterfront Park</span>
+          <div class="card-title">Hunter's Point South Park</div>
+          <div class="card-meta"><span>📍 Center Blvd &amp; Borden Ave</span></div>
+          <p class="card-desc">The newer southern stretch of the LIC waterfront — wetlands, a green oval, and a promenade that runs to the mouth of Newtown Creek.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Mexican</span>
+          <div class="card-title">Casa Enrique</div>
+          <div class="card-meta"><span>📍 5-48 49th Ave</span></div>
+          <p class="card-desc">Chef Cosme Aguilar's Chiapas-rooted kitchen held a Michelin star for nearly a decade (2014–2023) — the first Mexican restaurant in New York to earn one.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Cocktail Bar · Since 2009</span>
+          <div class="card-title">Dutch Kills</div>
+          <div class="card-meta"><span>📍 27-24 Jackson Ave</span></div>
+          <p class="card-desc">A wood-boothed craft-cocktail landmark named for the neighborhood's old creek — hand-cut ice and no shortcuts, nightly from 5 PM.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Free Arts Center</span>
+          <div class="card-title">Culture Lab LIC</div>
+          <div class="card-meta"><span>📍 5-25 46th Ave</span></div>
+          <p class="card-desc">A nonprofit gallery and performance campus with free outdoor "Live in The Lot" concerts on summer weekends and free Friday-night jazz at Culture Lab After Dark.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Bar · Live Music</span>
+          <div class="card-title">LIC Bar</div>
+          <div class="card-meta"><span>📍 45-58 Vernon Blvd</span></div>
+          <p class="card-desc">An old corner saloon with a brick back room and garden that books singer-songwriters and bands through the week.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag featured">Hotel · Rooftop Pool Club</span>
+          <div class="card-title">Ravel Hotel</div>
+          <div class="card-meta"><span>📍 8-08 Queens Plaza South</span></div>
+          <p class="card-desc">LIC's original boutique hotel, tucked under the Queensboro Bridge with the Profundo rooftop day club and pool looking straight at Midtown.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASTORIA -->
+  <section class="nbhood" id="astoria">
+    <div class="nbhood-head">
+      <h2>Astoria</h2>
+      <span class="nbhood-tag">Greek Queens &amp; the Film Lot</span>
+    </div>
+    <p class="nbhood-desc">
+      Astoria has been Queens' great arrival neighborhood for a century — famously Greek, and now equally Middle Eastern, Balkan, Brazilian, and Mexican, block by block. It's also the borough's film town: the Museum of the Moving Image sits beside Kaufman Astoria Studios, a working movie lot since the silent era, and the neighborhood keeps two of the city's best summer institutions — the oldest beer garden in New York (1910) and the biggest WPA-era pool (1936).
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Museum · Free Thursdays</span>
+          <div class="card-title">Museum of the Moving Image</div>
+          <div class="card-meta"><span>📍 36-01 35th Ave</span></div>
+          <p class="card-desc">Film, TV and digital media in all their machinery — home of the Jim Henson Exhibition's forty-plus puppets. Free Thursdays 2–6 PM; closed Mon–Wed.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Sculpture Park · Free · Est. 1986</span>
+          <div class="card-title">Socrates Sculpture Park</div>
+          <div class="card-meta"><span>📍 32-01 Vernon Blvd</span></div>
+          <p class="card-desc">An illegal dump turned outdoor museum, marking its 40th anniversary in 2026 with the "Artists Choose Artists" fellowship exhibition. Free, 9 AM to sunset, 365 days.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Park &amp; Pool · Since 1936</span>
+          <div class="card-title">Astoria Park &amp; Pool</div>
+          <div class="card-meta"><span>📍 Between the Triborough &amp; Hell Gate bridges</span></div>
+          <p class="card-desc">Lawns under two bridges on the East River, plus the largest pool in New York City — 330 feet long, the first of Robert Moses's giant 1936 WPA pools.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Beer Garden · Since 1910</span>
+          <div class="card-title">Bohemian Hall &amp; Beer Garden</div>
+          <div class="card-meta"><span>📍 29-19 24th Ave</span></div>
+          <p class="card-desc">New York's oldest beer garden, built by the Bohemian Citizens' Benevolent Society and pouring Czech lagers under the trees for over a century.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Greek Seafood</span>
+          <div class="card-title">Taverna Kyclades</div>
+          <div class="card-meta"><span>📍 36-01 Ditmars Blvd</span></div>
+          <p class="card-desc">The no-reservations Ditmars institution for grilled octopus and whole fish — the wait on the sidewalk is part of the ritual.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUNNYSIDE -->
+  <section class="nbhood" id="sunnyside">
+    <div class="nbhood-head">
+      <h2>Sunnyside</h2>
+      <span class="nbhood-tag">The Garden Suburb</span>
+    </div>
+    <p class="nbhood-desc">
+      Behind the neon arch over Queens Boulevard hides a piece of planning history: Sunnyside Gardens (1924–28), the first planned garden community in the United States, designed by Clarence Stein and Henry Wright around shared interior courtyards — critic Lewis Mumford lived here for years and championed it. The rest of the neighborhood is one of Queens' most easygoing dining strips, where Irish pubs share blocks with Colombian, Bolivian, Nepali and Romanian kitchens along Queens Boulevard and Skillman Avenue.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Historic District · 1924–28</span>
+          <div class="card-title">Sunnyside Gardens</div>
+          <div class="card-meta"><span>📍 Between Skillman &amp; 39th Aves, 43rd–52nd Sts</span></div>
+          <p class="card-desc">Seventy-seven acres of brick rowhouses around common gardens — America's first garden community, made a city historic district in 2007.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Pizzeria</span>
+          <div class="card-title">Philomena's</div>
+          <div class="card-meta"><span>📍 41-16 Queens Blvd</span></div>
+          <p class="card-desc">A family-run pizzeria that turns out some of the best pies in Queens — square and round, under the 7 train.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Bolivian</span>
+          <div class="card-title">Bolivian Llama Party</div>
+          <div class="card-meta"><span>📍 44-14 48th Ave</span></div>
+          <p class="card-desc">The brothers-run spot that made salteñas — Bolivia's soupy, sweet-savory hand pies — a New York obsession.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Italian</span>
+          <div class="card-title">SoleLuna</div>
+          <div class="card-meta"><span>📍 40-01 Queens Blvd</span></div>
+          <p class="card-desc">A sun-soaked neighborhood Italian room on the Boulevard — handmade pastas and dinner specials that keep the regulars regular.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Irish Grocer &amp; Deli</span>
+          <div class="card-title">Butcher Block</div>
+          <div class="card-meta"><span>📍 43-46 Queens Blvd</span></div>
+          <p class="card-desc">The Irish import grocery and butcher counter that has kept Sunnyside in rashers, bangers and brown bread for decades.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JACKSON HEIGHTS -->
+  <section class="nbhood" id="jackson-heights">
+    <div class="nbhood-head">
+      <h2>Jackson Heights</h2>
+      <span class="nbhood-tag">The World on 74th Street</span>
+    </div>
+    <p class="nbhood-desc">
+      Built between 1914 and 1939 as the nation's first planned garden-apartment cooperative community — its leafy interior-courtyard blocks were designated a historic district in 1993 — Jackson Heights is now routinely cited among the most diverse neighborhoods on Earth. Little India has anchored 74th Street since the 1970s, Diversity Plaza fills the block of 37th Road by the subway, and you can hear a dozen languages between one avenue and the next.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Historic District · Designated 1993</span>
+          <div class="card-title">Jackson Heights Historic District</div>
+          <div class="card-meta"><span>📍 Roughly 76th–88th Sts, 37th Ave to Roosevelt</span></div>
+          <p class="card-desc">Garden apartments built around private interior parks — walk 80th to 88th Streets between 37th and 35th Avenues for the showpiece blocks.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Public Plaza</span>
+          <div class="card-title">Diversity Plaza</div>
+          <div class="card-meta"><span>📍 37th Rd, between 73rd &amp; 74th Sts</span></div>
+          <p class="card-desc">The pedestrianized block by the Roosevelt Ave subway hub — momo carts, chai, and the neighborhood's living room in the open air.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Little India · Since the 1970s</span>
+          <div class="card-title">74th Street</div>
+          <div class="card-meta"><span>📍 74th St, 37th Ave to Roosevelt Ave</span></div>
+          <p class="card-desc">The historic South Asian shopping street — sari houses, gold jewelers, sweet shops and grocers that have drawn the region's diaspora for fifty years.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Colombian · Street-Cart Legend</span>
+          <div class="card-title">Arepa Lady</div>
+          <div class="card-meta"><span>📍 77-15A 37th Ave</span></div>
+          <p class="card-desc">María Piedad Cano's legendary Roosevelt Avenue arepa cart grew into this family-run storefront — the arepa de choclo with cheese is the order.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Diner &amp; Ice Cream · Brand Est. 1897</span>
+          <div class="card-title">Jahn's</div>
+          <div class="card-meta"><span>📍 81-04 37th Ave</span></div>
+          <p class="card-desc">The last surviving Jahn's ice cream parlor anywhere — vintage booths, diner breakfasts, and the group-size "Kitchen Sink" sundae.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ELMHURST -->
+  <section class="nbhood" id="elmhurst">
+    <div class="nbhood-head">
+      <h2>Elmhurst</h2>
+      <span class="nbhood-tag">Newtown Since 1652</span>
+    </div>
+    <p class="nbhood-desc">
+      Elmhurst began as Newtown, one of Queens' original English towns, settled in 1652 — Old St. James Church (1735), the borough's oldest surviving building of its kind, still stands just off Broadway. Today it's one of the city's dining capitals: a busy Chinatown, a Little Thailand, and Vietnamese, Indonesian and Latin American kitchens packed around the Broadway–Roosevelt corridor, with a Latin jazz stage hiding on a side street.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Landmark · Built 1735</span>
+          <div class="card-title">Old St. James Church</div>
+          <div class="card-meta"><span>📍 86-02 Broadway</span></div>
+          <p class="card-desc">The Church of England's colonial mission church at Newtown — the city's second-oldest religious building, landmarked in 2017.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Thai · Since 2008</span>
+          <div class="card-title">Ayada Thai</div>
+          <div class="card-meta"><span>📍 77-08 Woodside Ave</span></div>
+          <p class="card-desc">The family-run standard-bearer of Elmhurst's Thai row — order the som tum and anything with the word "spicy" taken seriously.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Isan Thai</span>
+          <div class="card-title">Zaab Zaab</div>
+          <div class="card-meta"><span>📍 76-04 Woodside Ave</span></div>
+          <p class="card-desc">Fiery northeastern-Thai cooking — larb, raw-shrimp salads and grilled seafood — that earned a spot in the Michelin Guide.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Northern Chinese</span>
+          <div class="card-title">Lao Bei Fang Dumpling House</div>
+          <div class="card-meta"><span>📍 83-05 Broadway</span></div>
+          <p class="card-desc">Pan-fried dumplings with shattering bottoms and hand-pulled noodle soups, made in view and priced like a secret.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Live Music · Nightly</span>
+          <div class="card-title">Terraza 7</div>
+          <div class="card-meta"><span>📍 40-19 Gleane St, at the Jackson Heights border</span></div>
+          <p class="card-desc">A two-level Latin jazz and world-music room with performances almost every night on its suspended stage — open daily 4 PM to 4 AM.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORONA -->
+  <section class="nbhood" id="corona">
+    <div class="nbhood-head">
+      <h2>Corona &amp; Flushing Meadows</h2>
+      <span class="nbhood-tag">Satchmo, Ices &amp; the Open</span>
+    </div>
+    <p class="nbhood-desc">
+      Louis Armstrong could have lived anywhere on Earth; he chose a modest house on 107th Street in Corona from 1943 until his death in 1971, and it's now one of the country's great house museums. The old Italian Corona of lemon ices and latticini shares the neighborhood with one of the city's largest Latin American communities — and next door spreads Flushing Meadows Corona Park, built for the 1939 and 1964 World's Fairs, where the Unisphere, two major museums, and the US Open all live.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">House Museum</span>
+          <div class="card-title">Louis Armstrong House Museum</div>
+          <div class="card-meta"><span>📍 34-56 107th St</span></div>
+          <p class="card-desc">Satchmo's preserved home, toured hourly Thu–Sat — with the Armstrong Center's "Here to Stay" exhibition and 75-seat jazz room across the street.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Italian Ices · Since 1944</span>
+          <div class="card-title">The Lemon Ice King of Corona</div>
+          <div class="card-meta"><span>📍 52-02 108th St</span></div>
+          <p class="card-desc">The Benfaremo family's walk-up window has scooped real-fruit ices for eighty years — and stars in the King of Queens opening credits. Daily 12–8.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Italian Deli</span>
+          <div class="card-title">Leo's Latticini (Mama's of Corona)</div>
+          <div class="card-meta"><span>📍 46-02 104th St</span></div>
+          <p class="card-desc">Fresh mozzarella pulled in back and heroes built with it up front — a Corona family institution. Tue–Sat 10–4.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">World's Fair Icon · 1964</span>
+          <div class="card-title">The Unisphere</div>
+          <div class="card-meta"><span>📍 Flushing Meadows Corona Park</span></div>
+          <p class="card-desc">The twelve-story stainless-steel globe built for the 1964–65 World's Fair, ringed by fountains — the symbol of Queens.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Museum · The Panorama</span>
+          <div class="card-title">Queens Museum</div>
+          <div class="card-meta"><span>📍 In the park, beside the Unisphere</span></div>
+          <p class="card-desc">Home of the Panorama of the City of New York — the astonishing block-by-block scale model of all five boroughs made for the 1964 Fair. Wed–Sun 11–5.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Science Museum</span>
+          <div class="card-title">New York Hall of Science</div>
+          <div class="card-meta"><span>📍 47-01 111th St</span></div>
+          <p class="card-desc">The hands-on science center in the Fair's Great Hall — and host field for the Queens Night Market's food stalls on Saturday nights in season.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag events">Tennis · Aug 23 – Sep 13, 2026</span>
+          <div class="card-title">US Open at the Billie Jean King National Tennis Center</div>
+          <div class="card-meta"><span>📍 Flushing Meadows Corona Park</span></div>
+          <p class="card-desc">The year's last Grand Slam, in the park since 1978 — free-admission Fan Week runs Aug 23–29, and the main draw plays Aug 30 to Sep 13 under Arthur Ashe Stadium's roof.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLUSHING -->
+  <section class="nbhood" id="flushing">
+    <div class="nbhood-head">
+      <h2>Flushing</h2>
+      <span class="nbhood-tag">Main Street Eats</span>
+    </div>
+    <p class="nbhood-desc">
+      The 7 train's last stop lands in one of the largest Chinese-speaking downtowns outside Asia — Main Street's malls, food courts and bakeries turn over regional Chinese cooking at a pace no other New York neighborhood matches. It's also colonial Queens: the 1694 Friends Meeting House on Northern Boulevard is New York City's oldest house of worship in continuous use, in the town where the 1657 Flushing Remonstrance staked an early American claim to religious liberty.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Food Court</span>
+          <div class="card-title">New World Mall Food Court</div>
+          <div class="card-meta"><span>📍 136-20 Roosevelt Ave, lower level</span></div>
+          <p class="card-desc">The big one — dozens of stalls of hand-pulled noodles, hot pot, dumplings and bubble tea under one roof, daily 10 AM–10 PM.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Soup Dumplings · Since 2006</span>
+          <div class="card-title">Nan Xiang Xiao Long Bao</div>
+          <div class="card-meta"><span>📍 39-16 Prince St</span></div>
+          <p class="card-desc">The xiao long bao destination of Flushing — a Michelin Guide pick for nine straight years, now in a bigger Prince Street home.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Historic Site · Built 1694</span>
+          <div class="card-title">Friends Quaker Meeting House</div>
+          <div class="card-meta"><span>📍 137-16 Northern Blvd</span></div>
+          <p class="card-desc">New York City's oldest house of worship in continuous use — Quakers still meet Sundays, with free tours after worship, 12–12:30.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Arts Center · Jazz</span>
+          <div class="card-title">Flushing Town Hall</div>
+          <div class="card-meta"><span>📍 137-35 Northern Blvd</span></div>
+          <p class="card-desc">The borough's global-arts presenter — jazz, world music and exhibitions year-round, including monthly all-comers jazz jams.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Garden</span>
+          <div class="card-title">Queens Botanical Garden</div>
+          <div class="card-meta"><span>📍 43-50 Main St</span></div>
+          <p class="card-desc">Thirty-nine acres off Main Street — $6 in season (free Wed 3–6 and Sun 9–11), and free altogether from mid-December through March. Closed Mondays.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOREST HILLS -->
+  <section class="nbhood" id="forest-hills">
+    <div class="nbhood-head">
+      <h2>Forest Hills</h2>
+      <span class="nbhood-tag">Tennis, Tudors &amp; Encores</span>
+    </div>
+    <p class="nbhood-desc">
+      For half a century this was the center of American tennis: the West Side Tennis Club's 1923 horseshoe stadium hosted the U.S. National Championships and US Open from 1924 through 1977, crowning champions from Althea Gibson to Arthur Ashe. The Beatles played their first stadium concerts here in August 1964 — and after decades of silence the stadium is again one of the city's great concert venues, ringed by the storybook Tudor blocks of Forest Hills Gardens.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Concert Stadium · Since 1923</span>
+          <div class="card-title">Forest Hills Stadium</div>
+          <div class="card-meta"><span>📍 1 Tennis Pl</span></div>
+          <p class="card-desc">The 13,000-seat tennis horseshoe where Dylan, the Stones and the Beatles played — its 2026 season runs June 6 to October 10, from Zac Brown Band to David Byrne and Erykah Badu.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Planned Enclave · Est. 1909</span>
+          <div class="card-title">Station Square &amp; Forest Hills Gardens</div>
+          <div class="card-meta"><span>📍 At the LIRR station, off Continental Ave</span></div>
+          <p class="card-desc">A brick-arcaded Tudor square straight out of an English village, gateway to the private-street garden suburb beyond — best seen on foot.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Historic Club</span>
+          <div class="card-title">West Side Tennis Club</div>
+          <div class="card-meta"><span>📍 1 Tennis Pl</span></div>
+          <p class="card-desc">The century-plus-old private club whose grounds hold the stadium — grass courts and all; the US Open's home before it moved to Flushing Meadows in 1978.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Soda Fountain · Site Since 1925</span>
+          <div class="card-title">Eddie's Sweet Shop</div>
+          <div class="card-meta"><span>📍 105-29 Metropolitan Ave</span></div>
+          <p class="card-desc">A working time capsule of a soda fountain — marble counter, wooden booths, homemade ice cream and real whipped cream, run as Eddie's since 1967.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Pizzeria · Since 1993</span>
+          <div class="card-title">Nick's Pizza</div>
+          <div class="card-meta"><span>📍 108-26 Ascan Ave</span></div>
+          <p class="card-desc">Thin, blistered, no-slices pies a block from Austin Street — a Forest Hills fixture for three decades.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RIDGEWOOD -->
+  <section class="nbhood" id="ridgewood">
+    <div class="nbhood-head">
+      <h2>Ridgewood</h2>
+      <span class="nbhood-tag">Brick Rows &amp; Late Nights</span>
+    </div>
+    <p class="nbhood-desc">
+      A turn-of-the-century brick-rowhouse district on the Brooklyn border, built by German brewers and knitters — the NRHP-listed Stockholm Street block still shows the mold: matched rows on a brick-paved street. The old world holds on at Gottscheer Hall (1924), clubhouse of the Gottschee German-speaking community, while a newer Ridgewood has made the neighborhood one of the city's best places to hear music after midnight — and its oldest Dutch stone house (1709) still stands on Flushing Avenue.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Hall &amp; Bar · Since 1924</span>
+          <div class="card-title">Gottscheer Hall</div>
+          <div class="card-meta"><span>📍 657 Fairview Ave</span></div>
+          <p class="card-desc">The Gottscheer community's century-old hall — a wood-paneled bar up front, a ballroom in back, and bands, parties and trivia nights on the calendar.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Club · Indoor-Outdoor</span>
+          <div class="card-title">Nowadays</div>
+          <div class="card-meta"><span>📍 56-06 Cooper Ave</span></div>
+          <p class="card-desc">A dance club with a listening-room conscience and a big backyard — daytime parties in summer, marathon sets year-round.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Venue &amp; Bar</span>
+          <div class="card-title">TV Eye</div>
+          <div class="card-meta"><span>📍 1647 Weirfield St</span></div>
+          <p class="card-desc">Rock club, bar and discotheque from Bowery Ballroom and WFMU alumni — the borough's home for touring underground bands.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Wood-Fired · Bar &amp; Grill</span>
+          <div class="card-title">Rolo's</div>
+          <div class="card-meta"><span>📍 853 Onderdonk Ave</span></div>
+          <p class="card-desc">A Michelin Guide-listed neighborhood grill where everything passes through the wood oven — with a bakery counter by day.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Historic District</span>
+          <div class="card-title">Stockholm Street Historic District</div>
+          <div class="card-meta"><span>📍 Stockholm St, between Onderdonk &amp; Woodward</span></div>
+          <p class="card-desc">An intact block of circa-1900 brick rowhouses on a brick-paved street — the picture of workers' Ridgewood, on the National Register.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag arts">Dutch Colonial · 1709</span>
+          <div class="card-title">Vander Ende-Onderdonk House</div>
+          <div class="card-meta"><span>📍 1820 Flushing Ave</span></div>
+          <p class="card-desc">The oldest Dutch Colonial stone house in New York City, on a site farmed since 1661 — open for tours and public events.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROCKAWAY BEACH -->
+  <section class="nbhood" id="rockaway-beach">
+    <div class="nbhood-head">
+      <h2>Rockaway Beach</h2>
+      <span class="nbhood-tag">The City's Surf Town</span>
+    </div>
+    <p class="nbhood-desc">
+      An hour on the A train or a ferry ride from Manhattan lands you at New York's only surf town — the ocean-facing strip of the Rockaway peninsula where the city's designated surfing beaches break off Beach 87th–92nd Streets. The 2026 swim season runs through September 13, and the boardwalk's concession culture is a destination in itself. Just west of the neighborhood, Jacob Riis Park — "The People's Beach," federal parkland in Gateway National Recreation Area — reopened its Art Deco bathhouse in summer 2026 after fifty boarded-up years.
+    </p>
+    <div class="nbhood-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Beach &amp; Boardwalk · Thru Sep 13</span>
+          <div class="card-title">Rockaway Beach &amp; Boardwalk</div>
+          <div class="card-meta"><span>📍 Concessions at Beach 86th &amp; Beach 97th Sts</span></div>
+          <p class="card-desc">The city's ocean beach, rebuilt boardwalk and all — lifeguarded swimming through September 13, surfers in the water year-round.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Beach Club &amp; Tacos · Seasonal</span>
+          <div class="card-title">Rockaway Beach Surf Club</div>
+          <div class="card-meta"><span>📍 302 Beach 87th St</span></div>
+          <p class="card-desc">The surf-shack bar and event space that anchors the 87th Street scene, home of Tacoway Beach's beer-battered fish tacos — open daily in season, mid-May through October.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag dining">Boardwalk Burgers · Seasonal</span>
+          <div class="card-title">Rippers</div>
+          <div class="card-meta"><span>📍 On the boardwalk at Beach 86th St</span></div>
+          <p class="card-desc">Smash burgers, frozen drinks and DJs right on the boardwalk — the definitive Rockaway summer lunch, weather permitting.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag nightlife">Bar · Frozen Piña Coladas</span>
+          <div class="card-title">Connolly's</div>
+          <div class="card-meta"><span>📍 155 Beach 95th St</span></div>
+          <p class="card-desc">A cash-bar beach dive pouring its famous frozen piña coladas in paper cups, Memorial Day through Labor Day.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <span class="card-tag outdoors">Next Door · Federal Parkland</span>
+          <div class="card-title">Jacob Riis Park</div>
+          <div class="card-meta"><span>📍 West of Beach 116th St — Gateway National Recreation Area</span></div>
+          <p class="card-desc">"The People's Beach" on national parkland just west of the neighborhood — its restored 1930s bathhouse reopened in 2026 as the Rockaway Ocean Club's courtyard of shops and concessions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE MUSIC (rendered by initLiveMusic in script.js) -->
+  <section class="section cat-section" data-cat="music" id="live-music" style="background:var(--mist);"></section>
+
+  </div><!-- /.content-main -->
+
+  <!-- MAP SIDEBAR — persistent right column, sticky, same structure as the
+       Manhattan page. Click a neighborhood shape to jump to its section. -->
+  <div class="map-sidebar">
+    <div class="map-embed-wrap">
+      <div id="queens-map" style="height:420px;"></div>
+    </div>
+    <p style="font-size:0.7rem;color:var(--sub);">
+      Hover a neighborhood to preview, click to jump to its section. These are ten starter neighborhoods, not the whole borough — Queens holds dozens more. Unlike Manhattan's forty-two (each drawn from a real OpenStreetMap <code>boundary=place</code> relation), most Queens neighborhoods exist in OpenStreetMap only as point markers, so this map uses real polygons where they exist and official city shapes for the rest: Forest Hills is OSM relation 21089477 — the only one of the ten with a true boundary relation — and the other nine use the NYC Dept of City Planning's 2020 Neighborhood Tabulation Area boundaries. Honest composites: Astoria is three Astoria NTAs plus Astoria Park; Corona is Corona + North Corona + Flushing Meadows-Corona Park, so the park's museums and the US Open grounds fall correctly inside it; Rockaway Beach uses the Rockaway Beach–Arverne–Edgemere NTA, whose seaward edge stops at the boardwalk line. OSM's Ridgewood place outline was evaluated but excludes NRHP-listed Ridgewood blocks (the Stockholm Street district), so the city polygon is used there too. Jacob Riis Park is federal land (Gateway National Recreation Area) west of the Rockaway Beach shape and is listed as an adjacency, not a placement. Every listing on this page was point-in-polygon tested against these shapes. See <a href="../data/queens-neighborhoods.geojson" target="_blank" rel="noopener" style="color:var(--sub);text-decoration:underline;">data source</a>. Map data &copy; OpenStreetMap contributors; neighborhood shapes NYC Dept of City Planning (NTA2020) via NYC Open Data.
+    </p>
+  </div>
+
+  </div><!-- /.content-grid -->
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p class="footer-tagline">Your local intelligence platform. Curated, verified, always up to date.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Queens</h5>
+        <ul>
+          <li><a href="#long-island-city">Long Island City</a></li>
+          <li><a href="#astoria">Astoria</a></li>
+          <li><a href="#sunnyside">Sunnyside</a></li>
+          <li><a href="#jackson-heights">Jackson Heights</a></li>
+          <li><a href="#elmhurst">Elmhurst</a></li>
+          <li><a href="#corona">Corona</a></li>
+          <li><a href="#flushing">Flushing</a></li>
+          <li><a href="#forest-hills">Forest Hills</a></li>
+          <li><a href="#ridgewood">Ridgewood</a></li>
+          <li><a href="#rockaway-beach">Rockaway Beach</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../new-york/index.html">New York</a></li>
+          <li><a href="../manhattan/index.html">Manhattan</a></li>
+          <li><a href="../connecticut/index.html">Connecticut</a></li>
+          <li><a href="../texas/index.html">Texas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>The Concierge</h5>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#suggest">Suggest a Place</a></li>
+          <li><a href="#">Advertise</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 The Concierge · All rights reserved.</span>
+      <span>Queens, NY</span>
+    </div>
+  </footer>
+
+</div><!-- /.page-wrap -->
+
+<script src="../script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../interactive-map.js"></script>
+<script>
+initCityBoundaryMap('queens-map', {
+  center: [40.72, -73.84],
+  zoom: 11,
+  boundaryUrl: '../data/queens-neighborhoods.geojson',
+  onClick: function (f) {
+    const el = document.querySelector(f.properties.url);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  },
+});
+</script>
+</body>
+</html>
