@@ -209,15 +209,14 @@ function buildSearchIndex() {
     { label:'Downtown Farmers Market',     sub:'Every Saturday · Veterans Memorial Park',type:'event',  url: p+'stamford/downtown/index.html',    keywords:['farmers market','market','stamford market','saturday market'] },
     { label:'Honey Harvest Festival',      sub:'Aug 30 · Bartlett Arboretum',            type:'event',  url: p+'stamford/north-stamford/index.html',keywords:['honey harvest','bartlett','arboretum','honey'] },
     // ── Events — Lubbock ──
-    { label:'TTU Football Season Opener',  sub:'Aug 30 · Jones AT&T Stadium · Lubbock', type:'sports', url: p+'lubbock/tech-district/index.html', keywords:['texas tech football','ttu football','red raiders football','football game','football','jones stadium','lubbock football'] },
-    { label:'TTU vs. Oklahoma State',      sub:'Sep 20 · Jones AT&T Stadium',           type:'sports', url: p+'lubbock/tech-district/index.html', keywords:['oklahoma state','osu','texas tech','big 12','football game','college football'] },
-    { label:'Texas Tech Homecoming',       sub:'Oct 11 · Texas Tech Campus',            type:'sports', url: p+'lubbock/tech-district/index.html', keywords:['homecoming','texas tech homecoming','ttu homecoming','football'] },
-    { label:'TTU Basketball Season Opener',sub:'Nov 8 · United Supermarkets Arena',     type:'sports', url: p+'lubbock/tech-district/index.html', keywords:['texas tech basketball','ttu basketball','red raiders basketball','basketball','college basketball','lubbock basketball'] },
+    { label:'TTU Football Season Opener',  sub:'Sep 5 · vs Abilene Christian · Jones AT&T Stadium', type:'sports', url: p+'lubbock/tech-district/index.html', keywords:['texas tech football','ttu football','red raiders football','football game','football','jones stadium','lubbock football','abilene christian','season opener'] },
+    { label:'TTU vs. Houston',             sub:'Sep 18 · Jones AT&T Stadium · Big 12 home opener', type:'sports', url: p+'lubbock/tech-district/index.html', keywords:['houston','texas tech','big 12','home opener','football game','college football'] },
+    { label:'Texas Tech Homecoming',       sub:'Oct 17 · vs Arizona State · Jones AT&T Stadium',   type:'sports', url: p+'lubbock/tech-district/index.html', keywords:['homecoming','texas tech homecoming','ttu homecoming','football','arizona state'] },
+    { label:'TTU vs. TCU — Thanksgiving',  sub:'Nov 26 · Jones AT&T Stadium · 8 PM',    type:'sports', url: p+'lubbock/tech-district/index.html', keywords:['tcu','texas tech','thanksgiving football','battle for the saddle','rivalry game','college football'] },
+    { label:'TTU Basketball Season Opener',sub:'Nov 2 · vs Jackson State · United Supermarkets Arena', type:'sports', url: p+'lubbock/tech-district/index.html', keywords:['texas tech basketball','ttu basketball','red raiders basketball','basketball','college basketball','lubbock basketball','jackson state'] },
     { label:'TTU Baseball',                sub:'Feb–May · Rip Griffin Park',            type:'sports', url: p+'lubbock/tech-district/index.html', keywords:['texas tech baseball','ttu baseball','baseball','college baseball','lubbock baseball'] },
-    { label:'Buddy Holly Music Festival',  sub:'Sep 13 · Depot District · Lubbock',     type:'event',  url: p+'lubbock/index.html',              keywords:['buddy holly','music festival','lubbock festival','free concert'] },
-    { label:'Reba McEntire at USA',        sub:'Sep 26 · United Supermarkets Arena',    type:'event',  url: p+'lubbock/historic-district/index.html',keywords:['reba','reba mcentire','country concert','lubbock concert','united supermarkets arena','usa arena'] },
-    { label:'Lubbock on the Square',       sub:'Oct 18 · Courthouse Square',            type:'event',  url: p+'lubbock/historic-district/index.html',keywords:['lubbock on the square','food wine','lubbock food','downtown lubbock event'] },
-    { label:'Depot District Music Crawl',  sub:'Nov 15 · All Depot Venues',             type:'event',  url: p+'lubbock/depot-district/index.html', keywords:['music crawl','bar crawl','depot crawl','lubbock bar crawl'] },
+    { label:'Buddy Holly 90th Birthday Bash', sub:'Sep 7 · Buddy Holly Center · Lubbock', type:'event', url: p+'lubbock/index.html',              keywords:['buddy holly','birthday bash','buddy holly center','lubbock festival','free concert','family event'] },
+    { label:"Mo's Sunset Market",          sub:'Saturdays 6–9 PM · 1712 Buddy Holly Ave', type:'event', url: p+'lubbock/depot-district/index.html', keywords:['mos sunset market','sunset market','depot district market','lubbock market','night market'] },
     { label:'Live Music at Blue Light',    sub:'Every Fri & Sat · Depot District',      type:'event',  url: p+'lubbock/depot-district/index.html', keywords:['blue light','blue light live','live music lubbock','red dirt','country music','texas music'] },
     { label:'Game Day on The Strip',       sub:'Home game Saturdays · University Ave',  type:'sports', url: p+'lubbock/tech-district/index.html', keywords:['game day','the strip','university ave','lubbock game day','football saturday'] },
     // ── Venues ──
@@ -1290,13 +1289,13 @@ const PANEL_EVENTS = {
     events: [
       { mo:'JUL', dy:'30', tag:'events',   tagLabel:'Concert',    name:'Ja Rule & Ashanti',           meta:'Mill River Park · Stamford, CT',       url:'stamford/downtown/index.html',         ticket:'https://palacestamford.org' },
       { mo:'AUG', dy:'1',  tag:'events',   tagLabel:'Food Fest',  name:'Hey Stamford! Food Festival', meta:'Mill River Park · Stamford, CT',       url:'stamford/downtown/index.html',         ticket:'https://heystamford.com' },
-      { mo:'AUG', dy:'30', tag:'events',   tagLabel:'Football',   name:'TTU Football Season Opener',  meta:'Jones AT&T Stadium · Lubbock, TX',     url:'lubbock/tech-district/index.html',     ticket:'https://texastech.com/sports/football' },
-      { mo:'SEP', dy:'13', tag:'arts',     tagLabel:'Music Fest', name:'Buddy Holly Music Festival',  meta:'Depot District · Lubbock, TX',         url:'lubbock/depot-district/index.html',    ticket:'https://buddyhollycenter.org' },
+      { mo:'SEP', dy:'5',  tag:'events',   tagLabel:'Football',   name:'TTU Football Season Opener',  meta:'vs Abilene Christian · Jones AT&T Stadium · Lubbock, TX', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football/schedule/2026' },
+      { mo:'SEP', dy:'7',  tag:'arts',     tagLabel:'Free Event', name:'Buddy Holly 90th Birthday Bash', meta:'Buddy Holly Center · Lubbock, TX',  url:'lubbock/depot-district/index.html',    ticket:'https://buddyhollycenter.org' },
       { mo:'SEP', dy:'19', tag:'arts',     tagLabel:'Concert',    name:'Labyrinth in Concert',        meta:'Palace Theatre · Stamford, CT',        url:'stamford/downtown/index.html',         ticket:'https://palacestamford.org' },
-      { mo:'SEP', dy:'26', tag:'events',   tagLabel:'Concert',    name:'Reba McEntire',               meta:'United Supermarkets Arena · Lubbock',  url:'lubbock/historic-district/index.html', ticket:'https://www.unitedssa.com' },
       { mo:'OCT', dy:'11', tag:'events',   tagLabel:'Festival',   name:"That's Amore Italian Fest",   meta:'Columbus Park · Stamford, CT',         url:'stamford/downtown/index.html',         ticket:'https://stamford-downtown.com' },
-      { mo:'OCT', dy:'18', tag:'dining',   tagLabel:'Food Fest',  name:'Lubbock on the Square',       meta:'Courthouse Square · Lubbock, TX',      url:'lubbock/historic-district/index.html', ticket:'https://downtownlubbock.org' },
-      { mo:'NOV', dy:'8',  tag:'events',   tagLabel:'Basketball', name:'TTU Basketball Opener',       meta:'United Supermarkets Arena · Lubbock',  url:'lubbock/tech-district/index.html',     ticket:'https://texastech.com/sports/mens-basketball' },
+      { mo:'OCT', dy:'17', tag:'events',   tagLabel:'Homecoming', name:'Texas Tech Homecoming',       meta:'vs Arizona State · Jones AT&T Stadium · Lubbock', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football/schedule/2026' },
+      { mo:'NOV', dy:'2',  tag:'events',   tagLabel:'Basketball', name:'TTU Basketball Opener',       meta:'vs Jackson State · United Supermarkets Arena · Lubbock', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/mens-basketball/schedule' },
+      { mo:'NOV', dy:'26', tag:'events',   tagLabel:'Football',   name:'TTU vs. TCU — Thanksgiving',  meta:'Jones AT&T Stadium · Lubbock, TX · 8 PM', url:'lubbock/tech-district/index.html',  ticket:'https://texastech.com/sports/football/schedule/2026' },
       { mo:'SAT', dy:'WKL',tag:'outdoors', tagLabel:'Market',     name:'Downtown Farmers Market',     meta:'Veterans Memorial Park · Stamford, CT',url:'stamford/index.html',                  ticket:'https://stamford-downtown.com/markets' },
     ]
   },
@@ -1350,45 +1349,45 @@ const PANEL_EVENTS = {
   Texas: {
     label: 'Texas Events', link: { href: 'texas/index.html', text: 'Texas Guide →' },
     events: [
-      { mo:'AUG', dy:'30', tag:'events', tagLabel:'Football',   name:'TTU Football Season Opener',  meta:'Jones AT&T Stadium · Lubbock',         url:'lubbock/tech-district/index.html',     ticket:'https://texastech.com/sports/football' },
-      { mo:'SEP', dy:'13', tag:'arts',   tagLabel:'Music Fest', name:'Buddy Holly Music Festival',  meta:'Depot District · Lubbock',             url:'lubbock/index.html',                   ticket:'https://buddyhollycenter.org' },
-      { mo:'SEP', dy:'26', tag:'events', tagLabel:'Concert',    name:'Reba McEntire at USA',        meta:'United Supermarkets Arena · Lubbock',  url:'lubbock/historic-district/index.html', ticket:'https://www.unitedssa.com' },
-      { mo:'NOV', dy:'8',  tag:'events', tagLabel:'Basketball', name:'TTU Basketball Opener',       meta:'United Supermarkets Arena · Lubbock',  url:'lubbock/tech-district/index.html',     ticket:'https://texastech.com/sports/mens-basketball' },
+      { mo:'SEP', dy:'5',  tag:'events', tagLabel:'Football',   name:'TTU Football Season Opener',  meta:'vs Abilene Christian · Jones AT&T Stadium · 7 PM', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football/schedule/2026' },
+      { mo:'SEP', dy:'7',  tag:'arts',   tagLabel:'Free Event', name:'Buddy Holly 90th Birthday Bash', meta:'Buddy Holly Center · Lubbock',      url:'lubbock/index.html',                   ticket:'https://buddyhollycenter.org' },
+      { mo:'SEP', dy:'18', tag:'events', tagLabel:'Football',   name:'TTU vs. Houston',             meta:'Big 12 home opener · Jones AT&T Stadium · 8 PM', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football/schedule/2026' },
+      { mo:'NOV', dy:'2',  tag:'events', tagLabel:'Basketball', name:'TTU Basketball Opener',       meta:'vs Jackson State · United Supermarkets Arena', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/mens-basketball/schedule' },
     ]
   },
   Lubbock: {
     label: 'Lubbock Events', link: { href: 'lubbock/index.html', text: 'Full Lubbock Guide →' },
     events: [
-      { mo:'AUG', dy:'30', tag:'events', tagLabel:'Football',   name:'TTU Football Season Opener',   meta:'Jones AT&T Stadium · 60K fans',        url:'lubbock/tech-district/index.html',     ticket:'https://texastech.com/sports/football' },
-      { mo:'SEP', dy:'13', tag:'arts',   tagLabel:'Music Fest', name:'Buddy Holly Music Festival',   meta:'Depot District · Free stages',         url:'lubbock/index.html',                   ticket:'https://buddyhollycenter.org' },
-      { mo:'SEP', dy:'20', tag:'events', tagLabel:'Football',   name:'TTU vs. Oklahoma State',       meta:'Jones AT&T Stadium · Big 12',          url:'lubbock/tech-district/index.html',     ticket:'https://texastech.com/sports/football' },
-      { mo:'SEP', dy:'26', tag:'events', tagLabel:'Concert',    name:'Reba McEntire at USA',         meta:'United Supermarkets Arena',            url:'lubbock/historic-district/index.html', ticket:'https://www.unitedssa.com' },
-      { mo:'OCT', dy:'11', tag:'events', tagLabel:'Homecoming', name:'Texas Tech Homecoming Game',   meta:'Jones AT&T Stadium',                   url:'lubbock/tech-district/index.html',     ticket:'https://texastech.com' },
-      { mo:'OCT', dy:'18', tag:'dining', tagLabel:'Food Fest',  name:'Lubbock on the Square',        meta:'Courthouse Square · Downtown',         url:'lubbock/historic-district/index.html', ticket:'https://downtownlubbock.org' },
-      { mo:'NOV', dy:'8',  tag:'events', tagLabel:'Basketball', name:'TTU Basketball Opener',        meta:'United Supermarkets Arena',            url:'lubbock/tech-district/index.html',     ticket:'https://texastech.com/sports/mens-basketball' },
+      { mo:'SEP', dy:'5',  tag:'events', tagLabel:'Football',   name:'TTU Football Season Opener',   meta:'vs Abilene Christian · Jones AT&T Stadium · 7 PM', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football/schedule/2026' },
+      { mo:'SEP', dy:'7',  tag:'arts',   tagLabel:'Free Event', name:'Buddy Holly 90th Birthday Bash', meta:'Buddy Holly Center · 10 AM–5 PM · Free', url:'lubbock/index.html',              ticket:'https://buddyhollycenter.org' },
+      { mo:'SEP', dy:'18', tag:'events', tagLabel:'Football',   name:'TTU vs. Houston',              meta:'Big 12 home opener · Jones AT&T Stadium · 8 PM', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football/schedule/2026' },
+      { mo:'OCT', dy:'17', tag:'events', tagLabel:'Homecoming', name:'Texas Tech Homecoming Game',   meta:'vs Arizona State · Jones AT&T Stadium', url:'lubbock/tech-district/index.html',    ticket:'https://texastech.com/sports/football/schedule/2026' },
+      { mo:'NOV', dy:'2',  tag:'events', tagLabel:'Basketball', name:'TTU Basketball Opener',        meta:'vs Jackson State · United Supermarkets Arena', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/mens-basketball/schedule' },
+      { mo:'NOV', dy:'26', tag:'events', tagLabel:'Football',   name:'TTU vs. TCU — Thanksgiving',   meta:'Jones AT&T Stadium · 8 PM',            url:'lubbock/tech-district/index.html',     ticket:'https://texastech.com/sports/football/schedule/2026' },
+      { mo:'SAT', dy:'WKL',tag:'outdoors',tagLabel:'Market',    name:"Mo's Sunset Market",           meta:'1712 Buddy Holly Ave · Sat 6–9 PM',    url:'lubbock/depot-district/index.html',    ticket:'https://lubbockculturaldistrict.org' },
     ]
   },
   'Depot District': {
     label: 'Depot District Events', link: { href: 'lubbock/depot-district/index.html', text: 'Full Depot Guide →' },
     events: [
       { mo:'FRI', dy:'WKL', tag:'nightlife', tagLabel:'Live Music', name:'Live Music at Blue Light',    meta:'1806 Buddy Holly Ave · Fri & Sat',  url:'lubbock/depot-district/index.html', ticket:'https://thebluelightlive.com' },
-      { mo:'SEP', dy:'13',  tag:'arts',      tagLabel:'Music Fest', name:'Buddy Holly Music Festival',  meta:'Depot District · Free stages',      url:'lubbock/depot-district/index.html', ticket:'https://buddyhollycenter.org' },
-      { mo:'NOV', dy:'15',  tag:'nightlife', tagLabel:'Bar Crawl',  name:'Depot District Music Crawl',  meta:'All venues · $15 wristband',        url:'lubbock/depot-district/index.html', ticket:'https://lubbockdepotdistrict.com' },
+      { mo:'SEP', dy:'7',   tag:'arts',      tagLabel:'Free Event', name:'Buddy Holly 90th Birthday Bash', meta:'Buddy Holly Center · 10 AM–5 PM · Free', url:'lubbock/depot-district/index.html', ticket:'https://buddyhollycenter.org' },
+      { mo:'SAT', dy:'WKL', tag:'outdoors',  tagLabel:'Market',     name:"Mo's Sunset Market",             meta:'1712 Buddy Holly Ave · Sat 6–9 PM',      url:'lubbock/depot-district/index.html', ticket:'https://lubbockculturaldistrict.org' },
     ]
   },
   'Tech District': {
     label: 'Tech District Events', link: { href: 'lubbock/tech-district/index.html', text: 'Tech District Guide →' },
     events: [
-      { mo:'AUG', dy:'30', tag:'events', tagLabel:'Football',  name:'TTU Football Season Opener', meta:'Jones AT&T Stadium · 60K fans',   url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football' },
+      { mo:'SEP', dy:'5',  tag:'events', tagLabel:'Football',  name:'TTU Football Season Opener', meta:'vs Abilene Christian · Jones AT&T Stadium · 7 PM', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/football/schedule/2026' },
       { mo:'SAT', dy:'WKL',tag:'events', tagLabel:'Game Day',  name:'Game Day on The Strip',      meta:'University Ave · Home game Sat',  url:'lubbock/tech-district/index.html', ticket:'https://texastech.com' },
-      { mo:'NOV', dy:'8',  tag:'events', tagLabel:'Basketball',name:'TTU Basketball Opener',      meta:'United Supermarkets Arena',       url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/mens-basketball' },
+      { mo:'NOV', dy:'2',  tag:'events', tagLabel:'Basketball',name:'TTU Basketball Opener',      meta:'vs Jackson State · United Supermarkets Arena', url:'lubbock/tech-district/index.html', ticket:'https://texastech.com/sports/mens-basketball/schedule' },
     ]
   },
   'Historic District': {
     label: 'Historic District Events', link: { href: 'lubbock/historic-district/index.html', text: 'Historic District Guide →' },
     events: [
-      { mo:'SEP', dy:'26', tag:'events', tagLabel:'Concert',  name:'Reba McEntire at USA',  meta:'United Supermarkets Arena',            url:'lubbock/historic-district/index.html', ticket:'https://www.unitedssa.com' },
-      { mo:'OCT', dy:'18', tag:'dining', tagLabel:'Food Fest',name:'Lubbock on the Square', meta:'Courthouse Square · Downtown',         url:'lubbock/historic-district/index.html', ticket:'https://downtownlubbock.org' },
+      { mo:'SEP', dy:'7',  tag:'arts',   tagLabel:'Free Event', name:'Buddy Holly 90th Birthday Bash', meta:'Buddy Holly Center · 10 AM–5 PM · Free', url:'lubbock/depot-district/index.html', ticket:'https://buddyhollycenter.org' },
+      { mo:'NOV', dy:'26', tag:'events', tagLabel:'Football',   name:'TTU vs. TCU — Thanksgiving',     meta:'Jones AT&T Stadium · 8 PM',              url:'lubbock/tech-district/index.html',  ticket:'https://texastech.com/sports/football/schedule/2026' },
     ]
   },
   Princeton: {
