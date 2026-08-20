@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Canaan — Connecticut · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-wrap { position: fixed; top: 68px; left: 0; right: 0; bottom: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white); }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+    .neighborhood-hero { padding: 2.5rem 5% 2.25rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; }
+    .hero-main { flex: 1 1 420px; min-width: 260px; }
+    .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
+    .hero-stats { display: flex; flex-direction: column; gap: 0.5rem; flex-shrink: 0; width: 190px; margin-left: auto; }
+    .highlight-card { background: rgba(255,255,255,0.12); backdrop-filter: blur(6px); border-radius: var(--radius); padding: 0.5rem 0.7rem; box-shadow: var(--shadow); border-right: 3px solid var(--gold); text-align: right; }
+    .highlight-card .big-num { font-family: 'Lora', serif; font-size: 1.15rem; color: var(--gold); font-weight: 700; line-height: 1; margin-bottom: 0.1rem; }
+    .highlight-card h4 { font-size: 0.68rem; color: #fff; margin-bottom: 0.1rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .highlight-card p { font-size: 0.62rem; color: rgba(255,255,255,0.75); line-height: 1.3; }
+    .section { padding: 2.25rem 5%; }
+    .section-sm { padding: 1.75rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+    .cat-section { padding: 2.25rem 5%; }
+    .sidebar-box { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem; margin-bottom: 1.25rem; }
+    .sidebar-box h4 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 0.65rem; }
+    .info-row { display: flex; gap: 0.5rem; align-items: flex-start; margin-bottom: 0.5rem; }
+    .info-row .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+    .info-row p { font-size: 0.8rem; color: var(--sub); line-height: 1.5; margin: 0; }
+    .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .map-embed-wrap #new-canaan-map { width: 100%; height: 280px; }
+    /* Persistent right-hand sidebar — the town's real boundary map stays
+       visible while the main column scrolls, same as Greenwich/Sea Bright. */
+    .map-sidebar { position: sticky; top: 68px; }
+    .events-list { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+    .event-row { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 0.85rem 1rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .event-date-badge { background: var(--gold); color: var(--navy); border-radius: 6px; padding: 0.3rem 0.55rem; text-align: center; flex-shrink: 0; min-width: 44px; }
+    .event-date-badge .month { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1; }
+    .event-date-badge .day { font-family: 'Lora', serif; font-size: 1.2rem; font-weight: 700; line-height: 1.1; }
+    .event-info h4 { font-size: 0.88rem; color: var(--navy); margin-bottom: 0.2rem; }
+    .event-info p { font-size: 0.77rem; color: var(--sub); margin: 0; line-height: 1.45; }
+    .event-info .event-link { font-size: 0.74rem; font-weight: 600; color: var(--gold); text-decoration: none; }
+    .listing-list { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2rem; }
+    .listing-row { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 0.65rem 1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; transition: box-shadow 0.2s; }
+    .listing-row:hover { box-shadow: var(--shadow-lg); }
+    .listing-info { flex: 1 1 320px; min-width: 220px; }
+    .listing-info .card-tag { margin-bottom: 0.25rem; margin-right: 0.3rem; }
+    .listing-info h3 { font-family: 'Lora', serif; font-size: 0.95rem; color: var(--navy); margin: 0 0 0.15rem; }
+    .listing-info p { font-size: 0.8rem; color: var(--sub); margin: 0; line-height: 1.4; }
+    .listing-meta { font-size: 0.74rem; color: var(--sub); white-space: nowrap; flex-shrink: 0; }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .neighborhood-hero { flex-direction: column; } .hero-stats { width: 100%; flex-direction: row; flex-wrap: wrap; margin-left: 0; } .hero-stats .highlight-card { flex: 1 1 45%; text-align: left; border-right: none; border-left: 3px solid var(--gold); } .map-sidebar { position: static; } }
+    @media (max-width: 560px) { .listing-meta { white-space: normal; } }
+  </style>
+</head>
+<body data-page-location="New Canaan">
+
+<nav>
+  <a href="../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../connecticut/index.html'">Connecticut</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">New Canaan</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../index.html">Home</a>
+  <a href="../connecticut/index.html">Connecticut</a>
+  <a href="index.html" class="active">New Canaan</a>
+  <a href="../greenwich/index.html">Greenwich</a>
+  <a href="../stamford/index.html">Stamford</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="../index.html">Home</a><span>›</span>
+      <a href="../connecticut/index.html">Connecticut</a><span>›</span>
+      <span>New Canaan</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="neighborhood-hero" style="background: linear-gradient(135deg, #14261c 0%, #1f4a37 55%, #3d7a5c 100%); color: white;">
+    <div class="hero-main">
+      <div class="section-label" style="color:rgba(253,187,45,0.9);">Fairfield County · "The Next Station to Heaven"</div>
+      <h1 style="font-family:'Lora',serif;color:white;">New Canaan</h1>
+      <p style="color:rgba(255,255,255,0.82);max-width:600px;line-height:1.65;margin-bottom:1rem;">A small town with an outsized design legacy. Established as Canaan Parish in 1731, New Canaan became the proving ground of American modernism after World War II, when the Harvard Five — Philip Johnson among them — built roughly 80 experimental homes in its woods, including Johnson's own Glass House. Today it runs on a compact, walkable village center around Elm and Main, the 300-acre spread of Waveny Park, and its own Metro-North branch line — the source of the town's century-old nickname.</p>
+      <div class="city-hero-meta">
+        <span>🏛 The Glass House</span>
+        <span>🌳 Waveny Park</span>
+        <span>🏗 Harvard Five Moderns</span>
+        <span>🚆 Own Metro-North branch</span>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="highlight-card"><div class="big-num">1731</div><h4>Canaan Parish</h4><p>Incorporated 1801</p></div>
+      <div class="highlight-card"><div class="big-num">20,622</div><h4>Population</h4><p>2020 Census</p></div>
+      <div class="highlight-card"><div class="big-num">22.1</div><h4>Sq. Mi. Land</h4><p>Backcountry &amp; village</p></div>
+      <div class="highlight-card"><div class="big-num">~80</div><h4>Modern Homes</h4><p>Built 1940s–60s</p></div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="cat-section" style="background:var(--mist);">
+    <div class="two-col">
+      <div>
+
+        <!-- Events -->
+        <div class="section-header"><h2 class="section-title">Events</h2></div>
+        <hr class="section-divider" />
+        <div class="events-list">
+
+          <div class="event-row">
+            <div class="event-date-badge"><div class="month">Oct</div><div class="day">18</div></div>
+            <div class="event-info">
+              <h4>Caffeine &amp; Carburetors</h4>
+              <p>New Canaan's famous cars-and-coffee gathering — everything from pre-war classics to modern exotics — takes over Waveny Park, 8–11 AM. Free and open to all; the year's earlier edition ran through downtown on June 14. <a class="event-link" href="https://caffeineandcarburetors.com/cc-events/" target="_blank" rel="noopener">Info →</a></p>
+            </div>
+          </div>
+
+          <div class="event-row">
+            <div class="event-date-badge"><div class="month">Sat</div><div class="day">WKLY</div></div>
+            <div class="event-info">
+              <h4>New Canaan Farmers Market</h4>
+              <p>Saturdays 10 AM–2 PM in the Lumber Yard Lot by the train station (244 Elm St), rain or shine, through December 19 — a Connecticut-grown market that has become a Saturday-morning tradition. <a class="event-link" href="https://www.newcanaanfarmersmarket.net/" target="_blank" rel="noopener">Info →</a></p>
+            </div>
+          </div>
+
+          <div class="event-row">
+            <div class="event-date-badge"><div class="month">Dec</div><div class="day">ANN</div></div>
+            <div class="event-info">
+              <h4>Holiday Stroll</h4>
+              <p>The downtown holiday tradition of more than two decades — tree lighting, carols, late store hours and Santa's arrival on a Friday evening in early December (the 2025 edition ran Dec 5). The Chamber posts each year's details in the fall. <a class="event-link" href="https://newcanaanchamber.com" target="_blank" rel="noopener">Info →</a></p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dining -->
+        <div class="section-header"><h2 class="section-title">Dining &amp; Nightlife</h2></div>
+        <hr class="section-divider" />
+        <div class="listing-list">
+
+          <div class="listing-row animate-in" data-subcat="new-american">
+            <div class="listing-info">
+              <span class="card-tag dining">New American</span><span class="card-tag featured">Chef-Driven</span>
+              <h3>Elm Restaurant</h3>
+              <p>Chef Luke Venner's polished New American dining room in the heart of the village — the town's standard-bearer for a serious night out, open seven days.</p>
+            </div>
+            <div class="listing-meta">📍 73 Elm St · (203) 920-4994</div>
+          </div>
+
+          <div class="listing-row animate-in" data-subcat="italian">
+            <div class="listing-info">
+              <span class="card-tag dining">Modern Italian</span>
+              <h3>Solé Ristorante</h3>
+              <p>Z Hospitality's modern Italian anchor on Elm Street — eclectic twists on traditional dishes and a lively bar in the center of town.</p>
+            </div>
+            <div class="listing-meta">📍 105 Elm St · (203) 972-8887</div>
+          </div>
+
+          <div class="listing-row animate-in" data-subcat="american">
+            <div class="listing-info">
+              <span class="card-tag dining">American</span><span class="card-tag nightlife">Late Bar</span>
+              <h3>Gates Restaurant &amp; Bar</h3>
+              <p>A Forest Street mainstay revived under new ownership — American cooking up front and a bar that runs past midnight on Fridays and Saturdays, which is late by New Canaan standards.</p>
+            </div>
+            <div class="listing-meta">📍 10 Forest St · Open daily</div>
+          </div>
+
+          <div class="listing-row animate-in" data-subcat="cafe">
+            <div class="listing-info">
+              <span class="card-tag dining">Bakery Café</span><span class="card-tag featured">Since 2004</span>
+              <h3>Rosie</h3>
+              <p>The village bakery-café — all-day breakfast, lunch and a serious pastry case, plus catering for half the parties in town. Closed Mondays.</p>
+            </div>
+            <div class="listing-meta">📍 27 Elm St · (203) 966-8998</div>
+          </div>
+
+        </div>
+
+        <!-- Where to Stay -->
+        <div class="section-header"><h2 class="section-title">Where to Stay</h2></div>
+        <hr class="section-divider" />
+        <div class="listing-list">
+
+          <div class="listing-row animate-in">
+            <div class="listing-info">
+              <span class="card-tag lodging">Country Inn</span><span class="card-tag featured">Revived</span>
+              <h3>Roger Sherman Inn</h3>
+              <p>New Canaan's historic country inn and French restaurant on Oenoke Ridge. After years of on-again, off-again redevelopment plans, local owners bought it and are restoring rooms, grounds and the dining room — the redevelopment-into-houses chapter is off.</p>
+            </div>
+            <div class="listing-meta">📍 195 Oenoke Ridge · rogershermaninnct.com</div>
+          </div>
+
+        </div>
+
+        <!-- Attractions & Outdoors -->
+        <div class="section-header"><h2 class="section-title">Attractions &amp; Outdoors</h2></div>
+        <hr class="section-divider" />
+        <div class="listing-list">
+
+          <div class="listing-row animate-in">
+            <div class="listing-info">
+              <span class="card-tag arts">Modern Architecture</span><span class="card-tag featured">National Trust Site</span>
+              <h3>The Glass House</h3>
+              <p>Philip Johnson's 1949 masterpiece and its 49-acre campus of structures. The 2026 tour season runs April 16 – December 14, closed Tuesdays and Wednesdays; tours start at the Visitor Center + Design Store at 199 Elm St, and advance tickets are strongly recommended — they sell out.</p>
+            </div>
+            <div class="listing-meta">📍 Visitor Center: 199 Elm St · theglasshouse.org</div>
+          </div>
+
+          <div class="listing-row animate-in">
+            <div class="listing-info">
+              <span class="card-tag arts">Architecture &amp; Nature</span><span class="card-tag outdoors">80 Acres</span>
+              <h3>Grace Farms</h3>
+              <p>The SANAA-designed River building — a ribbon of glass volumes under one winding roof — set in 80 acres of meadow and woodland, with an amphitheater, tea room and library. Open Tue–Sat 10 AM–5 PM, Sun 12–5 PM, closed Mondays.</p>
+            </div>
+            <div class="listing-meta">📍 365 Lukes Wood Rd · gracefarms.org</div>
+          </div>
+
+          <div class="listing-row animate-in">
+            <div class="listing-info">
+              <span class="card-tag outdoors">Town Park</span><span class="card-tag featured">300 Acres</span>
+              <h3>Waveny Park</h3>
+              <p>The town's great lawn — 300 acres of fields, ponds and 3.5 miles of woodland trails around the 1912 Waveny House ("the castle"). Open daylight hours, seven days a week, and home of the fall Caffeine &amp; Carburetors.</p>
+            </div>
+            <div class="listing-meta">📍 677 South Ave · Free</div>
+          </div>
+
+          <div class="listing-row animate-in">
+            <div class="listing-info">
+              <span class="card-tag outdoors">Nature Center</span>
+              <h3>New Canaan Nature Center</h3>
+              <p>Forty acres of woods, meadows and ponds with two miles of trails just north of the village; the visitor buildings are open Tue–Sat 9 AM–4 PM.</p>
+            </div>
+            <div class="listing-meta">📍 144 Oenoke Ridge</div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="map-sidebar">
+        <div class="map-embed-wrap" style="margin-bottom:1.25rem;">
+          <div id="new-canaan-map"></div>
+          <p style="font-size:0.7rem;color:var(--sub);padding:0.5rem 0.75rem;margin:0;">New Canaan's real town boundary — 22.1 square miles between Stamford and the New York line. Map data &copy; OpenStreetMap contributors.</p>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Need to Know</h4>
+          <div class="info-row"><span class="icon">🗺</span><p><strong>Location:</strong> Inland Fairfield County — Stamford to the south and west, Darien to the south, Wilton to the east, and the New York line to the north.</p></div>
+          <div class="info-row"><span class="icon">🚆</span><p><strong>Getting there:</strong> Metro-North's New Canaan Branch ends here — two stops in town (Talmadge Hill and New Canaan), about 65 minutes to Grand Central with the branch connection.</p></div>
+          <div class="info-row"><span class="icon">🚗</span><p><strong>Driving:</strong> The Merritt Parkway crosses the south of town; the village center sits a few minutes north of it.</p></div>
+          <div class="info-row"><span class="icon">🏷</span><p><strong>The nickname:</strong> "The Next Station to Heaven" — an 1890s newspaper editor's comeback after a rival called the branch line's terminus the next station to the other place.</p></div>
+          <div class="info-row"><span class="icon">🏗</span><p><strong>Design pilgrimage:</strong> About 80 mid-century modern homes were built here by the Harvard Five and their circle; roughly 20 have been lost, and the Glass House is the one you can actually tour.</p></div>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Explore Connecticut</h4>
+          <a href="../greenwich/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Greenwich →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../stamford/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Stamford →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../connecticut/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">All Connecticut →</span>
+            <span style="font-size:0.72rem;color:var(--gold);">State guide</span>
+          </a>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Quick Tips</h4>
+          <div class="info-row"><span class="icon">🎟</span><p>Glass House tours sell out — book online before you come; there's no walk-up guarantee at 199 Elm St.</p></div>
+          <div class="info-row"><span class="icon">☕</span><p>For Caffeine &amp; Carburetors, arrive close to 8 AM — the rarest metal tends to leave before 11.</p></div>
+          <div class="info-row"><span class="icon">📅</span><p>Grace Farms and the Nature Center are both closed Mondays; Rosie is too. Plan a Tuesday–Saturday visit to catch everything.</p></div>
+          <div class="info-row"><span class="icon">🥾</span><p>Waveny's trails are free and open daylight hours — park at the South Avenue entrance.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p>Your local intelligence platform — curated, verified, and always expanding.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Connecticut</h4>
+        <a href="../connecticut/index.html">CT Overview</a>
+        <a href="index.html">New Canaan</a>
+        <a href="../greenwich/index.html">Greenwich</a>
+        <a href="../stamford/index.html">Stamford</a>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="../index.html">Home</a>
+        <a href="../new-jersey/index.html">New Jersey</a>
+        <a href="../texas/index.html">Texas</a>
+      </div>
+      <div class="footer-links">
+        <h4>The Concierge</h4>
+        <a href="../index.html">About</a>
+        <a href="../index.html#suggest">Suggest a Place</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 The Concierge. All rights reserved.</div>
+  </footer>
+
+</div>
+<script src="../script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../interactive-map.js"></script>
+<script>
+/* New Canaan's real municipal boundary (OSM relation 11052088), single
+   feature — the town's own page, so no click-through tooltip. */
+initCityBoundaryMap('new-canaan-map', {
+  center: [41.16, -73.50],
+  zoom: 12,
+  boundaryUrl: '../data/new-canaan-boundary.geojson',
+  tooltipSuffix: '',
+});
+</script>
+</body>
+</html>
