@@ -33,6 +33,7 @@
     .section-sm { padding: 1.75rem 5%; }
     .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
     .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+    .events-list { display: flex; flex-direction: column; }
     .city-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
     .city-chip { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.85rem; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 50px; font-size: 0.8rem; font-weight: 600; color: white; text-decoration: none; transition: all 0.2s; }
     .city-chip:hover { background: var(--gold); color: var(--navy); border-color: var(--gold); }
@@ -42,7 +43,7 @@
     .map-embed-wrap iframe { display: block; width: 100%; height: 320px; border: none; }
     .sidebar-box { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem; margin-bottom: 1.25rem; }
     .sidebar-box h4 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 0.65rem; }
-    .map-sidebar { position: sticky; top: 68px; }
+    .map-sidebar { position: sticky; top: 68px; display: flex; flex-direction: column; gap: 1.5rem; }
     @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .city-hero-inner { flex-direction: column; } .highlight-strip { flex-direction: row; width: 100%; } .highlight-card { flex: 1; } .map-sidebar { position: static; } }
     @media (max-width: 600px) { .highlight-strip { flex-direction: column; } }
   </style>
@@ -121,6 +122,199 @@
           <h4>Places Live</h4>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Two-col: Events + Map -->
+  <div class="section">
+    <div class="two-col">
+
+      <!-- Events -->
+      <div>
+        <div class="section-header">
+          <h2 class="section-title">New Jersey Events</h2>
+          <a href="../lbi/index.html" class="section-link">LBI Guide →</a>
+        </div>
+        <hr class="section-divider" />
+        <div class="events-list">
+
+          <div class="event-card animate-in">
+            <div class="event-date"><span class="event-mo">SEP</span><span class="event-day">1</span></div>
+            <div class="event-info">
+              <div class="event-tags"><span class="tag tag-arts">Theatre</span></div>
+              <h4 class="event-title">Ghost: The Musical</h4>
+              <p class="event-detail">Surflight Theatre · Beach Haven · Sep 1–20</p>
+              <div class="event-actions">
+                <a href="../lbi/beach-haven/index.html" class="event-link">View Guide</a>
+                <a href="https://surflight.org" target="_blank" rel="noopener" class="event-link event-ticket">Tickets →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card animate-in">
+            <div class="event-date"><span class="event-mo">SEP</span><span class="event-day">TBD</span></div>
+            <div class="event-info">
+              <div class="event-tags"><span class="tag tag-community">Festival</span><span class="tag tag-free">Free</span></div>
+              <h4 class="event-title">Sea Bright Fall Festival</h4>
+              <p class="event-detail">Municipal Complex · Sea Bright · a Saturday in late September</p>
+              <div class="event-actions">
+                <a href="../sea-bright/index.html" class="event-link">View Guide</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card animate-in">
+            <div class="event-date"><span class="event-mo">SEP</span><span class="event-day">TBD</span></div>
+            <div class="event-info">
+              <div class="event-tags"><span class="tag tag-food">Food &amp; Wine</span></div>
+              <h4 class="event-title">Cape May Food &amp; Wine Celebration</h4>
+              <p class="event-detail">Dining rooms &amp; inns across Cape May · every September</p>
+              <div class="event-actions">
+                <a href="../cape-may/index.html" class="event-link">View Guide</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card animate-in">
+            <div class="event-date"><span class="event-mo">OCT</span><span class="event-day">3</span></div>
+            <div class="event-info">
+              <div class="event-tags"><span class="tag tag-food">Food Fest</span><span class="tag tag-featured">Featured</span></div>
+              <h4 class="event-title">Chowderfest — Beach Haven Chowder Cook-Off</h4>
+              <p class="event-detail">Taylor Ave Waterfront · Beach Haven · Oct 3–4</p>
+              <div class="event-actions">
+                <a href="../lbi/beach-haven/index.html" class="event-link">View Guide</a>
+                <a href="https://chowderfest.com" target="_blank" rel="noopener" class="event-link event-ticket">Tickets →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card animate-in">
+            <div class="event-date"><span class="event-mo">OCT</span><span class="event-day">9</span></div>
+            <div class="event-info">
+              <div class="event-tags"><span class="tag tag-outdoors">Kites</span><span class="tag tag-free">Free</span></div>
+              <h4 class="event-title">LBI FLY International Kite Festival</h4>
+              <p class="event-detail">Ship Bottom Beaches, 18th–27th St · Oct 9–10 · Free</p>
+              <div class="event-actions">
+                <a href="../lbi/ship-bottom/index.html" class="event-link">View Guide</a>
+                <a href="https://lbifly.com" target="_blank" rel="noopener" class="event-link event-ticket">Info →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card animate-in">
+            <div class="event-date"><span class="event-mo">OCT</span><span class="event-day">11</span></div>
+            <div class="event-info">
+              <div class="event-tags"><span class="tag tag-outdoors">Race</span></div>
+              <h4 class="event-title">LBI Commemorative 18 Mile Run &amp; 12K</h4>
+              <p class="event-detail">Starts in Holgate · Oct 11 · 10 AM · 52nd annual</p>
+              <div class="event-actions">
+                <a href="../lbi/holgate/index.html" class="event-link">View Guide</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card animate-in">
+            <div class="event-date"><span class="event-mo">OCT</span><span class="event-day">22</span></div>
+            <div class="event-info">
+              <div class="event-tags"><span class="tag tag-music">Jazz</span></div>
+              <h4 class="event-title">Exit Zero Jazz Festival</h4>
+              <p class="event-detail">Convention Hall &amp; venues around town · Cape May · Oct 22–25</p>
+              <div class="event-actions">
+                <a href="../cape-may/index.html" class="event-link">View Guide</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card animate-in">
+            <div class="event-date"><span class="event-mo">NOV</span><span class="event-day">21</span></div>
+            <div class="event-info">
+              <div class="event-tags"><span class="tag tag-community">Holiday</span></div>
+              <h4 class="event-title">Christmas in Cape May</h4>
+              <p class="event-detail">Citywide · Cape May · Nov 21 through New Year's</p>
+              <div class="event-actions">
+                <a href="../cape-may/index.html" class="event-link">View Guide</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card animate-in">
+            <div class="event-date"><span class="event-mo">SAT</span><span class="event-day">WKL</span></div>
+            <div class="event-info">
+              <div class="event-tags"><span class="tag tag-outdoors">Market</span><span class="tag tag-free">Free</span></div>
+              <h4 class="event-title">Montgomery Farmers' Market</h4>
+              <p class="event-detail">Municipal Complex · Skillman · Saturdays 10 AM–1 PM through November</p>
+              <div class="event-actions">
+                <a href="../montgomery/index.html" class="event-link">View Guide</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Map + Places sidebar -->
+      <div class="map-sidebar">
+        <div class="map-embed-wrap">
+          <div id="nj-map" style="height:320px;"></div>
+          <p style="font-size:0.7rem;color:var(--sub);padding:0.5rem 0.75rem 0;">Hover a place to preview, click to explore. Map data &copy; OpenStreetMap contributors.</p>
+        </div>
+
+        <div>
+          <h3 class="section-title" style="font-size: 0.9rem; margin-bottom: 0.75rem;">Places on The Concierge</h3>
+          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <a href="../lbi/index.html" class="place-card" style="padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <div style="font-weight: 700; font-size: 0.88rem; color: var(--navy);">Long Beach Island</div>
+                <div style="font-size: 0.75rem; color: var(--sub);">6 towns · Holgate to Barnegat Light</div>
+              </div>
+              <span class="badge badge-live">Live</span>
+            </a>
+            <a href="../princeton/index.html" class="place-card" style="padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <div style="font-weight: 700; font-size: 0.88rem; color: var(--navy);">Princeton</div>
+                <div style="font-size: 0.75rem; color: var(--sub);">Palmer Square · University · Western Section</div>
+              </div>
+              <span class="badge badge-live">Live</span>
+            </a>
+            <a href="../sea-bright/index.html" class="place-card" style="padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <div style="font-weight: 700; font-size: 0.88rem; color: var(--navy);">Sea Bright</div>
+                <div style="font-size: 0.75rem; color: var(--sub);">Ocean Ave dining · beach clubs · the seawall</div>
+              </div>
+              <span class="badge badge-live">Live</span>
+            </a>
+            <a href="../montgomery/index.html" class="place-card" style="padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <div style="font-weight: 700; font-size: 0.88rem; color: var(--navy);">Montgomery Township</div>
+                <div style="font-size: 0.75rem; color: var(--sub);">Skillman · Belle Mead · Blawenburg</div>
+              </div>
+              <span class="badge badge-live">Live</span>
+            </a>
+            <a href="../cape-may/index.html" class="place-card" style="padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <div style="font-weight: 700; font-size: 0.88rem; color: var(--navy);">Cape May</div>
+                <div style="font-size: 0.75rem; color: var(--sub);">Washington Street Mall · Congress Hall</div>
+              </div>
+              <span class="badge badge-live">Live</span>
+            </a>
+            <div class="place-card" style="padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between; opacity: 0.55; cursor: default;">
+              <div>
+                <div style="font-weight: 700; font-size: 0.88rem; color: var(--navy);">Asbury Park</div>
+                <div style="font-size: 0.75rem; color: var(--sub);">Boardwalk revival · Stone Pony</div>
+              </div>
+              <span class="badge">Soon</span>
+            </div>
+            <div class="place-card" style="padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between; opacity: 0.55; cursor: default;">
+              <div>
+                <div style="font-weight: 700; font-size: 0.88rem; color: var(--navy);">Jersey City</div>
+                <div style="font-size: 0.75rem; color: var(--sub);">Grove St restaurant row · Hudson waterfront</div>
+              </div>
+              <span class="badge">Soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -226,11 +420,9 @@
     <a href="../cape-may/index.html" style="font-size:0.85rem;font-weight:600;color:var(--navy);text-decoration:none;border-bottom:1px solid var(--gold);">Full Cape May guide →</a>
   </div>
 
-  <!-- Main content -->
-  <div class="section">
-    <div class="two-col">
-      <div>
-        <div class="section-header"><h2 class="section-title">Long Beach Island</h2></div>
+  <!-- LONG BEACH ISLAND -->
+  <div class="section" style="background:var(--mist);">
+    <div class="section-header"><h2 class="section-title">Long Beach Island</h2></div>
         <hr class="section-divider" />
 
         <p style="font-size:0.9rem;color:var(--sub);line-height:1.7;margin-bottom:1.5rem;">Eighteen miles of barrier island off the central Jersey Shore — no chain restaurants, one road in, and a million reasons to come back every summer. LBI is live on The Concierge from Holgate at the southern tip to Barnegat Light in the north.</p>
@@ -287,8 +479,21 @@
 
         </div>
 
-        <div class="section-header"><h2 class="section-title">Coming to New Jersey</h2></div>
-        <hr class="section-divider" />
+    <div class="sidebar-box" style="max-width:840px; margin:0.5rem 0 1.25rem;">
+      <h4>Getting to LBI</h4>
+      <div style="font-size:0.8rem;color:var(--sub);line-height:1.6;">
+        <p style="margin-bottom:0.5rem;"><strong style="color:var(--navy);">By Car:</strong> Route 72 East from the Garden State Parkway (Exit 63). One bridge, one road in. ~90 min from NYC, ~60 min from Philadelphia.</p>
+        <p style="margin-bottom:0.5rem;"><strong style="color:var(--navy);">By Train:</strong> NJ Transit to Bay Head or Toms River, then cab/rideshare across the bay.</p>
+        <p style="margin:0;"><strong style="color:var(--navy);">By Bike:</strong> Flat island-wide path. Rent in Ship Bottom or Surf City upon arrival.</p>
+      </div>
+    </div>
+    <a href="../lbi/index.html" style="font-size:0.85rem;font-weight:600;color:var(--navy);text-decoration:none;border-bottom:1px solid var(--gold);">Full LBI guide →</a>
+  </div>
+
+  <!-- COMING TO NEW JERSEY -->
+  <div class="section" style="background:var(--white);">
+    <div class="section-header"><h2 class="section-title">Coming to New Jersey</h2></div>
+    <hr class="section-divider" />
         <div class="grid-2" style="gap:0.75rem;">
           <div class="place-card" style="padding:0.9rem 1rem; opacity:0.7;">
             <h4 style="font-size:0.88rem;color:var(--navy);margin-bottom:0.2rem;">Asbury Park</h4>
@@ -303,59 +508,6 @@
             <p style="font-size:0.78rem;color:var(--sub);margin:0;">The mile square city. Sinatra's hometown, great restaurants, and the Hudson waterfront.</p>
           </div>
         </div>
-      </div>
-
-      <!-- Sidebar -->
-      <div class="map-sidebar">
-        <div class="map-embed-wrap" style="margin-bottom:1.25rem;">
-          <div id="nj-map" style="height:320px;"></div>
-          <p style="font-size:0.7rem;color:var(--sub);padding:0.5rem 0.75rem 0;">Hover a place to preview, click to explore. Map data &copy; OpenStreetMap contributors.</p>
-        </div>
-
-        <div class="sidebar-box">
-          <h4>LBI at a Glance</h4>
-          <div style="display:flex;flex-direction:column;gap:0.4rem;">
-            <a href="../lbi/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;">
-              <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">LBI Overview →</span>
-              <span class="badge badge-live">Live</span>
-            </a>
-            <a href="../lbi/holgate/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.55rem 0.75rem;">
-              <span style="font-size:0.82rem;color:var(--navy);">Holgate</span>
-              <span class="badge badge-live">Live</span>
-            </a>
-            <a href="../lbi/beach-haven/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.55rem 0.75rem;">
-              <span style="font-size:0.82rem;color:var(--navy);">Beach Haven</span>
-              <span class="badge badge-live">Live</span>
-            </a>
-            <a href="../lbi/ship-bottom/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.55rem 0.75rem;">
-              <span style="font-size:0.82rem;color:var(--navy);">Ship Bottom</span>
-              <span class="badge badge-live">Live</span>
-            </a>
-            <a href="../lbi/surf-city/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.55rem 0.75rem;">
-              <span style="font-size:0.82rem;color:var(--navy);">Surf City</span>
-              <span class="badge badge-live">Live</span>
-            </a>
-            <a href="../lbi/harvey-cedars/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.55rem 0.75rem;">
-              <span style="font-size:0.82rem;color:var(--navy);">Harvey Cedars</span>
-              <span class="badge badge-live">Live</span>
-            </a>
-            <a href="../lbi/barnegat-light/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.55rem 0.75rem;">
-              <span style="font-size:0.82rem;color:var(--navy);">Barnegat Light</span>
-              <span class="badge badge-live">Live</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="sidebar-box">
-          <h4>Getting to LBI</h4>
-          <div style="font-size:0.8rem;color:var(--sub);line-height:1.6;">
-            <p style="margin-bottom:0.5rem;"><strong style="color:var(--navy);">By Car:</strong> Route 72 East from the Garden State Parkway (Exit 63). One bridge, one road in. ~90 min from NYC, ~60 min from Philadelphia.</p>
-            <p style="margin-bottom:0.5rem;"><strong style="color:var(--navy);">By Train:</strong> NJ Transit to Bay Head or Toms River, then cab/rideshare across the bay.</p>
-            <p style="margin:0;"><strong style="color:var(--navy);">By Bike:</strong> Flat island-wide path. Rent in Ship Bottom or Surf City upon arrival.</p>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <!-- Footer -->

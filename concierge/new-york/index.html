@@ -38,6 +38,7 @@
     .section-sm { padding: 1.75rem 5%; }
     .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
     .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .map-sidebar { position: static; } }
     .events-list { display: flex; flex-direction: column; }
     .city-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.5rem; }
     .city-chip { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.85rem; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 50px; font-size: 0.8rem; font-weight: 600; color: white; text-decoration: none; transition: all 0.2s; }
