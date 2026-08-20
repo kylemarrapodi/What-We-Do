@@ -142,7 +142,13 @@ const SHARED_SEARCH_TREE = {
                 { label:'Roosevelt Island',   aliases:['roosevelt island','the tram','blackwell island'],   status:'live', url:'manhattan/index.html#roosevelt-island',   children:[] },
                 { label:'Lincoln Square',     aliases:['lincoln square','lincoln center','met opera'],      status:'live', url:'manhattan/index.html#lincoln-square',     children:[] },
                 { label:'Upper West Side',    aliases:['upper west side','uws'],                            status:'live', url:'manhattan/index.html#upper-west-side',    children:[] },
+                { label:'Upper East Side',    aliases:['upper east side','ues','museum mile'],              status:'live', url:'manhattan/index.html#upper-east-side',    children:[] },
+                { label:'Carnegie Hill',      aliases:['carnegie hill','guggenheim','cooper hewitt'],       status:'live', url:'manhattan/index.html#carnegie-hill',      children:[] },
+                { label:'Yorkville',          aliases:['yorkville','gracie mansion','germantown'],          status:'live', url:'manhattan/index.html#yorkville',          children:[] },
                 { label:'Harlem',             aliases:['harlem','apollo theater'],                          status:'live', url:'manhattan/index.html#harlem',             children:[] },
+                { label:'East Harlem',        aliases:['east harlem','el barrio','spanish harlem'],         status:'live', url:'manhattan/index.html#east-harlem',        children:[] },
+                { label:'Morningside Heights', aliases:['morningside heights','columbia','st john the divine'], status:'live', url:'manhattan/index.html#morningside-heights', children:[] },
+                { label:'Manhattanville',     aliases:['manhattanville','west harlem','manhattanville campus'], status:'live', url:'manhattan/index.html#manhattanville',  children:[] },
                 { label:'Financial District', aliases:['financial district','fidi','wall street'],          status:'live', url:'manhattan/index.html#financial-district', children:[] },
               ]
             },
@@ -361,6 +367,12 @@ function buildSearchIndex() {
     { label:'Sutton Place',       sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#sutton-place',     keywords:['sutton place','sutton','queensboro bridge view','riverview terrace'] },
     { label:'Roosevelt Island',   sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#roosevelt-island', keywords:['roosevelt island','blackwell island','tramway','east river island'] },
     { label:'Lincoln Square',     sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#lincoln-square',   keywords:['lincoln square','lincoln center','san juan hill','columbus avenue'] },
+    { label:'Upper East Side',    sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#upper-east-side',  keywords:['upper east side','ues','museum mile','fifth avenue museums'] },
+    { label:'Carnegie Hill',      sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#carnegie-hill',    keywords:['carnegie hill','carnegie mansion','upper museum mile'] },
+    { label:'Yorkville',          sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#yorkville',        keywords:['yorkville','germantown','german broadway','east end avenue'] },
+    { label:'East Harlem',        sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#east-harlem',      keywords:['east harlem','el barrio','spanish harlem','italian harlem'] },
+    { label:'Morningside Heights', sub:'Manhattan, NY',        type:'place',  url: p+'manhattan/index.html#morningside-heights', keywords:['morningside heights','columbia university','acropolis of new york'] },
+    { label:'Manhattanville',     sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#manhattanville',   keywords:['manhattanville','west harlem','manhattanville campus','125th street valley'] },
     { label:'The Odeon',          sub:'Tribeca, Manhattan',    type:'place',  url: p+'manhattan/index.html#tribeca',          keywords:['the odeon','odeon','tribeca brasserie'] },
     { label:"Bubby's",            sub:'Tribeca, Manhattan',    type:'place',  url: p+'manhattan/index.html#tribeca',          keywords:['bubbys','bubby','tribeca breakfast'] },
     { label:'Balthazar',          sub:'SoHo, Manhattan',       type:'place',  url: p+'manhattan/index.html#soho',             keywords:['balthazar','soho brasserie','french restaurant soho'] },
@@ -471,6 +483,37 @@ function buildSearchIndex() {
     { label:'The Smith Lincoln Square', sub:'Lincoln Square, Manhattan', type:'place', url: p+'manhattan/index.html#lincoln-square', keywords:['the smith','smith lincoln square','pre theater dinner lincoln center'] },
     { label:'Lincoln Center',     sub:'Lincoln Square, Manhattan', type:'place', url: p+'manhattan/index.html#lincoln-square',  keywords:['lincoln center','performing arts campus','lincoln center plaza'] },
     { label:'Old Homestead Steakhouse', sub:'Chelsea, Manhattan', type:'place', url: p+'manhattan/index.html#chelsea',        keywords:['old homestead','oldest steakhouse','ninth avenue steakhouse'] },
+    { label:'The Frick Collection', sub:'Upper East Side, Manhattan', type:'place', url: p+'manhattan/index.html#upper-east-side', keywords:['frick','frick collection','frick mansion','old masters museum'] },
+    { label:'Bemelmans Bar',      sub:'Upper East Side, Manhattan', type:'place', url: p+'manhattan/index.html#upper-east-side', keywords:['bemelmans','bemelmans bar','the carlyle','madeline murals','piano bar nyc'] },
+    { label:'Neue Galerie & Café Sabarsky', sub:'Upper East Side, Manhattan', type:'place', url: p+'manhattan/index.html#upper-east-side', keywords:['neue galerie','cafe sabarsky','woman in gold','viennese cafe'] },
+    { label:'Serendipity 3',      sub:'Upper East Side, Manhattan', type:'place', url: p+'manhattan/index.html#upper-east-side', keywords:['serendipity','serendipity 3','frozen hot chocolate','frrrozen hot chocolate'] },
+    { label:'J.G. Melon',         sub:'Upper East Side, Manhattan', type:'place', url: p+'manhattan/index.html#upper-east-side', keywords:['jg melon','j.g. melon','melon burger','cottage fries'] },
+    { label:'Solomon R. Guggenheim Museum', sub:'Carnegie Hill, Manhattan', type:'place', url: p+'manhattan/index.html#carnegie-hill', keywords:['guggenheim','guggenheim museum','frank lloyd wright spiral','museum mile'] },
+    { label:'Cooper Hewitt, Smithsonian Design Museum', sub:'Carnegie Hill, Manhattan', type:'place', url: p+'manhattan/index.html#carnegie-hill', keywords:['cooper hewitt','design museum','carnegie mansion','smithsonian nyc'] },
+    { label:'The Jewish Museum',  sub:'Carnegie Hill, Manhattan', type:'place', url: p+'manhattan/index.html#carnegie-hill',  keywords:['jewish museum','warburg mansion','judaica museum'] },
+    { label:'The 92nd Street Y',  sub:'Carnegie Hill, Manhattan', type:'place', url: p+'manhattan/index.html#carnegie-hill',  keywords:['92nd street y','92ny','92y','kaufmann concert hall','harkness dance'] },
+    { label:'The Corner Bookstore', sub:'Carnegie Hill, Manhattan', type:'place', url: p+'manhattan/index.html#carnegie-hill', keywords:['corner bookstore','madison avenue bookstore','carnegie hill books'] },
+    { label:'Gracie Mansion',     sub:'Yorkville, Manhattan',  type:'place',  url: p+'manhattan/index.html#yorkville',        keywords:['gracie mansion','mayors residence','gracie mansion tours'] },
+    { label:'Carl Schurz Park',   sub:'Yorkville, Manhattan',  type:'place',  url: p+'manhattan/index.html#yorkville',        keywords:['carl schurz park','john finley walk','hell gate promenade'] },
+    { label:'Heidelberg Restaurant', sub:'Yorkville, Manhattan', type:'place', url: p+'manhattan/index.html#yorkville',       keywords:['heidelberg','german restaurant nyc','boot of beer','germantown yorkville'] },
+    { label:'Schaller & Weber',   sub:'Yorkville, Manhattan',  type:'place',  url: p+'manhattan/index.html#yorkville',        keywords:['schaller and weber','schaller weber','german butcher','wurst nyc'] },
+    { label:'El Museo del Barrio', sub:'East Harlem, Manhattan', type:'place', url: p+'manhattan/index.html#east-harlem',     keywords:['el museo del barrio','el museo','latino museum','puerto rican museum'] },
+    { label:"Rao's",              sub:'East Harlem, Manhattan', type:'place', url: p+'manhattan/index.html#east-harlem',      keywords:['raos','rao','impossible reservation','114th street italian'] },
+    { label:"Patsy's Pizzeria (original)", sub:'East Harlem, Manhattan', type:'place', url: p+'manhattan/index.html#east-harlem', keywords:['patsys','patsys pizzeria','coal oven pizza harlem','original patsys 1933'] },
+    { label:'La Marqueta',        sub:'East Harlem, Manhattan', type:'place', url: p+'manhattan/index.html#east-harlem',      keywords:['la marqueta','park avenue market','el barrio market'] },
+    { label:'Graffiti Hall of Fame', sub:'East Harlem, Manhattan', type:'place', url: p+'manhattan/index.html#east-harlem',   keywords:['graffiti hall of fame','106th and park','jackie robinson complex murals'] },
+    { label:'Cathedral of St. John the Divine', sub:'Morningside Heights, Manhattan', type:'place', url: p+'manhattan/index.html#morningside-heights', keywords:['st john the divine','largest cathedral','vertical tour','cathedral peacocks'] },
+    { label:'Columbia University', sub:'Morningside Heights, Manhattan', type:'place', url: p+'manhattan/index.html#morningside-heights', keywords:['columbia','columbia university','low steps','low memorial library'] },
+    { label:'Riverside Church',   sub:'Morningside Heights, Manhattan', type:'place', url: p+'manhattan/index.html#morningside-heights', keywords:['riverside church','carillon','bell tower tour','bourdon bell'] },
+    { label:"Grant's Tomb",       sub:'Morningside Heights, Manhattan', type:'place', url: p+'manhattan/index.html#morningside-heights', keywords:['grants tomb','general grant national memorial','grant mausoleum'] },
+    { label:"Tom's Restaurant",   sub:'Morningside Heights, Manhattan', type:'place', url: p+'manhattan/index.html#morningside-heights', keywords:['toms restaurant','toms diner','monks cafe','seinfeld diner','suzanne vega'] },
+    { label:'Hungarian Pastry Shop', sub:'Morningside Heights, Manhattan', type:'place', url: p+'manhattan/index.html#morningside-heights', keywords:['hungarian pastry shop','amsterdam avenue cafe','columbia writers cafe'] },
+    { label:'Miller Theatre',     sub:'Morningside Heights, Manhattan', type:'place', url: p+'manhattan/index.html#morningside-heights', keywords:['miller theatre','composer portraits','columbia concert hall'] },
+    { label:'Dinosaur Bar-B-Que', sub:'Morningside Heights, Manhattan', type:'place', url: p+'manhattan/index.html#morningside-heights', keywords:['dinosaur bar-b-que','dinosaur bbq','harlem barbecue','125th street bbq'] },
+    { label:'The Forum at Columbia', sub:'Manhattanville, Manhattan', type:'place', url: p+'manhattan/index.html#manhattanville', keywords:['the forum','forum columbia','manhattanville campus','renzo piano columbia'] },
+    { label:'Wallach Art Gallery', sub:'Manhattanville, Manhattan', type:'place', url: p+'manhattan/index.html#manhattanville', keywords:['wallach art gallery','lenfest center','free gallery uptown'] },
+    { label:'Jerome L. Greene Science Center', sub:'Manhattanville, Manhattan', type:'place', url: p+'manhattan/index.html#manhattanville', keywords:['greene science center','zuckerman institute','brain science education lab'] },
+    { label:'West Harlem Piers Park', sub:'Manhattanville, Manhattan', type:'place', url: p+'manhattan/index.html#manhattanville', keywords:['west harlem piers','harlem piers park','hudson river piers uptown'] },
     { label:'Feast of San Gennaro', sub:'Sep 17–27 · Little Italy', type:'event', url: p+'manhattan/index.html#little-italy',  keywords:['san gennaro','feast of san gennaro','little italy festival','mulberry street festival'] },
     { label:'Tribeca Festival',   sub:'Jun · Tribeca',         type:'event',  url: p+'manhattan/index.html#tribeca',          keywords:['tribeca festival','tribeca film festival','robert de niro film festival'] },
     { label:'Village Halloween Parade', sub:'Oct 31 · Greenwich Village', type:'event', url: p+'manhattan/index.html#greenwich-village', keywords:['village halloween parade','halloween parade nyc','sixth avenue parade'] },
@@ -1034,13 +1077,14 @@ const LIVE_MUSIC = {
   // ── Manhattan ─────────────────────────────────────────────────────────
   // Verified Aug 2026 against each venue's own site plus a second source
   // (Yelp, Ticketmaster, Live Nation, or press coverage) where noted below.
-  // Columbia University's Miller Theatre (Morningside Heights) turned up in
-  // research but sits outside the 32 neighborhoods this page currently
-  // covers — noted here rather than added as a linked entry. Irving Plaza
-  // (17 Irving Pl) was also researched but falls inside OSM's Union Square
-  // boundary, outside all 26 covered polygons, so it isn't listed.
+  // Columbia University's Miller Theatre was once noted here as out of scope;
+  // Morningside Heights is now a covered neighborhood (its 2960 Broadway
+  // address PIP-tests into OSM relation 8398079), so it's a linked entry
+  // below. Irving Plaza (17 Irving Pl) was also researched but falls inside
+  // OSM's Union Square boundary, outside all covered polygons, so it isn't
+  // listed.
   'manhattan': {
-    blurb: 'Manhattan\'s music rooms are spread across the neighborhoods covered here — a Bleecker Street rock bar with a band on stage seven nights a week, a basement jazz club that\'s been open since 1935, an upscale room that helped revive New York jazz in the \'80s, a university performing-arts hall, a big-room concert venue in the East Village, the arena that hosts the Knicks, Rangers and the city\'s biggest touring concerts, a Beaux-Arts theatre on the Upper West Side, a famously good-sounding 575-cap room on the Lower East Side, a 184-seat supper club inside the Public Theater, an Irish session bar in Kips Bay with music every night, the Hell\'s Kitchen jazz room named for Charlie Parker, and the amateur-talent stage that launched Ella Fitzgerald. (Columbia University\'s Miller Theatre, in Morningside Heights, is a real public concert venue too, but it\'s outside the 32 neighborhoods covered on this page.)',
+    blurb: 'Manhattan\'s music rooms are spread across the neighborhoods covered here — a Bleecker Street rock bar with a band on stage seven nights a week, a basement jazz club that\'s been open since 1935, an upscale room that helped revive New York jazz in the \'80s, a university performing-arts hall, a big-room concert venue in the East Village, the arena that hosts the Knicks, Rangers and the city\'s biggest touring concerts, a Beaux-Arts theatre on the Upper West Side, a famously good-sounding 575-cap room on the Lower East Side, a 184-seat supper club inside the Public Theater, an Irish session bar in Kips Bay with music every night, the Hell\'s Kitchen jazz room named for Charlie Parker, the amateur-talent stage that launched Ella Fitzgerald, and Columbia\'s adventurous contemporary-music hall up in Morningside Heights.',
     venues: [
       { name: 'The Red Lion', kind: 'Live Music Bar', addr: '151 Bleecker St, Greenwich Village', phone: '(212) 260-9797',
         nights: 'Live music every night, 7 PM–4 AM · cover charge Friday, Saturday and holidays only',
@@ -1086,6 +1130,14 @@ const LIVE_MUSIC = {
         ],
         cal: { href: 'https://www.msg.com/beacon-theatre', label: 'msg.com/beacon-theatre' },
         link: 'manhattan/index.html#upper-west-side' },
+      { name: 'Miller Theatre at Columbia University', kind: 'Concert Hall', addr: '2960 Broadway at 116th St, Morningside Heights',
+        nights: 'Curated fall-through-spring season — Composer Portraits, early music, jazz, and pop-up concerts',
+        dated: [
+          { date: 'Oct 29, 2026', act: 'Composer Portraits: Suzanne Farrin — "Macabéa" concert premiere with Talea Ensemble' },
+        ],
+        desc: 'Columbia\'s public concert hall, known for its signature Composer Portraits series — each evening is devoted to one living composer, who joins an onstage conversation. The 2026–27 season also carries early music, jazz, and free student performances.',
+        cal: { href: 'https://www.millertheatre.com/', label: 'millertheatre.com' },
+        link: 'manhattan/index.html#morningside-heights' },
       { name: 'Bowery Ballroom', kind: 'Music Venue', addr: '6 Delancey St, Lower East Side',
         nights: 'Touring acts most nights — dozens of shows on the calendar through 2026–27',
         desc: 'A 575-capacity room in a 1929 building, booked by Mercury East Presents and widely rated one of the best-sounding small venues in the country.',
