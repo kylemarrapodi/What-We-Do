@@ -15,11 +15,11 @@ overflow-x: hidden;
 overflow-y: auto;
 }
 
-/* ── HERO: logo front and center, fills the first screen ── */
+/* ── HERO: logo front and center over a live beach video ── */
 .hero {
 min-height: calc(100vh - var(--nav-h));
 margin-top: var(--nav-h);
-background: linear-gradient(160deg, var(--navy) 0%, #1e4a72 55%, #2a6a9a 100%);
+background: url("hero-beach-poster.jpg") center/cover no-repeat, linear-gradient(160deg, var(--navy) 0%, #1e4a72 55%, #2a6a9a 100%);
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -27,6 +27,28 @@ justify-content: center;
 text-align: center;
 padding: 3rem 6% 4.5rem;
 position: relative;
+overflow: hidden;
+}
+.hero-video {
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+z-index: 0;
+}
+/* Navy tint so the logo and text stay legible over moving water */
+.hero::after {
+content: "";
+position: absolute;
+inset: 0;
+background: linear-gradient(160deg, rgba(20,42,66,0.72) 0%, rgba(26,58,92,0.55) 55%, rgba(20,42,66,0.65) 100%);
+z-index: 1;
+}
+.hero > *:not(.hero-video) { position: relative; z-index: 2; }
+/* Data-saver / reduced-motion users get the still poster instead */
+@media (prefers-reduced-motion: reduce) {
+.hero-video { display: none; }
 }
 .hero-logo {
 width: clamp(300px, 55vw, 620px);
@@ -182,8 +204,11 @@ box-shadow: 0 4px 16px rgba(26,58,92,0.15);
 <a href="contact.html" class="mobile-book">Book Now</a>
 </div>
 
-<!-- HERO — logo front and center -->
+<!-- HERO — logo front and center over live beach video -->
 <section class="hero">
+<video class="hero-video" autoplay muted loop playsinline poster="hero-beach-poster.jpg" aria-hidden="true">
+<source src="hero-beach.mp4" type="video/mp4" />
+</video>
 <img src="seaspraylogo.svg" alt="Sea Spray Motel" class="hero-logo" />
 <p class="hero-tagline">Your home on the Jersey Shore</p>
 <div class="home-rating">
