@@ -112,9 +112,15 @@ const SHARED_SEARCH_TREE = {
             {
               label: 'Manhattan', aliases: ['manhattan','new york city','nyc'], status: 'live', url: 'manhattan/index.html',
               children: [
+                { label:'Battery Park City',  aliases:['battery park city','bpc','brookfield place'],       status:'live', url:'manhattan/index.html#battery-park-city',  children:[] },
+                { label:'Civic Center',       aliases:['civic center','city hall','foley square'],          status:'live', url:'manhattan/index.html#civic-center',       children:[] },
                 { label:'Tribeca',            aliases:['tribeca'],                                          status:'live', url:'manhattan/index.html#tribeca',            children:[] },
                 { label:'SoHo',               aliases:['soho','south of houston'],                          status:'live', url:'manhattan/index.html#soho',               children:[] },
                 { label:'Greenwich Village',  aliases:['greenwich village','the village','stonewall'],      status:'live', url:'manhattan/index.html#greenwich-village',  children:[] },
+                { label:'Chinatown',          aliases:['chinatown','mott street','doyers street'],          status:'live', url:'manhattan/index.html#chinatown',          children:[] },
+                { label:'Little Italy',       aliases:['little italy','mulberry street','san gennaro'],     status:'live', url:'manhattan/index.html#little-italy',       children:[] },
+                { label:'Nolita',             aliases:['nolita','north of little italy'],                   status:'live', url:'manhattan/index.html#nolita',             children:[] },
+                { label:'Lower East Side',    aliases:['lower east side','les','orchard street','delancey'], status:'live', url:'manhattan/index.html#lower-east-side',   children:[] },
                 { label:'East Village',       aliases:['east village','st marks','st marks place','alphabet city'], status:'live', url:'manhattan/index.html#east-village', children:[] },
                 { label:'Chelsea',            aliases:['chelsea','high line','chelsea market'],             status:'live', url:'manhattan/index.html#chelsea',            children:[] },
                 { label:'Upper West Side',    aliases:['upper west side','uws','lincoln center'],           status:'live', url:'manhattan/index.html#upper-west-side',    children:[] },
@@ -313,6 +319,12 @@ function buildSearchIndex() {
     { label:'Upper West Side',    sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#upper-west-side',  keywords:['upper west side','uws','lincoln center','natural history museum'] },
     { label:'Harlem',             sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#harlem',           keywords:['harlem','apollo theater','studio museum in harlem','malcolm x blvd'] },
     { label:'Financial District', sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#financial-district',keywords:['financial district','fidi','wall street','stone street','9/11 memorial'] },
+    { label:'Battery Park City',  sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#battery-park-city',keywords:['battery park city','bpc','brookfield place','hudson river esplanade'] },
+    { label:'Civic Center',       sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#civic-center',     keywords:['civic center','city hall','foley square','african burial ground','woolworth building'] },
+    { label:'Chinatown',          sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#chinatown',        keywords:['chinatown','mott street','doyers street','dim sum','columbus park'] },
+    { label:'Little Italy',       sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#little-italy',     keywords:['little italy','mulberry street','san gennaro','ferrara'] },
+    { label:'Nolita',             sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#nolita',           keywords:['nolita','north of little italy','elizabeth street','old st patricks'] },
+    { label:'Lower East Side',    sub:'Manhattan, NY',         type:'place',  url: p+'manhattan/index.html#lower-east-side',  keywords:['lower east side','les','orchard street','delancey street','tenement'] },
     { label:'The Odeon',          sub:'Tribeca, Manhattan',    type:'place',  url: p+'manhattan/index.html#tribeca',          keywords:['the odeon','odeon','tribeca brasserie'] },
     { label:"Bubby's",            sub:'Tribeca, Manhattan',    type:'place',  url: p+'manhattan/index.html#tribeca',          keywords:['bubbys','bubby','tribeca breakfast'] },
     { label:'Balthazar',          sub:'SoHo, Manhattan',       type:'place',  url: p+'manhattan/index.html#soho',             keywords:['balthazar','soho brasserie','french restaurant soho'] },
@@ -334,6 +346,18 @@ function buildSearchIndex() {
     { label:'Fraunces Tavern',    sub:'Financial District, Manhattan', type:'place', url: p+'manhattan/index.html#financial-district', keywords:['fraunces tavern','oldest building manhattan','washington farewell'] },
     { label:"Delmonico's",        sub:'Financial District, Manhattan', type:'place', url: p+'manhattan/index.html#financial-district', keywords:['delmonicos','steakhouse fidi','wall street restaurant'] },
     { label:'9/11 Memorial & Museum', sub:'Financial District, Manhattan', type:'place', url: p+'manhattan/index.html#financial-district', keywords:['9/11 memorial','world trade center','ground zero museum'] },
+    { label:'Brookfield Place',   sub:'Battery Park City, Manhattan', type:'place', url: p+'manhattan/index.html#battery-park-city', keywords:['brookfield place','le district','hudson eats','winter garden'] },
+    { label:'African Burial Ground National Monument', sub:'Civic Center, Manhattan', type:'place', url: p+'manhattan/index.html#civic-center', keywords:['african burial ground','290 broadway','national monument'] },
+    { label:'Nom Wah Tea Parlor', sub:'Chinatown, Manhattan',  type:'place',  url: p+'manhattan/index.html#chinatown',        keywords:['nom wah','dim sum doyers','oldest chinatown restaurant'] },
+    { label:"Joe's Shanghai",     sub:'Chinatown, Manhattan',  type:'place',  url: p+'manhattan/index.html#chinatown',        keywords:['joes shanghai','soup dumplings','xiao long bao'] },
+    { label:'Ferrara Bakery',     sub:'Little Italy, Manhattan', type:'place', url: p+'manhattan/index.html#little-italy',    keywords:['ferrara','ferrara bakery','cannoli little italy','italian bakery 1892'] },
+    { label:"Lombardi's",         sub:'Nolita, Manhattan',     type:'place',  url: p+'manhattan/index.html#nolita',           keywords:['lombardis','first pizzeria','coal oven pizza spring street'] },
+    { label:"St. Patrick's Old Cathedral", sub:'Nolita, Manhattan', type:'place', url: p+'manhattan/index.html#nolita',       keywords:['old st patricks','basilica mulberry street','catacombs tour'] },
+    { label:"Katz's Delicatessen", sub:'Lower East Side, Manhattan', type:'place', url: p+'manhattan/index.html#lower-east-side', keywords:['katzs','katz deli','pastrami on rye','houston street deli'] },
+    { label:'Russ & Daughters',   sub:'Lower East Side, Manhattan', type:'place', url: p+'manhattan/index.html#lower-east-side', keywords:['russ and daughters','appetizing','smoked fish','bagels and lox'] },
+    { label:'Tenement Museum',    sub:'Lower East Side, Manhattan', type:'place', url: p+'manhattan/index.html#lower-east-side', keywords:['tenement museum','orchard street museum','immigrant history'] },
+    { label:'Bowery Ballroom',    sub:'Lower East Side, Manhattan', type:'place', url: p+'manhattan/index.html#lower-east-side', keywords:['bowery ballroom','delancey concert venue','live music les'] },
+    { label:'Feast of San Gennaro', sub:'Sep 17–27 · Little Italy', type:'event', url: p+'manhattan/index.html#little-italy',  keywords:['san gennaro','feast of san gennaro','little italy festival','mulberry street festival'] },
     { label:'Tribeca Festival',   sub:'Jun · Tribeca',         type:'event',  url: p+'manhattan/index.html#tribeca',          keywords:['tribeca festival','tribeca film festival','robert de niro film festival'] },
     { label:'Village Halloween Parade', sub:'Oct 31 · Greenwich Village', type:'event', url: p+'manhattan/index.html#greenwich-village', keywords:['village halloween parade','halloween parade nyc','sixth avenue parade'] },
     { label:'Harlem Week',        sub:'Aug 1–16 · Harlem',     type:'event',  url: p+'manhattan/index.html#harlem',           keywords:['harlem week','harlem day','a great day in harlem'] },
@@ -896,10 +920,10 @@ const LIVE_MUSIC = {
   // Verified Aug 2026 against each venue's own site plus a second source
   // (Yelp, Ticketmaster, Live Nation, or press coverage) where noted below.
   // Columbia University's Miller Theatre (Morningside Heights) turned up in
-  // research but sits outside the 8 neighborhoods this page currently
+  // research but sits outside the 14 neighborhoods this page currently
   // covers — noted here rather than added as a linked entry.
   'manhattan': {
-    blurb: 'Manhattan\'s music rooms are spread across the neighborhoods covered here — a Bleecker Street rock bar with a band on stage seven nights a week, a basement jazz club that\'s been open since 1935, an upscale room that helped revive New York jazz in the \'80s, a university performing-arts hall, a big-room concert venue in the East Village, the arena that hosts the Knicks, Rangers and the city\'s biggest touring concerts, a Beaux-Arts theatre on the Upper West Side, and the amateur-talent stage that launched Ella Fitzgerald. (Columbia University\'s Miller Theatre, in Morningside Heights, is a real public concert venue too, but it\'s outside the 8 neighborhoods covered on this page.)',
+    blurb: 'Manhattan\'s music rooms are spread across the neighborhoods covered here — a Bleecker Street rock bar with a band on stage seven nights a week, a basement jazz club that\'s been open since 1935, an upscale room that helped revive New York jazz in the \'80s, a university performing-arts hall, a big-room concert venue in the East Village, the arena that hosts the Knicks, Rangers and the city\'s biggest touring concerts, a Beaux-Arts theatre on the Upper West Side, a famously good-sounding 575-cap room on the Lower East Side, and the amateur-talent stage that launched Ella Fitzgerald. (Columbia University\'s Miller Theatre, in Morningside Heights, is a real public concert venue too, but it\'s outside the 14 neighborhoods covered on this page.)',
     venues: [
       { name: 'The Red Lion', kind: 'Live Music Bar', addr: '151 Bleecker St, Greenwich Village', phone: '(212) 260-9797',
         nights: 'Live music every night, 7 PM–4 AM · cover charge Friday, Saturday and holidays only',
@@ -945,6 +969,11 @@ const LIVE_MUSIC = {
         ],
         cal: { href: 'https://www.msg.com/beacon-theatre', label: 'msg.com/beacon-theatre' },
         link: 'manhattan/index.html#upper-west-side' },
+      { name: 'Bowery Ballroom', kind: 'Music Venue', addr: '6 Delancey St, Lower East Side',
+        nights: 'Touring acts most nights — dozens of shows on the calendar through 2026–27',
+        desc: 'A 575-capacity room in a 1929 building, booked by Mercury East Presents and widely rated one of the best-sounding small venues in the country.',
+        cal: { href: 'https://mercuryeastpresents.com/boweryballroom/', label: 'mercuryeastpresents.com/boweryballroom' },
+        link: 'manhattan/index.html#lower-east-side' },
       { name: 'Apollo Theater', kind: 'Historic Theater', addr: '253 W 125th St, Harlem',
         nights: 'Historic theater closed for renovation · programming continues at the Apollo Stages at the Victoria, 233 W 125th St',
         desc: 'Opened in 1934; Amateur Night has launched acts from Ella Fitzgerald to Lauryn Hill. The historic theater is mid-renovation and Amateur Night is paused until it reopens — in the meantime the Apollo runs shows and events at its Apollo Stages at the Victoria, a block down 125th Street.',
@@ -1504,6 +1533,7 @@ const PANEL_EVENTS = {
   'New York': {
     label: 'New York Events', link: { href: 'new-york/index.html', text: 'New York Guide →' },
     events: [
+      { mo:'SEP', dy:'17–27',tag:'events', tagLabel:'Festival', name:'Feast of San Gennaro',     meta:'100th feast · Mulberry St, Little Italy', url:'manhattan/index.html#little-italy', ticket:'https://sangennaronyc.org' },
       { mo:'OCT', dy:'16–18',tag:'arts',   tagLabel:'Open House',name:'Open House New York Weekend', meta:'300+ sites citywide · 24th annual',  url:'manhattan/index.html', ticket:'https://ohny.org/festival' },
       { mo:'OCT', dy:'31',   tag:'events', tagLabel:'Parade',   name:'Village Halloween Parade', meta:'Sixth Ave, Canal to 15th St · 7 PM',  url:'manhattan/index.html#greenwich-village', ticket:'https://halloween-nyc.com' },
       { mo:'NOV', dy:'1',    tag:'outdoors',tagLabel:'Race',    name:'TCS New York City Marathon',meta:'50th five-borough running · finishes Central Park', url:'manhattan/index.html', ticket:'https://www.nyrr.org' },
@@ -1515,6 +1545,7 @@ const PANEL_EVENTS = {
     label: 'Manhattan Events', link: { href: 'manhattan/index.html', text: 'Manhattan Guide →' },
     events: [
       { mo:'SEP', dy:'29',   tag:'arts',   tagLabel:'Concert',  name:'Gorillaz — The Mountain Tour', meta:'Madison Square Garden · 8 PM',        url:'manhattan/index.html#chelsea', ticket:'https://www.msg.com/events-tickets/gorillaz-little-simz-deltron-3030-madison-square-garden-september-2026/3B0064599DDAA6E6' },
+      { mo:'SEP', dy:'17–27',tag:'events', tagLabel:'Festival', name:'Feast of San Gennaro',     meta:'100th feast · Mulberry St, Little Italy · 11 AM–11 PM', url:'manhattan/index.html#little-italy', ticket:'https://sangennaronyc.org' },
       { mo:'OCT', dy:'10',   tag:'arts',   tagLabel:'Concert',  name:'The Chicks at the Beacon', meta:'Beacon Theatre · Oct 10, 12 & 13 · 8 PM', url:'manhattan/index.html#upper-west-side', ticket:'https://www.msg.com/beacon-theatre' },
       { mo:'OCT', dy:'16–18',tag:'arts',   tagLabel:'Open House',name:'Open House New York Weekend', meta:'300+ sites citywide · 24th annual',  url:'manhattan/index.html', ticket:'https://ohny.org/festival' },
       { mo:'OCT', dy:'31',   tag:'events', tagLabel:'Parade',   name:'Village Halloween Parade', meta:'Sixth Ave, Canal to 15th St · 7 PM',  url:'manhattan/index.html#greenwich-village', ticket:'https://halloween-nyc.com' },
