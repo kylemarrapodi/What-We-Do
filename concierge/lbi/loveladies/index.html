@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loveladies &amp; North Beach — Long Beach Island · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-wrap { position: fixed; top: 68px; left: 0; right: 0; bottom: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white); }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+    .neighborhood-hero { padding: 2.5rem 5% 2.25rem; }
+    .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
+    .hero-flex { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap; }
+    .hero-main { flex: 1 1 340px; min-width: 0; }
+    .hero-stats { display: flex; flex-direction: column; gap: 0.5rem; flex-shrink: 0; }
+    .hero-stat { display: flex; align-items: baseline; justify-content: flex-end; gap: 0.5rem; background: rgba(255,255,255,0.1); border-right: 3px solid var(--gold); border-radius: 6px; padding: 0.4rem 0.75rem; min-width: 165px; }
+    .hero-stat-num { font-family: 'Lora', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold); line-height: 1; white-space: nowrap; }
+    .hero-stat-label { font-size: 0.68rem; color: rgba(255,255,255,0.85); text-align: right; line-height: 1.2; }
+    .section { padding: 2.25rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+    .cat-section { padding: 2.25rem 5%; }
+    .sidebar-box { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem; margin-bottom: 1.25rem; }
+    .sidebar-box h4 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 0.65rem; }
+    .info-row { display: flex; gap: 0.5rem; align-items: flex-start; margin-bottom: 0.5rem; }
+    .info-row .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+    .info-row p { font-size: 0.8rem; color: var(--sub); line-height: 1.5; margin: 0; }
+    .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .hero-flex { flex-direction: column; } .hero-stats { width: 100%; } .hero-stat { justify-content: flex-start; } }
+  </style>
+</head>
+<body data-page-location="Loveladies" data-music-key="loveladies">
+
+<nav>
+  <a href="../../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../index.html'">LBI</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Loveladies</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../../index.html">Home</a>
+  <a href="../index.html">Long Beach Island</a>
+  <a href="index.html" class="active">Loveladies</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="../../index.html">Home</a><span>›</span>
+      <a href="../../new-jersey/index.html">New Jersey</a><span>›</span>
+      <a href="../index.html">Long Beach Island</a><span>›</span>
+      <span>Loveladies</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="neighborhood-hero" style="background: linear-gradient(135deg, #2b2620 0%, #6e5c40 55%, #c2a878 100%); color: white;">
+    <div class="hero-flex">
+      <div class="hero-main">
+        <div class="section-label" style="color:rgba(201,168,76,0.95);">Northern LBI · Long Beach Township</div>
+        <h1 style="font-family:'Lora',serif;color:white;">Loveladies &amp; North Beach</h1>
+        <p style="color:rgba(255,255,255,0.85);max-width:580px;line-height:1.65;margin-bottom:1rem;">The island's quietest miles: three Long Beach Township enclaves tucked between Barnegat Light, Harvey Cedars, and Surf City — <strong style="color:white;">Loveladies</strong> (named for 19th-century gunning-club owner Thomas Lovelady), the bayside lagoons of <strong style="color:white;">High Bar Harbor</strong>, and dune-backed <strong style="color:white;">North Beach</strong>. No stores, no bars, no boardwalk — just architect-designed beach houses, high dunes, and a nationally respected arts foundation.</p>
+        <div class="city-hero-meta">
+          <span>🎨 LBI Foundation of the Arts &amp; Sciences</span>
+          <span>🏠 Modernist Beach Houses</span>
+          <span>🌾 High Dunes &amp; Quiet Beaches</span>
+          <span>⛵ High Bar Harbor Lagoons</span>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">3</span><span class="hero-stat-label">Enclaves</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">1948</span><span class="hero-stat-label">LBIF Founded</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">0</span><span class="hero-stat-label">Storefronts — By Design</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">22.8</span><span class="hero-stat-label">LBIF Campus Acres</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="cat-section" style="background:var(--mist);">
+    <div class="two-col">
+      <div>
+        <div class="section-header"><h2 class="section-title">The Arts Anchor</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in">
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag arts">Arts &amp; Sciences</span><span class="card-tag featured">Must-See</span></div>
+              <h3 class="card-title">Long Beach Island Foundation of the Arts &amp; Sciences</h3>
+              <p class="card-desc">Founded in 1948 by sculptor Boris Blai — a Rodin student and founding dean of Temple's Tyler School of Art — on 22.8 acres of dune and marsh. Galleries, classes and workshops, marine-science programs, summer camps, and the annual national juried "Works on Paper" show (28th edition in 2026).</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 120 Long Beach Blvd, Loveladies · (609) 494-1241 · Open daily, year-round</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag arts">Architecture</span></div>
+              <h3 class="card-title">The Loveladies House Tour (of the Streets)</h3>
+              <p class="card-desc">After the 1962 storm leveled the north end, Loveladies rebuilt bold — it's now LBI's open-air gallery of modernist and contemporary beach architecture. LBIF even runs speaker programs on the modernist houses.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Lagoon and ocean lanes off the Boulevard · Look, don't trespass</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="section-header"><h2 class="section-title">Beaches &amp; the Bay</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in">
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag outdoors">Ocean</span><span class="card-tag featured">Uncrowded</span></div>
+              <h3 class="card-title">North Beach's Dune Beaches</h3>
+              <p class="card-desc">Some of the island's highest dunes and least-crowded guarded sand — street-end walkovers, no commercial strip behind you, Barnegat Lighthouse on the horizon.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Street ends off Long Beach Blvd · LBT beach badge required</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag outdoors">Bay</span></div>
+              <h3 class="card-title">High Bar Harbor</h3>
+              <p class="card-desc">A boater's pocket of lagoon-front homes on the peninsula jutting into Barnegat Bay beside Barnegat Light — calm water, docks, and back-bay sunsets.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Off the Boulevard at the island's north end · Residential</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="section-header"><h2 class="section-title">Practical Notes</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:0.75rem;">
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">No Shops, No Restaurants</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">There is deliberately nothing commercial here. Stock up before you arrive, or head minutes north to <a href="../barnegat-light/index.html" style="color:var(--gold);font-weight:600;">Barnegat Light</a> (Kubel's, Viking Village) or south to <a href="../harvey-cedars/index.html" style="color:var(--gold);font-weight:600;">Harvey Cedars</a> and <a href="../surf-city/index.html" style="color:var(--gold);font-weight:600;">Surf City</a>.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Parking Is Scarce</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Beach access is by street-end walkovers with very limited parking. Bike the Boulevard's shoulder lane or ride the free LBI Shuttle instead.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">The Name</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Loveladies is no romance-novel invention — it comes from Thomas Lovelady, whose small gunning island sat just offshore in the 1800s. The name stuck to the whole stretch.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Check the LBIF Calendar</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Exhibitions, lectures, kids' camps, tennis and pickleball, even mahjong — the foundation's seasonal catalog is the events list for this end of the island. lbifoundation.org has current dates.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="map-embed-wrap" style="margin-bottom:0.5rem;">
+          <div id="town-map" style="height:260px;"></div>
+        </div>
+        <p style="font-size:0.68rem;color:var(--sub);margin:0 0 1.25rem;">Hover a town to preview, click to explore. Map data &copy; OpenStreetMap contributors.</p>
+
+        <div class="sidebar-box">
+          <h4>Need to Know</h4>
+          <div class="info-row"><span class="icon">🗺</span><p><strong>Location:</strong> Long Beach Township's north end — Loveladies and High Bar Harbor between Barnegat Light and Harvey Cedars; North Beach between Harvey Cedars and Surf City</p></div>
+          <div class="info-row"><span class="icon">🏖</span><p><strong>Beach badges:</strong> Long Beach Township badges — valid on all township beaches, Loveladies to Holgate.</p></div>
+          <div class="info-row"><span class="icon">🎨</span><p><strong>LBIF:</strong> (609) 494-1241 · open Mon–Fri 9–4, weekends 9–3</p></div>
+          <div class="info-row"><span class="icon">🚌</span><p><strong>Shuttle:</strong> The free LBI Shuttle covers the Boulevard here in summer.</p></div>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Explore LBI</h4>
+          <a href="../barnegat-light/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">← Barnegat Light</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../harvey-cedars/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Harvey Cedars →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../surf-city/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Surf City →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">All LBI Towns →</span>
+            <span style="font-size:0.72rem;color:var(--gold);">9 areas</span>
+          </a>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Quick Tips</h4>
+          <div class="info-row"><span class="icon">🖼</span><p>LBIF's gallery openings are free — the best way to see inside the campus Boris Blai built.</p></div>
+          <div class="info-row"><span class="icon">📷</span><p>The Boulevard through North Beach has the island's most photogenic dune line — go at golden hour.</p></div>
+          <div class="info-row"><span class="icon">🦞</span><p>Dinner plan: badge the beach here all day, then drive 5 minutes to Viking Village in Barnegat Light for the day-boat catch.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE MUSIC (rendered by initLiveMusic in script.js) -->
+  <section class="section cat-section" data-cat="music" id="live-music" style="background:var(--mist);"></section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p>Your local intelligence platform — curated, verified, and always expanding.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Long Beach Island</h4>
+        <a href="../index.html">LBI Overview</a>
+        <a href="../holgate/index.html">Holgate</a>
+        <a href="../beach-haven/index.html">Beach Haven</a>
+        <a href="../spray-beach/index.html">Spray Beach</a>
+        <a href="../brant-beach/index.html">Brant Beach</a>
+        <a href="../ship-bottom/index.html">Ship Bottom</a>
+        <a href="../surf-city/index.html">Surf City</a>
+        <a href="../harvey-cedars/index.html">Harvey Cedars</a>
+        <a href="index.html">Loveladies</a>
+        <a href="../barnegat-light/index.html">Barnegat Light</a>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="../../index.html">Home</a>
+        <a href="../../new-jersey/index.html">New Jersey</a>
+        <a href="../../connecticut/index.html">Connecticut</a>
+      </div>
+      <div class="footer-links">
+        <h4>The Concierge</h4>
+        <a href="../../index.html">About</a>
+        <a href="../../index.html#suggest">Suggest a Place</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 The Concierge. All rights reserved.</div>
+  </footer>
+
+</div>
+<script src="../../script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../../interactive-map.js"></script>
+<script>
+initCityBoundaryMap('town-map', {
+  center: [39.60, -74.24],
+  zoom: 11,
+  boundaryUrl: '../../data/lbi-towns.geojson',
+  onClick: function (f) { window.location.href = '../' + f.properties.url; },
+});
+</script>
+</body>
+</html>

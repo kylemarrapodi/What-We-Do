@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spray Beach &amp; the Terraces — Long Beach Island · The Concierge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-wrap { position: fixed; top: 68px; left: 0; right: 0; bottom: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--white); }
+    .breadcrumb { margin-top: 0; position: sticky; top: 0; z-index: 10; }
+    .neighborhood-hero { padding: 2.5rem 5% 2.25rem; }
+    .neighborhood-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 0.4rem; }
+    .hero-flex { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap; }
+    .hero-main { flex: 1 1 340px; min-width: 0; }
+    .hero-stats { display: flex; flex-direction: column; gap: 0.5rem; flex-shrink: 0; }
+    .hero-stat { display: flex; align-items: baseline; justify-content: flex-end; gap: 0.5rem; background: rgba(255,255,255,0.1); border-right: 3px solid var(--gold); border-radius: 6px; padding: 0.4rem 0.75rem; min-width: 165px; }
+    .hero-stat-num { font-family: 'Lora', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold); line-height: 1; white-space: nowrap; }
+    .hero-stat-label { font-size: 0.68rem; color: rgba(255,255,255,0.85); text-align: right; line-height: 1.2; }
+    .section { padding: 2.25rem 5%; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0 1.5rem; }
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+    .cat-section { padding: 2.25rem 5%; }
+    .sidebar-box { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem; margin-bottom: 1.25rem; }
+    .sidebar-box h4 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 0.65rem; }
+    .info-row { display: flex; gap: 0.5rem; align-items: flex-start; margin-bottom: 0.5rem; }
+    .info-row .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+    .info-row p { font-size: 0.8rem; color: var(--sub); line-height: 1.5; margin: 0; }
+    .map-embed-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .hero-flex { flex-direction: column; } .hero-stats { width: 100%; } .hero-stat { justify-content: flex-start; } }
+  </style>
+</head>
+<body data-page-location="Spray Beach" data-music-key="spray-beach">
+
+<nav>
+  <a href="../../index.html" class="nav-logo">The <span>Concierge</span></a>
+  <div class="nav-trail" id="nav-trail">
+    <span class="nav-trail-item" onclick="location.href='../../index.html'">Home</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item" onclick="location.href='../index.html'">LBI</span>
+    <span class="nav-trail-sep">›</span>
+    <span class="nav-trail-item active">Spray Beach</span>
+  </div>
+  <div class="nav-search-wrap">
+    <form class="nav-search-form" onsubmit="handleNavSearch(event)">
+      <input type="text" placeholder="Search cities, events, sports…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../../index.html">Home</a>
+  <a href="../index.html">Long Beach Island</a>
+  <a href="index.html" class="active">Spray Beach</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="../../index.html">Home</a><span>›</span>
+      <a href="../../new-jersey/index.html">New Jersey</a><span>›</span>
+      <a href="../index.html">Long Beach Island</a><span>›</span>
+      <span>Spray Beach</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="neighborhood-hero" style="background: linear-gradient(135deg, #33202e 0%, #7a3b5e 55%, #c76b8f 100%); color: white;">
+    <div class="hero-flex">
+      <div class="hero-main">
+        <div class="section-label" style="color:rgba(201,168,76,0.9);">Southern LBI · Long Beach Township</div>
+        <h1 style="font-family:'Lora',serif;color:white;">Spray Beach &amp; the Terraces</h1>
+        <p style="color:rgba(255,255,255,0.82);max-width:580px;line-height:1.65;margin-bottom:1rem;">The mellow mile and a half just north of Beach Haven: five Long Beach Township communities — <strong style="color:white;">Beach Haven Terrace, Beach Haven Gardens, Bay Vista, Spray Beach,</strong> and <strong style="color:white;">North Beach Haven</strong> — where quiet rental blocks hide a genuine little restaurant row on the Boulevard around 132nd Street and one of the island's only truly oceanfront hotels.</p>
+        <div class="city-hero-meta">
+          <span>🦪 Year-Round Oyster House</span>
+          <span>🍺 Terrace Tavern</span>
+          <span>🏨 Oceanfront Hotel &amp; Beach Bar</span>
+          <span>🚲 Bikeable to Beach Haven</span>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">5</span><span class="hero-stat-label">Communities</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">132nd St</span><span class="hero-stat-label">Restaurant Row</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">1950</span><span class="hero-stat-label">Terrace Tavern's Roots</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">E 24th St</span><span class="hero-stat-label">Oceanfront Hotel</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="cat-section" style="background:var(--mist);">
+    <div class="two-col">
+      <div>
+
+        <!-- Dining -->
+        <div class="section-header"><h2 class="section-title">Dining &amp; Nightlife</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in" data-subcat="bar">
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag nightlife">Tavern</span><span class="card-tag featured">Iconic Spot</span></div>
+              <h3 class="card-title">The Terrace Tavern</h3>
+              <p class="card-desc">A Terrace fixture in a tavern room dating to 1950 — local seafood, 20 beers on tap, live music from 5 PM, and happy hour Sunday–Thursday 3–5.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 13201 Long Beach Blvd, Beach Haven Terrace · Full bar · Live music</p>
+            </div>
+          </div>
+
+          <div class="card animate-in" data-subcat="seafood">
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Oysters &amp; Seafood</span><span class="card-tag featured">Year-Round</span></div>
+              <h3 class="card-title">Delaware Avenue Oyster House &amp; Bar</h3>
+              <p class="card-desc">Family-owned oyster bar born out of a post-Sandy rebuild, right next door to the Terrace Tavern — raw bar and tapas-style plates, open seven days year-round.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 13211 Long Beach Blvd, Beach Haven Terrace · Full bar · Year-round</p>
+            </div>
+          </div>
+
+          <div class="card animate-in" data-subcat="beach-bar">
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">Beachfront Dining</span><span class="card-tag featured">On the Sand</span></div>
+              <h3 class="card-title">Drift Beach Bar &amp; Restaurant</h3>
+              <p class="card-desc">The Spray Beach Hotel's beachfront restaurant — one of the only places on LBI where you eat and drink with the ocean directly in front of you, breakfast through dinner.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Spray Beach Oceanfront Hotel, 200 E 24th St · Seasonal</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag dining">More Nearby</span></div>
+              <h3 class="card-title">Beach Haven Next Door</h3>
+              <p class="card-desc">North Beach Haven runs straight into Beach Haven borough — Fantasy Island, the Chicken or the Egg, and 50+ restaurants are a five-minute bike ride from anywhere in these communities.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 <a href="../beach-haven/index.html" style="color:var(--gold);font-weight:600;">Beach Haven guide →</a></p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Where to Stay -->
+        <div class="section-header"><h2 class="section-title">Where to Stay</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:1rem;margin-bottom:2rem;">
+
+          <div class="card animate-in" data-subcat="hotel">
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag lodging">Oceanfront Hotel</span><span class="card-tag featured">On the Beach</span></div>
+              <h3 class="card-title">Spray Beach Oceanfront Hotel</h3>
+              <p class="card-desc">Steps-from-the-sand rooms with a pool, complimentary beach badges, a lobby market, and Drift Beach Bar downstairs — the classic Spray Beach stay, with fall midweek deals into late October.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 200 E 24th St, Spray Beach · Pool · Beach badges included</p>
+            </div>
+          </div>
+
+          <div class="card animate-in">
+            <div class="card-body">
+              <div class="card-tags"><span class="card-tag lodging">Rentals</span></div>
+              <h3 class="card-title">Quiet Rental Blocks</h3>
+              <p class="card-desc">The Terraces and Gardens are classic LBI rental country — residential streets a short walk from both the ocean and the bay, without Beach Haven's summer crowds.</p>
+              <p style="font-size:0.78rem;color:var(--sub);">📍 Beach Haven Terrace to North Beach Haven · Book early for summer</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- The communities -->
+        <div class="section-header"><h2 class="section-title">The Five Communities</h2></div>
+        <hr class="section-divider" />
+        <div class="grid-2" style="gap:0.75rem;">
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Beach Haven Terrace</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">The northern edge of this stretch and its commercial heart — the Terrace Tavern and Delaware Avenue Oyster House sit side by side on the Boulevard around 132nd Street.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Beach Haven Gardens &amp; Bay Vista</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">Residential blocks ocean-to-bay in the middle of the stretch — Bay Vista is the small bayside pocket with lagoon-front homes.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">Spray Beach</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">The namesake community around the E 20s streets, anchored by the oceanfront hotel that has carried the Spray Beach name for generations.</p>
+          </div>
+          <div class="place-card" style="padding:0.9rem 1rem;">
+            <h4 style="font-size:0.85rem;color:var(--navy);margin-bottom:0.3rem;">North Beach Haven</h4>
+            <p style="font-size:0.78rem;color:var(--sub);line-height:1.5;margin:0;">The southernmost township blocks, running seamlessly into Beach Haven borough — closest to Fantasy Island and the borough's dining district.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="map-embed-wrap" style="margin-bottom:0.5rem;">
+          <div id="town-map" style="height:260px;"></div>
+        </div>
+        <p style="font-size:0.68rem;color:var(--sub);margin:0 0 1.25rem;">Hover a town to preview, click to explore. Map data &copy; OpenStreetMap contributors.</p>
+
+        <div class="sidebar-box">
+          <h4>Need to Know</h4>
+          <div class="info-row"><span class="icon">🗺</span><p><strong>Location:</strong> Long Beach Township, between The Dunes and Beach Haven borough — Beach Haven Terrace, Beach Haven Gardens, Bay Vista, Spray Beach, North Beach Haven</p></div>
+          <div class="info-row"><span class="icon">🏖</span><p><strong>Beach badges:</strong> Long Beach Township badges — valid on all township beaches, Loveladies to Holgate.</p></div>
+          <div class="info-row"><span class="icon">🚗</span><p><strong>Parking:</strong> Free street parking at most beach entrances; fills late morning in peak summer.</p></div>
+          <div class="info-row"><span class="icon">🚴</span><p><strong>By bike:</strong> Flat, quiet side streets — Beach Haven's restaurants and Fantasy Island are minutes away.</p></div>
+          <div class="info-row"><span class="icon">🚌</span><p><strong>Shuttle:</strong> The free LBI Shuttle stops along the Boulevard all summer.</p></div>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Explore LBI</h4>
+          <a href="../brant-beach/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">← Brant Beach</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../beach-haven/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Beach Haven →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../holgate/index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;margin-bottom:0.4rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">Holgate →</span>
+            <span class="badge badge-live">Live</span>
+          </a>
+          <a href="../index.html" class="place-card" style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;">
+            <span style="font-size:0.85rem;font-weight:600;color:var(--navy);">All LBI Towns →</span>
+            <span style="font-size:0.72rem;color:var(--gold);">9 areas</span>
+          </a>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>Quick Tips</h4>
+          <div class="info-row"><span class="icon">🦪</span><p>Delaware Avenue Oyster House is one of the few LBI rooms open all winter — a reliable off-season table.</p></div>
+          <div class="info-row"><span class="icon">🎶</span><p>Terrace Tavern's music starts at 5 PM — an early-evening set before the late rooms get going.</p></div>
+          <div class="info-row"><span class="icon">🌊</span><p>Drift is on the sand — sunset dinner there beats waiting for a window table anywhere else on the island.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE MUSIC (rendered by initLiveMusic in script.js) -->
+  <section class="section cat-section" data-cat="music" id="live-music" style="background:var(--mist);"></section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">The <span>Concierge</span></div>
+        <p>Your local intelligence platform — curated, verified, and always expanding.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Long Beach Island</h4>
+        <a href="../index.html">LBI Overview</a>
+        <a href="../holgate/index.html">Holgate</a>
+        <a href="../beach-haven/index.html">Beach Haven</a>
+        <a href="index.html">Spray Beach</a>
+        <a href="../brant-beach/index.html">Brant Beach</a>
+        <a href="../ship-bottom/index.html">Ship Bottom</a>
+        <a href="../surf-city/index.html">Surf City</a>
+        <a href="../harvey-cedars/index.html">Harvey Cedars</a>
+        <a href="../loveladies/index.html">Loveladies</a>
+        <a href="../barnegat-light/index.html">Barnegat Light</a>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="../../index.html">Home</a>
+        <a href="../../new-jersey/index.html">New Jersey</a>
+        <a href="../../connecticut/index.html">Connecticut</a>
+      </div>
+      <div class="footer-links">
+        <h4>The Concierge</h4>
+        <a href="../../index.html">About</a>
+        <a href="../../index.html#suggest">Suggest a Place</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 The Concierge. All rights reserved.</div>
+  </footer>
+
+</div>
+<script src="../../script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../../interactive-map.js"></script>
+<script>
+initCityBoundaryMap('town-map', {
+  center: [39.60, -74.24],
+  zoom: 11,
+  boundaryUrl: '../../data/lbi-towns.geojson',
+  onClick: function (f) { window.location.href = '../' + f.properties.url; },
+});
+</script>
+</body>
+</html>
