@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Izet's Leather &amp; Shoe Repair · Stamford, CT</title>
 <meta name="description" content="Unsolicited design proposal for Izet's Leather & Shoe Repair, an old-world shoe and leather repair shop in downtown Stamford, CT. Not affiliated with or published by the shop." />
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="scroll-page">
 <!-- NAV -->
 <nav>
 <a href="index.html" class="nav-logo">Izet's <span>Leather &amp; Shoe Repair</span></a>
@@ -29,8 +29,23 @@
 <a href="gallery.html">Gallery</a>
 <a href="contact.html" class="mobile-cta">Visit Us</a>
 </div>
+
+<!-- HERO -->
+<section class="cp-hero">
+<div class="cp-hero-inner">
+<p class="cp-hero-eyebrow">60 Atlantic Street · Stamford, Connecticut</p>
+<h1 class="cp-hero-word">Izet's<br><span>Leather</span></h1>
+<p class="cp-hero-sub">Full soles, heel repair and leather restoration — done the old-fashioned way, by hand.</p>
+<div class="cp-hero-btns">
+<a href="services.html" class="btn-primary">What We Repair</a>
+<a href="contact.html" class="btn-outline">Find the Shop</a>
+</div>
+</div>
+<a href="#split" class="cp-hero-scroll"><span>Discover</span><span>&#9662;</span></a>
+</section>
+
 <!-- HOME SPLIT -->
-<div class="home-split">
+<div class="home-split" id="split">
 <!-- LEFT: Info -->
 <div class="home-left">
 <div class="home-rating">
@@ -46,28 +61,28 @@ on Yelp &nbsp;·&nbsp; 61 Reviews
 </div>
 <div class="home-info-grid">
 <div class="home-info-item">
-<span class="home-info-icon">📍</span>
+<span class="home-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
 <div class="home-info-text">
 <strong>Downtown Stamford</strong>
 60 Atlantic St, Stamford, CT 06901
 </div>
 </div>
 <div class="home-info-item">
-<span class="home-info-icon">📞</span>
+<span class="home-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg></span>
 <div class="home-info-text">
 <strong>Phone</strong>
 <a href="tel:12033230319">(203) 323-0319</a>
 </div>
 </div>
 <div class="home-info-item">
-<span class="home-info-icon">🕒</span>
+<span class="home-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 1.9"/></svg></span>
 <div class="home-info-text">
 <strong>Hours</strong>
 Tue–Fri 9am–6pm, Sat 9am–3pm
 </div>
 </div>
 <div class="home-info-item">
-<span class="home-info-icon">🧵</span>
+<span class="home-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c6-2 9-5 11-9"/><path d="m14 4 6 3-3 6"/><path d="m17 5.5 3 1.5"/><circle cx="4" cy="20" r="1.4"/></svg></span>
 <div class="home-info-text">
 <strong>Specialty</strong>
 Full Sole &amp; Heel Replacement
@@ -81,6 +96,104 @@ Full Sole &amp; Heel Replacement
 <span class="home-photo-credit">Real photo · via izetsleather.com</span>
 </div>
 </div>
+
+<!-- FEATURE CARDS -->
+<section class="cp-section" id="highlights">
+<div class="cp-section-head">
+<div class="section-label">The Bench</div>
+<h2>A Second Life, By Hand</h2>
+<p>Worn-out shoes, boots, bags and belts brought back. Every service below is one Izet's own listings confirm they do.</p>
+</div>
+<div class="cp-cards">
+<a class="cp-card" href="services.html">
+<img src="photos/new-leather-sole-real.jpg" alt="Soles and Heels" loading="lazy" />
+<div class="cp-card-body">
+<h3>Soles &amp; Heels</h3>
+<p>Full sole replacement, heel repair, sole protectors, and cowboy boot work.</p>
+<span class="cp-card-link">See the services</span>
+</div>
+</a>
+<a class="cp-card" href="gallery.html">
+<img src="photos/before-after-heels-real.jpg" alt="Designer Restoration" loading="lazy" />
+<div class="cp-card-body">
+<h3>Designer Restoration</h3>
+<p>Designer footwear brought back — heels, Doc Martens and the pairs worth saving.</p>
+<span class="cp-card-link">See the work</span>
+</div>
+</a>
+<a class="cp-card" href="services.html">
+<img src="photos/leather-goods-tools-stock.jpg" alt="Bags, Belts and Gloves" loading="lazy" />
+<div class="cp-card-body">
+<h3>Bags, Belts &amp; Gloves</h3>
+<p>Handbag and leather accessory repair, zipper work, belts, and glove restringing.</p>
+<span class="cp-card-link">See the list</span>
+</div>
+</a>
+</div>
+</section>
+
+<!-- GALLERY STRIP -->
+<section class="cp-section alt">
+<div class="cp-section-head">
+<div class="section-label">The Work</div>
+<h2>Before &amp; After</h2>
+</div>
+<div class="cp-strip">
+<a href="gallery.html"><img src="photos/resoled-dress-shoe-real.jpg" alt="A resoled dress shoe" loading="lazy" /></a>
+<a href="gallery.html"><img src="photos/before-after-heels-real.jpg" alt="Heels, before and after" loading="lazy" /></a>
+<a href="gallery.html"><img src="photos/heel-repair-real.jpg" alt="Heel repair on the bench" loading="lazy" /></a>
+<a href="gallery.html"><img src="photos/resoled-pair-real.jpg" alt="A finished pair" loading="lazy" /></a>
+</div>
+<div class="cp-center"><a href="gallery.html" class="btn-outline">View Full Gallery</a></div>
+</section>
+
+<!-- BANNER -->
+<section class="cp-banner">
+<div>
+<h3>Bring It In and Ask</h3>
+<p>Tuesday to Saturday on Atlantic Street. If you are not sure it can be saved, it is worth asking.</p>
+</div>
+<a href="contact.html" class="btn-primary">Hours &amp; Contact</a>
+</section>
+
+<!-- LOCATION -->
+<section class="cp-section" id="find-us">
+<div class="cp-section-head">
+<div class="section-label">Location</div>
+<h2>Find the Shop</h2>
+<p>60 Atlantic St, Stamford, CT 06901 — downtown, on the Atlantic Street strip.</p>
+</div>
+<div class="cp-map">
+<iframe title="Map" loading="lazy"
+  src="https://maps.google.com/maps?q=60+Atlantic+St,+Stamford,+CT+06901&amp;output=embed&amp;z=15"></iframe>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="cp-footer">
+<div class="cp-footer-grid">
+<div>
+<div class="cp-footer-word">Izet's <span>Leather</span></div>
+<p>Leather &amp; shoe repair · Stamford, Connecticut</p>
+</div>
+<div>
+<h5>Explore</h5>
+<a href="services.html">Services</a>
+<a href="about.html">Our Craft</a>
+<a href="gallery.html">Gallery</a>
+</div>
+<div>
+<h5>Visit</h5>
+<a href="contact.html">Hours &amp; Contact</a>
+<a href="#find-us">Directions</a>
+</div>
+</div>
+<!-- This is an unsolicited pitch. Saying so plainly in the footer, rather than
+     burying it in a meta tag, is what keeps a spec site from being mistaken for
+     the business's own. -->
+<p class="cp-disclaimer">Independent design proposal. Not affiliated with, endorsed by, or published by Izet's Leather &amp; Shoe Repair. Hours are sourced from third-party listings rather than the shop itself — always call ahead.</p>
+</footer>
+
 <script src="script.js"></script>
 </body>
 </html>

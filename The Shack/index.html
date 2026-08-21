@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>The Shack BBQ · Lubbock, TX</title>
 <meta name="description" content="Unsolicited design proposal for The Shack BBQ, a pecan-wood-smoked barbecue joint in Lubbock, TX. Not affiliated with or published by the restaurant." />
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="scroll-page">
 <!-- NAV -->
 <nav>
 <a href="index.html" class="nav-logo">The Shack <span>BBQ</span></a>
@@ -29,8 +29,23 @@
 <a href="gallery.html">Gallery</a>
 <a href="contact.html" class="mobile-cta">Visit Us</a>
 </div>
+
+<!-- HERO -->
+<section class="cp-hero">
+<div class="cp-hero-inner">
+<p class="cp-hero-eyebrow">2309 N Frankford Avenue · Lubbock, Texas</p>
+<h1 class="cp-hero-word">The<br><span>Shack</span></h1>
+<p class="cp-hero-sub">Pecan-wood smoked since 2014. Brisket, ribs and pulled pork done low and slow on North Frankford.</p>
+<div class="cp-hero-btns">
+<a href="menu.html" class="btn-primary">View the Menu</a>
+<a href="contact.html" class="btn-outline">Find Us</a>
+</div>
+</div>
+<a href="#split" class="cp-hero-scroll"><span>Discover</span><span>&#9662;</span></a>
+</section>
+
 <!-- HOME SPLIT -->
-<div class="home-split">
+<div class="home-split" id="split">
 <!-- LEFT: Info -->
 <div class="home-left">
 <div class="home-rating">
@@ -46,28 +61,28 @@
 </div>
 <div class="home-info-grid">
 <div class="home-info-item">
-<span class="home-info-icon">📍</span>
+<span class="home-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
 <div class="home-info-text">
 <strong>Address</strong>
 2309 N Frankford Ave, Lubbock, TX 79416
 </div>
 </div>
 <div class="home-info-item">
-<span class="home-info-icon">📞</span>
+<span class="home-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg></span>
 <div class="home-info-text">
 <strong>Phone</strong>
 <a href="tel:18064161283">(806) 416-1283</a>
 </div>
 </div>
 <div class="home-info-item">
-<span class="home-info-icon">🕒</span>
+<span class="home-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 1.9"/></svg></span>
 <div class="home-info-text">
 <strong>Hours</strong>
 Wed–Sun 11 AM – 10 PM &nbsp;/&nbsp; Tue 11 AM – 3 PM
 </div>
 </div>
 <div class="home-info-item">
-<span class="home-info-icon">🔥</span>
+<span class="home-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-5-4-6-4-10 0 0-3 1.5-3 5 0 0-2-1-2-3-2 1.6-5 4.2-5 8a7 7 0 0 0 7 7Z"/></svg></span>
 <div class="home-info-text">
 <strong>Since 2014</strong>
 Pecan Wood · Full Bar · Live Music
@@ -81,6 +96,104 @@ Pecan Wood · Full Bar · Live Music
 <span class="home-photo-tag">Real Photo</span>
 </div>
 </div>
+
+<!-- FEATURE CARDS -->
+<section class="cp-section" id="highlights">
+<div class="cp-section-head">
+<div class="section-label">The Pit</div>
+<h2>Low, Slow, Pecan Wood</h2>
+<p>Made fresh daily and sold until it is gone. Meats by the pound, sandwiches, and plates with the sides to match.</p>
+</div>
+<div class="cp-cards">
+<a class="cp-card" href="menu.html">
+<img src="photos/brisket-stock.jpg" alt="Meats by the Pound" loading="lazy" />
+<div class="cp-card-body">
+<h3>Meats by the Pound</h3>
+<p>Brisket, sausage, turkey breast, chicken and pulled pork — straight off the pit.</p>
+<span class="cp-card-link">See the menu</span>
+</div>
+</a>
+<a class="cp-card" href="menu.html">
+<img src="photos/ribs-stock.jpg" alt="Rib Plates" loading="lazy" />
+<div class="cp-card-body">
+<h3>Rib Plates</h3>
+<p>Pork rib plates, with or without a second meat, and the sandwich plate.</p>
+<span class="cp-card-link">See the plates</span>
+</div>
+</a>
+<a class="cp-card" href="menu.html">
+<img src="photos/collard-greens-stock.jpg" alt="Sides and Sweet Tea" loading="lazy" />
+<div class="cp-card-body">
+<h3>Sides &amp; Sweet Tea</h3>
+<p>Collard greens, banana pudding, and sweet tea by the glass.</p>
+<span class="cp-card-link">See the sides</span>
+</div>
+</a>
+</div>
+</section>
+
+<!-- GALLERY STRIP -->
+<section class="cp-section alt">
+<div class="cp-section-head">
+<div class="section-label">Photo Gallery</div>
+<h2>Around the Shack</h2>
+</div>
+<div class="cp-strip">
+<a href="gallery.html"><img src="photos/exterior-sign-real.jpg" alt="The Shack from N Frankford Avenue" loading="lazy" /></a>
+<a href="gallery.html"><img src="photos/pulled-pork-stock.jpg" alt="Pulled pork" loading="lazy" /></a>
+<a href="gallery.html"><img src="photos/string-lights-stock.jpg" alt="The covered patio" loading="lazy" /></a>
+<a href="gallery.html"><img src="photos/banana-pudding-stock.jpg" alt="Banana pudding" loading="lazy" /></a>
+</div>
+<div class="cp-center"><a href="gallery.html" class="btn-outline">View Full Gallery</a></div>
+</section>
+
+<!-- BANNER -->
+<section class="cp-banner">
+<div>
+<h3>Full Bar, Live Music, Covered Patio</h3>
+<p>The patio stays open and the music keeps going. Come early — when it is gone, it is gone.</p>
+</div>
+<a href="contact.html" class="btn-primary">Plan a Visit</a>
+</section>
+
+<!-- LOCATION -->
+<section class="cp-section" id="find-us">
+<div class="cp-section-head">
+<div class="section-label">Location</div>
+<h2>Find Us</h2>
+<p>2309 N Frankford Ave, Lubbock, TX 79416 — north side, tin-sided and hard to miss.</p>
+</div>
+<div class="cp-map">
+<iframe title="Map" loading="lazy"
+  src="https://maps.google.com/maps?q=2309+N+Frankford+Ave,+Lubbock,+TX+79416&amp;output=embed&amp;z=15"></iframe>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="cp-footer">
+<div class="cp-footer-grid">
+<div>
+<div class="cp-footer-word">The <span>Shack</span></div>
+<p>Pecan-wood BBQ · Lubbock, Texas · Since 2014</p>
+</div>
+<div>
+<h5>Explore</h5>
+<a href="menu.html">Menu</a>
+<a href="about.html">Our Story</a>
+<a href="gallery.html">Gallery</a>
+</div>
+<div>
+<h5>Visit</h5>
+<a href="contact.html">Hours &amp; Contact</a>
+<a href="#find-us">Directions</a>
+</div>
+</div>
+<!-- This is an unsolicited pitch. Saying so plainly in the footer, rather than
+     burying it in a meta tag, is what keeps a spec site from being mistaken for
+     the business's own. -->
+<p class="cp-disclaimer">Independent design proposal. Not affiliated with, endorsed by, or published by The Shack. Some photography is labelled stock standing in for real dishes — see the Gallery page for the full breakdown.</p>
+</footer>
+
 <script src="script.js"></script>
 </body>
 </html>

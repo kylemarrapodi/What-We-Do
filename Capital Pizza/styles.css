@@ -652,6 +652,18 @@ gap: 2rem;
   border-radius:10px;box-shadow:0 6px 30px rgba(34,26,22,.14);background:#fff}
 @media(max-width:700px){.guide-frame-wrap iframe{height:70vh;min-height:460px}}
 
+/* ── SCROLLING HOME PAGE ───────────────────────────────────────────────── */
+/* The base layout is a locked full-screen split: `html, body { overflow:hidden }`
+   with an inner `.page-wrap` doing the scrolling. That is right for the inner
+   pages, but the home page now has real sections BELOW the hero, and under the
+   locked body every one of them — menu teaser, gallery, banner, map, footer —
+   was unreachable. Measured: 5409px of page inside a 1500px viewport with
+   scrollHeight === clientHeight.
+   Opt in per page with <body class="scroll-page"> so the inner pages keep the
+   layout they were designed around. */
+body.scroll-page{height:100%;overflow-y:auto;overflow-x:hidden;
+  -webkit-overflow-scrolling:touch}
+
 /* ── HOME SECTIONS (below the hero) ────────────────────────────────────── */
 .cp-section{padding:4rem 6%}
 .cp-section.alt{background:var(--cream-deep)}
