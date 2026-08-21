@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Our Story | Capital Pizza</title>
+<meta name="description" content="The story of Capital Pizza, the first restaurant and bar in the Tech Terrace neighborhood of Lubbock, TX, open since January 2013." />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;0,900;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<!-- NAV -->
+<nav>
+<a href="index.html" class="nav-logo">Capital <span>Pizza</span></a>
+<ul class="nav-links">
+<li><a href="about.html" class="active">Our Story</a></li>
+<li><a href="menu.html">Menu</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="contact.html" class="nav-cta">Visit Us</a></li>
+</ul>
+<button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+<a href="index.html">Home</a>
+<a href="about.html" class="active">Our Story</a>
+<a href="menu.html">Menu</a>
+<a href="gallery.html">Gallery</a>
+<a href="contact.html" class="mobile-cta">Visit Us</a>
+</div>
+
+<!-- Lubbock guide, embedded — the visitor never leaves Capital Pizza's site,
+     but the full Concierge experience (its own nav, search, other districts)
+     is browsable inside the frame. Same pattern as Sea Spray's lbi-guide.html. -->
+<section class="guide-head">
+<p class="guide-eyebrow">Powered by The Concierge</p>
+<h1>Around Tech Terrace</h1>
+<p class="guide-sub">Where to go before and after — curated for the neighborhood
+we have called home since 2013.</p>
+</section>
+<div class="guide-frame-wrap">
+<iframe
+  title="Lubbock Guide, powered by The Concierge"
+  src="../concierge/lubbock/tech-district/index.html?viewer=capital-pizza"
+  loading="lazy"></iframe>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
