@@ -1,19 +1,7 @@
 {
-  "generatedAt": "2026-08-20T10:05:35.527Z",
+  "generatedAt": "2026-08-21T10:06:29.408Z",
   "source": "goprincetontigers.com/api/v2.1/EventsResults",
   "events": [
-    {
-      "sportId": 30,
-      "sport": "Women's Soccer",
-      "date": "2026-08-20T19:00:00",
-      "mo": "AUG",
-      "dy": "20",
-      "time": "7:00 PM",
-      "opponent": "Loyola (Md.)",
-      "location": "Princeton, N.J.",
-      "scheduleUrl": "https://goprincetontigers.com/sports/womens-soccer/schedule",
-      "ticketUrl": null
-    },
     {
       "sportId": 30,
       "sport": "Women's Soccer",
@@ -72,6 +60,18 @@
       "opponent": "JMU",
       "location": "Myslik Field at Roberts Stadium",
       "scheduleUrl": "https://goprincetontigers.com/sports/mens-soccer/schedule",
+      "ticketUrl": null
+    },
+    {
+      "sportId": 30,
+      "sport": "Women's Soccer",
+      "date": "2026-09-10T19:00:00",
+      "mo": "SEP",
+      "dy": "10",
+      "time": "7:00 PM",
+      "opponent": "Colgate",
+      "location": "Princeton, N.J.",
+      "scheduleUrl": "https://goprincetontigers.com/sports/womens-soccer/schedule",
       "ticketUrl": null
     },
     {
@@ -156,6 +156,18 @@
       "opponent": "West Chester",
       "location": "Princeton, N.J.",
       "scheduleUrl": "https://goprincetontigers.com/sports/womens-rugby/schedule",
+      "ticketUrl": null
+    },
+    {
+      "sportId": 18,
+      "sport": "Men's Tennis",
+      "date": "2026-09-25T00:00:00",
+      "mo": "SEP",
+      "dy": "25",
+      "time": null,
+      "opponent": "Ted Farnsworth Invtational",
+      "location": "Princeton, NJ",
+      "scheduleUrl": "https://goprincetontigers.com/sports/mens-tennis/schedule",
       "ticketUrl": null
     },
     {
@@ -336,6 +348,18 @@
       "opponent": "Maryville",
       "location": "Princeton, N.J.",
       "scheduleUrl": "https://goprincetontigers.com/sports/mens-ice-hockey/schedule",
+      "ticketUrl": null
+    },
+    {
+      "sportId": 18,
+      "sport": "Men's Tennis",
+      "date": "2026-10-23T00:00:00",
+      "mo": "OCT",
+      "dy": "23",
+      "time": null,
+      "opponent": "Ivy League Championships",
+      "location": "Princeton, N.J.",
+      "scheduleUrl": "https://goprincetontigers.com/sports/mens-tennis/schedule",
       "ticketUrl": null
     },
     {
