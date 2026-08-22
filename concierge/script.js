@@ -2363,11 +2363,10 @@ function _renderPanelEvents(locationKey, p, containerEl) {
   containerEl.innerHTML = headerHtml + _eventItemsHtml(data.events, p);
 }
 
-// The whole row is the click target — no "More info" button, no venue line.
-// The panel is a scanning surface: the denser it is, the more of the week you
-// see without scrolling. The venue/time that used to sit under each title is
-// still there as the row's tooltip, so nothing is lost, it is just not
-// spending two lines of vertical space per event.
+// The whole row is the click target — no "More info" button. Each row reads
+// type chip / event name / venue · time, so the panel answers "what, where,
+// when" without a hover. The line is clamped to two lines and the full string
+// stays in the tooltip, so a long venue string can't blow the row height out.
 function _eventItemsHtml(events, p) {
   return events.map(ev => {
     const ticket   = ev.ticket || null;
@@ -2383,6 +2382,7 @@ function _eventItemsHtml(events, p) {
       <div class="home-event-info">
         <div class="home-event-tag ${ev.tag}">${ev.tagLabel}</div>
         <div class="home-event-name">${ev.name}${external ? '<span class="ev-ext" aria-hidden="true">↗</span>' : ''}</div>
+        ${ev.meta ? `<div class="home-event-meta">${ev.meta}</div>` : ''}
       </div>
     </${tag}>`;
   }).join('');

@@ -21,7 +21,9 @@ overflow-y: auto;
    It was `min-height`, which let the content push it past the fold — measured
    754px of hero in a 720px viewport. Everything inside is now sized in vh so
    it scales down with the screen instead of overflowing it. `svh` is the
-   smallest-viewport unit, so a mobile address bar can't push the strip down. */
+   smallest-viewport unit, so a mobile address bar can't push the strip down.
+   Vertical padding is symmetric on purpose: the block reads centred only if the
+   gap above the logo matches the gap under the rating. */
 .hero {
 height: calc(100vh - var(--nav-h));
 height: calc(100svh - var(--nav-h));
@@ -33,7 +35,7 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 text-align: center;
-padding: clamp(1rem, 3.5vh, 3rem) 6% clamp(1.5rem, 5vh, 4.5rem);
+padding: clamp(1rem, 3.5vh, 3rem) 6%;
 position: relative;
 overflow: hidden;
 }
@@ -53,7 +55,12 @@ inset: 0;
 background: linear-gradient(160deg, rgba(20,42,66,0.72) 0%, rgba(26,58,92,0.55) 55%, rgba(20,42,66,0.65) 100%);
 z-index: 1;
 }
-.hero > *:not(.hero-video) { position: relative; z-index: 2; }
+.hero > *:not(.hero-video):not(.hero-scroll) { position: relative; z-index: 2; }
+/* The blanket rule above outranks `.hero-scroll` on specificity, so without the
+   exclusion the scroll cue fell back into flow: it took 41px of column height
+   below the rating (and its `bottom` offset dragged it up over the rating text),
+   which is what threw the hero off-centre. It is an overlay, not a flex item. */
+.hero-scroll { z-index: 2; }
 /* Data-saver / reduced-motion users get the still poster instead */
 @media (prefers-reduced-motion: reduce) {
 .hero-video { display: none; }
@@ -100,6 +107,9 @@ gap: 0.2rem;
 }
 .hero-scroll span:last-child { font-size: 1.1rem; animation: bob 1.6s ease-in-out infinite; }
 @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+/* Under ~680px of viewport the centred block grows down into the scroll cue and
+   the two collide. The cue is decorative — drop it rather than break the centring. */
+@media (max-height: 680px) { .hero-scroll { display: none; } }
 
 /* ── INFO STRIP ── */
 .info-strip {

@@ -988,9 +988,9 @@ function renderEventsPanel(locationKey) {
     ? `<a href="${data.eventsLink.href}">${data.eventsLink.text}</a>`
     : '';
 
-  // Whole row is the click target — no "More info" button, no venue line under
-  // the title. Keeps the panel dense enough to scan a week without scrolling;
-  // the venue/time survives as the row tooltip.
+  // Whole row is the click target — no "More info" button. Type chip, name, then
+  // venue · time, so the row answers "what, where, when" without a hover. The
+  // meta line is clamped to two lines; the untruncated string stays the tooltip.
   const eventsHtml = data.events.map(ev => {
     const ticket   = ev.ticket || null;
     const href     = ticket || ev.url || null;
@@ -1006,6 +1006,7 @@ function renderEventsPanel(locationKey) {
       <div class="home-event-info">
         <div class="home-event-tag ${ev.tag}">${ev.tagLabel}</div>
         <div class="home-event-name">${ev.name}${external ? '<span class="ev-ext" aria-hidden="true">↗</span>' : ''}</div>
+        ${ev.meta ? `<div class="home-event-meta">${ev.meta}</div>` : ''}
       </div>
     </${tag}>`;
   }).join('');
