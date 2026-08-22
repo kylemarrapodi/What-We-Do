@@ -21,7 +21,7 @@
 (function () {
   var VIEWERS = {
     // key            business                     subcat hidden   path back to their site
-    'motel':          ['Sea Spray Motel',          'motel',   'Sea%20Spray%20Motel'],
+    'motel':          ['Sea Spray Motel',          'motel',   'sea-spray-motel'],
     'hudson-house':   ['Hudson House',             'bar',     'Hudson%20House%20Bar'],
     'capital-pizza':  ['Capital Pizza',            'pizza',   'Capital%20Pizza'],
     'cast-iron-grill':['Cast Iron Grill',          'diner',   'Cast%20Iron%20Grill'],

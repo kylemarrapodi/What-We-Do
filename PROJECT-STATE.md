@@ -9,7 +9,7 @@ _Last updated: Aug 20, 2026. This file is the cross-session source of truth. Rea
 
 ## Projects
 - **concierge/** — the main build. Local-guide platform: country → state (CT/NJ/TX/NY) → city/borough → neighborhood. All data hardcoded static; no backend. "Suggest a place/event" forms are decorative (candidate future feature: real capture + Claude-screened validation pipeline).
-- **Sea Spray Motel/** — flagship proposal site being demoed to the real motel's owners. Real traced-SVG logo (photos/sign logo best.jpg source), beach video hero (Pixabay, 18s/6MB loop), real OTA+official-site photos, LBI Guide = iframe embed of the Concierge Beach Haven page (`lbi-guide.html`). Brand fonts stay (Kaushan Script logo); © 2026 footer, no disclaimer.
+- **sea-spray-motel/** — flagship proposal site being demoed to the real motel's owners. Real traced-SVG logo (photos/sign logo best.jpg source), beach video hero (Pixabay, 18s/6MB loop), real OTA+official-site photos, LBI Guide = iframe embed of the Concierge Beach Haven page (`lbi-guide.html`). Brand fonts stay (Kaushan Script logo); © 2026 footer, no disclaimer.
 - 6 small-business proposal sites (Cast Iron Grill, Capital Pizza, Casey's Tavern, Izet's, Hudson House Bar, The Shack) — **all six rebuilt Aug 21, 2026** to a common standard: scrolling home page with a photographic hero, three-card feature section, gallery strip, banner, embedded map, and a footer disclaimer. Composition follows the business rather than a template (Hudson House has no kitchen so it leads with the games; Izet's leads with before-and-after repair work). Pending T's design review.
   - **`body.scroll-page` is required** on any page with sections below the hero. The base layout locks `html, body { overflow:hidden }` for the full-screen split; without the class everything below the fold is unreachable. This bug shipped in Capital Pizza and was caught Aug 21.
   - **Inter is now gone from all six** (it was the "standard AI font" flagged in convention 3). Per-site: Capital Pizza still on Inter → *to revisit*; Casey's=Karla, Cast Iron=Archivo, Hudson=Space Grotesk, Izet's=Jost, Shack=Barlow. When changing a font, change it in the stylesheet AND every page's font link — updating one leaves the other falling back to generic sans.
@@ -37,6 +37,10 @@ _Last updated: Aug 20, 2026. This file is the cross-session source of truth. Rea
 - CT expansion outward after that (Darien, Norwalk, Westport…).
 - Suggestion-form capture pipeline (Formspree-style → later Claude-screened auto-validation) — discussed, not built.
 - Sea Spray: possible custom domain + sale/handoff decision (iframe LBI Guide depends on Concierge staying hosted).
+  Folder renamed `Sea Spray Motel/` → `sea-spray-motel/` on Aug 22, 2026 so the shareable URL carries no `%20`:
+  https://kylemarrapodi.github.io/What-We-Do/sea-spray-motel/ — this is the link sent to the owners. The old
+  `/Sea%20Spray%20Motel/` path is dead (GitHub Pages has no redirect layer; the `_redirects` file is Netlify-only
+  and does nothing here), so anything already sent out pointing at the old path will 404.
 - Apollo Theater listed as under renovation (Amateur Night paused) — recheck when it reopens.
 
 ## Practical notes
