@@ -23,6 +23,12 @@ _Last updated: Aug 20, 2026. This file is the cross-session source of truth. Rea
 - **Home page:** left panel (search tree + "Happening in X" events panel driven by map hover/zoom) + US-wide map (`data/all-places.geojson`, ~16 shapes, hover/click-nav).
 
 ## Deploy layout
+- **Sea Spray is live on Netlify at https://sea-spray-motel.netlify.app** — this is the link sent
+  to the motel's owners. Continuous deployment from this repo, branch `main`: publish directory
+  `sea-spray-motel`, no base directory, no build command. Every push to `main` redeploys it, so
+  do not hand-drop folders into Netlify any more — that would detach it from the repo.
+  Deliberately its own site rather than a folder on Pages: the owners never see the other six
+  proposal sites, and nothing links back to the repo.
 - `sea-spray-motel/` is a **publish root** — Netlify serves it as its own site (publish directory
   `sea-spray-motel`, no base directory, no build command), so *everything in that folder ships*.
   Keep notes, dev scripts and source assets out of it: they live in `docs/` and `dev/`.
