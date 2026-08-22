@@ -1286,6 +1286,11 @@ const LIVE_MUSIC = {
         acts: ['Shorty Long and the Jersey Horns'],
         desc: 'One of the oldest structures on Long Beach Island, putting people up and putting bands on for over a century. Two rooms with separate schedules, so there is something on nearly every night of the week.',
         cal: { href: 'https://surfcityhotel.com/entertainment.html', label: 'surfcityhotel.com — entertainment' } },
+
+      { name: 'Northside Bar & Grille', kind: 'Sports Bar', addr: '1500 Long Beach Blvd', phone: '(609) 494-3771',
+        nights: 'Live music dates through the season · open daily at noon, year-round',
+        desc: 'The Island\'s sports bar, and one of the few Surf City rooms that stays open all winter. The kitchen stops at 9 but the bar runs to last call.',
+        cal: { href: 'https://www.northsidelbi.com/', label: 'northsidelbi.com' } },
     ],
     series: []
   },
@@ -2288,6 +2293,8 @@ const PANEL_EVENTS = {
     label: 'Surf City Events', link: { href: 'lbi/surf-city/index.html', text: 'Surf City Guide →' },
     events: [
       { mo:'MON', dy:'WKL', tag:'outdoors',tagLabel:'Market',    name:'Surf City Farmers Market', meta:'Surf City Firehouse · 713 Long Beach Blvd · Mon 8 AM–noon · Jun–Sep', url:'lbi/surf-city/index.html', ticket:null },
+      { mo:'TUE', dy:'FRI', tag:'nightlife',tagLabel:'Live Band',name:'Bands at the Beach Club',  meta:'Surf City Hotel · 800 N Long Beach Blvd · Tue, Fri, Sat & select Sun · 21+', url:'lbi/surf-city/index.html', ticket:'https://surfcityhotel.com/' },
+      { mo:'DLY', dy:'HH',  tag:'arts',    tagLabel:'Live Music',name:'Live music at the Bistro', meta:'Surf City Hotel · daily at happy hour or over dinner', url:'lbi/surf-city/index.html', ticket:'https://surfcityhotel.com/' },
     ]
   },
   'Harvey Cedars': {
