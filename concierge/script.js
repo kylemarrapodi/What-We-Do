@@ -1172,11 +1172,30 @@ const LIVE_MUSIC = {
   'beach-haven': {
     blurb: 'The Island\'s live-music capital. A real music hall, two oceanfront tiki bars, an early-evening tavern circuit and a free town concert series — all inside about a dozen blocks.',
     venues: [
+      // Booked schedule read off the Nite Club calendar at
+      // birdandbettys.com/nite-club on Aug 22, 2026. Late shows start at
+      // 10:30 PM and run to 3:30 AM, so the venue's own calendar prints each
+      // one on two days — these are the START dates only. The season ends
+      // after Oct 3; November is empty on their calendar.
       { name: "Bird & Betty's", kind: 'Music Hall & Restaurant', addr: '529 Dock Rd', phone: '(609) 492-3000',
         nights: 'Shows Wednesday–Sunday in the warm months; closed through the winter',
-        acts: ['Chevy Lopez', 'P-Funk North', 'AftershockNJ'],
         desc: 'The Jersey Shore\'s best-known waterfront music room — an actual stage, an actual sound system, and touring regional acts most nights of the summer week. This is the one to check first if you want to see a band rather than hear one.',
-        cal: { href: 'https://www.birdandbettys.com/events', label: 'birdandbettys.com/events' } },
+        dated: [
+          { date: 'Sat Aug 22', act: 'Good Noise · 10:30 PM' },
+          { date: 'Wed Aug 26', act: 'Highly Questionable Trivia · 8 PM' },
+          { date: 'Fri Aug 28', act: 'The Way Outs · 10:30 PM' },
+          { date: 'Sat Aug 29', act: 'Sky City Social · 10:30 PM' },
+          { date: 'Wed Sep 2',  act: 'Highly Questionable Trivia · 8 PM' },
+          { date: 'Fri Sep 4',  act: 'Gab Cinque Band · 10:30 PM' },
+          { date: 'Sat Sep 5',  act: 'Kono Nation · 10:30 PM' },
+          { date: 'Fri Sep 11', act: 'The Black Ties · 10:30 PM' },
+          { date: 'Sat Sep 12', act: 'Ridgemont Hight · 10:30 PM' },
+          { date: 'Fri Sep 25', act: 'The Polish Nannies · 10:30 PM' },
+          { date: 'Sat Sep 26', act: '95 Live · 10:30 PM' },
+          { date: 'Fri Oct 2',  act: 'Jel & The Kidz · 10:30 PM' },
+          { date: 'Sat Oct 3',  act: 'Band of Make Believe · 10:30 PM' },
+        ],
+        cal: { href: 'https://www.birdandbettys.com/nite-club', label: 'Full Nite Club calendar' } },
 
       { name: 'The Sea Shell Resort & Beach Club', kind: 'Oceanfront Tiki Bar', addr: '10 S Atlantic Ave', phone: '(609) 492-4611',
         nights: 'Live entertainment seven days in season · DJs on weekends · Thunder Thursday, 10 PM–2 AM',
@@ -2250,7 +2269,10 @@ const PANEL_EVENTS = {
   'Beach Haven': {
     label: 'Beach Haven Events', link: { href: 'lbi/beach-haven/index.html', text: 'Beach Haven Guide →' },
     events: [
+      { mo:'AUG', dy:'28',  tag:'nightlife',tagLabel:'Live Band', name:'The Way Outs',            meta:"Bird & Betty's · 529 Dock Rd · 10:30 PM", url:'lbi/beach-haven/index.html', ticket:'https://www.birdandbettys.com/nite-club' },
+      { mo:'AUG', dy:'29',  tag:'nightlife',tagLabel:'Live Band', name:'Sky City Social',         meta:"Bird & Betty's · 529 Dock Rd · 10:30 PM", url:'lbi/beach-haven/index.html', ticket:'https://www.birdandbettys.com/nite-club' },
       { mo:'AUG', dy:'30',  tag:'arts',    tagLabel:'Theatre',    name:'1776: The Musical — closing',   meta:'Surflight Theatre · runs through Aug 30', url:'lbi/beach-haven/index.html', ticket:'https://surflight.org' },
+      { mo:'SEP', dy:'4',   tag:'nightlife',tagLabel:'Live Band', name:'Gab Cinque Band',         meta:"Bird & Betty's · 529 Dock Rd · 10:30 PM", url:'lbi/beach-haven/index.html', ticket:'https://www.birdandbettys.com/nite-club' },
       { mo:'WED', dy:'WKL', tag:'arts',    tagLabel:'Free Music', name:'Concerts on the Green',   meta:'Veterans Bicentennial Park · Wed 7:30 PM', url:'lbi/beach-haven/index.html', ticket:null },
       { mo:'SEP', dy:'1–20',tag:'arts',    tagLabel:'Theatre',    name:'Ghost: The Musical',      meta:'Surflight Theatre',                   url:'lbi/beach-haven/index.html', ticket:'https://surflight.org' },
       { mo:'OCT', dy:'3–4', tag:'dining',  tagLabel:'Food Fest',  name:'Chowderfest — Chowder Cook-Off', meta:'Taylor Ave Waterfront · Oct 3–4', url:'lbi/beach-haven/index.html', ticket:'https://chowderfest.com' },
