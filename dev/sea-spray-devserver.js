@@ -2,7 +2,9 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const root = __dirname;
+// Lives outside the site folder on purpose: everything inside sea-spray-motel/
+// is published verbatim by Netlify, so only shippable files belong in there.
+const root = path.join(__dirname, '..', 'sea-spray-motel');
 const port = 8123;
 
 const mime = {

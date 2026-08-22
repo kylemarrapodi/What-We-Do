@@ -22,6 +22,19 @@ _Last updated: Aug 20, 2026. This file is the cross-session source of truth. Rea
 - **New York:** Manhattan hub — ALL 42 neighborhoods (single-page hub, sections + anchors; `data/manhattan-neighborhoods.geojson`, OSM relations ~8398xxx; documented fallbacks: Nolita=split of Little Italy relation, Midtown West=Theater District+Midtown union, Sutton Place=Midtown East clip, StuyTown=landuse way, Roosevelt Island=coastline). Queens hub — 10 neighborhoods (NTA2020 boundaries mostly; `data/queens-neighborhoods.geojson`). Brooklyn hub — COMPLETE (10 neighborhoods: Williamsburg, Greenpoint, DUMBO, Brooklyn Heights, Downtown Brooklyn, Fort Greene, Park Slope, Prospect Heights incl. Prospect Park, Bushwick, Coney Island; `data/brooklyn-neighborhoods.geojson` from NTA2020 + the two LPC historic districts for DUMBO since the NTA lumps it with Downtown; borough boundary OSM rel 9691750; PIP quirks documented in the map caption — Barclays/GAP arch sit in the Park Slope NTA, Brooklyn Paramount in Fort Greene, Transit Museum in Bklyn Heights).
 - **Home page:** left panel (search tree + "Happening in X" events panel driven by map hover/zoom) + US-wide map (`data/all-places.geojson`, ~16 shapes, hover/click-nav).
 
+## Deploy layout
+- `sea-spray-motel/` is a **publish root** — Netlify serves it as its own site (publish directory
+  `sea-spray-motel`, no base directory, no build command), so *everything in that folder ships*.
+  Keep notes, dev scripts and source assets out of it: they live in `docs/` and `dev/`.
+- The Concierge stays on GitHub Pages and the motel's LBI Guide frames it by absolute URL
+  (`CONCIERGE_GUIDE` in `sea-spray-motel/lbi-guide.html`), passing `?home=` so the guide's back
+  link returns to whichever domain the motel site is on. Moving the Concierge = edit that one
+  constant, and give the other six partner sites the same `?home=` treatment (they still frame
+  it by relative path and would break).
+- Known gap: `getConciergeDepth()` in `concierge/script.js` finds the site root by looking for a
+  `concierge` path segment, so the Concierge cannot yet be served at a domain root — depth comes
+  out 0 and every root-relative link breaks. One-line fix, needed before it gets its own domain.
+
 ## Conventions (non-negotiable)
 1. **Zero fabrication.** Every event/venue/date verified against a live web source in-session; closure-check businesses; PIP-test addresses into the right polygon; delete rather than guess. (Fabricated content was caught multiple times early — fake festivals, wrong TTU dates, invented venues.)
 2. **Boundaries:** real OSM relations via Overpass where they exist; NYC DCP NTA2020 for outer boroughs; document any fallback in the feature's `source` property and the page's map caption.

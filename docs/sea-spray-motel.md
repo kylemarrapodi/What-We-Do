@@ -4,8 +4,12 @@ Recreated locally from `sea-spray-motel-code.docx` (exported from work email on 
 
 ## Files
 - index.html, rooms.html, rates.html, amenities.html, contact.html, gallery.html
-- The "LBI Guide" nav link now goes straight to `../concierge/lbi/beach-haven/index.html?viewer=motel`
-  — the Concierge project's own Beach Haven page — instead of a separate, duplicated guide page.
+- The "LBI Guide" page frames the Concierge's own Beach Haven page. It is loaded by absolute URL
+  (`CONCIERGE_GUIDE` in `lbi-guide.html`) and passes `?viewer=motel&home=<this site's base URL>`,
+  so the site works deployed on its own domain and the guide's "back" link returns here.
+- This file used to live in the site folder. It moved to `docs/` because that folder is a
+  deploy root — Netlify publishes everything in it, so only shippable files belong there.
+  The unused logo-tracing source photos moved to `docs/sea-spray-source-photos/` for the same reason.
 - styles.css
 - script.js
 - seaspraylogo.svg — hand-built vector logo (inlined directly into index.html's hero), referencing
