@@ -41,11 +41,22 @@
   // count how deep below it we are, rather than assuming a fixed depth:
   //   /concierge/stamford/            -> 1 below -> ../../
   //   /concierge/lbi/beach-haven/     -> 2 below -> ../../../
-  var parts = location.pathname.split('/').filter(Boolean);
-  parts.pop();                                   // drop index.html
-  var ci = parts.indexOf('concierge');
-  var below = ci === -1 ? 1 : (parts.length - 1 - ci);
-  var back = '../'.repeat(below + 1) + dir + '/index.html';
+  // A partner deployed on its own domain passes ?home=<its base URL>, because
+  // no amount of "../" reaches a different host. Restricted to http(s) so the
+  // param can't smuggle a javascript: or data: URL into the banner's href —
+  // worth knowing it can still name any http(s) address, so treat the banner
+  // as "wherever the embedding page said it came from", not as proof of origin.
+  var home = new URLSearchParams(location.search).get('home');
+  var back;
+  if (home && /^https?:\/\//i.test(home)) {
+    back = home.replace(/\/?$/, '/') + 'index.html';
+  } else {
+    var parts = location.pathname.split('/').filter(Boolean);
+    parts.pop();                                 // drop index.html
+    var ci = parts.indexOf('concierge');
+    var below = ci === -1 ? 1 : (parts.length - 1 - ci);
+    back = '../'.repeat(below + 1) + dir + '/index.html';
+  }
 
   document.querySelectorAll('[data-subcat="' + subcat + '"]').forEach(function (card) {
     card.style.display = 'none';

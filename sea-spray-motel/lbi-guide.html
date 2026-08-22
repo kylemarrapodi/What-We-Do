@@ -89,12 +89,28 @@ curated for our guests, without leaving the motel's site.</p>
 </section>
 <div class="guide-frame-wrap">
 <iframe
+id="guide-frame"
 title="Long Beach Island Guide, powered by The Concierge"
-src="../concierge/lbi/beach-haven/index.html?viewer=motel"
 loading="lazy">
 </iframe>
 </div>
 
+<script>
+/* The guide used to load as "../concierge/...", which only resolved because
+   this site sat next to the Concierge in one repo. It no longer does — this
+   site is deployed on its own — so the frame points at the Concierge where it
+   is actually hosted, and hands over this site's own base URL as `home`. The
+   "← Back to Sea Spray Motel" link inside the frame is built from that, so it
+   returns here rather than to whatever host the Concierge happens to be on.
+   Nothing about the motel's domain is hardcoded: move this site and the link
+   follows it. If the Concierge ever moves, CONCIERGE_GUIDE is the one edit. */
+(function () {
+  var CONCIERGE_GUIDE = 'https://kylemarrapodi.github.io/What-We-Do/concierge/lbi/beach-haven/index.html';
+  var home = location.href.split('#')[0].split('?')[0].replace(/[^/]*$/, '');
+  document.getElementById('guide-frame').src =
+    CONCIERGE_GUIDE + '?viewer=motel&home=' + encodeURIComponent(home);
+})();
+</script>
 <script src="script.js"></script>
 </body>
 </html>
