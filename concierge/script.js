@@ -2295,12 +2295,14 @@ const PANEL_EVENTS = {
       { mo:'MON', dy:'WKL', tag:'outdoors',tagLabel:'Market',    name:'Surf City Farmers Market', meta:'Surf City Firehouse · 713 Long Beach Blvd · Mon 8 AM–noon · Jun–Sep', url:'lbi/surf-city/index.html', ticket:null },
       { mo:'TUE', dy:'FRI', tag:'nightlife',tagLabel:'Live Band',name:'Bands at the Beach Club',  meta:'Surf City Hotel · 800 N Long Beach Blvd · Tue, Fri, Sat & select Sun · 21+', url:'lbi/surf-city/index.html', ticket:'https://surfcityhotel.com/' },
       { mo:'DLY', dy:'HH',  tag:'arts',    tagLabel:'Live Music',name:'Live music at the Bistro', meta:'Surf City Hotel · daily at happy hour or over dinner', url:'lbi/surf-city/index.html', ticket:'https://surfcityhotel.com/' },
+      { mo:'THU', dy:'WKL', tag:'outdoors',tagLabel:'Night Market',name:'The Night Market',      meta:'The Firefly Gallery · Surf City · Thu 5–8 PM', url:'lbi/surf-city/index.html', ticket:null },
     ]
   },
   'Harvey Cedars': {
     label: 'Harvey Cedars Events', link: { href: 'lbi/harvey-cedars/index.html', text: 'Harvey Cedars Guide →' },
     events: [
-      { mo:'FRI', dy:'WKL', tag:'outdoors',tagLabel:'Market',    name:'Black Eyed Susans Farmers Market', meta:'Harvey Cedars · Fridays 9–11 AM in season', url:'lbi/harvey-cedars/index.html', ticket:null },
+      { mo:'FRI', dy:'WKL', tag:'outdoors',tagLabel:'Market',    name:'Black Eyed Susans Farmers Market', meta:'7908 Long Beach Blvd · Fridays 9–11 AM in season', url:'lbi/harvey-cedars/index.html', ticket:null },
+      { mo:'FRI', dy:'SUN', tag:'outdoors',tagLabel:'Bazaar',    name:"Birdy's Bazaars",                  meta:"Birdy's · 7801 Long Beach Blvd · Fri–Sun 8 AM–2 PM", url:'lbi/harvey-cedars/index.html', ticket:null },
     ]
   },
   'Barnegat Light': {
@@ -2308,6 +2310,7 @@ const PANEL_EVENTS = {
     events: [
       { mo:'DAI', dy:'LY',  tag:'outdoors',tagLabel:'Landmark', name:'Barnegat Lighthouse',     meta:'217 steps · Panoramic inlet views',   url:'lbi/barnegat-light/index.html', ticket:null },
       { mo:'DAI', dy:'LY',  tag:'outdoors',tagLabel:'Market',   name:'Viking Village Fish Market',meta:'Fresh catch off the boats',         url:'lbi/barnegat-light/index.html', ticket:null },
+      { mo:'SUN', dy:'WKL', tag:'outdoors',tagLabel:'Bazaar',   name:'Sunday Bazaar',            meta:'Yaatree Bazaar · Barnegat Light · Sun 10 AM–2 PM', url:'lbi/barnegat-light/index.html', ticket:null },
     ]
   },
   'Brant Beach': {
