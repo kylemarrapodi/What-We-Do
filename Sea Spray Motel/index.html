@@ -72,8 +72,16 @@ object-fit: contain;
 filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
 margin-bottom: clamp(0.6rem, 2vh, 1.5rem);
 }
-/* Rating sits below the buttons now, so this is a top margin */
-.hero .home-rating { margin: clamp(0.9rem, 2.2vh, 1.5rem) 0 0; }
+/* Rating sits below the buttons now, so this is a top margin. It is also
+   scaled down here rather than in styles.css: the hero is the only place the
+   badge appears, and at full size it competed with the buttons above it. */
+.hero .home-rating {
+  margin: clamp(0.9rem, 2.2vh, 1.5rem) 0 0;
+  font-size: 0.5rem;
+  letter-spacing: 0.05em;
+  gap: 0.3rem;
+  padding: 0.2rem 0.62rem;
+}
 .hero-tagline {
 font-family: 'Playfair Display', serif;
 font-size: clamp(1.1rem, 2.2vw, 1.5rem);
