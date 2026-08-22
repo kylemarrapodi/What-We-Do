@@ -1024,9 +1024,13 @@ body.panel-no-anim .panel-toggle { transition: none !important; }
 
 /* Two lines per event — date chip, tag, title. The whole row is an <a>, so the
    hover state has to read as "this is the button" on its own. */
+/* Rows are a fixed two lines now (name, then "[type] · where · when"), where
+   the type chip used to sit on a third line of its own. That plus the padding
+   below lands every row at ~75% of the old height — uniform, so a long entry no
+   longer costs a taller row than a short one. */
 .home-event-item {
   display: flex; align-items: center; gap: 0.6rem;
-  padding: 0.4rem 0.5rem; margin: 0 -0.5rem;
+  padding: 0.5rem 0.5rem; margin: 0 -0.5rem;
   border-bottom: 1px solid rgba(255,255,255,0.05);
   border-radius: 6px;
   text-decoration: none; color: inherit;
@@ -1051,19 +1055,29 @@ body.panel-no-anim .panel-toggle { transition: none !important; }
 .home-event-date .dy { font-size: 0.95rem; font-weight: 700; color: var(--white); line-height: 1; }
 .home-event-info { flex: 1; min-width: 0; }
 .home-event-name { font-size: 0.82rem; font-weight: 600; color: var(--white); line-height: 1.25; margin-bottom: 0.1rem; }
-/* Venue · time under each event title. Clamped to two lines so one verbose
-   entry can't cost four rows of panel height; the full text is the tooltip. */
+/* "[type] · where · when" under the title, on exactly one line. The venue is
+   the only part allowed to shrink, so the time survives however narrow the
+   column gets; the full untrimmed string is still the row's tooltip. */
 .home-event-meta {
-  font-size: 0.68rem;
+  display: flex;
+  align-items: center;
+  gap: 0.28rem;
+  min-width: 0;
+  margin-top: 0.12rem;
+  font-size: 0.66rem;
+  line-height: 1.3;
   color: rgba(255,255,255,0.45);
-  line-height: 1.35;
-  margin-top: 0.15rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
+.home-event-meta .home-event-tag { flex: 0 0 auto; margin-bottom: 0; }
+.home-event-meta .ev-where {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.home-event-meta .ev-when { flex: 0 0 auto; white-space: nowrap; color: rgba(255,255,255,0.58); }
+.home-event-meta .ev-sep { flex: 0 0 auto; opacity: 0.4; }
 .home-event-actions { display: flex; gap: 0.75rem; margin-top: 0.3rem; flex-wrap: wrap; }
 .home-event-action-link { font-size: 0.7rem; font-weight: 600; color: rgba(255,255,255,0.45); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.18); transition: color 0.15s, border-color 0.15s; }
 .home-event-action-link:hover { color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.5); }

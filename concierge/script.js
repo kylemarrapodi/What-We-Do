@@ -2363,10 +2363,37 @@ function _renderPanelEvents(locationKey, p, containerEl) {
   containerEl.innerHTML = headerHtml + _eventItemsHtml(data.events, p);
 }
 
-// The whole row is the click target — no "More info" button. Each row reads
-// type chip / event name / venue · time, so the panel answers "what, where,
-// when" without a hover. The line is clamped to two lines and the full string
-// stays in the tooltip, so a long venue string can't blow the row height out.
+// The whole row is the click target — no "More info" button. Two lines: the
+// event name, then "[type] · where · when", so the row answers what/where/when
+// without a hover while staying one line per part.
+
+// `meta` is authored as a free-form "·"-separated string, so pull the clock
+// time out of it and pin that to the end of the row as its own span. Only the
+// venue is allowed to ellipsis when the 320px column runs out — the time never
+// truncates. Street numbers are dropped on the way through: "Bird & Betty's"
+// identifies the place in a narrow panel and "529 Dock Rd" does not. The
+// untouched original stays on the row as its tooltip.
+const _EV_TIME_RE = /(\d{1,2}(:\d{2})?\s*(–|—|-|to)?\s*(\d{1,2}(:\d{2})?)?\s*(a\.?m\.?|p\.?m\.?)|noon|midnight)/i;
+const _EV_ADDR_RE = /^\d+[A-Za-z]?\s+.*\b(Rd|Road|St|Street|Ave|Avenue|Blvd|Boulevard|Ln|Lane|Dr|Drive|Ter|Terrace|Way|Hwy|Highway|Pl|Place|Pkwy|Sq)\b\.?$/i;
+
+function _splitEventMeta(meta) {
+  const parts = String(meta == null ? '' : meta).split('·').map(x => x.trim()).filter(Boolean);
+  let when = '';
+  for (let i = parts.length - 1; i >= 0; i--) {
+    if (_EV_TIME_RE.test(parts[i])) { when = parts.splice(i, 1)[0]; break; }
+  }
+  return { where: parts.filter(x => !_EV_ADDR_RE.test(x)).join(' · '), when };
+}
+
+function _eventMetaHtml(ev) {
+  const { where, when } = _splitEventMeta(ev.meta);
+  const bits = [];
+  if (ev.tagLabel) bits.push(`<span class="home-event-tag ${ev.tag}">${ev.tagLabel}</span>`);
+  if (where) bits.push(`<span class="ev-where">${where}</span>`);
+  if (when) bits.push(`<span class="ev-when">${when}</span>`);
+  if (!bits.length) return '';
+  return `<div class="home-event-meta">${bits.join('<span class="ev-sep">·</span>')}</div>`;
+}
 function _eventItemsHtml(events, p) {
   return events.map(ev => {
     const ticket   = ev.ticket || null;
@@ -2380,9 +2407,8 @@ function _eventItemsHtml(events, p) {
     <${tag} class="home-event-item${href ? ' is-link' : ''}"${attrs} title="${_attr(ev.meta)}">
       <div class="home-event-date"><div class="mo">${ev.mo}</div><div class="dy">${ev.dy}</div></div>
       <div class="home-event-info">
-        <div class="home-event-tag ${ev.tag}">${ev.tagLabel}</div>
         <div class="home-event-name">${ev.name}${external ? '<span class="ev-ext" aria-hidden="true">↗</span>' : ''}</div>
-        ${ev.meta ? `<div class="home-event-meta">${ev.meta}</div>` : ''}
+        ${_eventMetaHtml(ev)}
       </div>
     </${tag}>`;
   }).join('');

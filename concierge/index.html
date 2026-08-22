@@ -34,7 +34,7 @@
     /* Top zone — brand + search + go button. Always visible, never scrolls. */
     .home-left-top {
       flex-shrink: 0;
-      padding: 1.5rem 1.25rem 0.5rem;
+      padding: 0.75rem 1.25rem 0.5rem;
       display: flex;
       flex-direction: column;
       gap: 1.25rem;
@@ -62,10 +62,6 @@
       flex-shrink: 0;
       padding: 0 1.25rem 1.5rem;
     }
-
-    /* Brand — just the tagline now; the site title already lives in the
-       persistent top nav, so it isn't repeated here. */
-    .home-desc { font-size: 0.98rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
 
     /* ── TIERED SEARCH ── */
     .home-search { display: flex; flex-direction: column; gap: 0.5rem; }
@@ -367,11 +363,6 @@
 
     <!-- TOP: brand + search + go button — always locked in place -->
     <div class="home-left-top">
-
-      <!-- Brand -->
-      <div class="home-brand">
-        <p class="home-desc">Discover what's happening near you</p>
-      </div>
 
       <!-- Tiered Search -->
       <div class="home-search" id="tiered-search">
@@ -988,9 +979,9 @@ function renderEventsPanel(locationKey) {
     ? `<a href="${data.eventsLink.href}">${data.eventsLink.text}</a>`
     : '';
 
-  // Whole row is the click target — no "More info" button. Type chip, name, then
-  // venue · time, so the row answers "what, where, when" without a hover. The
-  // meta line is clamped to two lines; the untruncated string stays the tooltip.
+  // Whole row is the click target — no "More info" button. Name, then
+  // "[type] · where · when" via the shared _eventMetaHtml() in script.js, so the
+  // home panel and the injected side panel stay one format, not two.
   const eventsHtml = data.events.map(ev => {
     const ticket   = ev.ticket || null;
     const href     = ticket || ev.url || null;
@@ -1004,9 +995,8 @@ function renderEventsPanel(locationKey) {
     <${tag} class="home-event-item${href ? ' is-link' : ''}"${attrs} data-venue="${venue}" title="${venue}">
       <div class="home-event-date"><div class="mo">${ev.mo}</div><div class="dy">${ev.dy}</div></div>
       <div class="home-event-info">
-        <div class="home-event-tag ${ev.tag}">${ev.tagLabel}</div>
         <div class="home-event-name">${ev.name}${external ? '<span class="ev-ext" aria-hidden="true">↗</span>' : ''}</div>
-        ${ev.meta ? `<div class="home-event-meta">${ev.meta}</div>` : ''}
+        ${_eventMetaHtml(ev)}
       </div>
     </${tag}>`;
   }).join('');
