@@ -2369,8 +2369,8 @@ function _renderPanelEvents(locationKey, p, containerEl) {
 
 // `meta` is authored as a free-form "·"-separated string, so pull the clock
 // time out of it and pin that to the end of the row as its own span. Only the
-// venue is allowed to ellipsis when the 320px column runs out — the time never
-// truncates. Street numbers are dropped on the way through: "Bird & Betty's"
+// time is kept whole so it can't wrap mid-value, and the venue reflows around
+// it. Street numbers are dropped on the way through: "Bird & Betty's"
 // identifies the place in a narrow panel and "529 Dock Rd" does not. The
 // untouched original stays on the row as its tooltip.
 const _EV_TIME_RE = /(\d{1,2}(:\d{2})?\s*(–|—|-|to)?\s*(\d{1,2}(:\d{2})?)?\s*(a\.?m\.?|p\.?m\.?)|noon|midnight)/i;
@@ -2392,7 +2392,9 @@ function _eventMetaHtml(ev) {
   if (where) bits.push(`<span class="ev-where">${where}</span>`);
   if (when) bits.push(`<span class="ev-when">${when}</span>`);
   if (!bits.length) return '';
-  return `<div class="home-event-meta">${bits.join('<span class="ev-sep">·</span>')}</div>`;
+  // Real spaces around the separator, not CSS margins — they are the line's
+  // break opportunities, and without them "Theatre·Surflight" is one long word.
+  return `<div class="home-event-meta">${bits.join(' <span class="ev-sep">·</span> ')}</div>`;
 }
 function _eventItemsHtml(events, p) {
   return events.map(ev => {

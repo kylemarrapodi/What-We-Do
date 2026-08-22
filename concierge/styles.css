@@ -1055,29 +1055,21 @@ body.panel-no-anim .panel-toggle { transition: none !important; }
 .home-event-date .dy { font-size: 0.95rem; font-weight: 700; color: var(--white); line-height: 1; }
 .home-event-info { flex: 1; min-width: 0; }
 .home-event-name { font-size: 0.82rem; font-weight: 600; color: var(--white); line-height: 1.25; margin-bottom: 0.1rem; }
-/* "[type] · where · when" under the title, on exactly one line. The venue is
-   the only part allowed to shrink, so the time survives however narrow the
-   column gets; the full untrimmed string is still the row's tooltip. */
+/* "[type] · where · when" under the title. This wraps rather than ellipsising:
+   a 320px column minus the date block leaves ~150px for the venue, and most
+   venue strings are wider than that, so a single line clipped 10 rows out of 12.
+   Wrapping costs one extra line on the long ones and nothing on the short ones.
+   The time still can't break mid-value — only the venue reflows. */
 .home-event-meta {
-  display: flex;
-  align-items: center;
-  gap: 0.28rem;
-  min-width: 0;
   margin-top: 0.12rem;
   font-size: 0.66rem;
-  line-height: 1.3;
+  line-height: 1.35;
   color: rgba(255,255,255,0.45);
+  overflow-wrap: anywhere;
 }
-.home-event-meta .home-event-tag { flex: 0 0 auto; margin-bottom: 0; }
-.home-event-meta .ev-where {
-  flex: 0 1 auto;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.home-event-meta .ev-when { flex: 0 0 auto; white-space: nowrap; color: rgba(255,255,255,0.58); }
-.home-event-meta .ev-sep { flex: 0 0 auto; opacity: 0.4; }
+.home-event-meta .home-event-tag { margin-bottom: 0; vertical-align: 0.05em; }
+.home-event-meta .ev-when { white-space: nowrap; color: rgba(255,255,255,0.58); }
+.home-event-meta .ev-sep { opacity: 0.4; }
 .home-event-actions { display: flex; gap: 0.75rem; margin-top: 0.3rem; flex-wrap: wrap; }
 .home-event-action-link { font-size: 0.7rem; font-weight: 600; color: rgba(255,255,255,0.45); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.18); transition: color 0.15s, border-color 0.15s; }
 .home-event-action-link:hover { color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.5); }
