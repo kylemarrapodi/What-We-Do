@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Around Downtown Lubbock · Cast Iron Grill</title>
+<meta name="description" content="A local Lubbock guide for Cast Iron Grill visitors, powered by The Concierge." />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<!-- NAV -->
+<nav>
+<a href="index.html" class="nav-logo">Cast Iron <span>Grill</span></a>
+<ul class="nav-links">
+<li><a href="about.html">Our Story</a></li>
+<li><a href="menu.html">Menu</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="contact.html" class="nav-cta">Visit Us</a></li>
+</ul>
+<button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+<a href="index.html" class="active">Home</a>
+<a href="about.html">Our Story</a>
+<a href="menu.html">Menu</a>
+<a href="gallery.html">Gallery</a>
+<a href="contact.html" class="mobile-cta">Visit Us</a>
+</div>
+<section class="guide-head">
+<p class="guide-eyebrow">Powered by The Concierge</p>
+<h1>Around Downtown Lubbock</h1>
+<p class="guide-sub">What is worth your time in the Historic District — a few blocks in any direction from the griddle.</p>
+</section>
+<!-- The guide is embedded rather than linked away, so a visitor never leaves
+     the business's own site to read it. -->
+<div class="guide-frame-wrap">
+<iframe
+  title="Lubbock Guide, powered by The Concierge"
+  src="../concierge/lubbock/historic-district/index.html?viewer=cast-iron-grill"
+  loading="lazy"></iframe>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

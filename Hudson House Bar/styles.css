@@ -745,3 +745,10 @@ body.scroll-page{height:100%;overflow-y:auto;overflow-x:hidden;
   .cp-banner{flex-direction:column;align-items:flex-start}
   .cp-map iframe{height:300px}
 }
+
+
+/* The review figure is a claim about a real listing — make it checkable.
+   Stars stay decorative; the words carry the link out to the source. */
+.rating-link{color:inherit;text-decoration:none;border-bottom:1px solid currentColor;
+  padding-bottom:1px;opacity:.92;transition:opacity .18s}
+.rating-link:hover,.rating-link:focus-visible{opacity:1}

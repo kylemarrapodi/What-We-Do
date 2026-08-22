@@ -9,21 +9,33 @@
 }
 .cp-hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 /* Warm scrim so the wordmark stays legible over moving flame */
+/* Heavier scrim. The photograph behind this is a brightly lit pizza on a pale
+   board, and at the old opacity the sub-heading was reading grey-on-cream. The
+   red mid-stop is pulled down too — it was adding luminance exactly where the
+   text sits. */
 .cp-hero::after{content:"";position:absolute;inset:0;z-index:1;
-  background:linear-gradient(165deg,rgba(34,26,22,.80) 0%,rgba(155,31,35,.42) 55%,rgba(34,26,22,.78) 100%)}
+  background:linear-gradient(165deg,rgba(28,21,18,.94) 0%,rgba(96,20,22,.78) 52%,rgba(22,16,14,.95) 100%)}
+/* A second, tighter wash directly behind the copy block. */
+.cp-hero::before{content:"";position:absolute;inset:0;z-index:1;
+  background:radial-gradient(ellipse 70% 58% at 50% 47%,rgba(16,11,9,.70),transparent 72%)}
 .cp-hero-inner{position:relative;z-index:2;max-width:720px}
 @media (prefers-reduced-motion: reduce){ .cp-hero-video{display:none} }
 .cp-hero-eyebrow{
   font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;
   color:var(--gold);margin-bottom:1.1rem}
 .cp-hero-word{
-  font-family:'Fraunces',Georgia,serif;font-weight:900;line-height:.92;
+  font-family:'Fraunces',Georgia,serif;font-weight:900;
+  /* Fraunces at weight 900 has tall ascenders and a deep descender on the P.
+     At line-height .92 the descender of "Capital" collided with the P of
+     "Pizza" on the second line. 1.02 clears it without opening the wordmark up
+     into two loose lines. */
+  line-height:1.02;
   font-size:clamp(3rem,9vw,6.2rem);color:var(--cream);margin:0 0 1.1rem;
   text-shadow:0 6px 26px rgba(0,0,0,.45)}
 .cp-hero-word span{color:var(--gold)}
 .cp-hero-sub{
-  max-width:520px;margin:0 auto 2rem;color:rgba(251,243,230,.82);
-  font-size:1rem;line-height:1.7}
+  max-width:520px;margin:0 auto 2rem;color:rgba(251,243,230,.95);
+  font-size:1rem;line-height:1.7;text-shadow:0 2px 12px rgba(0,0,0,.55)}
 .cp-hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
 .cp-hero-scroll{
   position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);z-index:2;
@@ -730,3 +742,10 @@ body.scroll-page{height:100%;overflow-y:auto;overflow-x:hidden;
   .cp-footer-grid{grid-template-columns:1fr}
   .cp-banner{flex-direction:column;align-items:flex-start}
 }
+
+
+/* The review figure is a claim about a real listing — make it checkable.
+   Stars stay decorative; the words carry the link out to the source. */
+.rating-link{color:inherit;text-decoration:none;border-bottom:1px solid currentColor;
+  padding-bottom:1px;opacity:.92;transition:opacity .18s}
+.rating-link:hover,.rating-link:focus-visible{opacity:1}
