@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-21T10:06:29.408Z",
+  "generatedAt": "2026-08-22T09:54:23.675Z",
   "source": "goprincetontigers.com/api/v2.1/EventsResults",
   "events": [
     {
@@ -276,6 +276,18 @@
       "opponent": "Dartmouth ",
       "location": "Princeton, N.J.",
       "scheduleUrl": "https://goprincetontigers.com/sports/womens-rugby/schedule",
+      "ticketUrl": null
+    },
+    {
+      "sportId": 33,
+      "sport": "Women's Tennis",
+      "date": "2026-10-15T00:00:00",
+      "mo": "OCT",
+      "dy": "15",
+      "time": null,
+      "opponent": "Intercollegiate Tennis Association",
+      "location": "Princeton, N.J.",
+      "scheduleUrl": "https://goprincetontigers.com/sports/womens-tennis/schedule",
       "ticketUrl": null
     },
     {
