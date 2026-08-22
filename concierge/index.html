@@ -174,12 +174,23 @@
     .home-events-header a { font-size: 0.72rem; color: var(--gold); font-weight: 600; }
     .home-events-header a:hover { color: var(--gold-lt); }
 
+    /* Two lines per event — date chip, tag, title. Whole row is the <a>. */
     .home-event-item {
       display: flex; align-items: center; gap: 0.6rem;
-      padding: 0.45rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-      text-decoration: none; transition: opacity 0.15s; cursor: pointer;
+      padding: 0.4rem 0.5rem; margin: 0 -0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-radius: 6px;
+      text-decoration: none; color: inherit;
+      transition: background 0.15s; cursor: pointer;
     }
     .home-event-item:last-child { border-bottom: none; }
+    .home-event-item.is-link:hover,
+    .home-event-item.is-link:focus-visible {
+      background: rgba(255,255,255,0.06);
+      outline: none;
+    }
+    .home-event-item.is-link:hover .home-event-name { color: var(--gold-lt); }
+    .ev-ext { font-size: 0.68em; opacity: 0.5; margin-left: 0.25rem; vertical-align: 0.1em; }
 
     .home-event-date {
       min-width: 38px; text-align: center;
@@ -977,19 +988,27 @@ function renderEventsPanel(locationKey) {
     ? `<a href="${data.eventsLink.href}">${data.eventsLink.text}</a>`
     : '';
 
-  const eventsHtml = data.events.map(ev => `
-    <div class="home-event-item" data-venue="${ev.meta}">
+  // Whole row is the click target — no "More info" button, no venue line under
+  // the title. Keeps the panel dense enough to scan a week without scrolling;
+  // the venue/time survives as the row tooltip.
+  const eventsHtml = data.events.map(ev => {
+    const ticket   = ev.ticket || null;
+    const href     = ticket || ev.url || null;
+    const external = !!ticket;
+    const tag      = href ? 'a' : 'div';
+    const attrs    = href
+      ? ` href="${href}"${external ? ' target="_blank" rel="noopener"' : ''}`
+      : '';
+    const venue = String(ev.meta == null ? '' : ev.meta).replace(/"/g, '&quot;');
+    return `
+    <${tag} class="home-event-item${href ? ' is-link' : ''}"${attrs} data-venue="${venue}" title="${venue}">
       <div class="home-event-date"><div class="mo">${ev.mo}</div><div class="dy">${ev.dy}</div></div>
       <div class="home-event-info">
         <div class="home-event-tag ${ev.tag}">${ev.tagLabel}</div>
-        <div class="home-event-name">${ev.name}</div>
-        <div class="home-event-meta">${ev.meta}</div>
-        <div class="home-event-actions">
-          ${ev.url ? `<a href="${ev.url}" class="home-event-action-link">More info</a>` : ''}
-          ${ev.ticket ? `<a href="${ev.ticket}" target="_blank" rel="noopener" class="home-event-action-link ticket">Tickets / Info →</a>` : ''}
-        </div>
+        <div class="home-event-name">${ev.name}${external ? '<span class="ev-ext" aria-hidden="true">↗</span>' : ''}</div>
       </div>
-    </div>`).join('');
+    </${tag}>`;
+  }).join('');
 
   panel.innerHTML = `
     <div class="home-events-header">

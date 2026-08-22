@@ -2250,7 +2250,7 @@ const PANEL_EVENTS = {
   'Beach Haven': {
     label: 'Beach Haven Events', link: { href: 'lbi/beach-haven/index.html', text: 'Beach Haven Guide →' },
     events: [
-      { mo:'AUG', dy:'–30', tag:'arts',    tagLabel:'Theatre',    name:'1776: The Musical',       meta:'Surflight Theatre · through Aug 30',  url:'lbi/beach-haven/index.html', ticket:'https://surflight.org' },
+      { mo:'AUG', dy:'30',  tag:'arts',    tagLabel:'Theatre',    name:'1776: The Musical — closing',   meta:'Surflight Theatre · runs through Aug 30', url:'lbi/beach-haven/index.html', ticket:'https://surflight.org' },
       { mo:'WED', dy:'WKL', tag:'arts',    tagLabel:'Free Music', name:'Concerts on the Green',   meta:'Veterans Bicentennial Park · Wed 7:30 PM', url:'lbi/beach-haven/index.html', ticket:null },
       { mo:'SEP', dy:'1–20',tag:'arts',    tagLabel:'Theatre',    name:'Ghost: The Musical',      meta:'Surflight Theatre',                   url:'lbi/beach-haven/index.html', ticket:'https://surflight.org' },
       { mo:'OCT', dy:'3–4', tag:'dining',  tagLabel:'Food Fest',  name:'Chowderfest — Chowder Cook-Off', meta:'Taylor Ave Waterfront · Oct 3–4', url:'lbi/beach-haven/index.html', ticket:'https://chowderfest.com' },
@@ -2328,22 +2328,38 @@ function _renderPanelEvents(locationKey, p, containerEl) {
     return;
   }
 
-  const evHtml = data.events.map(ev => `
-    <div class="home-event-item">
+  containerEl.innerHTML = headerHtml + _eventItemsHtml(data.events, p);
+}
+
+// The whole row is the click target — no "More info" button, no venue line.
+// The panel is a scanning surface: the denser it is, the more of the week you
+// see without scrolling. The venue/time that used to sit under each title is
+// still there as the row's tooltip, so nothing is lost, it is just not
+// spending two lines of vertical space per event.
+function _eventItemsHtml(events, p) {
+  return events.map(ev => {
+    const ticket   = ev.ticket || null;
+    const href     = ticket || (ev.url ? p + ev.url : null);
+    const external = !!ticket;
+    const tag      = href ? 'a' : 'div';
+    const attrs    = href
+      ? ` href="${href}"${external ? ' target="_blank" rel="noopener"' : ''}`
+      : '';
+    return `
+    <${tag} class="home-event-item${href ? ' is-link' : ''}"${attrs} title="${_attr(ev.meta)}">
       <div class="home-event-date"><div class="mo">${ev.mo}</div><div class="dy">${ev.dy}</div></div>
       <div class="home-event-info">
         <div class="home-event-tag ${ev.tag}">${ev.tagLabel}</div>
-        <div class="home-event-name">${ev.name}</div>
-        <div class="home-event-meta">${ev.meta}</div>
-        <div class="home-event-actions">
-          ${ev.url ? `<a href="${p}${ev.url}" class="home-event-action-link">More info</a>` : ''}
-          ${ev.ticket ? `<a href="${ev.ticket}" target="_blank" rel="noopener" class="home-event-action-link ticket">Tickets / Info →</a>` : ''}
-        </div>
+        <div class="home-event-name">${ev.name}${external ? '<span class="ev-ext" aria-hidden="true">↗</span>' : ''}</div>
       </div>
-    </div>`).join('');
-
-  containerEl.innerHTML = headerHtml + evHtml;
+    </${tag}>`;
+  }).join('');
 }
+
+function _attr(s) {
+  return String(s == null ? '' : s).replace(/"/g, '&quot;');
+}
+
 
 function initSidePanel() {
   const loc = document.body.getAttribute('data-page-location');
@@ -2356,8 +2372,6 @@ function initSidePanel() {
 
   panel.innerHTML = `
     <div class="site-panel-top">
-      <div class="home-eyebrow">The Concierge</div>
-      <div class="home-title">Your Local<br><span>Guide</span></div>
       <form class="nav-search-form site-panel-search" onsubmit="handleNavSearch(event)" autocomplete="off">
         <input type="text" placeholder="Search cities, events…" />
         <button type="submit" aria-label="Search">⌕</button>

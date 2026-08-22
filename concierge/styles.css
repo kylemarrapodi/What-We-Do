@@ -863,8 +863,11 @@ footer {
 /* Children keep their full width so text doesn't reflow while the panel slides */
 .site-left-panel > * { width: var(--panel-w-open); }
 body.panel-collapsed .site-left-panel { border-right: none; }
+/* The "The Concierge / Your Local Guide" masthead used to sit above the search
+   box. It restated the site you were already on, so it is gone and the search
+   box moves up into the space. */
 .site-panel-top {
-  padding: 1.5rem 1.25rem 1rem;
+  padding: 1rem 1.25rem 0.85rem;
   flex-shrink: 0;
   position: relative;
 }
@@ -1019,12 +1022,25 @@ body.panel-no-anim .panel-toggle { transition: none !important; }
 .home-events-header a { font-size: 0.72rem; color: var(--gold); font-weight: 600; }
 .home-events-header a:hover { color: var(--gold-lt); }
 
+/* Two lines per event — date chip, tag, title. The whole row is an <a>, so the
+   hover state has to read as "this is the button" on its own. */
 .home-event-item {
-  display: flex; align-items: flex-start; gap: 0.6rem;
-  padding: 0.45rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-  text-decoration: none; transition: opacity 0.15s;
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.4rem 0.5rem; margin: 0 -0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-radius: 6px;
+  text-decoration: none; color: inherit;
+  transition: background 0.15s;
 }
 .home-event-item:last-child { border-bottom: none; }
+.home-event-item.is-link { cursor: pointer; }
+.home-event-item.is-link:hover,
+.home-event-item.is-link:focus-visible {
+  background: rgba(255,255,255,0.06);
+  outline: none;
+}
+.home-event-item.is-link:hover .home-event-name { color: var(--gold-lt); }
+.ev-ext { font-size: 0.68em; opacity: 0.5; margin-left: 0.25rem; vertical-align: 0.1em; }
 
 .home-event-date {
   min-width: 38px; text-align: center;

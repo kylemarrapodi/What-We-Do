@@ -15,9 +15,17 @@ overflow-x: hidden;
 overflow-y: auto;
 }
 
-/* ── HERO: logo front and center over a live beach video ── */
+/* ── HERO: logo front and center over a live beach video ──
+   The hero is locked to exactly one screen: nav + hero = 100vh, so the video
+   ends and the info strip (address / phone) begins precisely at the fold.
+   It was `min-height`, which let the content push it past the fold — measured
+   754px of hero in a 720px viewport. Everything inside is now sized in vh so
+   it scales down with the screen instead of overflowing it. `svh` is the
+   smallest-viewport unit, so a mobile address bar can't push the strip down. */
 .hero {
-min-height: calc(100vh - var(--nav-h));
+height: calc(100vh - var(--nav-h));
+height: calc(100svh - var(--nav-h));
+min-height: 480px;
 margin-top: var(--nav-h);
 background: url("hero-beach-poster.jpg") center/cover no-repeat, linear-gradient(160deg, var(--navy) 0%, #1e4a72 55%, #2a6a9a 100%);
 display: flex;
@@ -25,7 +33,7 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 text-align: center;
-padding: 3rem 6% 4.5rem;
+padding: clamp(1rem, 3.5vh, 3rem) 6% clamp(1.5rem, 5vh, 4.5rem);
 position: relative;
 overflow: hidden;
 }
@@ -51,25 +59,28 @@ z-index: 1;
 .hero-video { display: none; }
 }
 .hero-logo {
-width: clamp(300px, 55vw, 620px);
+width: clamp(280px, 52vw, 600px);
+max-height: 34vh;
+object-fit: contain;
 filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
-margin-bottom: 1.5rem;
+margin-bottom: clamp(0.6rem, 2vh, 1.5rem);
 }
-.hero .home-rating { margin-bottom: 2rem; }
+/* Rating sits below the buttons now, so this is a top margin */
+.hero .home-rating { margin: clamp(0.9rem, 2.2vh, 1.5rem) 0 0; }
 .hero-tagline {
 font-family: 'Playfair Display', serif;
 font-size: clamp(1.1rem, 2.2vw, 1.5rem);
 color: rgba(255,255,255,0.92);
 letter-spacing: 0.14em;
 text-transform: uppercase;
-margin-bottom: 1rem;
+margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
 }
 .hero-desc {
 max-width: 560px;
 color: rgba(255,255,255,0.75);
 font-size: 0.95rem;
 line-height: 1.7;
-margin-bottom: 2rem;
+margin-bottom: clamp(0.9rem, 2.5vh, 2rem);
 }
 .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
 .hero-scroll {
@@ -233,14 +244,14 @@ box-shadow: 0 4px 16px rgba(26,58,92,0.15);
 </video>
 <img src="seaspraylogo.svg" alt="Sea Spray Motel" class="hero-logo" />
 <p class="hero-tagline">Your home on the Jersey Shore</p>
-<div class="home-rating">
-<span class="star">★★★★☆</span>
-<a class="rating-link" href="https://www.booking.com/hotel/us/sea-spray-motel.html" target="_blank" rel="noopener">8.3 / 10 · Very Good on Booking.com · 172 reviews</a>
-</div>
 <p class="hero-desc">Wake up steps from the beach. Family-owned and loved for decades, Sea Spray Motel is where LBI memories are made — 52 rooms, a heated pool, and free parking right on the bay.</p>
 <div class="hero-btns">
 <a href="contact.html" class="btn-primary">Book Your Stay</a>
 <a href="rooms.html" class="btn-outline">View Rooms</a>
+</div>
+<div class="home-rating">
+<span class="star">★★★★☆</span>
+<a class="rating-link" href="https://www.booking.com/hotel/us/sea-spray-motel.html" target="_blank" rel="noopener">8.3 / 10 on Booking.com · 172 reviews</a>
 </div>
 <a href="#info" class="hero-scroll"><span>Explore</span><span>▾</span></a>
 </section>
