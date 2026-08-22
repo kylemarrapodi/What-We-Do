@@ -478,28 +478,6 @@ initCityBoundaryMap('town-map', {
   onClick: function (f) { window.location.href = '../' + f.properties.url; },
 });
 </script>
-<script>
-/* ── PARTNER-SITE VIEWER: hides "alike" listings and shows a way back when
-   arriving via a partner business's own site link (e.g. Sea Spray Motel's
-   "LBI Guide" nav item), instead of a plain, un-filtered visit. ── */
-(function () {
-  const VIEWERS = {
-    'motel': { name: 'Sea Spray Motel', back: '../../../Sea%20Spray%20Motel/index.html', subcat: 'motel' }
-  };
-  const key = new URLSearchParams(location.search).get('viewer');
-  const viewer = key && VIEWERS[key];
-  if (!viewer) return;
-
-  document.querySelectorAll('[data-subcat="' + viewer.subcat + '"]').forEach(function (card) {
-    card.style.display = 'none';
-  });
-
-  const slot = document.getElementById('viewer-banner-slot');
-  if (slot) {
-    slot.innerHTML = '<div class="viewer-banner">Viewing via <strong>' + viewer.name +
-      '</strong> — curated for our guests &nbsp;·&nbsp; <a href="' + viewer.back + '">← Back to ' + viewer.name + '</a></div>';
-  }
-})();
-</script>
+<script src="../../viewer.js"></script>
 </body>
 </html>

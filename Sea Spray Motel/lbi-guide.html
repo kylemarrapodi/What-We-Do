@@ -7,21 +7,59 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&family=Kaushan+Script&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 <style>
-html, body { height: 100%; overflow: hidden; }
+/* The guide should read as a room in this house, not a window into someone
+   else's. It was a bare full-bleed iframe pinned under the nav — no header, no
+   palette, edge to edge — so it looked like an embedded third-party site.
+   Now it gets a Sea Spray header and sits inset on the motel's own sand, the
+   same treatment Capital Pizza's guide uses. */
+.guide-head {
+margin-top: var(--nav-h, 64px);
+padding: 3rem 6% 1.5rem;
+text-align: center;
+background: var(--sand);
+}
+.guide-eyebrow {
+font-size: 0.7rem;
+letter-spacing: 0.24em;
+text-transform: uppercase;
+color: var(--ocean);
+margin-bottom: 0.6rem;
+}
+.guide-head h1 {
+font-family: 'Playfair Display', Georgia, serif;
+font-size: clamp(2rem, 5vw, 3rem);
+color: var(--navy);
+margin: 0 0 0.6rem;
+}
+.guide-sub {
+max-width: 560px;
+margin: 0 auto;
+color: var(--gray);
+line-height: 1.7;
+}
 .guide-frame-wrap {
-position: fixed;
-top: var(--nav-h); left: 0; right: 0; bottom: 0;
-background: var(--white);
+padding: 0 4% 3rem;
+background: var(--sand);
 }
 .guide-frame-wrap iframe {
 width: 100%;
-height: 100%;
-border: none;
+height: 78vh;
+min-height: 560px;
+border: 0;
+box-shadow: 0 6px 30px rgba(26, 58, 92, 0.16);
+background: #fff;
 display: block;
 }
+@media (max-width: 700px) {
+.guide-frame-wrap iframe { height: 70vh; min-height: 460px; }
+}
+/* This page scrolls now; the base layout locks the body for the full-screen
+   split, so it has to opt in the same way the home pages do. */
+body.scroll-page { height: 100%; overflow-y: auto; overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; }
 </style>
 </head>
-<body>
+<body class="scroll-page">
 <!-- NAV -->
 <nav>
 <a href="index.html" class="nav-logo"><img src="seaspraylogo.svg" alt="Sea Spray Motel" /></a>
@@ -43,9 +81,12 @@ display: block;
 <a href="contact.html" class="mobile-book">Book Now</a>
 </div>
 
-<!-- Local guide, embedded — stays within the Sea Spray Motel site rather
-     than navigating away. The Concierge page itself is fully browsable
-     inside this frame (its own nav, search, other towns, etc). -->
+<section class="guide-head">
+<p class="guide-eyebrow">Powered by The Concierge</p>
+<h1>Exploring Long Beach Island</h1>
+<p class="guide-sub">Restaurants, events and beaches up and down the island &mdash;
+curated for our guests, without leaving the motel's site.</p>
+</section>
 <div class="guide-frame-wrap">
 <iframe
 title="Long Beach Island Guide, powered by The Concierge"

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Around Beach Haven · Hudson House Bar</title>
+<meta name="description" content="A local guide for Hudson House Bar visitors, powered by The Concierge." />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<!-- NAV -->
+<nav>
+<a href="index.html" class="nav-logo">Hudson House <span>Bar</span></a>
+<ul class="nav-links">
+<li><a href="about.html">Our Story</a></li>
+<li><a href="menu.html">Bar Menu</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="contact.html" class="nav-cta">Visit Us</a></li>
+</ul>
+<button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+<a href="index.html" class="active">Home</a>
+<a href="about.html">Our Story</a>
+<a href="menu.html">Bar Menu</a>
+<a href="gallery.html">Gallery</a>
+<a href="contact.html" class="mobile-cta">Visit Us</a>
+</div>
+<section class="guide-head">
+<p class="guide-eyebrow">Powered by The Concierge</p>
+<h1>Around Beach Haven</h1>
+<p class="guide-sub">The rest of the island — where to eat, what is on, and where to sleep it off.</p>
+</section>
+<!-- Embedded rather than linked away, so a visitor never leaves this site to
+     read the guide. Clicking "The Concierge" inside the frame breaks out to the
+     Concierge proper — see concierge/viewer.js. -->
+<div class="guide-frame-wrap">
+<iframe
+  title="Local guide, powered by The Concierge"
+  src="../concierge/lbi/beach-haven/index.html?viewer=hudson-house"
+  loading="lazy"></iframe>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

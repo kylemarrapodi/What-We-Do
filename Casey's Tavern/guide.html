@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Around Downtown Stamford · Casey's Tavern</title>
+<meta name="description" content="A local guide for Casey's Tavern visitors, powered by The Concierge." />
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700;800&family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<!-- NAV -->
+<nav>
+<a href="index.html" class="nav-logo">Casey's <span>Tavern</span></a>
+<ul class="nav-links">
+<li><a href="about.html">Our Story</a></li>
+<li><a href="menu.html">Menu</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="contact.html" class="nav-cta">Visit Us</a></li>
+</ul>
+<button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+<a href="index.html" class="active">Home</a>
+<a href="about.html">Our Story</a>
+<a href="menu.html">Menu</a>
+<a href="gallery.html">Gallery</a>
+<a href="contact.html" class="mobile-cta">Visit Us</a>
+</div>
+<section class="guide-head">
+<p class="guide-eyebrow">Powered by The Concierge</p>
+<h1>Around Downtown Stamford</h1>
+<p class="guide-sub">Where to go before and after — the neighbourhood on the other side of the door.</p>
+</section>
+<!-- Embedded rather than linked away, so a visitor never leaves this site to
+     read the guide. Clicking "The Concierge" inside the frame breaks out to the
+     Concierge proper — see concierge/viewer.js. -->
+<div class="guide-frame-wrap">
+<iframe
+  title="Local guide, powered by The Concierge"
+  src="../concierge/stamford/index.html?viewer=caseys-tavern"
+  loading="lazy"></iframe>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
